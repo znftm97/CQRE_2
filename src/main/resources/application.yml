@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/C:\Users\leejihoon\Desktop\CQRE\cqre
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #show_sql: true #콘솔에 로그를 찍음
+        format_sql: true #쿼리 이쁘게 나옴
+
+logging.level:
+  org.hibernate.SQL: debug #콘솔이 아니라 로그파일로 남김
+  #org.hibernate.type: trace #파라미터 까지 볼 수 있음
