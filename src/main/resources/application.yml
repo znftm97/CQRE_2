@@ -13,6 +13,13 @@ spring:
         #show_sql: true #콘솔에 로그를 찍음
         format_sql: true #쿼리 이쁘게 나옴
 
+  thymeleaf:
+    cache: false
+
+  devtools:
+    restart:
+      enabled: true
+
 logging.level:
   org.hibernate.SQL: debug #콘솔이 아니라 로그파일로 남김
   #org.hibernate.type: trace #파라미터 까지 볼 수 있음
