@@ -21,7 +21,7 @@ $(document).ready(function (){
 
     $(perbox2).hover(function (){
         $(perbox2Child).css('opacity', '1.0').css('margin-top', '100px');
-        $(perbox2).css({"background":"url(/images/noticeMain.png)"});
+        $(perbox2).css({"background":"url(/images/noticeMainBlue.png)"});
     }, function (){
         $(perbox2Child).css('opacity', '0').css('margin-top', '40px');
         $(perbox2).css({"background": "url(/images/none.png)"});
@@ -37,7 +37,7 @@ $(document).ready(function (){
 
     $(perbox4).hover(function (){
         $(perbox4Child).css('opacity', '1.0').css('margin-top', '100px');
-        $(perbox4).css({"background":"url(/images/gallerMain2.png)"});
+        $(perbox4).css({"background":"url(/images/galleryMainBlue.png)"});
     }, function (){
         $(perbox4Child).css('opacity', '0').css('margin-top', '40px');
         $(perbox4).css({"background": "url(/images/none.png)"});

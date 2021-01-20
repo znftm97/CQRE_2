@@ -5,10 +5,31 @@
 </head>
 <body>
     <header th:fragment="top">
-        <img th:src="@{/images/mainLogo.png}" type="images" alt="">
+        <a th:href="@{/}">
+            <img th:src="@{/images/mainLogo4.png}" type="images" alt="">
+        </a>
+        <div class="menu">
+            <ul>
+                <li>
+                    <a href="#">연혁</a>
+                </li>
+                <li>
+                    <a href="#">공지사항</a>
+                </li>
+                <li>
+                    <a href="#">자유게시판</a>
+                </li>
+                <li>
+                    <a href="#">갤러리</a>
+                </li>
+                <li>
+                    <a href="#">쇼핑몰</a>
+                </li>
+            </ul>
+        </div>
         <div class="sign">
-            <a href="#">로그인</a>
-            <a href="#">회원가입</a>
+            <a th:href="@{/signIn}">SignIn/SignUp</a>
+            <a th:href="@{/userInfo}">myInfo</a>
         </div>
     </header>
 </body>
