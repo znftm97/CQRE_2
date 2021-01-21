@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>commentList</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrinkto-fit=no">
+    <!-- Bootstrap CSS , jQuery-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-
+ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <script th:src="@{/js/jquery-3.5.1.min.js}"> </script>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/common/fragments.css}">
+    <link rel="stylesheet" th:href="@{/css/common/infoCommon.css}">
+    <link rel="stylesheet" th:href="@{/css/comment/commentList.css}">
+    <script rel="stylesheet" th:src="@{/js/common/infoCommon.js}"></script>
+</head>
+<body>
+<div class="containerCustom">
+    <div th:replace="fragments/top :: top"/>
+
+    <div class="visual">
+        <h2>
+            <p>CommentList</p>
+            <p>댓글</p>
+        </h2>
+    </div>
+
+    <div class="contents">
+        <div class="lnb">
+            <ul>
+                <li>
+                    <a th:href="@{/userInfo}">회원 정보</a>
+                </li>
+                <li>
+                    <a th:href="@{/orderList}">나의 주문 내역</a>
+                </li>
+                <li>
+                    <a th:href="@{/basketList}">장바구니 확인</a>
+                </li>
+                <li>
+                    <a th:href="@{orderCancelList}">주문 취소 내역</a>
+                </li>
+                <li>
+                    <a th:href="@{couponList}">내 쿠폰함</a>
+                </li>
+                <li>
+                    <a th:href="@{postList}">내 글</a>
+                </li>
+                <li>
+                    <a th:href="@{commentList}">내 댓글</a>
+                </li>
+            </ul>
+        </div><!--lnb-->
+
+        <div id="tableBox">
+            <!--searchBox-->
+            <div class="searchBox">
+                <form class="form-inline">
+                    <div class="form-group mx-sm-1 mb-2">
+                        <select name="searchOption">
+                            <option value="name">검색 조건 선택</option>
+                            <option value="title">글제목</option>
+                            <option value="name">글쓴이</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <input type="text" id="searchWord" name="searchWord" class="form-control" placeholder="검색어"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">검색</button>
+                </form>
+            </div><!--searchBox-->
+
+            <!--table-->
+            <table class="table table-hover table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+                </tbody>
+            </table><!--table-->
+
+            <!--paging-->
+            <nav style="text-align: center;">
+                <ul class="pagination justify-content-center">
+
+                    <!--  first  -->
+                    <li class="page-item">
+                        <a class="page-link"  aria-label="First">
+                            <span aria-hidden="true">First</span>
+                        </a>
+                    </li>
+
+                    <!--  <  -->
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Previous" >
+                            <span aria-hidden="true">&lt;</span>
+                        </a>
+                    </li>
+
+                    <!--  1,2,3  -->
+                    <li class="page-item">
+                        <a class="page-link"></a>
+                    </li>
+
+                    <!--  > -->
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&gt;</span>
+                        </a>
+                    </li>
+
+                    <!--  Last  -->
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Last">
+                            <span aria-hidden="true">Last</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav><!--paging-->
+        </div><!--tableBox-->
+    </div><!--contents-->
+
+
+
+    <div th:replace="fragments/footer :: footer"/>
+</div>
+</body>
+</html>

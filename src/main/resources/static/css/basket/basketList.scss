@@ -4,18 +4,7 @@ $blueColor: #0070ff;
 $blueLightColor: #4e9bff;
 $grayTextColor: #777;
 
-.contents .lnb > ul > li:first-child > a{
+.contents .lnb > ul > li:nth-child(3) > a{
   background-color: $blueLightColor!important;
   color: white!important;
-}
-
-.table-dark{
-  text-align: center;
-}
-
-#tableBox{
-  button{
-    margin-top: 20px;
-    margin-left: 20px;
-  }
 }

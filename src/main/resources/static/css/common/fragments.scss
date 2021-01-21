@@ -1,0 +1,151 @@
+$pinkColor: #f3ade1;
+$purpleColor: #a873f9;
+$blueColor: #0070ff;
+$blueLightColor: #4e9bff;
+$grayTextColor: #777;
+
+html, body{
+  font-family: "Noto Sans CJK KR";
+}
+
+.containerCustom{
+  max-width: 1920px;
+  max-height: 1080px;
+}
+
+/*header*/
+header{
+  background-color: white;
+  box-shadow: rgba(0,0,0,.1) 5px 5px 8px;
+  position: fixed;
+  width: 1920px;
+  height: 100px;
+  text-align: center;
+  line-height: 14px;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+
+  img{
+    position: absolute;
+    margin-top: 20px;
+    width: 160px;
+    height: 60px;
+    margin-left: 80px;
+  }
+
+  .menu{
+    width: 1000px;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    margin-left: 300px;
+
+    ul{
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul > li{
+      list-style: none;
+      float: left;
+      width: 140px;
+      height: 100px;
+
+      a{
+        display: block;
+        text-decoration: none;
+        font-size: 20px;
+        letter-spacing: -0.4pt;
+        line-height: 135%;
+        box-sizing: border-box;
+        margin-top: 35px;
+        color: black;
+      }
+    }
+  }
+
+  .sign{
+    float: right; /*sing 박스 오른쪽 정렬*/
+    width: 350px;
+    height: inherit;
+    margin-right: 20px;
+
+    button{
+      display: inline-block;
+      font-size: 18px;
+      margin-top: 25px;
+      background: linear-gradient(to right, $pinkColor, $blueLightColor);
+      border: none;
+
+      a{
+        text-decoration: none;
+        color:white;
+      }
+    }
+    button:last-child{
+      margin-left: 25px;
+    }
+
+  }
+
+}
+
+header .menu > ul > li:nth-child(1):hover{
+  border-bottom: 5px solid white;
+  border-image: linear-gradient(to right, $pinkColor, $blueColor);
+  border-image-slice: 1;
+  transition: 0.5s all;
+}
+header .menu > ul > li:nth-child(2):hover{
+  border-bottom: 5px solid white;
+  border-image: linear-gradient(to right, $pinkColor, $blueColor);
+  border-image-slice: 1;
+  transition: 0.5s all;
+}
+header .menu > ul > li:nth-child(3):hover{
+  border-bottom: 5px solid white;
+  border-image: linear-gradient(to right, $pinkColor, $blueColor);
+  border-image-slice: 1;
+  transition: 0.5s all;
+}
+header .menu > ul > li:nth-child(4):hover{
+  border-bottom: 5px solid white;
+  border-image: linear-gradient(to right, $pinkColor, $blueColor);
+  border-image-slice: 1;
+  transition: 0.5s all;
+}
+header .menu > ul > li:nth-child(5):hover{
+  border-bottom: 5px solid white;
+  border-image: linear-gradient(to right, $pinkColor, $blueColor);
+  border-image-slice: 1;
+  transition: 0.5s all;
+}
+/*header*/
+
+/*footer*/
+footer {
+  width: 100%;
+  /*하단에 고정*/
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+
+  background-color: lightgray;
+  font-size: 12px;
+  letter-spacing: -0.35px;
+  line-height: 14px;
+  text-align: center;
+  color: black!important;
+  text-decoration: none solid rgb(255, 255, 255)!important;
+
+  p:first-child{
+    padding-top: 1%;
+  }
+}/*footer*/
+
+
+
+
+

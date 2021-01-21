@@ -1,16 +1,15 @@
-html, body{
-  font-family: "Noto Sans CJK KR";
-}
+@charset "UTF-8";
+html, body {
+  font-family: "Noto Sans CJK KR"; }
 
-.containerCustom{
+.containerCustom {
   max-width: 1920px;
-  max-height: 1080px;
-}
+  max-height: 1080px; }
 
 /*header*/
-header{
+header {
   background-color: white;
-  box-shadow: rgba(0,0,0,.1) 5px 5px 8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 5px 5px 8px;
   position: fixed;
   width: 1920px;
   height: 100px;
@@ -18,36 +17,29 @@ header{
   line-height: 14px;
   z-index: 2;
   display: flex;
-  justify-content: space-between;
-
-  img{
+  justify-content: space-between; }
+  header img {
     position: absolute;
     margin-top: 20px;
     width: 160px;
     height: 60px;
-    margin-left: 80px;
-  }
-
-  .menu{
+    margin-left: 80px; }
+  header .menu {
     width: 1000px;
     height: inherit;
     display: flex;
     justify-content: center;
-    margin-left: 300px;
-
-    ul{
+    margin-left: 300px; }
+    header .menu ul {
       text-align: center;
       margin: 0;
-      padding: 0;
-    }
-
-    ul > li{
+      padding: 0; }
+    header .menu ul > li {
       list-style: none;
       float: left;
       width: 140px;
-      height: 100px;
-
-      a{
+      height: 100px; }
+      header .menu ul > li a {
         display: block;
         text-decoration: none;
         font-size: 20px;
@@ -55,62 +47,56 @@ header{
         line-height: 135%;
         box-sizing: border-box;
         margin-top: 35px;
-        color: black;
-      }
-    }
-  }
-
-  .sign{
-    float: right; /*sing 박스 오른쪽 정렬*/
-    width: 300px;
+        color: black; }
+  header .sign {
+    float: right;
+    /*sing 박스 오른쪽 정렬*/
+    width: 350px;
     height: inherit;
-    margin-right: 20px;
-
-    a{
+    margin-right: 20px; }
+    header .sign button {
       display: inline-block;
-      font-size: 20px;
-      color: black;
-      padding-left: 20px;
-      margin-top: 40px;
-      text-decoration: none;
-    }
+      font-size: 18px;
+      margin-top: 25px;
+      background: linear-gradient(to right, #f3ade1, #4e9bff);
+      border: none; }
+      header .sign button a {
+        text-decoration: none;
+        color: white; }
+    header .sign button:last-child {
+      margin-left: 25px; }
 
-  }
+header .menu > ul > li:nth-child(1):hover {
+  border-bottom: 5px solid white;
+  border-image: linear-gradient(to right, #f3ade1, #0070ff);
+  border-image-slice: 1;
+  transition: 0.5s all; }
 
-}
+header .menu > ul > li:nth-child(2):hover {
+  border-bottom: 5px solid white;
+  border-image: linear-gradient(to right, #f3ade1, #0070ff);
+  border-image-slice: 1;
+  transition: 0.5s all; }
 
-header .menu > ul > li:nth-child(1):hover{
+header .menu > ul > li:nth-child(3):hover {
   border-bottom: 5px solid white;
   border-image: linear-gradient(to right, #f3ade1, #0070ff);
   border-image-slice: 1;
-  transition: 0.1s all;
-}
-header .menu > ul > li:nth-child(2):hover{
+  transition: 0.5s all; }
+
+header .menu > ul > li:nth-child(4):hover {
   border-bottom: 5px solid white;
   border-image: linear-gradient(to right, #f3ade1, #0070ff);
   border-image-slice: 1;
-  transition: 0.1s all;
-}
-header .menu > ul > li:nth-child(3):hover{
+  transition: 0.5s all; }
+
+header .menu > ul > li:nth-child(5):hover {
   border-bottom: 5px solid white;
   border-image: linear-gradient(to right, #f3ade1, #0070ff);
   border-image-slice: 1;
-  transition: 0.1s all;
-}
-header .menu > ul > li:nth-child(4):hover{
-  border-bottom: 5px solid white;
-  border-image: linear-gradient(to right, #f3ade1, #0070ff);
-  border-image-slice: 1;
-  transition: 0.1s all;
-}
-header .menu > ul > li:nth-child(5):hover{
-  border-bottom: 5px solid white;
-  border-image: linear-gradient(to right, #f3ade1, #0070ff);
-  border-image-slice: 1;
-  transition: 0.2s all;
-}
+  transition: 0.5s all; }
+
 /*header*/
-
 /*footer*/
 footer {
   width: 100%;
@@ -118,16 +104,16 @@ footer {
   position: absolute;
   bottom: 0;
   z-index: 2;
-
+  background-color: lightgray;
   font-size: 12px;
   letter-spacing: -0.35px;
   line-height: 14px;
   text-align: center;
-  color: black!important;
-  text-decoration: none solid rgb(255, 255, 255)!important;
-}/*footer*/
+  color: black !important;
+  text-decoration: none solid white !important; }
+  footer p:first-child {
+    padding-top: 1%; }
 
+/*footer*/
 
-
-
-
+/*# sourceMappingURL=fragments.css.map */
