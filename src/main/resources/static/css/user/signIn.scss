@@ -223,28 +223,30 @@ input:focus{outline:none;}
 
 /*social login button*/
 .socialLogin{
-  width: 300px;
-  height: 300px;
-  display: inline-block;
-  margin-top: 200px;
-  margin-left: 550px;
+  width: 515px;
+  margin-top: 10%;
+  margin-left: -78px;
   position: absolute;
 
-  .fa-facebook{
-    height: 48.125px;
+  li{
+    float: left;
+    list-style: none;
   }
 
-  #naver_id_login > img{
-    cursor: pointer;
+  .btn-google,
+  #custom-login-btn > img{
+    margin-left: 8%;
+  }
+
+  #naver_id_login > img,
+  #custom-login-btn > img{
     width: 222px;
     height: 38px;
   }
 
-  a:nth-child(3){
-    img{
-      border: 1px solid red;
-      height: 38px;
-    }
+  #naver_id_login > img{
+    cursor: pointer;
+    margin-top: 10px;
   }
-}
-/*social login button*/
+
+}  /*social login button*/

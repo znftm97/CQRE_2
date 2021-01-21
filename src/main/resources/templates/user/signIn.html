@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrinkto-fit=no">
     <!-- Bootstrap CSS , jQuery-->
-    <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" integrity="sha384-
 ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
     <script th:src="@{/js/jquery-3.5.1.min.js}"> </script>
@@ -57,6 +57,40 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     <div class="foot-lnk">
                         <a href="#forgot">ID/PW 찾기</a>
                     </div>
+
+                    <!--social login button-->
+                    <div class="socialLogin">
+                        <ul>
+                            <li>
+                                <a href="javascript:;" name="social" class="btn btn-social btn-facebook" data-social="facebook" style="margin-bottom: 10px; width: 222px;">
+                                    <span class="fa fa-facebook"> </span> Facebook으로 로그인
+                                </a><br/>
+                            </li>
+                            <li>
+                                <a href="javascript:;" name="social" class="btn btn-social btn-google" data-social="google" style="margin-bottom: 10px; width: 222px;">
+                                    <span class="fa fa-google"> </span> Google로 로그인
+                                </a><br/>
+                            </li>
+                            <li>
+                                <div href="javascript:;" name="social" id="naver_id_login" data-social="naver">
+                                    <img th:src="@{/images/naverLogin.png}"/>
+                                </div>
+                            </li>
+                            <li>
+                                <a id="custom-login-btn" href="javascript:loginWithKakao()">
+                                    <img
+                                            src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
+                                            width="222"
+                                            href="javascript:;"
+                                            name="social"
+                                            data-social="kakao"
+                                            style="margin-top: 10px;"
+                                    />
+                                </a>
+                                <p id="token-result"></p>
+                            </li>
+                        </ul>
+                    </div><!--social login button-->
                 </div>
 
                 <div class="sign-up-htm">
@@ -90,36 +124,8 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 </div>
             </div>
         </div>
+    </form><!--login form-->
 
-        <!--social login button-->
-        <div class="socialLogin">
-            <a href="javascript:;" name="social" class="btn btn-social btn-facebook" data-social="facebook" style="margin-bottom: 10px; width: 222px;">
-                <span class="fa fa-facebook"> </span> Facebook으로 로그인
-            </a><br/>
-
-            <a href="javascript:;" name="social" class="btn btn-social btn-google" data-social="google" style="margin-bottom: 10px; width: 222px;">
-                <span class="fa fa-google"> </span> Google로 로그인
-            </a><br/>
-
-            <div href="javascript:;" name="social" id="naver_id_login" data-social="naver">
-                <img th:src="@{/images/naverLogin.png}"/>
-            </div>
-
-            <a id="custom-login-btn" href="javascript:loginWithKakao()">
-                <img
-                        src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
-                        width="222"
-                        href="javascript:;"
-                        name="social"
-                        data-social="kakao"
-                        style="margin-top: 10px;"
-                />
-            </a>
-            <p id="token-result"></p>
-        </div>
-        <!--social login button-->
-    </form>
-    <!--login form-->
 
 
 
