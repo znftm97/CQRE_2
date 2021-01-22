@@ -50,4 +50,15 @@ public class homeController {
     public String commentList(){
         return "/comment/commentList";
     }
+
+    @GetMapping("/noticeBoard")
+    public String noticeBoard(){
+        return "board/noticeBoard";
+    }
+
+    @GetMapping("/freeBoard")
+    public String freeBoard(){
+        return "board/freeBoard";
+    }
+
 }

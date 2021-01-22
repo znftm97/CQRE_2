@@ -4,8 +4,9 @@ $blueColor: #0070ff;
 $blueLightColor: #4e9bff;
 $grayTextColor: #777;
 
-.contents .lnb > ul > li:nth-child(6) > a{
+.contents .lnb > ul > li:first-child > a{
   background-color: $blueLightColor!important;
   /*background: linear-gradient(to right, $pinkColor, $blueLightColor);*/
   color: white!important;
 }
+

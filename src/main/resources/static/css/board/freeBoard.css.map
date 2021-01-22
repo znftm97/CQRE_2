@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "freeBoard.css",
+	"sources": [
+		"freeBoard.scss"
+	],
+	"names": [],
+	"mappings": "AAMA,AAAA,SAAS,CAAC,IAAI,GAAG,EAAE,GAAG,EAAE,AAAA,WAAW,GAAG,CAAC,CAAA;EACrC,gBAAgB,EAJD,OAAO,CAIW,UAAU;EAC3C,KAAK,EAAE,KAAK,CAAA,UAAU,GACvB"
+}
