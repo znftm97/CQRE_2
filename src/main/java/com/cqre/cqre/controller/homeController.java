@@ -53,22 +53,37 @@ public class homeController {
 
     @GetMapping("/noticeBoard")
     public String noticeBoard(){
-        return "board/noticeBoard";
+        return "/board/noticeBoard";
     }
 
     @GetMapping("/freeBoard")
     public String freeBoard(){
-        return "board/freeBoard";
+        return "/board/freeBoard";
     }
 
     @GetMapping("/noticeCreate")
     public String noticeCreate(){
-        return "board/noticeCreate";
+        return "/board/noticeCreate";
     }
 
     @GetMapping("/freeCreate")
     public String freeCreate(){
-        return "board/freeCreate";
+        return "/board/freeCreate";
+    }
+
+    @GetMapping("/history")
+    public String history(){
+        return "/history/history";
+    }
+
+    @GetMapping("/idpwSearch")
+    public String idpwSearch(){
+        return "/user/idpwSearch";
+    }
+
+    @GetMapping("/updatePassword")
+    public String updatePassword(){
+        return "/user/updatePassword";
     }
 
 }
