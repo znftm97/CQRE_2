@@ -1,3 +1,4 @@
+
 $(document).ready(function (){
 
     var perbox1 = $('.personal-box:nth-child(1)'),
@@ -13,7 +14,7 @@ $(document).ready(function (){
 
     $(perbox1).hover(function (){
         $(perbox1Child).css('opacity', '1.0').css('margin-top', '100px');
-        $(perbox1).css({"background":"url(/images/historyMain.png)"});
+        $(perbox1).css({"background":"url(/images/historyMain.png)"}).addClass('slideDown');
     }, function (){
         $(perbox1Child).css('opacity', '0').css('margin-top', '40px');
         $(perbox1).css({"background": "url(/images/none.png)"});
@@ -51,9 +52,5 @@ $(document).ready(function (){
         $(perbox5).css({"background": "url(/images/none.png)"});
     });
 
-
-
-
 })
-
 

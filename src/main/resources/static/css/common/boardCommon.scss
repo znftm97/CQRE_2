@@ -14,9 +14,15 @@ $grayTextColor: #777;
 
 /*tableBox*/
 #tableBox{
-  width: 70.64%;
+  width: 70%;
   margin: 0 auto;
   visibility: visible!important;
+
+  .searchBox > a{
+    display: inline-block;
+    position: absolute;
+    margin: -42px 0 0 595px;
+  }
 
   .list{
     width: 100%;

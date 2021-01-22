@@ -61,4 +61,14 @@ public class homeController {
         return "board/freeBoard";
     }
 
+    @GetMapping("/noticeCreate")
+    public String noticeCreate(){
+        return "board/noticeCreate";
+    }
+
+    @GetMapping("/freeCreate")
+    public String freeCreate(){
+        return "board/freeCreate";
+    }
+
 }
