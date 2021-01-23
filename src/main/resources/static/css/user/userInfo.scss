@@ -13,9 +13,28 @@ $grayTextColor: #777;
   text-align: center;
 }
 
-#tableBox{
-  a{
-    margin-top: 20px;
-    margin-left: 20px;
+.buttonBox{
+  width: 60%;
+  height: 50px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#passwordCheck{
+  width: 50%;
+  height: 30%;
+  z-index: 9999;
+
+  form > input,
+  form > .btn-primary{
+    display: block;
+  }
+
+  form > button,
+  form > a > button{
+    margin-top: 15px;
+    text-align: center;
   }
 }
+

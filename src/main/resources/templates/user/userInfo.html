@@ -15,6 +15,9 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     <link rel="stylesheet" th:href="@{/css/common/infoCommon.css}">
     <link rel="stylesheet" th:href="@{/css/user/userInfo.css}">
     <script rel="stylesheet" th:src="@{/js/common/infoCommon.js}"></script>
+    <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 </head>
 <body>
     <div class="containerCustom">
@@ -76,9 +79,27 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
                     </tbody>
                 </table>
-                <a class="btn btn-primary">정보 수정</a>
-                <a class="btn btn-success" th:href="@{/updatePassword}">비밀번호 변경</a>
-                <a class="btn btn-danger">회원 탈퇴</a>
+                <div class="buttonBox">
+                    <a href="#passwordCheck" rel="modal:open">
+                        <button class="btn btn-primary">정보 수정</button>
+                    </a>
+                    <a href="#passwordCheck" rel="modal:open">
+                        <button class="btn btn-success">비밀번호 변경</button>
+                    </a>
+                    <a class="btn btn-danger">회원 탈퇴</a>
+
+                    <!--modal-->
+                    <div id="passwordCheck" class="modal">
+                        <form>
+                            <p class="modal-header">비밀번호 재확인</p>
+                            <div class="modal-content">
+                                <input type="password" placeholder="비밀번호를 입력하세요">
+                            </div>
+                            <button class="btn btn-primary">submit</button>
+                            <a rel="modal:close"><button class="btn btn-danger small">닫기</button></a>
+                        </form>
+                    </div><!--modal-->
+                </div><!--buttonBox-->
             </div><!--tableBox-->
 
         </div><!--contents-->

@@ -96,4 +96,9 @@ public class homeController {
         return "/shop/shop";
     }
 
+    @GetMapping("/createGallery")
+    public String createGallery(){
+        return "/gallery/createGallery";
+    }
+
 }

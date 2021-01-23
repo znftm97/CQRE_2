@@ -13,8 +13,11 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     <!-- Custom styles for this template -->
     <link rel="stylesheet" th:href="@{/css/common/fragments.css}">
     <link rel="stylesheet" th:href="@{/css/common/infoCommon.css}">
-    <link rel="stylesheet" th:href="@{/css/common/boardCommon.css}">
     <link rel="stylesheet" th:href="@{/css/shop/shop.css}">
+    <!--lightbox2-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+
 </head>
 <body>
 <div class="containerCustom">
@@ -57,65 +60,82 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     <button type="submit" class="btn btn-primary mb-2">검색</button>
                 </form>
 
-                <a class="btn btn-primary mb-2" th:href="@{/noticeCreate}">글쓰기</a>
+                <a class="btn btn-primary mb-2" th:href="@{/galleryUpload}">상품 등록</a>
             </div><!--searchBox-->
 
             <!--list-->
             <div class="list">
-                <li>
-                    <a>
+                <div class="topPic">
+                    <li>
+                        <a href="/images/board.jpg" data-lightbox="example-set">
+                            <img src="/images/board.jpg">
+                        </a>
                         <div>
-                            <h5>제목 제목 제목 제목11122222222222222222222222222222222221</h5>
-                            <p>본문 본문 본문 ㅁㄴㅇㄴ어맨어ㅑㅁ내어aaaaaaaaaaaadasdszxzzzzzzzzzzzzzzzzzzzzzzzzzzzadzxcxzczxczczxczxczxczxczxczxczxczxaaaa가방모자 쇼밍 젓가락 수저 가위 휴지</p>
-                            <p>2021.01.22</p>
+                            <p><strong>상품명안경</strong></p>
+                            <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
+                            <p>20,000원</p>
+                            <button class="btn btn-success">주문</button>
                         </div>
-                    </a>
-                </li>
-                <li>
-                    <a>
+                    </li>
+                    <li>
+                        <a href="/images/board.jpg" data-lightbox="example-set">
+                            <img src="/images/board.jpg">
+                        </a>
                         <div>
-                            <h5>제목 제목 제목 제목1111</h5>
-                            <p>본문 본문 본문 ㅁㄴㅇㄴ어맨어ㅑㅁ내어aaaaaaaaaaaadasdszxzzzzzzzzzzzzzzzzzzzzzzzzzzzadzxcxzczxczczxczxczxczxczxczxczxczxaaaa가방모자 쇼밍 젓가락 수저 가위 휴지</p>
-                            <p>2021.01.22</p>
+                            <p><strong>상품명안경</strong></p>
+                            <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
+                            <p>20,000원</p>
+                            <button class="btn btn-success">주문</button>
                         </div>
-                    </a>
-                </li>
-                <li>
-                    <a>
+                    </li>
+                    <li>
+                        <a href="/images/board.jpg" data-lightbox="example-set">
+                            <img src="/images/board.jpg">
+                        </a>
                         <div>
-                            <h5>제목 제목 제목 제목1111</h5>
-                            <p>본문 본문 본문 ㅁㄴㅇㄴ어맨어ㅑㅁ내어aaaaaaaaaaaadasdszxzzzzzzzzzzzzzzzzzzzzzzzzzzzadzxcxzczxczczxczxczxczxczxczxczxczxaaaa가방모자 쇼밍 젓가락 수저 가위 휴지</p>
-                            <p>2021.01.22</p>
+                            <p><strong>상품명안경</strong></p>
+                            <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
+                            <p>20,000원</p>
+                            <button class="btn btn-success">주문</button>
                         </div>
-                    </a>
-                </li>
-                <li>
-                    <a>
+                    </li>
+                </div><!--topPic-->
+
+                <div class="bottomPic">
+                    <li>
+                        <a href="/images/board.jpg" data-lightbox="example-set">
+                            <img src="/images/board.jpg">
+                        </a>
                         <div>
-                            <h5>제목 제목 제목 제목1111</h5>
-                            <p>본문 본문 본문 ㅁㄴㅇㄴ어맨어ㅑㅁ내어aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-                            <p>2021.01.22</p>
+                            <p><strong>상품명안경</strong></p>
+                            <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
+                            <p>20,000원</p>
+                            <button class="btn btn-success">주문</button>
                         </div>
-                    </a>
-                </li>
-                <li>
-                    <a>
+                    </li>
+                    <li>
+                        <a href="/images/board.jpg" data-lightbox="example-set">
+                            <img src="/images/board.jpg">
+                        </a>
                         <div>
-                            <h5>제목 제목 제목 제목1111</h5>
-                            <p>본문 본문 본문 ㅁㄴㅇㄴ어맨어ㅑㅁ내어aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-                            <p>2021.01.22</p>
+                            <p><strong>상품명안경</strong></p>
+                            <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
+                            <p>20,000원</p>
+                            <button class="btn btn-success">주문</button>
                         </div>
-                    </a>
-                </li>
-                <li>
-                    <a>
+                    </li>
+                    <li>
+                        <a href="/images/board.jpg" data-lightbox="example-set">
+                            <img src="/images/board.jpg">
+                        </a>
                         <div>
-                            <h5>제목 제목 제목 제목1111</h5>
-                            <p>본문 본문 본문 ㅁㄴㅇㄴ어맨어ㅑㅁ내어aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-                            <p>2021.01.22</p>
+                            <p><strong>상품명안경</strong></p>
+                            <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
+                            <p>20,000원</p>
+                            <button class="btn btn-success">주문</button>
                         </div>
-                    </a>
-                </li>
+                    </li>
+                </div><!--bottomPic-->
             </div><!--list-->
 
             <!--paging-->
@@ -162,3 +182,4 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 </div><!--containerCustom-->
 </body>
 </html>
+
