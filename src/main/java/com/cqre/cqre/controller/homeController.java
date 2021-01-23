@@ -36,9 +36,9 @@ public class homeController {
         return "/order/orderCancelList";
     }
 
-    @GetMapping("/couponList")
-    public String couponList(){
-        return "/coupon/couponList";
+    @GetMapping("/myCouponList")
+    public String myCouponList(){
+        return "/coupon/myCouponList";
     }
 
     @GetMapping("/postList")
@@ -99,6 +99,41 @@ public class homeController {
     @GetMapping("/createGallery")
     public String createGallery(){
         return "/gallery/createGallery";
+    }
+
+    @GetMapping("/createOrder")
+    public String createOrder(){
+        return "/order/createOrder";
+    }
+
+    @GetMapping("/couponList")
+    public String couponList(){
+        return "/coupon/couponList";
+    }
+
+    @GetMapping("/createCoupon")
+    public String createCoupon(){
+        return "/coupon/createCoupon";
+    }
+
+    @GetMapping("/selectItemType")
+    public String selectItemType(){
+        return "/item/selectItemType";
+    }
+
+    @GetMapping("/createBook")
+    public String createBook(){
+        return "/item/createBook";
+    }
+
+    @GetMapping("/createDailyNecessity")
+    public String createDailyNecessity(){
+        return "/item/createDailyNecessity";
+    }
+
+    @GetMapping("/createPcParts")
+    public String createPcParts(){
+        return "/item/createPcParts";
     }
 
 }

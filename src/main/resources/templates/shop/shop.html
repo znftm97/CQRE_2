@@ -59,9 +59,13 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">검색</button>
                 </form>
-
-                <a class="btn btn-primary mb-2" th:href="@{/galleryUpload}">상품 등록</a>
             </div><!--searchBox-->
+
+            <div class="buttonBoxShop">
+                <a class="btn btn-primary mb-2" th:href="@{/selectItemType}">상품 등록</a>
+                <a class="btn btn-primary mb-2" th:href="@{/createCoupon}">쿠폰 생성</a>
+                <a class="btn btn-primary mb-2" th:href="@{/couponList}">쿠폰 목록</a>
+            </div>
 
             <!--list-->
             <div class="list">
@@ -74,7 +78,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                             <p><strong>상품명안경</strong></p>
                             <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
                             <p>20,000원</p>
-                            <button class="btn btn-success">주문</button>
+                            <a th:href="@{/createOrder}" class="btn btn-success">주문</a>
                         </div>
                     </li>
                     <li>
@@ -85,7 +89,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                             <p><strong>상품명안경</strong></p>
                             <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
                             <p>20,000원</p>
-                            <button class="btn btn-success">주문</button>
+                            <a th:href="@{/createOrder}" class="btn btn-success">주문</a>
                         </div>
                     </li>
                     <li>
@@ -96,7 +100,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                             <p><strong>상품명안경</strong></p>
                             <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
                             <p>20,000원</p>
-                            <button class="btn btn-success">주문</button>
+                            <a th:href="@{/createOrder}" class="btn btn-success">주문</a>
                         </div>
                     </li>
                 </div><!--topPic-->
@@ -110,7 +114,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                             <p><strong>상품명안경</strong></p>
                             <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
                             <p>20,000원</p>
-                            <button class="btn btn-success">주문</button>
+                            <a th:href="@{/createOrder}" class="btn btn-success">주문</a>
                         </div>
                     </li>
                     <li>
@@ -121,7 +125,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                             <p><strong>상품명안경</strong></p>
                             <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
                             <p>20,000원</p>
-                            <button class="btn btn-success">주문</button>
+                            <a th:href="@{/createOrder}" class="btn btn-success">주문</a>
                         </div>
                     </li>
                     <li>
@@ -132,7 +136,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                             <p><strong>상품명안경</strong></p>
                             <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
                             <p>20,000원</p>
-                            <button class="btn btn-success">주문</button>
+                            <a th:href="@{/createOrder}" class="btn btn-success">주문</a>
                         </div>
                     </li>
                 </div><!--bottomPic-->

@@ -25,16 +25,26 @@ $grayTextColor: #777;
   background-size: 100% 100%;
   opacity: 0.8;
 }
+
 #tableBox{
   width: 70%;
   margin: 0 auto;
   visibility: visible!important;
 
-  .searchBox > a{
-    display: inline-block;
-    position: absolute;
-    margin: -42px 0 0 575px;
+  .searchBox{
+    margin-left: 340px;
   }
+
+  .buttonBoxShop{
+    display: inline-block;
+    height: 37px;
+    width: 350px;
+    float: right;
+    a{
+      margin-left: 24px;
+    }
+  }
+
   /*list*/
   .list{
     width: 100%;
@@ -56,6 +66,16 @@ $grayTextColor: #777;
       margin-top: 50px;
     }
 
+    li > a{
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+      height: 300px;
+      padding-top: 5%;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
     li{
       list-style: none;
       position: relative;
@@ -66,15 +86,6 @@ $grayTextColor: #777;
       border: 2px solid lightgray;
       box-shadow: rgba(0,0,0,.14) 3px 6px 12px;
 
-      a{
-        cursor: pointer;
-        display: block;
-        text-decoration: none;
-        height: 300px;
-        padding-top: 5%;
-        text-align: center;
-        box-sizing: border-box;
-
         /*인스타 프레임*/
         img{
           width: 349px;
@@ -83,8 +94,6 @@ $grayTextColor: #777;
           margin-left: -1px;
         }
 
-
-      }
 
       div{
         width: 90%;
