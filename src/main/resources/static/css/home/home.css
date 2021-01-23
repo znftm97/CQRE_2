@@ -83,7 +83,9 @@ header {
         display: inline-block;
         margin-top: 14px;
         text-decoration: none;
-        color: white; }
+        color: white;
+        width: 220px;
+        height: 60px; }
 
 /*total box*/
 /*footer*/

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>gallery</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrinkto-fit=no">
+    <!-- Bootstrap CSS , jQuery-->
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" integrity="sha384-
+ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <script th:src="@{/js/jquery-3.5.1.min.js}"> </script>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/common/fragments.css}">
+    <link rel="stylesheet" th:href="@{/css/common/infoCommon.css}">
+    <link rel="stylesheet" th:href="@{/css/gallery/gallery.css}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+</head>
+<body>
+<div class="containerCustom">
+    <div th:replace="fragments/top :: top"/>
+
+    <div class="visual">
+        <h2>
+            <p>gallery</p>
+            <p>갤러리</p>
+        </h2>
+    </div>
+
+    <div class="contents">
+        <div class="lnb">
+            <ul>
+                <li>
+                    <a th:href="@{gallery}">갤러리</a>
+                </li>
+                <li>
+                    <a th:href="@{shop}">쇼핑몰</a>
+                </li>
+            </ul>
+        </div><!--lnb-->
+
+        <div id="tableBox">
+            <!--searchBox-->
+            <div class="searchBox">
+                <form class="form-inline">
+                    <div class="form-group mx-sm-1 mb-2">
+                        <select name="searchOption">
+                            <option value="name">검색 조건 선택</option>
+                            <option value="title">글제목</option>
+                            <option value="name">글쓴이</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <input type="text" id="searchWord" name="searchWord" class="form-control" placeholder="검색어"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">검색</button>
+                </form>
+
+                <a class="btn btn-primary mb-2" th:href="@{/galleryUpload}">업로드</a>
+            </div><!--searchBox-->
+
+            <!--list-->
+            <div class="list">
+                <div class="topPic">
+                    <li>
+                        <a href="/images/board.jpg" data-lightbox="example-set">
+                            <img src="/images/instagramFrame.png"/>
+                            <img src="/images/board.jpg">
+                        </a>
+                        <div>
+                            <p>작성자</p>
+                            <p>제목</p>
+                            <p>2021.01.23</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="/images/board.jpg" data-lightbox="example-set">
+                            <img src="/images/instagramFrame.png"/>
+                            <img src="/images/board.jpg">
+                        </a>
+                        <div>
+                            <p>작성자</p>
+                            <p>제목</p>
+                            <p>2021.01.23</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="/images/board.jpg" data-lightbox="example-set">
+                            <img src="/images/instagramFrame.png"/>
+                            <img src="/images/board.jpg">
+                        </a>
+                        <div>
+                            <p>작성자</p>
+                            <p>제목</p>
+                            <p>2021.01.23</p>
+                        </div>
+                    </li>
+                </div><!--topPic-->
+
+                <div class="bottomPic">
+                    <li>
+                        <a href="/images/board.jpg" data-lightbox="example-set">
+                            <img src="/images/instagramFrame.png"/>
+                            <img src="/images/board.jpg">
+                        </a>
+                        <div>
+                            <p>작성자</p>
+                            <p>제목</p>
+                            <p>2021.01.23</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="/images/board.jpg" data-lightbox="example-set">
+                            <img src="/images/instagramFrame.png"/>
+                            <img src="/images/board.jpg">
+                        </a>
+                        <div>
+                            <p>작성자</p>
+                            <p>제목</p>
+                            <p>2021.01.23</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="/images/board.jpg" data-lightbox="example-set">
+                            <img src="/images/instagramFrame.png"/>
+                            <img src="/images/board.jpg">
+                        </a>
+                        <div>
+                            <p>작성자</p>
+                            <p>제목</p>
+                            <p>2021.01.23</p>
+                        </div>
+                    </li>
+                </div><!--bottomPic-->
+            </div><!--list-->
+
+            <!--paging-->
+            <nav style="text-align: center;">
+                <ul class="pagination justify-content-center">
+
+                    <!--  first  -->
+                    <li class="page-item">
+                        <a class="page-link"  aria-label="First">
+                            <span aria-hidden="true">First</span>
+                        </a>
+                    </li>
+
+                    <!--  <  -->
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Previous" >
+                            <span aria-hidden="true">&lt;</span>
+                        </a>
+                    </li>
+
+                    <!--  1,2,3  -->
+                    <li class="page-item">
+                        <a class="page-link"></a>
+                    </li>
+
+                    <!--  > -->
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&gt;</span>
+                        </a>
+                    </li>
+
+                    <!--  Last  -->
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Last">
+                            <span aria-hidden="true">Last</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav><!--paging-->
+        </div><!--tableBox-->
+        <div th:replace="fragments/footer :: footer"/>
+    </div><!--contents-->
+</div><!--containerCustom-->
+</body>
+</html>

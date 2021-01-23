@@ -18,7 +18,7 @@ header {
   height: 100px;
   text-align: center;
   line-height: 14px;
-  z-index: 2;
+  z-index: 99;
   display: flex;
   justify-content: space-between; }
   header img {
