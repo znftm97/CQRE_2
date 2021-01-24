@@ -49,6 +49,7 @@ $grayTextColor: #777;
         text-decoration: none;
         height: inherit;
         padding-top: 5%;
+        color: black;
 
         div{
           line-height: 155%;
@@ -84,11 +85,27 @@ $grayTextColor: #777;
             -webkit-box-orient: vertical;
           }
 
-          p:last-child{
-            font-size: 15px;
-            text-align: right;
-            margin-right: 5px;
-            color: #888;
+          div{
+            width: 100%;
+
+            p:first-child,
+            p:last-child{
+              font-size: 15px;
+              text-align: right;
+              margin-right: 5px;
+              color: #888;
+              display: inline-block;
+            }
+
+            p:first-child{
+              float: left;
+            }
+
+            p:last-child{
+              width: 80px;
+              float: right;
+              margin: 0;
+            }
           }
         }
       }
@@ -105,31 +122,49 @@ $grayTextColor: #777;
   border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
   border-image-slice: 1!important;
   color: $blueColor!important;
+  a{
+    color: $blueColor!important;
+  }
 }
 .list > li:nth-child(2):hover{
   border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
   border-image-slice: 1!important;
   color: $blueColor!important;
+  a{
+    color: $blueColor!important;
+  }
 }
 .list > li:nth-child(3):hover{
   border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
   border-image-slice: 1!important;
   color: $blueColor!important;
+  a{
+    color: $blueColor!important;
+  }
 }
 .list > li:nth-child(4):hover{
   border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
   border-image-slice: 1!important;
   color: $blueColor!important;
+  a{
+    color: $blueColor!important;
+  }
 }
 .list > li:nth-child(5):hover{
   border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
   border-image-slice: 1!important;
   color: $blueColor!important;
+  a{
+    color: $blueColor!important;
+  }
 }
 .list > li:nth-child(6):hover{
   border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
   border-image-slice: 1!important;
   color: $blueColor!important;
+  a{
+    color: $blueColor!important;
+  }
 }
 /*hover*/
 

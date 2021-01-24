@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>readPost</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrinkto-fit=no">
+    <!-- Bootstrap CSS , jQuery-->
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" integrity="sha384-
+ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <script th:src="@{/js/jquery-3.5.1.min.js}"> </script>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/common/fragments.css}">
+    <link rel="stylesheet" th:href="@{/css/common/infoCommon.css}">
+    <link rel="stylesheet" th:href="@{/css/board/freeCreate.css}">
+    <link rel="stylesheet" th:href="@{/css/post/readPost.css}">
+
+</head>
+<body>
+<div class="containerCustom">
+    <div th:replace="fragments/top :: top"/>
+    <div class="postBox">
+        <div class="boardTitle">
+            <h2>제목</h2>
+        </div>
+        <div>
+            <span>글쓴이 : </span>
+            <span></span>
+            <span>, 조회수 : </span>
+            <span></span>
+            <span>, 작성시간 : </span>
+            <span></span>
+        </div>
+        <!--글 내용-->
+        <div class="content">
+            <p> asdsdasdaaddsaasdsad</p>
+        </div><!--글 내용-->
+
+        <p><strong>첨부파일</strong></p>
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <a>파일1</a>
+                    <a>파일2</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!--댓글 박스-->
+        <div class="commentBox" style="margin-top: 100px">
+            <form style="display: flex" role="form" method="post">
+                <input type="text" class="form-control" placeholder="내용을 입력하세요" style="height: 60px">
+                <button type="submit" class="btn btn-sm btn-primary" >Submit</button>
+            </form>
+
+            <table class="table table-dark">
+                <tbody>
+                <tr>
+                    <td  style="float: left"></td>
+                    <td></td>
+                    <td></td>
+                    <td style="float: right">
+                        <form role="form" method="post">
+                            <button class="btn-danger" style="float: right">삭제</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        <!--paging-->
+        <nav style="text-align: center;">
+            <ul class="pagination justify-content-center">
+
+                <!--  first  -->
+                <li class="page-item">
+                    <a class="page-link"  aria-label="First">
+                        <span aria-hidden="true">First</span>
+                    </a>
+                </li>
+
+                <!--  <  -->
+                <li class="page-item">
+                    <a class="page-link" aria-label="Previous" >
+                        <span aria-hidden="true">&lt;</span>
+                    </a>
+                </li>
+
+                <!--  1,2,3  -->
+                <li class="page-item">
+                    <a class="page-link"></a>
+                </li>
+
+                <!--  > -->
+                <li class="page-item">
+                    <a class="page-link" aria-label="Next">
+                        <span aria-hidden="true">&gt;</span>
+                    </a>
+                </li>
+
+                <!--  Last  -->
+                <li class="page-item">
+                    <a class="page-link" aria-label="Last">
+                        <span aria-hidden="true">Last</span>
+                    </a>
+                </li>
+            </ul>
+        </nav><!--paging-->
+    </div><!--commetBox-->
+</div> <!--postBox-->
+</div><!--containerCustom-->
+</body>
+</html>

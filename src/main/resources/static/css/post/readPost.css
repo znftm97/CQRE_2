@@ -1,0 +1,17 @@
+.postBox {
+  width: 50%;
+  margin: 0 auto; }
+  .postBox table tbody > tr > td > a {
+    display: block; }
+
+.content {
+  width: 100%;
+  border: 1px solid lightgray;
+  box-shadow: rgba(0, 0, 0, 0.14) 3px 6px 12px;
+  height: 500px;
+  margin: 10px 0 10px 0; }
+
+.commentBox {
+  margin-bottom: 20px; }
+
+/*# sourceMappingURL=readPost.css.map */

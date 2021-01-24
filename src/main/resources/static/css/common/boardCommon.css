@@ -36,7 +36,8 @@
         display: block;
         text-decoration: none;
         height: inherit;
-        padding-top: 5%; }
+        padding-top: 5%;
+        color: black; }
         #tableBox .list li a div {
           line-height: 155%;
           letter-spacing: normal;
@@ -64,11 +65,21 @@
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical; }
-          #tableBox .list li a div p:last-child {
-            font-size: 15px;
-            text-align: right;
-            margin-right: 5px;
-            color: #888; }
+          #tableBox .list li a div div {
+            width: 100%; }
+            #tableBox .list li a div div p:first-child,
+            #tableBox .list li a div div p:last-child {
+              font-size: 15px;
+              text-align: right;
+              margin-right: 5px;
+              color: #888;
+              display: inline-block; }
+            #tableBox .list li a div div p:first-child {
+              float: left; }
+            #tableBox .list li a div div p:last-child {
+              width: 80px;
+              float: right;
+              margin: 0; }
     #tableBox .list li:nth-child(2n) {
       margin-right: 0; }
 
@@ -78,31 +89,43 @@
   border-image: linear-gradient(to right, #f3ade1, #0070ff) !important;
   border-image-slice: 1 !important;
   color: #0070ff !important; }
+  .list > li:nth-child(1):hover a {
+    color: #0070ff !important; }
 
 .list > li:nth-child(2):hover {
   border-image: linear-gradient(to right, #f3ade1, #0070ff) !important;
   border-image-slice: 1 !important;
   color: #0070ff !important; }
+  .list > li:nth-child(2):hover a {
+    color: #0070ff !important; }
 
 .list > li:nth-child(3):hover {
   border-image: linear-gradient(to right, #f3ade1, #0070ff) !important;
   border-image-slice: 1 !important;
   color: #0070ff !important; }
+  .list > li:nth-child(3):hover a {
+    color: #0070ff !important; }
 
 .list > li:nth-child(4):hover {
   border-image: linear-gradient(to right, #f3ade1, #0070ff) !important;
   border-image-slice: 1 !important;
   color: #0070ff !important; }
+  .list > li:nth-child(4):hover a {
+    color: #0070ff !important; }
 
 .list > li:nth-child(5):hover {
   border-image: linear-gradient(to right, #f3ade1, #0070ff) !important;
   border-image-slice: 1 !important;
   color: #0070ff !important; }
+  .list > li:nth-child(5):hover a {
+    color: #0070ff !important; }
 
 .list > li:nth-child(6):hover {
   border-image: linear-gradient(to right, #f3ade1, #0070ff) !important;
   border-image-slice: 1 !important;
   color: #0070ff !important; }
+  .list > li:nth-child(6):hover a {
+    color: #0070ff !important; }
 
 /*hover*/
 /*footer*/

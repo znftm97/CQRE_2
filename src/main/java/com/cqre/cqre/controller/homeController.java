@@ -61,14 +61,14 @@ public class homeController {
         return "/board/freeBoard";
     }
 
-    @GetMapping("/noticeCreate")
-    public String noticeCreate(){
-        return "/board/noticeCreate";
+    @GetMapping("/createNoticePost")
+    public String createNoticePost(){
+        return "/post/createNoticePost";
     }
 
-    @GetMapping("/freeCreate")
-    public String freeCreate(){
-        return "/board/freeCreate";
+    @GetMapping("/createFreePost")
+    public String createFreePost(){
+        return "/post/createFreePost";
     }
 
     @GetMapping("/history")
@@ -135,5 +135,11 @@ public class homeController {
     public String createPcParts(){
         return "/item/createPcParts";
     }
+
+    @GetMapping("/readPost")
+    public String readPost(){
+        return "/post/readPost";
+    }
+
 
 }
