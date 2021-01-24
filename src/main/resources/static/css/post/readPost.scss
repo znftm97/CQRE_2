@@ -2,6 +2,16 @@
   width: 50%;
   margin: 0 auto;
 
+  .postInfo{
+    form{
+      display: inline-block;
+      float: right;
+      button{
+        height: 35px;
+      }
+    }
+  }
+
   table{
     tbody > tr > td > a{
       display: block;
@@ -13,7 +23,7 @@
   border: 1px solid lightgray;
   box-shadow: rgba(0,0,0,.14) 3px 6px 12px;
   height: 500px;
-  margin: 10px 0 10px 0;
+  margin: 20px 0 10px 0;
 }
 
 .commentBox{

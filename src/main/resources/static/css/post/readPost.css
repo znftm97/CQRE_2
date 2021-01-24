@@ -1,6 +1,11 @@
 .postBox {
   width: 50%;
   margin: 0 auto; }
+  .postBox .postInfo form {
+    display: inline-block;
+    float: right; }
+    .postBox .postInfo form button {
+      height: 35px; }
   .postBox table tbody > tr > td > a {
     display: block; }
 
@@ -9,7 +14,7 @@
   border: 1px solid lightgray;
   box-shadow: rgba(0, 0, 0, 0.14) 3px 6px 12px;
   height: 500px;
-  margin: 10px 0 10px 0; }
+  margin: 20px 0 10px 0; }
 
 .commentBox {
   margin-bottom: 20px; }
