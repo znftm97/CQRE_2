@@ -12,16 +12,21 @@
   text-align: center;
   margin-top: 20px; }
 
-#passwordCheck {
+#passwordCheck, #addAddress {
   width: 50%;
   height: 30%;
   z-index: 9999; }
   #passwordCheck form > input,
-  #passwordCheck form > .btn-primary {
+  #passwordCheck form > .btn-primary, #addAddress form > input,
+  #addAddress form > .btn-primary {
     display: block; }
   #passwordCheck form > button,
-  #passwordCheck form > a > button {
+  #passwordCheck form > a > button, #addAddress form > button,
+  #addAddress form > a > button {
     margin-top: 15px;
     text-align: center; }
+
+#addAddress input:last-child {
+  margin-top: 6px; }
 
 /*# sourceMappingURL=userInfo.css.map */

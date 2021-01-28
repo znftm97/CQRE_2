@@ -1,20 +1,76 @@
+@charset "UTF-8";
+@import url("https://use.fontawesome.com/releases/v5.0.9/css/all.css");
 .postBox {
   width: 50%;
-  margin: 0 auto; }
-  .postBox .postInfo form {
-    display: inline-block;
-    float: right; }
-    .postBox .postInfo form button {
-      height: 35px; }
-  .postBox table tbody > tr > td > a {
+  margin: 0 auto;
+  /*좋아요 버튼*/ }
+  .postBox .postInfo table tbody > tr > td > a {
     display: block; }
+  .postBox .content {
+    width: 100%;
+    border: 1px solid lightgray;
+    box-shadow: rgba(0, 0, 0, 0.14) 3px 6px 12px;
+    height: 500px;
+    margin: 20px 0 10px 0;
+    /*좋아요 버튼*/ }
+    .postBox .content div {
+      width: 50px;
+      height: 40px;
+      position: relative;
+      margin: 0 auto;
+      margin-top: 410px; }
+      .postBox .content div i {
+        cursor: pointer;
+        padding: 10px 12px 8px;
+        background: #f3ade1;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 0 0 15px;
+        color: #aaa;
+        transition: .2s; }
+      .postBox .content div i:hover {
+        color: #666; }
+      .postBox .content div i:before {
+        font-family: fontawesome, serif;
+        content: '\f004';
+        font-style: normal;
+        font-size: 20px; }
+      .postBox .content div span {
+        position: absolute;
+        bottom: 70px;
+        left: 0;
+        right: 0;
+        visibility: hidden;
+        transition: .6s;
+        z-index: -2;
+        font-size: 2px;
+        color: transparent;
+        font-weight: 400; }
+      .postBox .content div i.press {
+        animation: size .4s;
+        color: #e23b3b; }
+      .postBox .content div span.press {
+        bottom: 50px;
+        font-size: 14px;
+        visibility: visible;
+        animation: fade 1s; }
 
-.content {
-  width: 100%;
-  border: 1px solid lightgray;
-  box-shadow: rgba(0, 0, 0, 0.14) 3px 6px 12px;
-  height: 500px;
-  margin: 20px 0 10px 0; }
+@keyframes fade {
+  0% {
+    color: #transparent; }
+  50% {
+    color: #e23b3b; }
+  100% {
+    color: #transparent; } }
+
+@keyframes size {
+  0% {
+    padding: 10px 12px 8px; }
+  50% {
+    padding: 14px 16px 12px;
+    margin-top: -4px; }
+  100% {
+    padding: 10px 12px 8px; } }
 
 .commentBox {
   margin-bottom: 20px; }

@@ -21,7 +21,7 @@ $grayTextColor: #777;
   margin-top: 20px;
 }
 
-#passwordCheck{
+#passwordCheck, #addAddress{
   width: 50%;
   height: 30%;
   z-index: 9999;
@@ -36,5 +36,10 @@ $grayTextColor: #777;
     margin-top: 15px;
     text-align: center;
   }
+}
+
+#addAddress input:last-child{
+  margin-top: 6px;
+
 }
 
