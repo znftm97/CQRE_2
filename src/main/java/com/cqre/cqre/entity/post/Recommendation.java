@@ -2,15 +2,14 @@ package com.cqre.cqre.entity.post;
 
 import com.cqre.cqre.entity.BaseEntity;
 import com.cqre.cqre.entity.User;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Recommendation extends BaseEntity {
 
@@ -28,11 +27,4 @@ public class Recommendation extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
-
-    @Builder
-    public Recommendation(int check, User user, Post post){
-        this.check = check;
-        this.user = user;
-        this.post = post;
-    }
 }

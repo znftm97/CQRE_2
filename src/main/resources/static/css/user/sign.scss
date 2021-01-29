@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+$pinkColor: #f3ade1;
+$purpleColor: #a873f9;
+$blueColor: #0070ff;
+$blueLightColor: #4e9bff;
+$grayTextColor: #777;
+
+html, body{
+  font-family: "Noto Sans CJK KR";
+  margin:0;
+}
+
+.containerCustom{
+  max-width: 1920px;
+  max-height: 1080px;
+}
+
+.bg-image{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/backgroundCut.png") no-repeat;
+  background-size: 100% 100%;
+  z-index: -100;
+  opacity: 0.7;
+}
+
+/*header*/
+header {
+  width: 1920px;
+  height: 70px;
+  /*가운데 정렬*/
+  text-align: center;
+  line-height: 14px;
+  z-index: 2;
+  position: absolute;
+  display: block;
+  position: fixed;
+
+  img {
+    margin-top: 20px;
+    width: 160px;
+    height: 60px;
+  }
+}
+
+footer {
+  width: 100%;
+  /*하단에 고정*/
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+
+  font-size: 12px;
+  letter-spacing: -0.35px;
+  line-height: 14px;
+  text-align: center;
+  color: white!important;
+  text-decoration: none solid rgb(255, 255, 255)!important;
+}  /*header , footer*/
+
+
+/*social login button*/
+.socialLogin{
+  width: 500px;
+  position: absolute;
+  margin: -180px 0 0 -12px;
+
+  li{
+    float: left;
+    list-style: none;
+  }
+
+  .btn-google,
+  #custom-login-btn > img{
+    margin-left: 8%;
+  }
+
+  #naver_id_login > img,
+  #custom-login-btn > img{
+    width: 222px;
+    height: 38px;
+  }
+
+  #naver_id_login > img{
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+}  /*social login button*/
+

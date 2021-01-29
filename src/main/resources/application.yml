@@ -16,9 +16,9 @@ spring:
   thymeleaf:
     cache: false
 
-  devtools:
-    restart:
-      enabled: true
+  #devtools:
+    #restart:
+      #enabled: true
 
 logging.level:
   org.hibernate.SQL: debug #콘솔이 아니라 로그파일로 남김

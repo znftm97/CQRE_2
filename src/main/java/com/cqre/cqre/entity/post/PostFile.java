@@ -1,15 +1,14 @@
 package com.cqre.cqre.entity.post;
 
 import com.cqre.cqre.entity.BaseEntity;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostFile extends BaseEntity {
 
@@ -27,12 +26,4 @@ public class PostFile extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
-
-    @Builder
-    public PostFile(String originFilename, String filename, String filePath, Post post){
-        this.originFilename = originFilename;
-        this.filename = filename;
-        this.filePath = filePath;
-        this.post = post;
-    }
 }

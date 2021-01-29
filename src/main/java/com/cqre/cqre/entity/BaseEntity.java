@@ -20,5 +20,5 @@ public class BaseEntity {
     private LocalDateTime createDate;
 
     @LastModifiedBy
-    private LocalDateTime lastModifiedDate;
+    private LocalDateTime lastModifiedDate = LocalDateTime.now();
 }

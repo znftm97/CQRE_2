@@ -1,23 +1,16 @@
 package com.cqre.cqre.entity.shop.item;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class DailyNecessity extends Item{
 
     private String manufacturer;
     private String lifeSpan;
-
-    @Builder
-    public DailyNecessity(String manufacturer, String lifeSpan){
-        this.manufacturer = manufacturer;
-        this.lifeSpan = lifeSpan;
-    }
 }

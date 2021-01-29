@@ -1,9 +1,6 @@
 package com.cqre.cqre.entity;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -31,7 +28,7 @@ public class User extends BaseEntity{
 
     @Builder
     public User(String name, String studentId, String loginId, String password, String email){
-        Address address = new Address("없음", "없음");
+        Address address = new Address("Not yet Entered", "Not yet Entered");
 
         this.name = name;
         this.studentId = studentId;

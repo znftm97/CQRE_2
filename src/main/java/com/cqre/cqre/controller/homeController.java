@@ -11,11 +11,6 @@ public class homeController {
         return "/home/home";
     }
 
-    @GetMapping("/signIn")
-    public String signIn(){
-        return "/user/signIn";
-    }
-
     @GetMapping("/userInfo")
     public String userInfo(){
         return "/user/userInfo";

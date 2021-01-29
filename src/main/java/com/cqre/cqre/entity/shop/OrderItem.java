@@ -2,10 +2,7 @@ package com.cqre.cqre.entity.shop;
 
 import com.cqre.cqre.entity.BaseEntity;
 import com.cqre.cqre.entity.shop.item.Item;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,6 +10,8 @@ import java.util.List;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem extends BaseEntity {
 
@@ -32,12 +31,4 @@ public class OrderItem extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
-
-    @Builder
-    public OrderItem(int orderPrice, int count, List<Item> items){
-        this.orderPrice = orderPrice;
-        this.count = count;
-        this.items = items;
-    }
-
 }

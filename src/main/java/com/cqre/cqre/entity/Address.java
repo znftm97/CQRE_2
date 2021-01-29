@@ -8,8 +8,8 @@ import javax.persistence.Embeddable;
 @Getter
 public class Address {
 
-    private String street;
-    private String detail;
+    private String street = "Not yet entered";
+    private String detail = "Not yet entered";
 
     protected Address(){
 
