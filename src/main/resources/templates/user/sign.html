@@ -43,23 +43,23 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 <h1>Sign Up</h1>
                 <input type="text" placeholder="Name" th:field="*{name}" class="form-control"
                        th:class="${#fields.hasErrors('name')}? 'form-control fieldError' : 'form-control'"/>
-                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">다시 입력해 주세요!</p>
+                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
 
                 <input type="text" placeholder="Student Id" th:field="*{studentId}" class="form-control"
                        th:class="${#fields.hasErrors('studentId')}? 'form-control fieldError' : 'form-control'"/>
-                <p th:if="${#fields.hasErrors('studentId')}" th:errors="*{studentId}">다시 입력해 주세요!</p>
+                <p th:if="${#fields.hasErrors('studentId')}" th:errors="*{studentId}"></p>
 
                 <input type="text" placeholder="Id" th:field="*{loginId}" class="form-control"
                        th:class="${#fields.hasErrors('loginId')}? 'form-control fieldError' : 'form-control'"/>
-                <p th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}">다시 입력해 주세요!</p>
+                <p th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></p>
 
                 <input type="password" placeholder="Password" th:field="*{password}" class="form-control"
                        th:class="${#fields.hasErrors('password')}? 'form-control fieldError' : 'form-control'"/>
-                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">다시 입력해 주세요!</p>
+                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 
                 <input type="email" placeholder="Email" th:field="*{email}" class="form-control"
                        th:class="${#fields.hasErrors('email')}? 'form-control fieldError' : 'form-control'"/>
-                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">다시 입력해 주세요!</p>
+                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 
                 <button type="submit">Sign Up</button>
             </form>
@@ -111,10 +111,10 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
-                    <button class="ghost" id="signUp">Sign Up</button>
+                    <button class="ghost" id="signUp">Sign In</button>
                 </div>
                 <div class="overlay-panel overlay-left">
-                    <button class="ghost" id="signIn">Sign In</button>
+                    <button class="ghost" id="signIn">Sign Up</button>
                 </div>
             </div>
         </div>

@@ -29,6 +29,7 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	implementation 'com.querydsl:querydsl-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	compileOnly 'org.projectlombok:lombok'
 	compile 'org.webjars:jquery:3.5.1'
 	runtimeOnly 'com.h2database:h2'

@@ -16,6 +16,15 @@ spring:
   thymeleaf:
     cache: false
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: jangchanghun011@gmail.com
+    password: wprkfrhdaud12!
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+
   #devtools:
     #restart:
       #enabled: true

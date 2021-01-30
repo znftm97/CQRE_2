@@ -3,9 +3,11 @@ package com.cqre.cqre.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseEntity{
 
@@ -26,8 +28,12 @@ public class User extends BaseEntity{
     @Embedded
     private Address address;
 
+    private String emailVerified;
+
+    private String emailCheckToken;
+
     @Builder
-    public User(String name, String studentId, String loginId, String password, String email){
+    public User(String name, String studentId, String loginId, String password, String email, String emailCheckToken){
         Address address = new Address("Not yet Entered", "Not yet Entered");
 
         this.name = name;
@@ -36,8 +42,11 @@ public class User extends BaseEntity{
         this.password = password;
         this.email = email;
         this.address = address;
+        this.emailVerified = "false";
+        this.emailCheckToken = UUID.randomUUID().toString();
     }
 }
+
 
 
 
