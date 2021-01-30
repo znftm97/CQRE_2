@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,7 +34,8 @@ public class UserController {
 
     /*회원가입*/
     @PostMapping("/user/signUp")
-    public String signUp(@ModelAttribute("SignUpDto") @Valid SignUpDto signUpDto, BindingResult result){
+    public String signUp(@ModelAttribute("SignUpDto") @Valid SignUpDto signUpDto, BindingResult result)
+            throws UnsupportedEncodingException, MessagingException {
         if (result.hasErrors()){
             return "/user/sign";
         }

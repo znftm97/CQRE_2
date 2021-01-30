@@ -5,12 +5,15 @@ import com.cqre.cqre.entity.User;
 import com.cqre.cqre.exception.customexception.CValidationEmailException;
 import com.cqre.cqre.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.thymeleaf.spring5.SpringTemplateEngine;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 
 @Service
 @RequiredArgsConstructor
@@ -19,11 +22,10 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JavaMailSender javaMailSender;
-    private final SpringTemplateEngine templateEngine;
 
     /*회원가입*/
     @Transactional
-    public void signUp(SignUpDto signUpDto){
+    public void signUp(SignUpDto signUpDto) throws UnsupportedEncodingException, MessagingException {
 
         User user = User.builder()
                 .name(signUpDto.getName())
@@ -39,29 +41,24 @@ public class UserService {
     }
 
     /*메일 전송*/
-    public void emailSend(User user){
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
+    public void emailSend(User user) throws MessagingException, UnsupportedEncodingException {
 
-        mailMessage.setTo(user.getEmail());
-        mailMessage.setSubject("CQRE 회원 가입 인증");
-        mailMessage.setText(
-                "아래 링크를 클릭하시면 이메일 인증이 완료됩니다." +
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
+        String html = "<h1>이메일 인증</h1><br>" +
+                "아래 버튼을 클릭하시면 이메일 인증이 완료됩니다.<br>" +
                 "<a href='http://localhost:8080/user/validationEmail?email=" +
                 user.getEmail() +
                 "&emailCheckToken=" +
                 user.getEmailCheckToken() +
-                "' target='_blank'>이메일 인증 확인</a>");
+                "' target='_blank'><button>이메일 인증 하기</button></a>";
 
-        /*mailMessage.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
-                .append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
-                .append("<a href='http://localhost:8080/user/validationEmail?email=")
-                .append(user.getEmail())
-                .append("&emailCheckToken=")
-                .append(user.getEmailCheckToken())
-                .append("' target='_blank'>이메일 인증 확인</a>")
-                .toString());*/
+        messageHelper.setSubject("CQRE 회원 가입 인증");
+        messageHelper.setText(html, true);
+        messageHelper.setTo(user.getEmail());
 
-        javaMailSender.send(mailMessage);
+        javaMailSender.send(message);
     }
 
     /*토큰 값 검증*/
