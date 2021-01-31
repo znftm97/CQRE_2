@@ -66,10 +66,10 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         </div>
 
         <div class="form-container sign-in-container">
-            <form action="#">
+            <form role="form" th:action="@{/user/signIn}" method="post">
                 <h1>Sign in</h1>
-                <input type="email" placeholder="Id" />
-                <input type="password" placeholder="Password" />
+                <input type="text" name="username" placeholder="Id" />
+                <input type="password" name="password" placeholder="Password" />
                 <a href="#">ID/PW 찾기</a>
                 <button>Sign In</button>
             </form>

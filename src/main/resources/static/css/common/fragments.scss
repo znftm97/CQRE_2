@@ -75,20 +75,31 @@ header{
     height: inherit;
     margin-right: 20px;
 
-    button{
+    form{
+      width: 100px;
+      height: 20px;
       display: inline-block;
-      font-size: 18px;
-      margin-top: 25px;
-      background: linear-gradient(to right, $pinkColor, $blueLightColor);
-      border: none;
+      font-size: 20px;
+      margin-top: 40px;
 
-      a{
-        text-decoration: none;
-        color:white;
+      button{
+        background: none;
+        border: none;
       }
     }
-    button:last-child{
-      margin-left: 25px;
+
+    a{
+      display: inline-block;
+      font-size: 20px;
+      color: black;
+      margin-top: 40px;
+      text-decoration: none;
+      width: 100px;
+      height: 20px;
+    }
+
+    a:first-child{
+      margin-left: 90px;
     }
 
   }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
 </head>
@@ -28,8 +29,11 @@
             </ul>
         </div>
         <div class="sign">
-            <button class="btn btn-primary" ><a th:href="@{/user/sign}">SignIn/SignUp</a></button>
-            <button class="btn btn-primary"><a th:href="@{/userInfo}">MyInfo</a></button>
+            <a th:href="@{/user/sign}" sec:authorize="isAnonymous()">SignIn/SignUp</a>
+            <form role="form" th:action="@{/user/logout}" method="post">
+                <button sec:authorize="isAuthenticated()">Logout</button>
+            </form>
+            <a th:href="@{/userInfo}" sec:authorize="isAuthenticated()">MyInfo</a>
         </div>
     </header>
 </body>

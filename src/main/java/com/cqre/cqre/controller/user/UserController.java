@@ -3,8 +3,13 @@ package com.cqre.cqre.controller.user;
 import com.cqre.cqre.dto.SignInDto;
 import com.cqre.cqre.dto.SignUpDto;
 import com.cqre.cqre.repository.user.UserRepository;
+import com.cqre.cqre.security.UserContext;
 import com.cqre.cqre.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 
@@ -42,14 +49,28 @@ public class UserController {
 
         userService.signUp(signUpDto);
 
-        return "/user/validationEmail";
+        return "/home/home";
+
+        /*return "/user/validationEmail";*/
     }
 
-    /*이메일 인증*/
+    /*이메일 인증*//*
     @GetMapping("/user/validationEmail")
     public String validationEmail(@RequestParam String email, @RequestParam String emailCheckToken){
         userService.validationEmailToken(email, emailCheckToken);
 
         return "/user/validationSuccess";
+    }*/
+
+    /*로그아웃*/
+    @PostMapping("/user/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if(authentication != null){
+            new SecurityContextLogoutHandler().logout(request,response,authentication);
+        }
+
+        return "/home/home";
     }
 }

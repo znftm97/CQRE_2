@@ -57,17 +57,25 @@ header {
     width: 350px;
     height: inherit;
     margin-right: 20px; }
-    header .sign button {
+    header .sign form {
+      width: 100px;
+      height: 20px;
       display: inline-block;
-      font-size: 18px;
-      margin-top: 25px;
-      background: linear-gradient(to right, #f3ade1, #4e9bff);
-      border: none; }
-      header .sign button a {
-        text-decoration: none;
-        color: white; }
-    header .sign button:last-child {
-      margin-left: 25px; }
+      font-size: 20px;
+      margin-top: 40px; }
+      header .sign form button {
+        background: none;
+        border: none; }
+    header .sign a {
+      display: inline-block;
+      font-size: 20px;
+      color: black;
+      margin-top: 40px;
+      text-decoration: none;
+      width: 100px;
+      height: 20px; }
+    header .sign a:first-child {
+      margin-left: 90px; }
 
 header .menu > ul > li:nth-child(1):hover {
   border-bottom: 5px solid white;

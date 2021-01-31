@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Home</title>
     <!-- Required meta tags -->
@@ -22,8 +23,11 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 <img th:src="@{/images/mainLogo4.png}" type="images" alt="">
             </a>
             <div class="sign">
-                <a th:href="@{/user/sign}">SignIn/SignUp</a>
-                <a th:href="@{/userInfo}">myInfo</a>
+                <a th:href="@{/user/sign}" sec:authorize="isAnonymous()">SignIn/SignUp</a>
+                <form role="form" th:action="@{/user/logout}" method="post">
+                    <button type="submit" sec:authorize="isAuthenticated()">Logout</button>
+                </form>
+                <a th:href="@{/userInfo}" sec:authorize="isAuthenticated()">myInfo</a>
             </div>
         </header>
 

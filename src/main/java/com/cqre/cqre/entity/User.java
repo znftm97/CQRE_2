@@ -3,6 +3,8 @@ package com.cqre.cqre.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -32,8 +34,10 @@ public class User extends BaseEntity{
 
     private String emailCheckToken;
 
+    private String role = "USER";
+
     @Builder
-    public User(String name, String studentId, String loginId, String password, String email, String emailCheckToken){
+    public User(String name, String studentId, String loginId, String password, String email){
         Address address = new Address("Not yet Entered", "Not yet Entered");
 
         this.name = name;

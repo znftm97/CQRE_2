@@ -37,7 +37,7 @@ public class UserService {
 
         userRepository.save(user);
 
-        emailSend(user);
+        /*emailSend(user);*/
     }
 
     /*메일 전송*/
