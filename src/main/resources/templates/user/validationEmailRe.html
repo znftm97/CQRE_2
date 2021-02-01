@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>authenticationEmail</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrinkto-fit=no">
+    <!-- Bootstrap CSS , jQuery-->
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" integrity="sha384-
+ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <script th:src="@{/js/jquery-3.5.1.min.js}"> </script>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/user/validationEmail.css}">
+</head>
+<body>
+<div class="containerCustom">
+    <div class="bg-image"></div>
+    <!--header-->
+    <header>
+        <a th:href="@{/}">
+            <img th:src="@{/images/mainLogo4.png}" type="images" alt="">
+        </a>
+    </header>
+    <!--header-->
+
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <h1>이메일 인증</h1>
+            <form role="form" th:action="@{/user/validationEmailRe}" th:object="${ValidationEmailReDto}" method="post">
+                <input type="text" name="LoginId" placeholder="Id" />
+                <input type="password" name="LoginPassword" placeholder="Password" />
+                <button class="btn btn-primary">인증 이메일 전송</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div th:replace="fragments/footer :: footer"/>
+</div>
+
+</body>
+</html>

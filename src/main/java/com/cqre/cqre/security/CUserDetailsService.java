@@ -24,7 +24,7 @@ public class CUserDetailsService implements UserDetailsService {
         User findUser = userRepository.findByLoginId(loginId);
 
         if (findUser == null) {
-            throw new UsernameNotFoundException("User를 찾을 수 없음");
+            throw new UsernameNotFoundException("");
         }
 
         List<GrantedAuthority> roles = new ArrayList<>();

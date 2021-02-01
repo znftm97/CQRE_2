@@ -1,9 +1,11 @@
 package com.cqre.cqre.security;
 
+import com.cqre.cqre.exceptionhandler.CLoginFailHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -21,7 +23,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-    private final CUserDetailsService cUserDetailsService;
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        return new CAuthenticationProvider(passwordEncoder());
+    }
+
+    private final CLoginFailHandler cLoginFailHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -33,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/user/sign")
                 .loginProcessingUrl("/user/signIn")
                 .defaultSuccessUrl("/home")
+                .failureHandler(cLoginFailHandler)
                 .permitAll();
         http
                 .logout()
@@ -43,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(cUserDetailsService);
+        auth.authenticationProvider(authenticationProvider());
     }
 
     @Override

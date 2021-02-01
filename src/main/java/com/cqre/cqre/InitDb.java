@@ -36,6 +36,7 @@ public class InitDb {
                     .email("znftm93@gmail.com")
                     .build();
 
+            user.setEmailVerified("true");
             em.persist(user);
         }
     }

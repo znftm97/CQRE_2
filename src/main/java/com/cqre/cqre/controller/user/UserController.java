@@ -1,13 +1,11 @@
 package com.cqre.cqre.controller.user;
 
-import com.cqre.cqre.dto.SignInDto;
+import com.cqre.cqre.dto.ValidationEmailReDto;
 import com.cqre.cqre.dto.SignUpDto;
 import com.cqre.cqre.repository.user.UserRepository;
-import com.cqre.cqre.security.UserContext;
 import com.cqre.cqre.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -33,9 +31,12 @@ public class UserController {
 
     /*sign 페이지*/
     @GetMapping("/user/sign")
-    public String signIn(Model model){
-        model.addAttribute("SignInDto", new SignInDto());
+    public String signIn(@RequestParam(value = "error", required = false) String error,
+                         @RequestParam(value = "errorMsg", required = false) String errorMsg,
+                         Model model){
         model.addAttribute("SignUpDto", new SignUpDto());
+        model.addAttribute("error", error);
+        model.addAttribute("errorMsg", errorMsg);
         return "/user/sign";
     }
 
@@ -49,18 +50,18 @@ public class UserController {
 
         userService.signUp(signUpDto);
 
-        return "/home/home";
+        /*return "/home/home";*/
 
-        /*return "/user/validationEmail";*/
+        return "/user/validationEmail";
     }
 
-    /*이메일 인증*//*
+    /*이메일 인증*/
     @GetMapping("/user/validationEmail")
     public String validationEmail(@RequestParam String email, @RequestParam String emailCheckToken){
         userService.validationEmailToken(email, emailCheckToken);
 
         return "/user/validationSuccess";
-    }*/
+    }
 
     /*로그아웃*/
     @PostMapping("/user/logout")
@@ -72,5 +73,21 @@ public class UserController {
         }
 
         return "/home/home";
+    }
+
+    /*이메일 재인증 페이지*/
+    @GetMapping("/user/validationEmailRe")
+    public String GAuthenticationEmail(Model model){
+        model.addAttribute("ValidationEmailReDto", new ValidationEmailReDto());
+        return "/user/validationEmailRe";
+    }
+
+    /*이메일 재인증*/
+    @PostMapping("/user/validationEmailRe")
+    public String PAuthenticationEmail(@ModelAttribute("AuthenticationEmailDto") ValidationEmailReDto dto)
+            throws UnsupportedEncodingException, MessagingException{
+
+        userService.emailSendRe(dto);
+        return "/user/validationEmail";
     }
 }

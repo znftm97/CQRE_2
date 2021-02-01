@@ -1,5 +1,6 @@
 package com.cqre.cqre.service.user;
 
+import com.cqre.cqre.dto.ValidationEmailReDto;
 import com.cqre.cqre.dto.SignUpDto;
 import com.cqre.cqre.entity.User;
 import com.cqre.cqre.exception.customexception.CValidationEmailException;
@@ -37,7 +38,7 @@ public class UserService {
 
         userRepository.save(user);
 
-        /*emailSend(user);*/
+        emailSend(user);
     }
 
     /*메일 전송*/
@@ -61,7 +62,30 @@ public class UserService {
         javaMailSender.send(message);
     }
 
-    /*토큰 값 검증*/
+    /*이메일 재전송*/
+    @Transactional
+    public void emailSendRe(ValidationEmailReDto dto) throws MessagingException, UnsupportedEncodingException {
+        User findUser = userRepository.findByLoginId(dto.getLoginId());
+
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
+        String html = "<h1>이메일 인증</h1><br>" +
+                "아래 버튼을 클릭하시면 이메일 인증이 완료됩니다.<br>" +
+                "<a href='http://localhost:8080/user/validationEmail?email=" +
+                findUser.getEmail() +
+                "&emailCheckToken=" +
+                findUser.getEmailCheckToken() +
+                "' target='_blank'><button>이메일 인증 하기</button></a>";
+
+        messageHelper.setSubject("CQRE 회원 가입 인증");
+        messageHelper.setText(html, true);
+        messageHelper.setTo(findUser.getEmail());
+
+        javaMailSender.send(message);
+    }
+
+    /*이메일 토큰 값 검증*/
     @Transactional
     public void validationEmailToken(String email, String emailCheckToken){
         User findUser = userRepository.findByEmail(email);

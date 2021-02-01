@@ -34,7 +34,7 @@ public class User extends BaseEntity{
 
     private String emailCheckToken;
 
-    private String role = "USER";
+    private String role = "ROLE_USER";
 
     @Builder
     public User(String name, String studentId, String loginId, String password, String email){
