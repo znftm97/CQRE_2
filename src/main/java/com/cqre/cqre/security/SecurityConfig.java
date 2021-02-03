@@ -1,8 +1,8 @@
 package com.cqre.cqre.security;
 
 import com.cqre.cqre.exceptionhandler.CLoginFailHandler;
+import com.cqre.cqre.security.OAuth2.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private final CLoginFailHandler cLoginFailHandler;
+    private final CustomOAuth2UserService customOAuth2UserService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -47,6 +48,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/user/logout")
                 .logoutSuccessUrl("/home")
                 .permitAll();
+        http
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(customOAuth2UserService);
     }
 
     @Override

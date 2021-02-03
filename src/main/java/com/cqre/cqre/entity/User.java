@@ -3,8 +3,6 @@ package com.cqre.cqre.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -48,6 +46,15 @@ public class User extends BaseEntity{
         this.address = address;
         this.emailVerified = "false";
         this.emailCheckToken = UUID.randomUUID().toString();
+    }
+
+    // == 비즈니스 로직 == //
+
+    /*소셜 계정 정보 업데이트 시 DB값도 업데이트 하기 위함*/
+    public User update(String name) {
+        this.name = name;
+
+        return this;
     }
 }
 
