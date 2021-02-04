@@ -81,7 +81,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <div class="socialLogin">
                 <ul>
                     <li>
-                        <a href="javascript:;" name="social" class="btn btn-social btn-facebook" data-social="facebook" style="margin-bottom: 10px; width: 222px;">
+                        <a th:href="@{/oauth2/authorization/facebook}" name="social" class="btn btn-social btn-facebook" data-social="facebook" style="margin-bottom: 10px; width: 222px;">
                             <span class="fa fa-facebook"> </span> Facebook으로 로그인
                         </a><br/>
                     </li>
@@ -91,16 +91,15 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                         </a><br/>
                     </li>
                     <li>
-                        <div href="javascript:;" name="social" id="naver_id_login" data-social="naver">
+                        <a th:href="@{/oauth2/authorization/naver}" name="social" id="naver_id_login" data-social="naver">
                             <img th:src="@{/images/naverLogin.png}"/>
-                        </div>
+                        </a>
                     </li>
                     <li>
-                        <a id="custom-login-btn" href="javascript:loginWithKakao()">
+                        <a id="custom-login-btn" th:href="@{/oauth2/authorization/kakao}">
                             <img
                                     src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
                                     width="222"
-                                    href="javascript:;"
                                     name="social"
                                     data-social="kakao"
                                     style="margin-top: 10px;"
