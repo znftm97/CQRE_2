@@ -73,9 +73,10 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 <div th:if="${param.error}" class="form-group">
                     <span th:text="${errorMsg}" class="alert alert-danger"></span>
                 </div>
-                <a href="#">ID/PW 찾기</a>
-                <a th:href="@{/user/validationEmailRe}">이메일 인증하기</a>
                 <button>Sign In</button>
+                <a th:href="@{/user/findId}">ID 찾기</a>
+                <a href="#">PW 찾기</a>
+                <a th:href="@{/user/validationEmailRe}">이메일 인증하기</a>
             </form>
             <!--social login button-->
             <div class="socialLogin">

@@ -1,5 +1,6 @@
 package com.cqre.cqre.service.user;
 
+import com.cqre.cqre.dto.FindIdPwDto;
 import com.cqre.cqre.dto.ValidationEmailReDto;
 import com.cqre.cqre.dto.SignUpDto;
 import com.cqre.cqre.entity.User;
@@ -95,5 +96,20 @@ public class UserService {
         }
 
         findUser.setEmailVerified("true");
+    }
+
+    /*id 찾기*/
+    public String findId(FindIdPwDto findIdPwDto){
+        User findUser = userRepository.findByEmail(findIdPwDto.getEmail());
+
+        /*if (findUser == null) {
+            예외처리
+        }*/
+
+        /*if (!findUser.getName().equals(findIdPwDto.getName())) {
+            예외처리
+        }*/
+
+        return findUser.getLoginId();
     }
 }

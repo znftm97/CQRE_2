@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .logout()
                 .logoutUrl("/user/logout")
-                .logoutSuccessUrl("/home")
+                .logoutSuccessUrl("/user/sign")
                 .permitAll();
         http
                 .oauth2Login()

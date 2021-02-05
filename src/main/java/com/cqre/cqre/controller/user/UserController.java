@@ -2,6 +2,7 @@ package com.cqre.cqre.controller.user;
 
 import com.cqre.cqre.dto.ValidationEmailReDto;
 import com.cqre.cqre.dto.SignUpDto;
+import com.cqre.cqre.dto.FindIdPwDto;
 import com.cqre.cqre.repository.user.UserRepository;
 import com.cqre.cqre.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -72,7 +73,7 @@ public class UserController {
             new SecurityContextLogoutHandler().logout(request,response,authentication);
         }
 
-        return "/home/home";
+        return "/user/sign";
     }
 
     /*이메일 재인증 페이지*/
@@ -89,5 +90,23 @@ public class UserController {
 
         userService.emailSendRe(dto);
         return "/user/validationEmail";
+    }
+
+    /*ID 찾기 페이지*/
+    @GetMapping("/user/findId")
+    public String findId(Model model){
+        model.addAttribute("findIdPwDto", new FindIdPwDto());
+
+        return "/user/findId";
+    }
+
+    /*ID 찾기*/
+    @PostMapping("/user/findId")
+    public String PFindId(@ModelAttribute("findIdPwDto") FindIdPwDto findIdPwDto, Model model){
+
+        String findLoginId = userService.findId(findIdPwDto);
+        model.addAttribute("findLoginId", findLoginId);
+
+        return "/user/findId";
     }
 }

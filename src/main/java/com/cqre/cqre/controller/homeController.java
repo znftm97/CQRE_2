@@ -71,11 +71,6 @@ public class homeController {
         return "/history/history";
     }
 
-    @GetMapping("/idpwSearch")
-    public String idpwSearch(){
-        return "/user/idpwSearch";
-    }
-
     @GetMapping("/updatePassword")
     public String updatePassword(){
         return "/user/updatePassword";
