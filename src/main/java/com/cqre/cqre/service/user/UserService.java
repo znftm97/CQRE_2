@@ -1,12 +1,18 @@
 package com.cqre.cqre.service.user;
 
-import com.cqre.cqre.dto.FindIdPwDto;
-import com.cqre.cqre.dto.ValidationEmailReDto;
 import com.cqre.cqre.dto.SignUpDto;
+import com.cqre.cqre.dto.UpdatePasswordDto;
+import com.cqre.cqre.dto.UserDto;
+import com.cqre.cqre.dto.ValidationEmailReDto;
 import com.cqre.cqre.entity.User;
+import com.cqre.cqre.exception.customexception.CFindIdUserNotFoundException;
+import com.cqre.cqre.exception.customexception.CFindPwUserNotFoundException;
 import com.cqre.cqre.exception.customexception.CValidationEmailException;
 import com.cqre.cqre.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,11 +30,12 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JavaMailSender javaMailSender;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final ModelMapper modelMapper;
 
     /*회원가입*/
     @Transactional
     public void signUp(SignUpDto signUpDto) throws UnsupportedEncodingException, MessagingException {
-
         User user = User.builder()
                 .name(signUpDto.getName())
                 .studentId(signUpDto.getStudentId())
@@ -64,7 +71,6 @@ public class UserService {
     }
 
     /*이메일 재전송*/
-    @Transactional
     public void emailSendRe(ValidationEmailReDto dto) throws MessagingException, UnsupportedEncodingException {
         User findUser = userRepository.findByLoginId(dto.getLoginId());
 
@@ -99,17 +105,44 @@ public class UserService {
     }
 
     /*id 찾기*/
-    public String findId(FindIdPwDto findIdPwDto){
-        User findUser = userRepository.findByEmail(findIdPwDto.getEmail());
+    public String findId(UserDto userDto){
+        User findUser = userRepository.OpFindByEmail(userDto.getEmail()).orElseThrow(CFindIdUserNotFoundException::new);
 
-        /*if (findUser == null) {
-            예외처리
-        }*/
-
-        /*if (!findUser.getName().equals(findIdPwDto.getName())) {
-            예외처리
-        }*/
+        if (!findUser.getName().equals(userDto.getName())) {
+            logger.error("엔티티 조회 에러");
+            throw new CFindIdUserNotFoundException();
+        }
 
         return findUser.getLoginId();
+    }
+
+    /*비밀번호 변경 본인확인 메일 전송*/
+    public void emailSendPw(UserDto userDto) throws MessagingException, UnsupportedEncodingException {
+        User findUser = userRepository.OpFindByEmail(userDto.getEmail()).orElseThrow(CFindPwUserNotFoundException::new);
+        if (!userDto.getLoginId().equals(findUser.getLoginId())) {
+            throw new CFindPwUserNotFoundException();
+        }
+
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
+        String html = "<h1>비밀번호 변경 본인확인</h1><br>" +
+                "아래 버튼을 클릭하시면 본인 인증이 완료됩니다.<br>" +
+                "<a href='http://localhost:8080/user/updatePassword?email=" +
+                findUser.getEmail() +
+                "' target='_blank'><button>인증 하기</button></a>";
+
+        messageHelper.setSubject("CQRE 본인 확인");
+        messageHelper.setText(html, true);
+        messageHelper.setTo(findUser.getEmail());
+
+        javaMailSender.send(message);
+    }
+
+    /*pw 변경*/
+    @Transactional
+    public void updatePassword(UpdatePasswordDto updatePasswordDto) {
+        User findUser = userRepository.OpFindByEmail(updatePasswordDto.getEmail()).orElseThrow(CFindPwUserNotFoundException::new);
+        findUser.setPassword(passwordEncoder.encode(updatePasswordDto.getUpdatePassword()));
     }
 }

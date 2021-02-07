@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>update Pw</title>
+    <title>find Pw</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrinkto-fit=no">
@@ -12,11 +12,6 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     <script th:src="@{/js/jquery-3.5.1.min.js}"> </script>
     <!-- Custom styles for this template -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/user/validationEmail.css}">
-    <style>
-        .fieldError {
-            border-color: #bd2130;
-        }
-    </style>
 </head>
 <body>
 <div class="containerCustom">
@@ -31,24 +26,18 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <h1>Password 변경</h1>
-            <form role="form" th:action="@{/user/updatePassword}" th:object="${updatePasswordDto}" method="post">
-                <input type="password" name="updatePassword" placeholder="password" class="form-control"
-                       th:class="${#fields.hasErrors('updatePassword')}? 'form-control fieldError' : 'form-control'"/>
-                <p th:if="${#fields.hasErrors('updatePassword')}" th:errors="*{updatePassword}"></p>
-
-                <input type="password" name="updatePasswordRe" placeholder="Re-enter password" class="form-control"
-                       th:class="${#fields.hasErrors('updatePasswordRe')}? 'form-control fieldError' : 'form-control'"/>
-                <p th:if="${#fields.hasErrors('updatePasswordRe')}" th:errors="*{updatePasswordRe}"></p>
-
-                <input type="hidden" name="email" th:value="${email}">
+            <h1>Password 찾기</h1>
+            <form role="form" th:action="@{/user/findPw}" th:object="${userDto}" method="post">
+                <input type="text" name="email" placeholder="email" />
+                <input type="text" name="loginId" placeholder="id" />
                 <button class="btn btn-primary">submit</button>
 
-                <div th:if="${notEquals}" class="form-group" style="margin-top: 50px">
-                    <span>입력한 두 비밀번호가 같지 않음</span>
+                <div th:if="${notExist}" class="form-group" style="margin-top: 50px">
+                    <span>해당 이메일, id로 가입된 회원 없음</span>
                 </div>
             </form>
         </div>
+
     </div>
 
     <div th:replace="fragments/footer :: footer"/>

@@ -1,8 +1,6 @@
 package com.cqre.cqre.controller.user;
 
-import com.cqre.cqre.dto.ValidationEmailReDto;
-import com.cqre.cqre.dto.SignUpDto;
-import com.cqre.cqre.dto.FindIdPwDto;
+import com.cqre.cqre.dto.*;
 import com.cqre.cqre.repository.user.UserRepository;
 import com.cqre.cqre.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -95,18 +93,63 @@ public class UserController {
     /*ID 찾기 페이지*/
     @GetMapping("/user/findId")
     public String findId(Model model){
-        model.addAttribute("findIdPwDto", new FindIdPwDto());
+        model.addAttribute("userDto", new UserDto());
 
         return "/user/findId";
     }
 
     /*ID 찾기*/
     @PostMapping("/user/findId")
-    public String PFindId(@ModelAttribute("findIdPwDto") FindIdPwDto findIdPwDto, Model model){
+    public String PFindId(@ModelAttribute("userDto") UserDto userDto, Model model){
 
-        String findLoginId = userService.findId(findIdPwDto);
+        String findLoginId = userService.findId(userDto);
         model.addAttribute("findLoginId", findLoginId);
 
         return "/user/findId";
     }
+
+    /*비밀번호 찾기 페이지*/
+    @GetMapping("/user/findPw")
+    public String findPw(Model model){
+
+        model.addAttribute("userDto", new UserDto());
+
+        return "/user/findPw";
+    }
+
+    /*비밀번호 찾기*/
+    @PostMapping("/user/findPw")
+    public String PFindPw(@ModelAttribute("userDto") UserDto userDto, Model model) throws UnsupportedEncodingException, MessagingException {
+
+        userService.emailSendPw(userDto);
+
+        return "/user/validationEmail";
+    }
+
+    /*이메일에서 버튼 클릭 url 매핑*/
+    @GetMapping("/user/updatePassword")
+    public String updatePassword(@RequestParam String email, Model model){
+
+        model.addAttribute("updatePasswordDto", new UpdatePasswordDto());
+        model.addAttribute("email", email);
+        return "/user/updatePassword";
+    }
+
+    /*비밀번호 변경*/
+    @PostMapping("/user/updatePassword")
+    public String PUpdatePassword(@ModelAttribute("updatePasswordDto") @Valid UpdatePasswordDto updatePasswordDto, BindingResult result, Model model){
+        if (result.hasErrors()){
+            return "/user/updatePassword";
+        }
+
+        if (!updatePasswordDto.getUpdatePassword().equals(updatePasswordDto.getUpdatePasswordRe())) {
+            model.addAttribute("notEquals", "notEquals");
+            return "/user/updatePassword";
+        }
+
+        userService.updatePassword(updatePasswordDto);
+
+        return "redirect:/user/sign";
+    }
+
 }

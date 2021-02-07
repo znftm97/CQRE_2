@@ -27,17 +27,19 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     <div class="container" id="container">
         <div class="form-container sign-up-container">
             <h1>ID 찾기</h1>
-            <form role="form" th:action="@{/user/findId}" th:object="${findIdPwDto}" method="post">
+            <form role="form" th:action="@{/user/findId}" th:object="${userDto}" method="post">
                 <input type="text" name="name" placeholder="name" />
                 <input type="text" name="email" placeholder="email" />
                 <button class="btn btn-primary">submit</button>
                 <div th:if="${findLoginId}" class="form-group" style="margin-top: 50px">
                     <span>회원님의 아이디는 </span>
-                    <span th:text="${findLoginId}" class="alert alert-danger"></span>
+                    <span th:text="${findLoginId}" class="alert alert-info"></span>
                     <span> 입니다.</span>
                 </div>
 
-
+                <div th:if="${notExist}" class="form-group" style="margin-top: 50px">
+                    <span>해당 이메일,이름으로 가입된 회원 없음</span>
+                </div>
             </form>
         </div>
 
