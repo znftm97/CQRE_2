@@ -11,11 +11,6 @@ public class homeController {
         return "/home/home";
     }
 
-    @GetMapping("/userInfo")
-    public String userInfo(){
-        return "/user/userInfo";
-    }
-
     @GetMapping("/orderList")
     public String orderList(){
         return "/order/orderList";

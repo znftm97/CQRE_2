@@ -1,20 +1,22 @@
 package com.cqre.cqre.service.user;
 
-import com.cqre.cqre.dto.SignUpDto;
-import com.cqre.cqre.dto.UpdatePasswordDto;
-import com.cqre.cqre.dto.UserDto;
-import com.cqre.cqre.dto.ValidationEmailReDto;
+import com.cqre.cqre.dto.*;
+import com.cqre.cqre.entity.Address;
 import com.cqre.cqre.entity.User;
 import com.cqre.cqre.exception.customexception.CFindIdUserNotFoundException;
 import com.cqre.cqre.exception.customexception.CFindPwUserNotFoundException;
+import com.cqre.cqre.exception.customexception.CUserNotFoundException;
 import com.cqre.cqre.exception.customexception.CValidationEmailException;
 import com.cqre.cqre.repository.user.UserRepository;
+import com.cqre.cqre.security.UserContext;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -144,5 +146,32 @@ public class UserService {
     public void updatePassword(UpdatePasswordDto updatePasswordDto) {
         User findUser = userRepository.OpFindByEmail(updatePasswordDto.getEmail()).orElseThrow(CFindPwUserNotFoundException::new);
         findUser.setPassword(passwordEncoder.encode(updatePasswordDto.getUpdatePassword()));
+    }
+
+    /*로그인 사용자 가져오기*/
+    public User getLoginUser() {
+        User loginUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User findUser = userRepository.findByName(loginUser.getName()).orElseThrow(CUserNotFoundException::new);
+
+        return findUser;
+    }
+
+    /*회원 정보 수정*/
+    @Transactional
+    public void updateUserInfo(UserAddressDto userAddressDto){
+        Address address = new Address(userAddressDto.getStreet(), userAddressDto.getDetail());
+
+        User loginUser = getLoginUser();
+        loginUser.setName(userAddressDto.getName());
+        loginUser.setStudentId(userAddressDto.getStudentId());
+        loginUser.setLoginId(userAddressDto.getLoginId());
+        loginUser.setAddress(address);
+    }
+
+    /*회원 탈퇴*/
+    @Transactional
+    public void removeUser(){
+        User loginUser = getLoginUser();
+        userRepository.delete(loginUser);
     }
 }

@@ -27,7 +27,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 <form role="form" th:action="@{/user/logout}" method="post">
                     <button type="submit" sec:authorize="isAuthenticated()">Logout</button>
                 </form>
-                <a th:href="@{/userInfo}" sec:authorize="isAuthenticated()">myInfo</a>
+                <a th:href="@{/user/userInfo}" sec:authorize="isAuthenticated()">myInfo</a>
             </div>
         </header>
 

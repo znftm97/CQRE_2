@@ -43,16 +43,16 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                         <a th:href="@{/basketList}">장바구니 확인</a>
                     </li>
                     <li>
-                        <a th:href="@{orderCancelList}">주문 취소 내역</a>
+                        <a th:href="@{/orderCancelList}">주문 취소 내역</a>
                     </li>
                     <li>
-                        <a th:href="@{myCouponList}">내 쿠폰함</a>
+                        <a th:href="@{/myCouponList}">내 쿠폰함</a>
                     </li>
                     <li>
-                        <a th:href="@{postList}">내 글</a>
+                        <a th:href="@{/postList}">내 글</a>
                     </li>
                     <li>
-                        <a th:href="@{commentList}">내 댓글</a>
+                        <a th:href="@{/commentList}">내 댓글</a>
                     </li>
                 </ul>
             </div><!--lnb-->
@@ -62,71 +62,105 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     <tbody>
                     <tr>
                         <th scope="row">이름</th>
-                        <td>Mark</td>
+                        <td th:text="${loginUserDto.getName()}"></td>
                     </tr>
                     <tr>
                         <th scope="row">학번</th>
-                        <td>Jacob</td>
+                        <td th:text="${loginUserDto.getStudentId()}"></td>
                     </tr>
                     <tr>
                         <th scope="row">아이디</th>
-                        <td>Larry</td>
+                        <td th:text="${loginUserDto.getLoginId()}"></td>
                     </tr>
                     <tr>
                         <th scope="row">이메일</th>
-                        <td>Larry</td>
+                        <td th:text="${loginUserDto.getEmail()}"></td>
                     </tr>
                     <tr>
                         <th scope="row">주소</th>
-                        <td>없음</td>
+                        <td th:text="${loginUserDto.getAddress().getStreet()}">없음</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" style="border: none">상세 주소</th>
+                        <td th:text="${loginUserDto.getAddress().getDetail()}" style="border: none">없음</td>
                     </tr>
 
                     </tbody>
                 </table>
                 <div class="buttonBox">
-                    <a href="#passwordCheck" rel="modal:open">
+                    <a href="#passwordCheck1" rel="modal:open">
                         <button class="btn btn-primary">정보 수정</button>
                     </a>
-                    <a href="#passwordCheck" rel="modal:open">
+                    <a href="#passwordCheck2" rel="modal:open">
                         <button class="btn btn-success">비밀번호 변경</button>
                     </a>
-                    <a class="btn btn-danger">회원 탈퇴</a>
-                    <a href="#addAddress" rel="modal:open">
-                        <button class="btn btn-dark">주소 추가</button>
+                    <a  href="#passwordCheck3" rel="modal:open" >
+                        <button class="btn btn-danger">회원 탈퇴</button>
                     </a>
+                    <div th:if="${notEquals}" class="form-group" style="margin-top: 50px">
+                        <h3 style="color: red">비밀번호 다시 입력해주세요.</h3>
+                    </div>
 
                     <!--modal-->
-                    <div id="passwordCheck" class="modal">
-                        <form>
+                    <div id="passwordCheck1" class="modal">
+                        <form role="form" th:action="@{/user/editPwCheck}" th:object="${userPwCheckDto}" method="post">
                             <p class="modal-header">비밀번호 재확인</p>
                             <div class="modal-content">
-                                <input type="password" placeholder="비밀번호를 입력하세요">
+                                <input type="password" name="password" placeholder="비밀번호를 입력하세요">
                             </div>
                             <button class="btn btn-primary">submit</button>
                             <a rel="modal:close"><button class="btn btn-danger small">닫기</button></a>
+                            <input type="hidden" name="identifier" value="1">
                         </form>
                     </div><!--modal-->
 
                     <!--modal-->
-                    <div id="addAddress" class="modal">
-                        <form>
-                            <p class="modal-header">주소 입력</p>
+                    <div id="passwordCheck2" class="modal">
+                        <form role="form" th:action="@{/user/editPwCheck}" th:object="${userPwCheckDto}" method="post">
+                            <p class="modal-header">비밀번호 재확인</p>
                             <div class="modal-content">
-                                <input type="text" placeholder="도로명 주소">
-                                <input type="text" placeholder="상세 주소">
+                                <input type="password" name="password" placeholder="비밀번호를 입력하세요">
                             </div>
                             <button class="btn btn-primary">submit</button>
                             <a rel="modal:close"><button class="btn btn-danger small">닫기</button></a>
+                            <input type="hidden" name="identifier" value="2">
                         </form>
                     </div><!--modal-->
+
+                    <!--modal-->
+                    <div id="passwordCheck3" class="modal">
+                        <form role="form" th:action="@{/user/editPwCheck}" th:object="${userPwCheckDto}" method="post">
+                            <p class="modal-header">비밀번호 재확인</p>
+                            <div class="modal-content">
+                                <input type="password" name="password" placeholder="비밀번호를 입력하세요">
+                            </div>
+                            <button class="btn btn-primary">submit</button>
+                            <a rel="modal:close"><button class="btn btn-danger small">닫기</button></a>
+                            <input type="hidden" name="identifier" value="3">
+                        </form>
+                    </div><!--modal-->
+
                 </div><!--buttonBox-->
             </div><!--tableBox-->
 
         </div><!--contents-->
-
-
-
         <div th:replace="fragments/footer :: footer"/>
     </div>
+
+<!--<script>
+    $("pwCheckBtn").on('click', function (){
+        $.ajax({
+            url: "/user/editPwCheck",
+            type: "POST",
+            data: {"pw" : $("#pwCheckBtn").val()},
+            success: function (data){
+                $(".pwCheckFail").text(data)
+            },
+            error: function (){
+                alert("에러 에러 에러");
+            }
+        });
+    });
+</script>-->
 </body>
 </html>

@@ -96,6 +96,15 @@ input {
   .sign-in-container form {
     padding-bottom: 100px; }
 
+.remember {
+  width: 100%;
+  height: 20px;
+  float: left;
+  text-align: left; }
+  .remember input {
+    width: 13px;
+    height: 13px; }
+
 .sign-in-container form p {
   font-size: 14px;
   line-height: 20px;

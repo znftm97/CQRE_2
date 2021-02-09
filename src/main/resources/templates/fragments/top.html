@@ -33,7 +33,7 @@
             <form role="form" th:action="@{/user/logout}" method="post">
                 <button sec:authorize="isAuthenticated()">Logout</button>
             </form>
-            <a th:href="@{/userInfo}" sec:authorize="isAuthenticated()">MyInfo</a>
+            <a th:href="@{/user/userInfo}" sec:authorize="isAuthenticated()">MyInfo</a>
         </div>
     </header>
 </body>

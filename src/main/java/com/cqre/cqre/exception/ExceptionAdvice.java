@@ -1,8 +1,6 @@
 package com.cqre.cqre.exception;
 
-import com.cqre.cqre.exception.customexception.CFindIdUserNotFoundException;
-import com.cqre.cqre.exception.customexception.CFindPwUserNotFoundException;
-import com.cqre.cqre.exception.customexception.CValidationEmailException;
+import com.cqre.cqre.exception.customexception.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -32,5 +30,16 @@ public class ExceptionAdvice {
     protected String findPwEntityNotFound(Model model) {
         model.addAttribute("notExist", "notExist");
         return "/user/findPw";
+    }
+
+    @ExceptionHandler(CPwNotEquals.class)
+    protected String pwNotEquals(Model model){
+        model.addAttribute("notEquals", "notEquals");
+        return "redirect:/user/userInfo";
+    }
+
+    @ExceptionHandler(CUserNotFoundException.class)
+    protected String userNotFound(){
+        return "/user/userNotFoundException";
     }
 }

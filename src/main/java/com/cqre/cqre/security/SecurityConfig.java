@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CLoginFailHandler cLoginFailHandler;
     private final CustomOAuth2UserService customOAuth2UserService;
+    private final CUserDetailsService cUserDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -52,6 +53,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .oauth2Login()
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService);
+        http
+                .rememberMe()
+                .userDetailsService(cUserDetailsService)
+                .tokenValiditySeconds(604800);
     }
 
     @Override

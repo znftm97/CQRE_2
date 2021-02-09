@@ -21,7 +21,7 @@ $grayTextColor: #777;
   margin-top: 20px;
 }
 
-#passwordCheck, #addAddress{
+#passwordCheck1, #passwordCheck2, #passwordCheck3{
   width: 50%;
   height: 30%;
   z-index: 9999;
@@ -36,10 +36,5 @@ $grayTextColor: #777;
     margin-top: 15px;
     text-align: center;
   }
-}
-
-#addAddress input:last-child{
-  margin-top: 6px;
-
 }
 

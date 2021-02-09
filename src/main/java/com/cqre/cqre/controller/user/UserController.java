@@ -1,23 +1,26 @@
 package com.cqre.cqre.controller.user;
 
 import com.cqre.cqre.dto.*;
-import com.cqre.cqre.repository.user.UserRepository;
+import com.cqre.cqre.entity.User;
+import com.cqre.cqre.exception.customexception.CPwNotEquals;
 import com.cqre.cqre.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 
@@ -26,7 +29,9 @@ import java.io.UnsupportedEncodingException;
 public class UserController {
 
     private final UserService userService;
-    private final UserRepository userRepository;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
 
     /*sign 페이지*/
     @GetMapping("/user/sign")
@@ -138,6 +143,7 @@ public class UserController {
     /*비밀번호 변경*/
     @PostMapping("/user/updatePassword")
     public String PUpdatePassword(@ModelAttribute("updatePasswordDto") @Valid UpdatePasswordDto updatePasswordDto, BindingResult result, Model model){
+
         if (result.hasErrors()){
             return "/user/updatePassword";
         }
@@ -150,6 +156,51 @@ public class UserController {
         userService.updatePassword(updatePasswordDto);
 
         return "redirect:/user/sign";
+    }
+
+    /*회원 정보 페이지*/
+    @GetMapping("/user/userInfo")
+    public String userInfo(Model model, @RequestParam(value = "notEquals", required = false) String notEquals){
+
+        User loginUser = userService.getLoginUser();
+        UserDto loginUserDto = modelMapper.map(loginUser, UserDto.class);
+        model.addAttribute("loginUserDto", loginUserDto);
+        model.addAttribute("userPwCheckDto", new UserPwCheckDto());
+        model.addAttribute("notEquals", notEquals);
+
+        return "/user/userInfo";
+    }
+
+    /*비밀번호 재 검증 및 각 페이지 매핑(회원정보 수정, 비밀번호 변경, 회원탈퇴)*/
+    @PostMapping("/user/editPwCheck")
+    public String userInfoEdit(@ModelAttribute("userPwCheckDto") UserPwCheckDto userPwCheckDto, Model model, HttpSession session){
+        User loginUser = userService.getLoginUser();
+
+        if (!passwordEncoder.matches(userPwCheckDto.getPassword(), loginUser.getPassword())) {
+            throw new CPwNotEquals();
+        }
+
+        if (userPwCheckDto.getIdentifier() == 1) {
+            model.addAttribute("userAddressDto", new UserAddressDto());
+            return "/user/updateUserInfo";
+
+        } else if(userPwCheckDto.getIdentifier() == 3){
+            userService.removeUser();
+            session.invalidate();
+
+            return "redirect:/home";
+        }
+
+        return "";
+    }
+
+    /*회원 정보 수정*/
+    @PostMapping("/user/edit")
+    public String PUserInfoEdit(@ModelAttribute("userAddressDto") UserAddressDto userAddressDto, HttpSession session){
+        userService.updateUserInfo(userAddressDto);
+
+        session.invalidate();
+        return "redirect:/home";
     }
 
 }
