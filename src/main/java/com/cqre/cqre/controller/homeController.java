@@ -46,19 +46,9 @@ public class homeController {
         return "/board/noticeBoard";
     }
 
-    @GetMapping("/freeBoard")
-    public String freeBoard(){
-        return "/board/freeBoard";
-    }
-
     @GetMapping("/createNoticePost")
     public String createNoticePost(){
         return "/post/createNoticePost";
-    }
-
-    @GetMapping("/createFreePost")
-    public String createFreePost(){
-        return "/post/createFreePost";
     }
 
     @GetMapping("/history")

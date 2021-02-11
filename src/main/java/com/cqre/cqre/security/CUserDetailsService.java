@@ -1,7 +1,7 @@
 package com.cqre.cqre.security;
 
 import com.cqre.cqre.entity.User;
-import com.cqre.cqre.repository.user.UserRepository;
+import com.cqre.cqre.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -1,14 +1,10 @@
-package com.cqre.cqre.service.user;
+package com.cqre.cqre.service;
 
-import com.cqre.cqre.dto.*;
+import com.cqre.cqre.dto.user.*;
 import com.cqre.cqre.entity.Address;
 import com.cqre.cqre.entity.User;
-import com.cqre.cqre.exception.customexception.CFindIdUserNotFoundException;
-import com.cqre.cqre.exception.customexception.CFindPwUserNotFoundException;
-import com.cqre.cqre.exception.customexception.CUserNotFoundException;
-import com.cqre.cqre.exception.customexception.CValidationEmailException;
-import com.cqre.cqre.repository.user.UserRepository;
-import com.cqre.cqre.security.UserContext;
+import com.cqre.cqre.exception.customexception.user.*;
+import com.cqre.cqre.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -16,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -150,10 +145,15 @@ public class UserService {
 
     /*로그인 사용자 가져오기*/
     public User getLoginUser() {
-        User loginUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User findUser = userRepository.findByName(loginUser.getName()).orElseThrow(CUserNotFoundException::new);
+        User loginUser;
 
-        return findUser;
+        try {
+             loginUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        } catch (ClassCastException e) {
+            throw e;
+        }
+
+        return userRepository.findByName(loginUser.getName()).orElseThrow(CUserNotFoundException::new);
     }
 
     /*회원 정보 수정*/

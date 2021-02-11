@@ -1,4 +1,4 @@
-package com.cqre.cqre.exception.customexception;
+package com.cqre.cqre.exception.customexception.user;
 
 public class CFindIdUserNotFoundException extends RuntimeException{
     public CFindIdUserNotFoundException() {

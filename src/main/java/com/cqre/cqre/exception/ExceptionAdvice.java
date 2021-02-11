@@ -1,6 +1,7 @@
 package com.cqre.cqre.exception;
 
-import com.cqre.cqre.exception.customexception.*;
+import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
+import com.cqre.cqre.exception.customexception.user.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -40,6 +41,16 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(CUserNotFoundException.class)
     protected String userNotFound(){
-        return "/user/userNotFoundException";
+        return "/user/exception/userNotFoundException";
+    }
+
+    @ExceptionHandler(CPostNotFoundException.class)
+    protected String postNotFound(){
+        return "/post/postNotFoundException";
+    }
+
+    @ExceptionHandler(ClassCastException.class)
+    protected String userNotLogin(){
+        return "/user/exception/userNotFoundException";
     }
 }

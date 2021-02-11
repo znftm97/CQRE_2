@@ -1,4 +1,4 @@
-package com.cqre.cqre.exception.customexception;
+package com.cqre.cqre.exception.customexception.user;
 
 import org.springframework.security.core.AuthenticationException;
 

@@ -1,4 +1,4 @@
-package com.cqre.cqre.repository.user;
+package com.cqre.cqre.repository;
 
 import com.cqre.cqre.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

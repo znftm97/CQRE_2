@@ -1,4 +1,4 @@
-package com.cqre.cqre.dto;
+package com.cqre.cqre.dto.user;
 
 import com.cqre.cqre.entity.Address;
 import lombok.Data;

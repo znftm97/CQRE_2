@@ -31,10 +31,10 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <div class="lnb">
             <ul>
                 <li>
-                    <a th:href="@{noticeBoard}">공지시항</a>
+                    <a th:href="@{/board/noticeBoard}">공지시항</a>
                 </li>
                 <li>
-                    <a th:href="@{freeBoard}">자유게시판</a>
+                    <a th:href="@{/board/freeBoard}">자유게시판</a>
                 </li>
             </ul>
         </div><!--lnb-->
@@ -57,118 +57,64 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     <button type="submit" class="btn btn-primary mb-2">검색</button>
                 </form>
 
-                <a class="btn btn-primary mb-2" th:href="@{/createNoticePost}">글쓰기</a>
+                <a class="btn btn-primary mb-2" th:href="@{/post/createNoticePost}">글쓰기</a>
            </div><!--searchBox-->
 
             <!--list-->
             <div class="list">
-                <li>
-                    <a th:href="@{/readPost}">
+                <li th:each="post : ${posts}">
+                    <a th:href="@{/post/readPost/{postId} (postId=${post.id})}">
                         <div>
-                            <h5>제목 제목 제목 제목11122222222222222222222222222222222221</h5>
-                            <p>본문 본문 본문 ㅁㄴㅇㄴ어맨어ㅑㅁ내어aaaaaaaaaaaadasdszxzzzzzzzzzzzzzzzzzzzzzzzzzzzadzxcxzczxczczxczxczxczxczxczxczxczxaaaa가방모자 쇼밍 젓가락 수저 가위 휴지</p>
+                            <h5 th:text="${post.title}"></h5>
+                            <p th:text="${post.content}"></p>
                             <div>
-                                <p>추천: 7회</p>
-                                <p>2021.01.22</p>
+                                <span>추천: </span>
+                                <span th:text="${post.recommendation}"></span>
+                                <span>조회수: </span>
+                                <span th:text="${post.postViews}"></span>
+                                <p th:text="${post.lastModifiedDate}"></p>
                             </div>
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a>
-                        <div>
-                            <h5>제목 제목 제목 제목1111</h5>
-                            <p>본문 본문 본문 ㅁㄴㅇㄴ어맨어ㅑㅁ내어aaaaaaaaaaaadasdszxzzzzzzzzzzzzzzzzzzzzzzzzzzzadzxcxzczxczczxczxczxczxczxczxczxczxaaaa가방모자 쇼밍 젓가락 수저 가위 휴지</p>
-                            <div>
-                                <p>추천: 7회</p>
-                                <p>2021.01.22</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <div>
-                            <h5>제목 제목 제목 제목1111</h5>
-                            <p>본문 본문 본문 ㅁㄴㅇㄴ어맨어ㅑㅁ내어aaaaaaaaaaaadasdszxzzzzzzzzzzzzzzzzzzzzzzzzzzzadzxcxzczxczczxczxczxczxczxczxczxczxaaaa가방모자 쇼밍 젓가락 수저 가위 휴지</p>
-                            <div>
-                                <p>추천: 7회</p>
-                                <p>2021.01.22</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <div>
-                            <h5>제목 제목 제목 제목1111</h5>
-                            <p>본문 본문 본문 ㅁㄴㅇㄴ어맨어ㅑㅁ내어aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-                            <div>
-                                <p>추천: 7회</p>
-                                <p>2021.01.22</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <div>
-                            <h5>제목 제목 제목 제목1111</h5>
-                            <p>본문 본문 본문 ㅁㄴㅇㄴ어맨어ㅑㅁ내어aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-                            <div>
-                                <p>추천: 7회</p>
-                                <p>2021.01.22</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <div>
-                            <h5>제목 제목 제목 제목1111</h5>
-                            <p>본문 본문 본문 ㅁㄴㅇㄴ어맨어ㅑㅁ내어aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-                            <div>
-                                <p>추천: 7회</p>
-                                <p>2021.01.22</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-            </div><!--list-->
+            </div>
+            <!--list-->
 
             <!--paging-->
             <nav style="text-align: center;">
-                <ul class="pagination justify-content-center">
+                <ul class="pagination justify-content-center"
+                    th:with="start=${T(Math).floor(posts.number/10)*10 + 1},
+                    last=(${start + 9 < posts.totalPages ? start + 9 : posts.totalPages})">
 
                     <!--  first  -->
                     <li class="page-item">
-                        <a class="page-link"  aria-label="First">
+                        <a class="page-link" th:href="@{/board/noticeBoard(page=0)}" aria-label="First">
                             <span aria-hidden="true">First</span>
                         </a>
                     </li>
 
                     <!--  <  -->
                     <li class="page-item">
-                        <a class="page-link" aria-label="Previous" >
+                        <a class="page-link" th:href="${posts.first} ? '#' :@{/board/noticeBoard(page=${posts.number - 1})}" aria-label="Previous" >
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
                     <!--  1,2,3  -->
-                    <li class="page-item">
-                        <a class="page-link"></a>
+                    <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == posts.number + 1} ? 'page-item active'">
+                        <a class="page-link" th:text="${page}" th:href="@{/board/noticeBoard(page=${page - 1})}"></a>
                     </li>
 
                     <!--  > -->
-                    <li class="page-item">
-                        <a class="page-link" aria-label="Next">
+                    <li class="page-item" th:class="${posts.last} ? 'disabled'">
+                        <a class="page-link" th:href="${posts.last} ? '#' : @{/board/noticeBoard(page=${posts.number + 1})}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
 
                     <!--  Last  -->
                     <li class="page-item">
-                        <a class="page-link" aria-label="Last">
+                        <a class="page-link" th:href="@{/board/noticeBoard(page=${posts.totalPages - 1})}" aria-label="Last">
                             <span aria-hidden="true">Last</span>
                         </a>
                     </li>

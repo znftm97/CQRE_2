@@ -1,9 +1,9 @@
-package com.cqre.cqre.controller.user;
+package com.cqre.cqre.controller;
 
-import com.cqre.cqre.dto.*;
+import com.cqre.cqre.dto.user.*;
 import com.cqre.cqre.entity.User;
-import com.cqre.cqre.exception.customexception.CPwNotEquals;
-import com.cqre.cqre.service.user.UserService;
+import com.cqre.cqre.exception.customexception.user.CPwNotEquals;
+import com.cqre.cqre.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -184,9 +184,10 @@ public class UserController {
             model.addAttribute("userAddressDto", new UserAddressDto());
             return "/user/updateUserInfo";
 
-        } else if(userPwCheckDto.getIdentifier() == 3){
+        } else if(userPwCheckDto.getIdentifier() == 2){
             userService.removeUser();
             session.invalidate();
+            /*글, 댓글, 등 다 삭제하는 로직 추가해야함*/
 
             return "redirect:/home";
         }

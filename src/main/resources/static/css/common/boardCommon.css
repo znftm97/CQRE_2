@@ -74,10 +74,11 @@
               margin-right: 5px;
               color: #888;
               display: inline-block; }
-            #tableBox .list li a div div p:first-child {
+            #tableBox .list li a div div span {
               float: left; }
+            #tableBox .list li a div div span:nth-child(3) {
+              margin-left: 20px; }
             #tableBox .list li a div div p:last-child {
-              width: 80px;
               float: right;
               margin: 0; }
     #tableBox .list li:nth-child(2n) {

@@ -1,6 +1,6 @@
 package com.cqre.cqre.security;
 
-import com.cqre.cqre.exception.customexception.CEmailTokenFalseException;
+import com.cqre.cqre.exception.customexception.user.CEmailTokenFalseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

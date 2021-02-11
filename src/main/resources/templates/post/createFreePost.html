@@ -23,15 +23,15 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <h2>자유게시판</h2>
     </div>
 
-    <form role="form" method="post" enctype="multipart/form-data">
+    <form role="form" method="post" enctype="multipart/form-data" th:action="@{/post/createFreePost}" th:object="${createPostDto}">
         <div class="form-group">
             <label th:for="title"><strong>제목</strong></label>
-            <input type="text" class="form-control" placeholder="제목을 입력하세요">
+            <input type="text" name="title" class="form-control" placeholder="제목을 입력하세요">
         </div>
 
         <div class="form-group">
             <label th:for="content"><strong>내용</strong></label>
-            <textarea type="text" class="form-control" rows= "10" placeholder="내용을 입력하세요"></textarea>
+            <textarea type="text" name="content" class="form-control" rows= "10" placeholder="내용을 입력하세요"></textarea>
         </div>
 
         <div class="form-group">
@@ -46,7 +46,6 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <strong>파일명</strong>
             <div class="zero" id="zero"></div>
         </div>
-
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 

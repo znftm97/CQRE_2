@@ -1,6 +1,6 @@
 package com.cqre.cqre.exceptionhandler;
 
-import com.cqre.cqre.exception.customexception.CEmailTokenFalseException;
+import com.cqre.cqre.exception.customexception.user.CEmailTokenFalseException;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;

@@ -24,20 +24,19 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     <div th:replace="fragments/top :: top"/>
     <div class="postBox">
         <div class="boardTitle">
-            <h2>제목</h2>
+            <h2 th:text="${readPostDto.title}">제목</h2>
         </div>
         <div class="postInfo">
             <span>글쓴이 : </span>
-            <span></span>
+            <span th:text="${readPostDto.userName}"></span>
             <span>, 조회수 : </span>
-            <span></span>
+            <span th:text="${readPostDto.postViews}"></span>
             <span>, 작성시간 : </span>
-            <span></span>
+            <span th:text="${readPostDto.lastModifiedDate}"></span>
         </div>
         <!--글 내용-->
         <div class="content">
-            <p> asdsdasdaaddsaasdsad</p>
-
+            <p th:text="${readPostDto.content}"></p>
             <div>
                 <i></i>
                 <span>liked!</span>
