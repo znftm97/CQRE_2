@@ -2,7 +2,6 @@ package com.cqre.cqre.controller;
 
 import com.cqre.cqre.dto.post.CreatePostDto;
 import com.cqre.cqre.dto.post.ListPostDto;
-import com.cqre.cqre.dto.post.PostDto;
 import com.cqre.cqre.dto.post.ReadPostDto;
 import com.cqre.cqre.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -11,9 +10,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
@@ -61,7 +64,11 @@ public class PostController {
 
     /*자유게시판 글 생성*/
     @PostMapping("/post/createFreePost")
-    public String PCreateFreePost(@ModelAttribute("createPostDto") CreatePostDto createPostDto){
+    public String PCreateFreePost(@ModelAttribute("createPostDto") @Valid CreatePostDto createPostDto, BindingResult result){
+        if (result.hasErrors()) {
+            return "/post/createFreePost";
+        }
+
         postService.createFreePost(createPostDto);
 
         return "redirect:/board/freeBoard";
@@ -69,7 +76,12 @@ public class PostController {
 
     /*공지사항 글 생성*/
     @PostMapping("/post/createNoticePost")
-    public String PCreateNoticePost(@ModelAttribute("createPostDto") CreatePostDto createPostDto){
+    public String PCreateNoticePost(@ModelAttribute("createPostDto") @Valid CreatePostDto createPostDto, BindingResult result){
+
+        if (result.hasErrors()) {
+            return "/post/createNoticePost";
+        }
+
         postService.createNoticePost(createPostDto);
 
         return "redirect:/board/noticeBoard";

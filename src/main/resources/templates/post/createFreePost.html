@@ -15,6 +15,11 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     <link rel="stylesheet" th:href="@{/css/common/infoCommon.css}">
     <link rel="stylesheet" th:href="@{/css/board/freeCreate.css}">
 </head>
+<style>
+    .fieldError {
+        border-color: #bd2130;
+    }
+</style>
 <body>
 <div class="containerCustom">
     <div th:replace="fragments/top :: top"/>
@@ -26,12 +31,16 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     <form role="form" method="post" enctype="multipart/form-data" th:action="@{/post/createFreePost}" th:object="${createPostDto}">
         <div class="form-group">
             <label th:for="title"><strong>제목</strong></label>
-            <input type="text" name="title" class="form-control" placeholder="제목을 입력하세요">
+            <input type="text" name="title" class="form-control" placeholder="제목을 입력하세요"
+                   th:class="${#fields.hasErrors('title')}? 'form-control fieldError' : 'form-control'">
+            <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
         </div>
 
         <div class="form-group">
             <label th:for="content"><strong>내용</strong></label>
-            <textarea type="text" name="content" class="form-control" rows= "10" placeholder="내용을 입력하세요"></textarea>
+            <textarea type="text" name="content" class="form-control" rows= "10" placeholder="내용을 입력하세요"
+                      th:class="${#fields.hasErrors('content')}? 'form-control fieldError' : 'form-control'"></textarea>
+            <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p>
         </div>
 
         <div class="form-group">

@@ -65,9 +65,12 @@ public class PostService {
     }
 
     /*글 읽기*/
+    @Transactional
     public ReadPostDto readPost(Long postId){
 
         Post findPost = postRepository.CFindByPostId(postId).orElseThrow(CPostNotFoundException::new);
+        findPost.addPostViews();
+
         ReadPostDto dto = modelMapper.map(findPost, ReadPostDto.class);
         dto.setUserName(findPost.getUser().getName());
 

@@ -31,4 +31,11 @@ public class Post extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private Board board;
+
+    /*조회수 증가*/
+    public void addPostViews(){
+        this.postViews++;
+    }
 }
+
+
