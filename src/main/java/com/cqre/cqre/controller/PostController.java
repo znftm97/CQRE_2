@@ -3,30 +3,35 @@ package com.cqre.cqre.controller;
 import com.cqre.cqre.dto.post.CreatePostDto;
 import com.cqre.cqre.dto.post.ListPostDto;
 import com.cqre.cqre.dto.post.ReadPostDto;
+import com.cqre.cqre.entity.post.PostFile;
+import com.cqre.cqre.repository.PostFileRepository;
+import com.cqre.cqre.service.PostFileService;
 import com.cqre.cqre.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class PostController {
 
     private final PostService postService;
+    private final PostFileService postFileService;
+    private final PostFileRepository postFileRepository;
 
     /*자유게시판 페이지*/
     @GetMapping("/board/freeBoard")
-    public String freeBoard(Model model, @PageableDefault(size = 6, sort = "id") Pageable pageable){
+    public String freeBoard(Model model, @PageableDefault(size = 6, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
 
         Page<ListPostDto> posts = postService.findFreePosts(pageable);
         model.addAttribute("posts", posts);
@@ -36,7 +41,7 @@ public class PostController {
 
     /*공지사항 게시판 페이지*/
     @GetMapping("/board/noticeBoard")
-    public String noticeBoard(Model model, @PageableDefault(size = 6, sort = "id") Pageable pageable){
+    public String noticeBoard(Model model, @PageableDefault(size = 6, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
 
         Page<ListPostDto> posts = postService.findNoticePosts(pageable);
         model.addAttribute("posts", posts);
@@ -64,25 +69,33 @@ public class PostController {
 
     /*자유게시판 글 생성*/
     @PostMapping("/post/createFreePost")
-    public String PCreateFreePost(@ModelAttribute("createPostDto") @Valid CreatePostDto createPostDto, BindingResult result){
+    public String PCreateFreePost(@ModelAttribute("createPostDto") @Valid CreatePostDto createPostDto, BindingResult result,
+                                  @RequestParam(value = "file", required = false) List<MultipartFile> files){
         if (result.hasErrors()) {
             return "/post/createFreePost";
         }
 
-        postService.createFreePost(createPostDto);
+        Long postId = postService.createFreePost(createPostDto);
+        if (!((files.get(0).getOriginalFilename()).isEmpty())){
+            postFileService.saveFile(files, postId);
+        }
 
         return "redirect:/board/freeBoard";
     }
 
     /*공지사항 글 생성*/
     @PostMapping("/post/createNoticePost")
-    public String PCreateNoticePost(@ModelAttribute("createPostDto") @Valid CreatePostDto createPostDto, BindingResult result){
+    public String PCreateNoticePost(@ModelAttribute("createPostDto") @Valid CreatePostDto createPostDto, BindingResult result,
+                                    @RequestParam(value = "file", required = false) List<MultipartFile> files){
 
         if (result.hasErrors()) {
             return "/post/createNoticePost";
         }
 
-        postService.createNoticePost(createPostDto);
+        Long postId = postService.createNoticePost(createPostDto);
+        if (!((files.get(0).getOriginalFilename()).isEmpty())){
+            postFileService.saveFile(files, postId);
+        }
 
         return "redirect:/board/noticeBoard";
     }
@@ -90,8 +103,14 @@ public class PostController {
     /*자유게시판,공지사항 글 읽기 페이지*/
     @GetMapping("/post/readPost/{postId}")
     public String readFreePost(@PathVariable("postId") Long postId, Model model){
+        //글 조회
         ReadPostDto readPostDto = postService.readPost(postId);
         model.addAttribute("readPostDto", readPostDto);
+
+        //파일 조회
+        List<PostFile> postFiles = postFileRepository.findPostFileByPostId(postId);
+        model.addAttribute("postFiles", postFiles);
+
         return "/post/readPost";
     }
 

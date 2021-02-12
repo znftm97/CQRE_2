@@ -46,10 +46,9 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <p><strong>첨부파일</strong></p>
         <table>
             <tbody>
-            <tr>
+            <tr th:each="postFile : ${postFiles}">
                 <td>
-                    <a>파일1</a>
-                    <a>파일2</a>
+                    <a th:href="@{/postFile/download/{postFileId} (postFileId=${postFile.id})}" th:text="${postFile.originFilename}"></a>
                 </td>
             </tr>
             </tbody>

@@ -34,7 +34,7 @@ public class PostService {
 
     /*자유게시판 글 생성*/
     @Transactional
-    public void createFreePost(CreatePostDto createPostDto){
+    public Long createFreePost(CreatePostDto createPostDto){
         User loginUser = userService.getLoginUser();
         Post post = Post.builder()
                 .title(createPostDto.getTitle())
@@ -46,11 +46,13 @@ public class PostService {
                 .build();
 
         postRepository.save(post);
+
+        return post.getId();
     }
 
     /*공지사항 글 생성*/
     @Transactional
-    public void createNoticePost(CreatePostDto createPostDto){
+    public Long createNoticePost(CreatePostDto createPostDto){
         User loginUser = userService.getLoginUser();
         Post post = Post.builder()
                 .title(createPostDto.getTitle())
@@ -62,6 +64,8 @@ public class PostService {
                 .build();
 
         postRepository.save(post);
+
+        return post.getId();
     }
 
     /*글 읽기*/
