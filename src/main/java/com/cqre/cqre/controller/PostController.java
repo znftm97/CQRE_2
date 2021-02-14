@@ -1,10 +1,14 @@
 package com.cqre.cqre.controller;
 
+import com.cqre.cqre.dto.comment.CreateCommentDto;
+import com.cqre.cqre.dto.comment.ReadCommentDto;
 import com.cqre.cqre.dto.post.CreatePostDto;
 import com.cqre.cqre.dto.post.ListPostDto;
 import com.cqre.cqre.dto.post.ReadPostDto;
 import com.cqre.cqre.entity.post.PostFile;
+import com.cqre.cqre.repository.CommentRepository;
 import com.cqre.cqre.repository.PostFileRepository;
+import com.cqre.cqre.service.CommentService;
 import com.cqre.cqre.service.PostFileService;
 import com.cqre.cqre.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +32,7 @@ public class PostController {
     private final PostService postService;
     private final PostFileService postFileService;
     private final PostFileRepository postFileRepository;
+    private final CommentService commentService;
 
     /*자유게시판 페이지*/
     @GetMapping("/board/freeBoard")
@@ -103,13 +108,20 @@ public class PostController {
     /*자유게시판,공지사항 글 읽기 페이지*/
     @GetMapping("/post/readPost/{postId}")
     public String readFreePost(@PathVariable("postId") Long postId, Model model){
-        //글 조회
+        /*글 조회*/
         ReadPostDto readPostDto = postService.readPost(postId);
         model.addAttribute("readPostDto", readPostDto);
 
-        //파일 조회
+        /*파일 조회*/
         List<PostFile> postFiles = postFileRepository.findPostFileByPostId(postId);
         model.addAttribute("postFiles", postFiles);
+
+        /*댓글 조회*/
+        List<ReadCommentDto> commentDtos = commentService.readComment(postId);
+        model.addAttribute("commentDtos", commentDtos);
+
+        CreateCommentDto createCommentDto = new CreateCommentDto();
+        model.addAttribute("createCommentDto", createCommentDto);
 
         return "/post/readPost";
     }

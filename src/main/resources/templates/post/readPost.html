@@ -56,23 +56,26 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
         <!--댓글 박스-->
         <div class="commentBox" style="margin-top: 100px">
-            <form style="display: flex" role="form" method="post">
-                <input type="text" class="form-control" placeholder="내용을 입력하세요" style="height: 60px">
-                <button type="submit" class="btn btn-sm btn-primary" >Submit</button>
+            <form style="display: flex" role="form" method="post" th:action="@{/comment/create}" th:object="${createCommentDto}">
+                <input type="text" id="commentInput" class="form-control" placeholder="내용을 입력하세요" style="height: 60px"/>
+                <button type="submit" class="btn btn-sm btn-primary" id="commentBtn" >Submit</button>
+                <input type="hidden" th:value="${readPostDto.id}" id="postId">
             </form>
 
             <table class="table table-dark">
                 <tbody>
-                <tr>
-                    <td  style="float: left"></td>
-                    <td></td>
-                    <td></td>
-                    <td style="float: right">
-                        <form role="form" method="post">
-                            <button class="btn-danger" style="float: right">삭제</button>
-                        </form>
-                    </td>
-                </tr>
+                    <tr th:each="commentDto : ${commentDtos}">
+                        <td style="float: left" th:text="${commentDto.username}"></td>
+                        <td th:text="${commentDto.content}"></td>
+                        <td th:text="${commentDto.lastModifiedDate}"></td>
+                        <td style="float: right">
+                            <form role="form" method="post">
+                                <button class="btn-danger" style="float: right">삭제</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody id="newTbody">
                 </tbody>
             </table>
 
@@ -117,5 +120,59 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     </div><!--commetBox-->
 </div> <!--postBox-->
 </div><!--containerCustom-->
+
+<script>
+    $("#commentBtn").on('click', function (e){
+        e.preventDefault();
+        let form ={
+            content: $("#commentInput").val(),
+            postId: $("#postId").val()
+        };
+
+        $.ajax({
+            url: "/comment/create",
+            type: "post",
+            data: JSON.stringify(form),
+            contentType: "application/json; charset=utf-8",
+        }).done(function (resp){
+            $.createComment = function (resp){
+                var tr = document.createElement('tr')
+                $("#newTbody").append(tr);
+
+                var td1 = document.createElement('td');
+                var text1 = document.createTextNode(resp.username);
+                td1.append(text1);
+
+                var td2 = document.createElement('td');
+                var text2 = document.createTextNode(resp.content);
+                td2.append(text2);
+
+                var td3 = document.createElement('td');
+                var text3 = document.createTextNode(resp.lastModifiedDate);
+                td3.append(text3);
+
+                var td4 = document.createElement('td');
+                var btn = document.createElement('button');
+                btn.innerText = "삭제";
+                btn.className = "btn-danger";
+                td4.append(btn);
+
+                tr.append(td1);
+                tr.append(td2);
+                tr.append(td3);
+                tr.append(td4)
+            }
+            if(resp.username == null){
+                alert("로그인이 필요합니다.")
+            }else{
+                $.createComment(resp);
+            }
+
+
+        }).fail(function (error){
+            alert(JSON.stringify(error));
+        });
+    });
+</script>
 </body>
 </html>

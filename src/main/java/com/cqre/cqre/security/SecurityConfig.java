@@ -38,6 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .anyRequest().permitAll();
         http
+                .csrf().disable();
+        http
                 .formLogin()
                 .loginPage("/user/sign")
                 .loginProcessingUrl("/user/signIn")
