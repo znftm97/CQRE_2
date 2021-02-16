@@ -2,6 +2,7 @@ package com.cqre.cqre.controller;
 
 import com.cqre.cqre.dto.comment.CreateCommentDto;
 import com.cqre.cqre.dto.comment.ReadCommentDto;
+import com.cqre.cqre.dto.comment.RemoveCommentDto;
 import com.cqre.cqre.dto.post.CreatePostDto;
 import com.cqre.cqre.dto.post.ListPostDto;
 import com.cqre.cqre.dto.post.ReadPostDto;
@@ -105,7 +106,7 @@ public class PostController {
         return "redirect:/board/noticeBoard";
     }
 
-    /*자유게시판,공지사항 글 읽기 페이지*/
+    /*공지사항 글 읽기 페이지*/
     @GetMapping("/post/readPost/{postId}")
     public String readFreePost(@PathVariable("postId") Long postId, Model model){
         /*글 조회*/
@@ -122,6 +123,9 @@ public class PostController {
 
         CreateCommentDto createCommentDto = new CreateCommentDto();
         model.addAttribute("createCommentDto", createCommentDto);
+
+        RemoveCommentDto removeCommentDto = new RemoveCommentDto();
+        model.addAttribute("removeCommentDto", removeCommentDto);
 
         return "/post/readPost";
     }

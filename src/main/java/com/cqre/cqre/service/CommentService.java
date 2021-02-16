@@ -25,7 +25,7 @@ public class CommentService {
 
     /*댓글 생성*/
     @Transactional
-    public LocalDateTime createComment(CreateCommentDto dto) {
+    public Comment createComment(CreateCommentDto dto) {
         Post findPost = postRepository.findById(dto.getPostId()).orElseThrow(CPostNotFoundException::new);
 
         Comment comment = Comment.builder()
@@ -34,9 +34,7 @@ public class CommentService {
                 .post(findPost)
                 .depth(1)
                 .build();
-
-        Comment saveComment = commentRepository.save(comment);
-        return saveComment.getLastModifiedDate();
+        return commentRepository.save(comment);
     }
 
     /*댓글 조회*/
@@ -47,4 +45,10 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
+    /*댓글 삭제*/
+    @Transactional
+    public void deleteComment(Long commentId){
+        Comment findComment = commentRepository.findById(commentId).get();
+        commentRepository.delete(findComment);
+    }
 }

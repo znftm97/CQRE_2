@@ -36,6 +36,16 @@ public class Post extends BaseEntity {
     public void addPostViews(){
         this.postViews++;
     }
+
+    /*추천수 증가*/
+    public void addRecommendation(){
+        this.recommendation++;
+    }
+
+    /*추천수 감소*/
+    public void subtractRecommendation(){
+        this.recommendation--;
+    }
 }
 
 

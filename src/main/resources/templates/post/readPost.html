@@ -34,11 +34,12 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <span>, 작성시간 : </span>
             <span th:text="${readPostDto.lastModifiedDate}"></span>
         </div>
+
         <!--글 내용-->
         <div class="content">
             <p th:text="${readPostDto.content}"></p>
             <div>
-                <i></i>
+                <i id="recommendationBtn"></i>
                 <span>liked!</span>
             </div>
         </div><!--글 내용-->
@@ -69,8 +70,11 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                         <td th:text="${commentDto.content}"></td>
                         <td th:text="${commentDto.lastModifiedDate}"></td>
                         <td style="float: right">
-                            <form role="form" method="post">
-                                <button class="btn-danger" style="float: right">삭제</button>
+                            <form role="form" method="post" th:action="@{/comment/delete}">
+                                <button id="updateBtn" class="btn-dark" style="float: right" >수정</button>
+                                <input type="submit" th:value="삭제" id="removeBtn" class="btn-danger" style="float: right" th:formaction="@{/comment/delete/{commentId} (commentId=${commentDto.id})}"/>
+                                <button id="reBtn" class="btn-success" style="float: right">답글</button>
+                                <input type="hidden" th:value="${commentDto.id}">
                             </form>
                         </td>
                     </tr>
@@ -122,6 +126,44 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 </div><!--containerCustom-->
 
 <script>
+    /*추천*/
+    $("#recommendationBtn").on('click', function (e){
+        let form = {
+            postId: $("#postId").val()
+        }
+        console.log(form);
+
+        $.ajax({
+            url: "/recommendation",
+            type: "post",
+            data: JSON.stringify(form),
+            contentType: "application/json; charset=utf-8",
+        }).done(function (resp){
+
+        }).fail(function (error){
+            alert("실패");
+        });
+    });
+
+    $("#removeBtnAjax").on('click', function (e){
+        e.preventDefault();
+        let form = {
+            commentId: $("#commentId").val()
+        }
+
+        $.ajax({
+            url: "/comment/delete",
+            type: "post",
+            data: JSON.stringify(form),
+            contentType: "application/json; charset=utf-8",
+        }).done(function (resp) {
+            alert(resp);
+        }).fail(function (error) {
+            alert(error);
+        });
+
+    })
+
     $("#commentBtn").on('click', function (e){
         e.preventDefault();
         let form ={
@@ -152,22 +194,53 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 td3.append(text3);
 
                 var td4 = document.createElement('td');
-                var btn = document.createElement('button');
-                btn.innerText = "삭제";
-                btn.className = "btn-danger";
-                td4.append(btn);
+                var formTag = document.createElement('form');
+                formTag.method = "post";
+                formTag.action = "/comment/delete";
+                td4.append(formTag);
+
+                var btn1 = document.createElement('button');
+                btn1.innerText = "수정";
+                btn1.className = "btn-dark";
+                btn1.style.float = "right";
+                btn1.id = "updateBtnAjax";
+
+                var input2 = document.createElement('input');
+                input2.value = "삭제";
+                input2.className = "btn-danger";
+                input2.style.float = "right";
+                input2.id = "removeBtnAjax";
+                input2.type = "submit";
+                input2.formAction = "/comment/delete";
+
+                var btn3 = document.createElement('button');
+                btn3.innerText = "답글";
+                btn3.className = "btn-success";
+                btn3.style.float = "right";
+                btn3.id = "reBtnAjax";
+
+                var inputTag = document.createElement('input');
+                var commentId = resp.id;
+                inputTag.type = "hidden";
+                inputTag.value = commentId;
+                inputTag.id = "commentId"
+
+                formTag.append(btn1);
+                formTag.append(input2);
+                formTag.append(btn3);
+                formTag.append(inputTag);
 
                 tr.append(td1);
                 tr.append(td2);
                 tr.append(td3);
-                tr.append(td4)
+                tr.append(td4);
             }
             if(resp.username == null){
                 alert("로그인이 필요합니다.")
+                location.href = "/user/sign";
             }else{
                 $.createComment(resp);
             }
-
 
         }).fail(function (error){
             alert(JSON.stringify(error));
