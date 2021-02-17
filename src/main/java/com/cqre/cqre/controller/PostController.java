@@ -108,7 +108,7 @@ public class PostController {
         return "redirect:/board/noticeBoard";
     }
 
-    /*공지사항 글 읽기 페이지*/
+    /*글 읽기 페이지*/
     @GetMapping("/post/readPost/{postId}")
     public String readFreePost(@PathVariable("postId") Long postId, Model model){
         /*글 조회*/
@@ -134,6 +134,13 @@ public class PostController {
         model.addAttribute("recommendationCheck", recommendationCheck);
 
         return "/post/readPost";
+    }
+
+    /*글 삭제*/
+    @PostMapping("/post/remove/{postId}")
+    public String removePost(@PathVariable("postId") Long postId){
+        postService.removePost(postId);
+        return "redirect:/board/freeBoard";
     }
 
 }

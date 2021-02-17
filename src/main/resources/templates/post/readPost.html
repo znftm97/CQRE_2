@@ -45,7 +45,11 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             </div>
         </div><!--글 내용-->
 
-        <p><strong>첨부파일</strong></p>
+        <span><strong>첨부파일</strong></span>
+        <button class="btn-success" style="float: right" th:if="${readPostDto.authorCheck} == true">수정</button>
+        <form role="form" method="post" th:action="@{/post/remove/{postId} (postId=${readPostDto.id})}">
+            <button type="submit" class="btn-danger" style="float: right; margin-right: 10px" th:if="${readPostDto.authorCheck} == true">삭제</button>
+        </form>
         <table>
             <tbody>
             <tr th:each="postFile : ${postFiles}">

@@ -14,4 +14,5 @@ public class ReadPostDto {
     private int recommendation;
     private LocalDateTime lastModifiedDate;
     private String userName;
+    private boolean AuthorCheck;
 }
