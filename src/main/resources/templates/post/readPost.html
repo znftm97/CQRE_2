@@ -41,6 +41,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <div>
                 <i id="recommendationBtn"></i>
                 <span>liked!</span>
+                <input id="recommendationCheck" type="hidden" th:value="${recommendationCheck}"/>
             </div>
         </div><!--글 내용-->
 
@@ -126,6 +127,14 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 </div><!--containerCustom-->
 
 <script>
+    /*추천 여부 확인*/
+    let check = $("#recommendationCheck").val();
+    console.log(check);
+    if (check == "exist") {
+        $( "i,span" ).toggleClass( "press", 1000 );
+        console.log(check);
+    }
+
     /*추천*/
     $("#recommendationBtn").on('click', function (e){
         let form = {
@@ -145,6 +154,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         });
     });
 
+    /*댓글 삭제*/
     $("#removeBtnAjax").on('click', function (e){
         e.preventDefault();
         let form = {
@@ -164,6 +174,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
     })
 
+    /*댓글 생성*/
     $("#commentBtn").on('click', function (e){
         e.preventDefault();
         let form ={

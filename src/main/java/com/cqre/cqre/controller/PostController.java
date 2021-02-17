@@ -12,6 +12,7 @@ import com.cqre.cqre.repository.PostFileRepository;
 import com.cqre.cqre.service.CommentService;
 import com.cqre.cqre.service.PostFileService;
 import com.cqre.cqre.service.PostService;
+import com.cqre.cqre.service.RecommendationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,6 +35,7 @@ public class PostController {
     private final PostFileService postFileService;
     private final PostFileRepository postFileRepository;
     private final CommentService commentService;
+    private final RecommendationService recommendationService;
 
     /*자유게시판 페이지*/
     @GetMapping("/board/freeBoard")
@@ -126,6 +128,10 @@ public class PostController {
 
         RemoveCommentDto removeCommentDto = new RemoveCommentDto();
         model.addAttribute("removeCommentDto", removeCommentDto);
+
+        /*추천 조회*/
+        String recommendationCheck = recommendationService.recommendationCheck(postId);
+        model.addAttribute("recommendationCheck", recommendationCheck);
 
         return "/post/readPost";
     }
