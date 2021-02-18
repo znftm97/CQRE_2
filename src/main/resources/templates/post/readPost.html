@@ -45,20 +45,27 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             </div>
         </div><!--글 내용-->
 
+        <!--첨부파일-->
         <span><strong>첨부파일</strong></span>
-        <button class="btn-success" style="float: right" th:if="${readPostDto.authorCheck} == true">수정</button>
+
+        <!--글 수정 삭제-->
+        <div>
+            <a class="btn-success" style="float: right" th:if="${readPostDto.authorCheck} == true"
+               th:href="@{/post/update/{postId} (postId=${readPostDto.id})}">수정</a>
+        </div>
         <form role="form" method="post" th:action="@{/post/remove/{postId} (postId=${readPostDto.id})}">
             <button type="submit" class="btn-danger" style="float: right; margin-right: 10px" th:if="${readPostDto.authorCheck} == true">삭제</button>
-        </form>
+        </form> <!--글 수정 삭제-->
+
         <table>
             <tbody>
-            <tr th:each="postFile : ${postFiles}">
+            <tr th:each="postFile : ${postFileDtos}">
                 <td>
                     <a th:href="@{/postFile/download/{postFileId} (postFileId=${postFile.id})}" th:text="${postFile.originFilename}"></a>
                 </td>
             </tr>
             </tbody>
-        </table>
+        </table><!--첨부파일-->
 
         <!--댓글 박스-->
         <div class="commentBox" style="margin-top: 100px">

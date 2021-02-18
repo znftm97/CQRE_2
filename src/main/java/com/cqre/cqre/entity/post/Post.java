@@ -1,5 +1,6 @@
 package com.cqre.cqre.entity.post;
 
+import com.cqre.cqre.dto.post.CreateUpdatePostDto;
 import com.cqre.cqre.entity.BaseEntity;
 import com.cqre.cqre.entity.User;
 import lombok.*;
@@ -45,6 +46,12 @@ public class Post extends BaseEntity {
     /*추천수 감소*/
     public void subtractRecommendation(){
         this.recommendation--;
+    }
+
+    /*글 수정*/
+    public void updatePost(CreateUpdatePostDto dto){
+        this.title = dto.getTitle();
+        this.content = dto.getContent();
     }
 }
 

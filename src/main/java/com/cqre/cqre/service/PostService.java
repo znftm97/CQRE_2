@@ -1,8 +1,6 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.dto.post.CreatePostDto;
-import com.cqre.cqre.dto.post.ListPostDto;
-import com.cqre.cqre.dto.post.ReadPostDto;
+import com.cqre.cqre.dto.post.*;
 import com.cqre.cqre.entity.User;
 import com.cqre.cqre.entity.post.*;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
@@ -42,11 +40,11 @@ public class PostService {
 
     /*자유게시판 글 생성*/
     @Transactional
-    public Long createFreePost(CreatePostDto createPostDto){
+    public Long createFreePost(CreateUpdatePostDto createUpdatePostDto){
         User loginUser = userService.getLoginUser();
         Post post = Post.builder()
-                .title(createPostDto.getTitle())
-                .content(createPostDto.getContent())
+                .title(createUpdatePostDto.getTitle())
+                .content(createUpdatePostDto.getContent())
                 .postViews(0)
                 .recommendation(0)
                 .user(loginUser)
@@ -60,11 +58,11 @@ public class PostService {
 
     /*공지사항 글 생성*/
     @Transactional
-    public Long createNoticePost(CreatePostDto createPostDto){
+    public Long createNoticePost(CreateUpdatePostDto createUpdatePostDto){
         User loginUser = userService.getLoginUser();
         Post post = Post.builder()
-                .title(createPostDto.getTitle())
-                .content(createPostDto.getContent())
+                .title(createUpdatePostDto.getTitle())
+                .content(createUpdatePostDto.getContent())
                 .postViews(0)
                 .recommendation(0)
                 .user(loginUser)
@@ -98,26 +96,47 @@ public class PostService {
     public void removePost(Long postId){
         List<Comment> comments = commentRepository.findCommentByPostId(postId);
         List<Long> commentIds = comments
-                .stream()
-                .map(c -> c.getId())
-                .collect(Collectors.toList());
+                                    .stream()
+                                    .map(c -> c.getId())
+                                    .collect(Collectors.toList());
         commentRepository.deleteAllByIdInQuery(commentIds);
 
         List<PostFile> postFiles = postFileRepository.findPostFileByPostId(postId);
         List<Long> postFileIds = postFiles
-                .stream()
-                .map(p -> p.getId())
-                .collect(Collectors.toList());
+                                    .stream()
+                                    .map(p -> p.getId())
+                                    .collect(Collectors.toList());
         postFileRepository.deleteAllByIdInQuery(postFileIds);
 
         List<Recommendation> recommendations = recommendationRepository.findRecommendationByPostId(postId);
         List<Long> recommendationIds = recommendations
-                .stream()
-                .map(r -> r.getId())
-                .collect(Collectors.toList());
+                                            .stream()
+                                            .map(r -> r.getId())
+                                            .collect(Collectors.toList());
         recommendationRepository.deleteAllByIdInQuery(recommendationIds);
 
         Post findPost = postRepository.CFindByPostId(postId).orElseThrow(CPostNotFoundException::new);
         postRepository.delete(findPost);
+    }
+
+    /*글 수정 페이지*/
+    /*글이랑 파일 같이 조회하는 쿼리 작성해서 성능 최적화 해보자*/
+    public CreateUpdatePostDto updatePostPage(Long postId) {
+        Post findPost = postRepository.findById(postId).orElseThrow(CPostNotFoundException::new);
+        List<PostFile> postFiles = postFileRepository.findPostFileByPostId(postId);
+        List<PostFileDto> postFileDtos = postFiles.stream()
+                .map(p -> new PostFileDto(p))
+                .collect(Collectors.toList());
+
+        return new CreateUpdatePostDto(findPost.getTitle(), findPost.getContent(), findPost.getId(), findPost.getBoard(), postFileDtos);
+    }
+
+    /*글 수정*/
+    @Transactional
+    public Post updatePost(CreateUpdatePostDto createUpdatePostDto) {
+        Post findPost = postRepository.findById(createUpdatePostDto.getId()).orElseThrow(CPostNotFoundException::new);
+        findPost.updatePost(createUpdatePostDto);
+
+        return findPost;
     }
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>freeCreate</title>
+    <title>noticeCreate</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrinkto-fit=no">
@@ -13,7 +13,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     <!-- Custom styles for this template -->
     <link rel="stylesheet" th:href="@{/css/common/fragments.css}">
     <link rel="stylesheet" th:href="@{/css/common/infoCommon.css}">
-    <link rel="stylesheet" th:href="@{/css/board/freeCreate.css}">
+    <link rel="stylesheet" th:href="@{/css/board/noticeCreate.css}">
 </head>
 <style>
     .fieldError {
@@ -25,20 +25,22 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     <div th:replace="fragments/top :: top"/>
 
     <div class="boardTitle">
-        <h2>자유게시판</h2>
+        <h2>공지사항</h2>
     </div>
 
-    <form role="form" method="post" enctype="multipart/form-data" th:action="@{/post/createFreePost}" th:object="${createUpdatePostDto}">
+    <form role="form" method="post" enctype="multipart/form-data" th:action="@{/post/update}" th:object="${createUpdatePostDto}">
         <div class="form-group">
             <label th:for="title"><strong>제목</strong></label>
-            <input type="text" name="title" class="form-control" placeholder="제목을 입력하세요"
+            <input type="text" name="title" class="form-control" placeholder="제목을 입력하세요" th:field="*{title}"
                    th:class="${#fields.hasErrors('title')}? 'form-control fieldError' : 'form-control'">
             <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+            <input type="hidden" th:value="${createUpdatePostDto.id}" th:field="*{id}">
+            <input type="hidden" th:value="${createUpdatePostDto.board}" th:field="*{board}">
         </div>
 
         <div class="form-group">
             <label th:for="content"><strong>내용</strong></label>
-            <textarea type="text" name="content" class="form-control" rows= "10" placeholder="내용을 입력하세요"
+            <textarea type="text" name="content" class="form-control" rows= "10" placeholder="내용을 입력하세요" th:field="*{content}"
                       th:class="${#fields.hasErrors('content')}? 'form-control fieldError' : 'form-control'"></textarea>
             <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p>
         </div>
@@ -53,6 +55,16 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             </div>
             <p> </p>
             <strong>파일명</strong>
+            <p th:if="${createUpdatePostDto.files != null}">
+            <table>
+                <tbody>
+                <tr th:each="file : ${createUpdatePostDto.files}">
+                    <td>
+                        <p th:text="${file.originFilename}"></p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
             <div class="zero" id="zero"></div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>

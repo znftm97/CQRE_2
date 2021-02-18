@@ -1,5 +1,6 @@
 package com.cqre.cqre.service;
 
+import com.cqre.cqre.dto.post.PostFileDto;
 import com.cqre.cqre.entity.post.Post;
 import com.cqre.cqre.entity.post.PostFile;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -60,6 +62,16 @@ public class PostFileService {
                 e.printStackTrace();
             }
         }
+    }
+
+    /*파일 읽기*/
+    public List<PostFileDto> readPostFiles(Long postId) {
+        List<PostFile> postFiles = postFileRepository.findPostFileByPostId(postId);
+        List<PostFileDto> postFileDtos = postFiles.stream()
+                                                    .map(p -> new PostFileDto(p))
+                                                    .collect(Collectors.toList());
+
+        return postFileDtos;
     }
 
 }
