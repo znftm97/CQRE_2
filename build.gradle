@@ -32,6 +32,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	compile 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	compile group: 'org.modelmapper', name: 'modelmapper', version: '2.1.1'
+	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time'
 	compileOnly 'org.projectlombok:lombok'
 	compile 'org.webjars:jquery:3.5.1'
 	runtimeOnly 'com.h2database:h2'
