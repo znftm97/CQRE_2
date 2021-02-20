@@ -1,4 +1,9 @@
 @import url('https://use.fontawesome.com/releases/v5.0.9/css/all.css');
+$pinkColor: #f3ade1;
+$purpleColor: #a873f9;
+$blueColor: #0070ff;
+$blueLightColor: #4e9bff;
+$grayTextColor: #777;
 
 .postBox{
   width: 50%;
@@ -91,4 +96,40 @@
 .commentBox{
   margin-bottom: 20px;
 
+  .commentList{
+
+    .comment{
+      border: 1px;
+      width: 100%;
+      height: 80px;
+      background: $blueLightColor;
+      border-bottom: 1px solid $pinkColor;
+
+      span{
+        margin-top: 25px;
+        width: 200px;
+        height: 30px;
+        display: inline-block;
+        margin-left: 20px;
+      }
+
+      span:nth-child(1){
+        width: 80px;
+      }
+
+      span:nth-child(2){
+        width: 450px;
+      }
+
+      span:nth-child(3){
+        width: 175px;
+      }
+
+      form{
+        width: 150px;
+        float: right;
+        margin-top: 25px;
+      }
+    }
+  }
 }

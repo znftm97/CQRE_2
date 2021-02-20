@@ -1,5 +1,6 @@
 package com.cqre.cqre.dto.comment;
 
+import com.cqre.cqre.entity.User;
 import com.cqre.cqre.entity.post.Comment;
 import lombok.Data;
 
@@ -11,11 +12,18 @@ public class ResponseCommentDto {
     private String username;
     private LocalDateTime lastModifiedDate;
     private String content;
+    private boolean authorCheck;
 
-    public ResponseCommentDto(Comment comment) {
+    public ResponseCommentDto(Comment comment, User loginUser) {
         this.id = comment.getId();
         this.lastModifiedDate = comment.getLastModifiedDate();
         this.content = comment.getContent();
-    }
+        this.username = comment.getUser().getName();
 
+        if (comment.getUser().getId().equals(loginUser.getId())) {
+            authorCheck = true;
+        } else {
+            authorCheck = false;
+        }
+    }
 }

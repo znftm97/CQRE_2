@@ -40,11 +40,11 @@ public class PostService {
 
     /*자유게시판 글 생성*/
     @Transactional
-    public Long createFreePost(CreateUpdatePostDto createUpdatePostDto){
+    public Long createFreePost(CreateAndUpdatePostDto createAndUpdatePostDto){
         User loginUser = userService.getLoginUser();
         Post post = Post.builder()
-                .title(createUpdatePostDto.getTitle())
-                .content(createUpdatePostDto.getContent())
+                .title(createAndUpdatePostDto.getTitle())
+                .content(createAndUpdatePostDto.getContent())
                 .postViews(0)
                 .recommendation(0)
                 .user(loginUser)
@@ -58,11 +58,11 @@ public class PostService {
 
     /*공지사항 글 생성*/
     @Transactional
-    public Long createNoticePost(CreateUpdatePostDto createUpdatePostDto){
+    public Long createNoticePost(CreateAndUpdatePostDto createAndUpdatePostDto){
         User loginUser = userService.getLoginUser();
         Post post = Post.builder()
-                .title(createUpdatePostDto.getTitle())
-                .content(createUpdatePostDto.getContent())
+                .title(createAndUpdatePostDto.getTitle())
+                .content(createAndUpdatePostDto.getContent())
                 .postViews(0)
                 .recommendation(0)
                 .user(loginUser)
@@ -121,21 +121,21 @@ public class PostService {
 
     /*글 수정 페이지*/
     /*글이랑 파일 같이 조회하는 쿼리 작성해서 성능 최적화 해보자*/
-    public CreateUpdatePostDto updatePostPage(Long postId) {
+    public CreateAndUpdatePostDto updatePostPage(Long postId) {
         Post findPost = postRepository.findById(postId).orElseThrow(CPostNotFoundException::new);
         List<PostFile> postFiles = postFileRepository.findPostFileByPostId(postId);
         List<PostFileDto> postFileDtos = postFiles.stream()
                 .map(p -> new PostFileDto(p))
                 .collect(Collectors.toList());
 
-        return new CreateUpdatePostDto(findPost.getTitle(), findPost.getContent(), findPost.getId(), findPost.getBoard(), postFileDtos);
+        return new CreateAndUpdatePostDto(findPost.getTitle(), findPost.getContent(), findPost.getId(), findPost.getBoard(), postFileDtos);
     }
 
     /*글 수정*/
     @Transactional
-    public Post updatePost(CreateUpdatePostDto createUpdatePostDto) {
-        Post findPost = postRepository.findById(createUpdatePostDto.getId()).orElseThrow(CPostNotFoundException::new);
-        findPost.updatePost(createUpdatePostDto);
+    public Post updatePost(CreateAndUpdatePostDto createAndUpdatePostDto) {
+        Post findPost = postRepository.findById(createAndUpdatePostDto.getId()).orElseThrow(CPostNotFoundException::new);
+        findPost.updatePost(createAndUpdatePostDto);
 
         return findPost;
     }

@@ -3,6 +3,7 @@ package com.cqre.cqre.controller;
 import com.cqre.cqre.dto.comment.CreateCommentDto;
 import com.cqre.cqre.dto.comment.ReadCommentDto;
 import com.cqre.cqre.dto.comment.RemoveCommentDto;
+import com.cqre.cqre.dto.comment.ResponseCommentDto;
 import com.cqre.cqre.dto.post.*;
 import com.cqre.cqre.entity.post.Board;
 import com.cqre.cqre.entity.post.Post;
@@ -21,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -75,13 +77,13 @@ public class PostController {
 
     /*자유게시판 글 생성*/
     @PostMapping("/post/createFreePost")
-    public String PCreateFreePost(@ModelAttribute("createUpdatePostDto") @Valid CreateUpdatePostDto createUpdatePostDto, BindingResult result,
+    public String PCreateFreePost(@ModelAttribute("createUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
                                   @RequestParam(value = "file", required = false) List<MultipartFile> files){
         if (result.hasErrors()) {
             return "/post/createFreePost";
         }
 
-        Long postId = postService.createFreePost(createUpdatePostDto);
+        Long postId = postService.createFreePost(createAndUpdatePostDto);
         if (!((files.get(0).getOriginalFilename()).isEmpty())){
             postFileService.saveFile(files, postId);
         }
@@ -91,14 +93,14 @@ public class PostController {
 
     /*공지사항 글 생성*/
     @PostMapping("/post/createNoticePost")
-    public String PCreateNoticePost(@ModelAttribute("createUpdatePostDto") @Valid CreateUpdatePostDto createUpdatePostDto, BindingResult result,
+    public String PCreateNoticePost(@ModelAttribute("createUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
                                     @RequestParam(value = "file", required = false) List<MultipartFile> files){
 
         if (result.hasErrors()) {
             return "/post/createNoticePost";
         }
 
-        Long postId = postService.createNoticePost(createUpdatePostDto);
+        Long postId = postService.createNoticePost(createAndUpdatePostDto);
         if (!((files.get(0).getOriginalFilename()).isEmpty())){
             postFileService.saveFile(files, postId);
         }
@@ -118,7 +120,7 @@ public class PostController {
         model.addAttribute("postFileDtos", postFileDtos);
 
         /*댓글 조회*/
-        List<ReadCommentDto> commentDtos = commentService.readComment(postId);
+        List<ResponseCommentDto> commentDtos = commentService.readComment(postId);
         model.addAttribute("commentDtos", commentDtos);
 
         CreateCommentDto createCommentDto = new CreateCommentDto();
@@ -144,9 +146,10 @@ public class PostController {
     /*글 수정 페이지*/
     @GetMapping("/post/update/{postId}")
     public String updatePost(@PathVariable("postId") Long postId, Model model) {
-        CreateUpdatePostDto createUpdatePostDto = postService.updatePostPage(postId);
+        CreateAndUpdatePostDto createUpdatePostDto = postService.updatePostPage(postId);
         model.addAttribute("createUpdatePostDto", createUpdatePostDto);
 
+        
         if (createUpdatePostDto.getBoard() == Board.FREE) {
             return "/post/updatePostFree";
         }else {
@@ -156,17 +159,17 @@ public class PostController {
 
     /*글 수정*/
     @PostMapping("/post/update")
-    public String PUpdatePost(@ModelAttribute("createUpdatePostDto") @Valid CreateUpdatePostDto createUpdatePostDto, BindingResult result,
+    public String PUpdatePost(@ModelAttribute("createUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
                               @RequestParam(value = "file", required = false) List<MultipartFile> files){
-        if (result.hasErrors() && (createUpdatePostDto.getBoard()==Board.FREE) ) {
+        if (result.hasErrors() && (createAndUpdatePostDto.getBoard()==Board.FREE) ) {
             return "/post/updatePostFree";
-        } else if (result.hasErrors() && (createUpdatePostDto.getBoard() == Board.NOTICE)) {
+        } else if (result.hasErrors() && (createAndUpdatePostDto.getBoard() == Board.NOTICE)) {
             return "/post/updatePostNotice";
         }
 
-        Post updatePost = postService.updatePost(createUpdatePostDto);
+        Post updatePost = postService.updatePost(createAndUpdatePostDto);
         if (!((files.get(0).getOriginalFilename()).isEmpty())){
-            postFileService.saveFile(files, createUpdatePostDto.getId());
+            postFileService.saveFile(files, createAndUpdatePostDto.getId());
         }
 
         if(updatePost.getBoard() == Board.FREE){

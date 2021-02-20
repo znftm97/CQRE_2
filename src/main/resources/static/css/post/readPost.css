@@ -74,5 +74,27 @@
 
 .commentBox {
   margin-bottom: 20px; }
+  .commentBox .commentList .comment {
+    border: 1px;
+    width: 100%;
+    height: 80px;
+    background: #4e9bff;
+    border-bottom: 1px solid #f3ade1; }
+    .commentBox .commentList .comment span {
+      margin-top: 25px;
+      width: 200px;
+      height: 30px;
+      display: inline-block;
+      margin-left: 20px; }
+    .commentBox .commentList .comment span:nth-child(1) {
+      width: 80px; }
+    .commentBox .commentList .comment span:nth-child(2) {
+      width: 450px; }
+    .commentBox .commentList .comment span:nth-child(3) {
+      width: 175px; }
+    .commentBox .commentList .comment form {
+      width: 150px;
+      float: right;
+      margin-top: 25px; }
 
 /*# sourceMappingURL=readPost.css.map */
