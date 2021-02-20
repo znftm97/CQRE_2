@@ -2,6 +2,7 @@ package com.cqre.cqre.service;
 
 import com.cqre.cqre.dto.comment.CreateCommentDto;
 import com.cqre.cqre.dto.comment.ReadCommentDto;
+import com.cqre.cqre.dto.comment.RemoveCommentDto;
 import com.cqre.cqre.dto.comment.ResponseCommentDto;
 import com.cqre.cqre.entity.User;
 import com.cqre.cqre.entity.post.Comment;
@@ -24,9 +25,18 @@ public class CommentService {
     private final PostRepository postRepository;
     private final UserService userService;
 
+    /*댓글 조회*/
+    public List<ResponseCommentDto> readComment(Long postId){
+        List<Comment> comments = commentRepository.findCommentByPostId(postId);
+        User loginUser = userService.getLoginUser();
+        return comments.stream()
+                .map(c -> new ResponseCommentDto(c, loginUser))
+                .collect(Collectors.toList());
+    }
+
     /*댓글 생성*/
     @Transactional
-    public List<ResponseCommentDto> createComment(CreateCommentDto dto) {
+    public void createComment(CreateCommentDto dto) {
         Post findPost = postRepository.findById(dto.getPostId()).orElseThrow(CPostNotFoundException::new);
         User loginUser = userService.getLoginUser();
 
@@ -38,26 +48,14 @@ public class CommentService {
                 .build();
 
         commentRepository.save(comment);
-
-        List<Comment> commentList = commentRepository.findCommentByPostId(dto.getPostId());
-        return commentList.stream()
-                            .map(c -> new ResponseCommentDto(c, loginUser))
-                            .collect(Collectors.toList());
-    }
-
-    /*댓글 조회*/
-    public List<ResponseCommentDto> readComment(Long postId){
-        List<Comment> comments = commentRepository.findCommentByPostId(postId);
-        User loginUser = userService.getLoginUser();
-        return comments.stream()
-                .map(c -> new ResponseCommentDto(c, loginUser))
-                .collect(Collectors.toList());
     }
 
     /*댓글 삭제*/
-    @Transactional
-    public void deleteComment(Long commentId){
-        Comment findComment = commentRepository.findById(commentId).get();
+    /*@Transactional
+    public List<ResponseCommentDto> deleteComment(RemoveCommentDto removeCommentDto){
+        Comment findComment = commentRepository.findById(removeCommentDto.getCommentId()).get();
         commentRepository.delete(findComment);
-    }
+
+        return readComment(removeCommentDto.getPostId());
+    }*/
 }

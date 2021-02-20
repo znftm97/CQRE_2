@@ -28,14 +28,14 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <h2>자유게시판</h2>
     </div>
 
-    <form role="form" method="post" enctype="multipart/form-data" th:action="@{/post/update}" th:object="${createUpdatePostDto}">
+    <form role="form" method="post" enctype="multipart/form-data" th:action="@{/post/update}" th:object="${createAndUpdatePostDto}">
         <div class="form-group">
             <label th:for="title"><strong>제목</strong></label>
             <input type="text" name="title" class="form-control" placeholder="제목을 입력하세요" th:field="*{title}"
                    th:class="${#fields.hasErrors('title')}? 'form-control fieldError' : 'form-control'">
             <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
-            <input type="hidden" th:value="${createUpdatePostDto.id}" th:field="*{id}">
-            <input type="hidden" th:value="${createUpdatePostDto.board}" th:field="*{board}">
+            <input type="hidden" th:value="${createAndUpdatePostDto.id}" th:field="*{id}">
+            <input type="hidden" th:value="${createAndUpdatePostDto.board}" th:field="*{board}">
         </div>
 
         <div class="form-group">
@@ -55,10 +55,10 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             </div>
             <p> </p>
             <strong>파일명</strong>
-            <p th:if="${createUpdatePostDto.files != null}">
+            <p th:if="${createAndUpdatePostDto.files != null}">
             <table>
                 <tbody>
-                <tr th:each="file : ${createUpdatePostDto.files}">
+                <tr th:each="file : ${createAndUpdatePostDto.files}">
                     <td>
                         <span th:text="${file.originFilename}"></span>
                     </td>

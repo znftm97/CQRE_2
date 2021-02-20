@@ -61,7 +61,7 @@ public class PostController {
     @GetMapping("/post/createFreePost")
     public String createFreePost(Model model){
 
-        model.addAttribute("createUpdatePostDto", new CreateUpdatePostDto());
+        model.addAttribute("createAndUpdatePostDto", new CreateAndUpdatePostDto());
 
         return "/post/createFreePost";
     }
@@ -70,14 +70,14 @@ public class PostController {
     @GetMapping("/post/createNoticePost")
     public String createNoticePost(Model model){
 
-        model.addAttribute("createUpdatePostDto", new CreateUpdatePostDto());
+        model.addAttribute("createAndUpdatePostDto", new CreateAndUpdatePostDto());
 
         return "/post/createNoticePost";
     }
 
     /*자유게시판 글 생성*/
     @PostMapping("/post/createFreePost")
-    public String PCreateFreePost(@ModelAttribute("createUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
+    public String PCreateFreePost(@ModelAttribute("createAndUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
                                   @RequestParam(value = "file", required = false) List<MultipartFile> files){
         if (result.hasErrors()) {
             return "/post/createFreePost";
@@ -93,7 +93,7 @@ public class PostController {
 
     /*공지사항 글 생성*/
     @PostMapping("/post/createNoticePost")
-    public String PCreateNoticePost(@ModelAttribute("createUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
+    public String PCreateNoticePost(@ModelAttribute("createAndUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
                                     @RequestParam(value = "file", required = false) List<MultipartFile> files){
 
         if (result.hasErrors()) {
@@ -146,11 +146,11 @@ public class PostController {
     /*글 수정 페이지*/
     @GetMapping("/post/update/{postId}")
     public String updatePost(@PathVariable("postId") Long postId, Model model) {
-        CreateAndUpdatePostDto createUpdatePostDto = postService.updatePostPage(postId);
-        model.addAttribute("createUpdatePostDto", createUpdatePostDto);
+        CreateAndUpdatePostDto createAndUpdatePostDto = postService.updatePostPage(postId);
+        model.addAttribute("createAndUpdatePostDto", createAndUpdatePostDto);
 
         
-        if (createUpdatePostDto.getBoard() == Board.FREE) {
+        if (createAndUpdatePostDto.getBoard() == Board.FREE) {
             return "/post/updatePostFree";
         }else {
             return "/post/updatePostNotice";
@@ -159,7 +159,7 @@ public class PostController {
 
     /*글 수정*/
     @PostMapping("/post/update")
-    public String PUpdatePost(@ModelAttribute("createUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
+    public String PUpdatePost(@ModelAttribute("createAndUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
                               @RequestParam(value = "file", required = false) List<MultipartFile> files){
         if (result.hasErrors() && (createAndUpdatePostDto.getBoard()==Board.FREE) ) {
             return "/post/updatePostFree";

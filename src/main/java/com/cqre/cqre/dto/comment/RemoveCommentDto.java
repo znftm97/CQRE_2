@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class RemoveCommentDto {
-    private Long id;
+    private Long commentId;
+    private Long postId;
 }
