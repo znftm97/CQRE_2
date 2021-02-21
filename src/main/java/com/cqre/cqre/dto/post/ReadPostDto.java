@@ -12,7 +12,7 @@ public class ReadPostDto {
     private String content;
     private int postViews;
     private int recommendation;
-    private LocalDateTime lastModifiedDate;
+    private LocalDateTime createDate;
     private String userName;
     private boolean AuthorCheck;
 }

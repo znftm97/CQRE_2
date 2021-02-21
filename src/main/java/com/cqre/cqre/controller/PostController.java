@@ -119,16 +119,6 @@ public class PostController {
         List<PostFileDto> postFileDtos = postFileService.readPostFiles(postId);
         model.addAttribute("postFileDtos", postFileDtos);
 
-        /*댓글 조회*/
-        List<ResponseCommentDto> commentDtos = commentService.readComment(postId);
-        model.addAttribute("commentDtos", commentDtos);
-
-        CreateCommentDto createCommentDto = new CreateCommentDto();
-        model.addAttribute("createCommentDto", createCommentDto);
-
-        RemoveCommentDto removeCommentDto = new RemoveCommentDto();
-        model.addAttribute("removeCommentDto", removeCommentDto);
-
         /*추천 조회*/
         String recommendationCheck = recommendationService.recommendationCheck(postId);
         model.addAttribute("recommendationCheck", recommendationCheck);

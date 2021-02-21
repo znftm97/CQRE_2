@@ -72,7 +72,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                                 <span th:text="${post.recommendation}"></span>
                                 <span>조회수: </span>
                                 <span th:text="${post.postViews}"></span>
-                                <p>[[${#temporals.format(post.lastModifiedDate, 'yyyy-MM-dd일 hh:mm분')}]]</p>
+                                <p>[[${#temporals.format(post.createDate, 'yyyy-MM-dd일 hh:mm분')}]]</p>
                             </div>
                         </div>
                     </a>

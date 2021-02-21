@@ -1,9 +1,6 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.dto.comment.CreateCommentDto;
-import com.cqre.cqre.dto.comment.ReadCommentDto;
-import com.cqre.cqre.dto.comment.RemoveCommentDto;
-import com.cqre.cqre.dto.comment.ResponseCommentDto;
+import com.cqre.cqre.dto.comment.*;
 import com.cqre.cqre.entity.User;
 import com.cqre.cqre.entity.post.Comment;
 import com.cqre.cqre.entity.post.Post;
@@ -55,5 +52,12 @@ public class CommentService {
     public void deleteComment(RemoveCommentDto removeCommentDto){
         Comment findComment = commentRepository.findById(removeCommentDto.getCommentId()).get();
         commentRepository.delete(findComment);
+    }
+
+    /*댓글 수정*/
+    @Transactional
+    public void updateComment(UpdateCommentDto updateCommentDto){
+        Comment findComment = commentRepository.findById(updateCommentDto.getCommentId()).get();
+        findComment.updateComment(updateCommentDto.getUpdateContent());
     }
 }

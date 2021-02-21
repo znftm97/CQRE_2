@@ -13,7 +13,7 @@ public class ListPostDto {
     private String content;
     private int postViews;
     private int recommendation;
-    private LocalDateTime lastModifiedDate;
+    private LocalDateTime createDate;
 
     public ListPostDto() {
 
@@ -25,6 +25,6 @@ public class ListPostDto {
         this.content = post.getContent();
         this.postViews = post.getPostViews();
         this.recommendation = post.getRecommendation();
-        this.lastModifiedDate = post.getLastModifiedDate();
+        this.createDate = post.getCreateDate();
     }
 }
