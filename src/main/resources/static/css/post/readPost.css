@@ -92,7 +92,7 @@
       width: 450px; }
     .commentBox .commentList .comment span:nth-child(3) {
       width: 175px; }
-    .commentBox .commentList .comment form {
+    .commentBox .commentList .comment div {
       width: 150px;
       float: right;
       margin-top: 25px; }

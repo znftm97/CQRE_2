@@ -51,11 +51,9 @@ public class CommentService {
     }
 
     /*댓글 삭제*/
-    /*@Transactional
-    public List<ResponseCommentDto> deleteComment(RemoveCommentDto removeCommentDto){
+    @Transactional
+    public void deleteComment(RemoveCommentDto removeCommentDto){
         Comment findComment = commentRepository.findById(removeCommentDto.getCommentId()).get();
         commentRepository.delete(findComment);
-
-        return readComment(removeCommentDto.getPostId());
-    }*/
+    }
 }

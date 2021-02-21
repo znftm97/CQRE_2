@@ -69,32 +69,10 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
         <!--댓글 박스-->
         <div class="commentBox" style="margin-top: 100px">
-            <form style="display: flex" role="form" method="post" th:action="@{/comment/create}" th:object="${createCommentDto}">
+            <div style="display: flex">
                 <input type="text" id="commentInput" class="form-control" placeholder="내용을 입력하세요" style="height: 60px"/>
                 <button type="submit" class="btn btn-sm btn-primary" id="commentBtn" >Submit</button>
-                <input type="hidden" th:value="${readPostDto.id}" id="postId">
-            </form>
-
-            <!--<table class="table table-dark">
-                <tbody>
-                <tr th:each="commentDto : ${commentDtos}">
-                    <td style="float: left" th:text="${commentDto.username}"></td>
-                    <td th:text="${commentDto.content}"></td>
-                    <td th:text="${commentDto.lastModifiedDate}"></td>
-                    <td style="float: right">
-                        <form role="form" method="post" th:action="@{/comment/delete}" th:object="${removeCommentDto}">
-                            <button class="btn-dark updateBtn" style="float: right" th:if="${commentDto.authorCheck} == true">수정</button>
-                            <button class="btn-danger removeBtn" style="float: right" th:if="${commentDto.authorCheck} == true">삭제</button>
-                            <button class="btn-success reBtn" style="float: right">답글</button>
-                            <input type="hidden" name="commentId" th:value="${commentDto.id}">
-                            <input type="hidden" name="postId" th:value="${readPostDto.id}">
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-                <tbody id="newTbody">
-                </tbody>
-            </table>-->
+            </div>
             <div class="commentList">
 
             </div>
@@ -165,51 +143,25 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 str += '    <span>' + comment.username + '</span>';
                 str += '    <span>' + comment.content + '</span>';
                 str += '    <span>' + formatTime(comment.lastModifiedDate) + '분</span>';
-                str += '    <form>';
+                str += '    <div class="btnBox">';
                 if(comment.authorCheck == true){
                     str += '        <button class="btn-dark updateBtn" style="float: right">수정</button>';
-                    str += '        <input value="삭제" type="submit" class="btn-danger removeBtn" style="float: right" th:formaction="@{/comment/delete}"></input>';
+                    str += '        <button value="' + comment.id + '" type="submit" class="btn-danger removeBtn" style="float: right">삭제</button>';
                 }
                 str += '        <button class="btn-success reBtn" style="float: right" >답글</button>';
-                str += '        <input id="commentId" value="' + comment.id + '" type="hidden"></input>';
-                str += '    </form>';
+                str += '        <input value="' + comment.id + '" type="hidden"></input>';
+                str += '    </div>';
                 str += ' </div>';
-
             })
 
             $(".commentList").html(str);
             $("#commentInput").val('');
-            $(".table-dark").empty();
+
         });
     }
 
     /*페이지 이동 후 바로 댓글 비동기로 조회*/
     getCommentList();
-
-    /*추천 여부 확인*/
-    let check = [[${recommendationCheck}]];
-    if (check == "exist") {
-        $( "i,span" ).toggleClass( "press", 1000 );
-    }
-
-    /*추천*/
-    $("#recommendationBtn").on('click', function (){
-        let readPostDto = [[${readPostDto}]];
-        let form = {
-            postId: readPostDto.id
-        }
-
-        $.ajax({
-            url: "/recommendation",
-            type: "post",
-            data: JSON.stringify(form),
-            contentType: "application/json; charset=utf-8",
-        }).done(function (resp){
-
-        }).fail(function (error){
-            alert(error);
-        });
-    });
 
     /*댓글 생성 요청*/
     $("#commentBtn").on('click', function (e){
@@ -235,24 +187,49 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     });
 
     /*댓글 삭제*/
-    /*$(".removeBtn").on('click', function (e){
+    $(document).on('click', '.removeBtn', function (e){
         e.preventDefault();
         let form = {
-            commentId: $("#commentId").val()
+            commentId: $(this).val()
         }
 
         $.ajax({
             url: "/comment/delete",
-            type: "post",
+            type: "delete",
             data: JSON.stringify(form),
             contentType: "application/json; charset=utf-8",
-        }).done(function (resp) {
-            alert(resp);
+        }).done(function () {
+            getCommentList();
+
         }).fail(function (error) {
             alert(error);
         });
+    })
 
-    });*/
+    /*추천 여부 확인*/
+    let check = [[${recommendationCheck}]];
+    if (check == "exist") {
+        $( "i,span" ).toggleClass( "press", 1000 );
+    }
+
+    /*추천*/
+    $("#recommendationBtn").on('click', function (){
+        let readPostDto = [[${readPostDto}]];
+        let form = {
+            postId: readPostDto.id
+        }
+
+        $.ajax({
+            url: "/recommendation",
+            type: "post",
+            data: JSON.stringify(form),
+            contentType: "application/json; charset=utf-8",
+        }).done(function (resp){
+
+        }).fail(function (error){
+            alert(error);
+        });
+    });
 </script>
 </body>
 </html>

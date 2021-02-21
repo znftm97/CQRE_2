@@ -31,11 +31,10 @@ public class CommentController {
     }
 
     /*댓글 삭제*/
-    /*@PostMapping(value = "/comment/delete")
+    @DeleteMapping(value = "/comment/delete")
     @ResponseBody
-    public List<ResponseCommentDto> deleteComment(RemoveCommentDto removeCommentDto){
-        return commentService.deleteComment(removeCommentDto);
-    }*/
-
+    public void deleteComment(@RequestBody RemoveCommentDto removeCommentDto){
+        commentService.deleteComment(removeCommentDto);
+    }
 
 }
