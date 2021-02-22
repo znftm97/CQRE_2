@@ -11,14 +11,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class CommentService {
+    Long bundleId= 1L;
 
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
@@ -26,9 +25,10 @@ public class CommentService {
 
     /*댓글 조회*/
     public List<ResponseCommentDto> readComment(Long postId){
-        List<Comment> comments = commentRepository.findCommentByPostId(postId);
         User loginUser = userService.getLoginUser();
-        return comments.stream()
+
+        List<Comment> commentList = commentRepository.findCommentAllByPost(postId);
+        return commentList.stream()
                 .map(c -> new ResponseCommentDto(c, loginUser))
                 .collect(Collectors.toList());
     }
@@ -44,6 +44,8 @@ public class CommentService {
                 .user(loginUser)
                 .post(findPost)
                 .depth(1)
+                .bundleId(bundleId++)
+                .bundleOrder(System.currentTimeMillis())
                 .existsCheck(true)
                 .build();
 
@@ -62,5 +64,25 @@ public class CommentService {
     public void updateComment(UpdateCommentDto updateCommentDto){
         Comment findComment = commentRepository.findById(updateCommentDto.getCommentId()).get();
         findComment.updateComment(updateCommentDto.getUpdateContent());
+    }
+
+    /*대댓글 생성*/
+    @Transactional
+    public void createReComment(CreateReCommentDto createReCommentDto){
+        Post findPost = postRepository.findById(createReCommentDto.getPostId()).orElseThrow(CPostNotFoundException::new);
+        User loginUser = userService.getLoginUser();
+        Comment findComment = commentRepository.findById(createReCommentDto.getOriginalCommentId()).get();
+
+        Comment comment = Comment.builder()
+                .content(createReCommentDto.getContent())
+                .user(loginUser)
+                .post(findPost)
+                .depth(2)
+                .bundleId(findComment.getBundleId())
+                .bundleOrder(System.currentTimeMillis())
+                .existsCheck(true)
+                .build();
+
+        commentRepository.save(comment);
     }
 }

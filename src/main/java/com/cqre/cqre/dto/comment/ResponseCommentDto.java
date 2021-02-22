@@ -14,6 +14,7 @@ public class ResponseCommentDto {
     private String content;
     private boolean authorCheck;
     private boolean existsCheck;
+    private int depth;
 
     public ResponseCommentDto(Comment comment, User loginUser) {
         this.id = comment.getId();
@@ -21,6 +22,7 @@ public class ResponseCommentDto {
         this.content = comment.getContent();
         this.username = comment.getUser().getName();
         this.existsCheck = comment.isExistsCheck();
+        this.depth = comment.getDepth();
 
         if (comment.getUser().getId().equals(loginUser.getId())) {
             authorCheck = true;

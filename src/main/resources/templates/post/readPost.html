@@ -76,47 +76,8 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <div class="commentList">
 
             </div>
-
-        <!--paging-->
-        <nav style="text-align: center;">
-            <ul class="pagination justify-content-center">
-
-                <!--  first  -->
-                <li class="page-item">
-                    <a class="page-link"  aria-label="First">
-                        <span aria-hidden="true">First</span>
-                    </a>
-                </li>
-
-                <!--  <  -->
-                <li class="page-item">
-                    <a class="page-link" aria-label="Previous" >
-                        <span aria-hidden="true">&lt;</span>
-                    </a>
-                </li>
-
-                <!--  1,2,3  -->
-                <li class="page-item">
-                    <a class="page-link"></a>
-                </li>
-
-                <!--  > -->
-                <li class="page-item">
-                    <a class="page-link" aria-label="Next">
-                        <span aria-hidden="true">&gt;</span>
-                    </a>
-                </li>
-
-                <!--  Last  -->
-                <li class="page-item">
-                    <a class="page-link" aria-label="Last">
-                        <span aria-hidden="true">Last</span>
-                    </a>
-                </li>
-            </ul>
-        </nav><!--paging-->
-    </div><!--commetBox-->
-</div> <!--postBox-->
+        </div><!--commetBox-->
+    </div> <!--postBox-->
 </div><!--containerCustom-->
 
 <script th:inline="javascript">
@@ -140,26 +101,39 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             var str = "";
 
             $.each(arr, function (idx, comment){
-                str += ' <div class="comment">';
-                str += '    <span>' + comment.username + '</span>';
-                if(comment.existsCheck == true){
-                    str += '    <span>' + comment.content + '</span>';
-                }else if(comment.existsCheck == false){
-                    str += '    <span>' + "[삭제된 댓글입니다.]" + '</span>';
+                if(comment.depth == 1){
+                    str += ' <div class="comment">';
+                }else if(comment.depth == 2){
+                    str += ' <div class="comment" style="width: 97%; margin-left: 28px; background: #6e9bff">';
                 }
+                str += '    <span>' + comment.username + '</span>';
+
+                if(comment.existsCheck == true){
+                str += '    <span>' + comment.content + '</span>';
+                }else if(comment.existsCheck == false){
+                str += '    <span>' + "[삭제된 댓글입니다.]" + '</span>';
+                }
+
                 str += '    <span>' + formatTime(comment.lastModifiedDate) + '분</span>';
                 str += '    <div class="btnBox">';
+
                 if(comment.authorCheck == true){
-                    str += '        <button value="' + comment.id + '" class="btn-dark updateBtn" style="float: right">수정</button>';
-                    str += '        <button value="' + comment.id + '" type="submit" class="btn-danger removeBtn" style="float: right">삭제</button>';
+                str += '        <button value="' + comment.id + '" class="btn-dark updateBtn" style="float: right">수정</button>';
+                str += '        <button value="' + comment.id + '" type="submit" class="btn-danger removeBtn" style="float: right">삭제</button>';
                 }
-                str += '        <button class="btn-success reBtn" style="float: right" >답글</button>';
-                str += '        <input value="' + comment.id + '" type="hidden"></input>';
-                str += '    </div>';
-                str += ' </div>';
+
+                str += '        <button value="' + comment.id + '" class="btn-success reBtn" style="float: right" >답글</button>';
+                str += '    </div>'; /*btnBox*/
+                str += ' </div>'; /*comment*/
+
                 str += ' <div class="updateComment'+ comment.id +'" style="display: none; height: 60px">';
                 str += '    <input class="updateContent'+ comment.id +'" type="text" class="form-control" placeholder="수정 할 내용을 입력하세요" style="width: 92%; height: 50px">';
                 str += '    <button value="'+ comment.id + '" type="submit" class="btn btn-sm btn-primary updateSubmitBtn" style="height: 50px">수정완료</button>';
+                str += ' </div>';
+
+                str += ' <div class="reComment'+ comment.id +'" style="display: none; height: 60px">';
+                str += '    <input class="reCommentContent'+ comment.id +'" type="text" class="form-control" placeholder="내용을 입력하세요" style="width: 92%; height: 50px">';
+                str += '    <button value="'+ comment.id + '" type="submit" class="btn btn-sm btn-primary reCommentSubmitBtn" style="height: 50px">Submit</button>';
                 str += ' </div>';
             })
 
@@ -248,6 +222,43 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             alert(error);
         });
 
+    });
+
+    /*대댓글 영역 활성화, 비활성화*/
+    $(document).on('click', '.reBtn', function (e){
+        e.preventDefault();
+        var commentId = $(this).val();
+
+        if($(".reComment"+commentId).css("display") == "none"){
+            $(".reComment"+commentId).css("display", "flex");
+        } else{
+            $(".reComment"+commentId).css("display", "none");
+        }
+    });
+
+    /*대댓글 생성 요청*/
+    $(document).on('click', '.reCommentSubmitBtn', function (e){
+        e.preventDefault();
+        var originalCommentId = $(this).val();
+
+        let readPostDto = [[${readPostDto}]];
+        let form ={
+            content: $(".reCommentContent"+originalCommentId).val(),
+            postId: readPostDto.id,
+            originalCommentId: originalCommentId
+        };
+
+        $.ajax({
+            url: "/reComment/create",
+            type: "post",
+            data: JSON.stringify(form),
+            contentType: "application/json; charset=utf-8",
+        }).done(function (){
+            getCommentList();
+
+        }).fail(function (error){
+            alert(JSON.stringify(error));
+        });
     });
 
     /*추천 여부 확인*/

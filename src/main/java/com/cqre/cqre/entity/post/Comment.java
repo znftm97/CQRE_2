@@ -22,6 +22,10 @@ public class Comment extends BaseEntity {
 
     private int depth;
 
+    private Long bundleId;
+
+    private Long bundleOrder;
+
     private boolean existsCheck;
 
     @ManyToOne(fetch = FetchType.LAZY)

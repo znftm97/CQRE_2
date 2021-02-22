@@ -1,9 +1,6 @@
 package com.cqre.cqre.controller;
 
-import com.cqre.cqre.dto.comment.CreateCommentDto;
-import com.cqre.cqre.dto.comment.RemoveCommentDto;
-import com.cqre.cqre.dto.comment.ResponseCommentDto;
-import com.cqre.cqre.dto.comment.UpdateCommentDto;
+import com.cqre.cqre.dto.comment.*;
 import com.cqre.cqre.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -43,5 +40,12 @@ public class CommentController {
     @ResponseBody
     public void updateComment(@RequestBody UpdateCommentDto updateCommentDto){
         commentService.updateComment(updateCommentDto);
+    }
+
+    /*대댓글 생성*/
+    @PostMapping("/reComment/create")
+    @ResponseBody
+    public void createReComment(@RequestBody CreateReCommentDto createReCommentDto){
+        commentService.createReComment(createReCommentDto);
     }
 }
