@@ -111,7 +111,8 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 if(comment.existsCheck == true){
                 str += '    <span>' + comment.content + '</span>';
                 }else if(comment.existsCheck == false){
-                str += '    <span>' + "[삭제된 댓글입니다.]" + '</span>';
+                str += '    <span>'
+                    + "[삭제된 댓글입니다.]" + '</span>';
                 }
 
                 str += '    <span>' + formatTime(comment.lastModifiedDate) + '분</span>';
