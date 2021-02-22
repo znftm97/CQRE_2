@@ -22,6 +22,8 @@ public class Comment extends BaseEntity {
 
     private int depth;
 
+    private boolean existsCheck;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
@@ -33,5 +35,10 @@ public class Comment extends BaseEntity {
     /*댓글 수정*/
     public void updateComment(String content){
         this.content = content;
+    }
+
+    /*댓글 삭제*/
+    public void removeComment(){
+        this.existsCheck = false;
     }
 }

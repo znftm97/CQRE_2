@@ -13,12 +13,14 @@ public class ResponseCommentDto {
     private LocalDateTime lastModifiedDate;
     private String content;
     private boolean authorCheck;
+    private boolean existsCheck;
 
     public ResponseCommentDto(Comment comment, User loginUser) {
         this.id = comment.getId();
         this.lastModifiedDate = comment.getLastModifiedDate();
         this.content = comment.getContent();
         this.username = comment.getUser().getName();
+        this.existsCheck = comment.isExistsCheck();
 
         if (comment.getUser().getId().equals(loginUser.getId())) {
             authorCheck = true;

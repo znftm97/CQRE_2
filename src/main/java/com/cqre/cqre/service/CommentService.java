@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,6 +44,7 @@ public class CommentService {
                 .user(loginUser)
                 .post(findPost)
                 .depth(1)
+                .existsCheck(true)
                 .build();
 
         commentRepository.save(comment);
@@ -51,7 +54,7 @@ public class CommentService {
     @Transactional
     public void deleteComment(RemoveCommentDto removeCommentDto){
         Comment findComment = commentRepository.findById(removeCommentDto.getCommentId()).get();
-        commentRepository.delete(findComment);
+        findComment.removeComment();
     }
 
     /*댓글 수정*/
