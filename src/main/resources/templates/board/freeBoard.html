@@ -40,8 +40,17 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         </div><!--lnb-->
 
         <div id="tableBox">
-            <!--searchBox-->
-            <div class="searchBox">
+            <!--optionBox-->
+            <div class="optionBox">
+                <form class="form-group mx-sm-1 mb-2" th:action="@{/board/freeBoard}" method="get">
+                    <select name="sortSelect">
+                        <option>정렬기준선택</option>
+                        <option value="recommendation">추천순</option>
+                        <option value="postViews">조회순</option>
+                    </select>
+                    <button class="btn btn-primary" type="submit">정렬</button>
+                </form>
+
                 <form class="form-inline">
                     <div class="form-group mx-sm-1 mb-2">
                         <select name="searchOption">
@@ -58,7 +67,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 </form>
 
                 <a class="btn btn-primary mb-2" th:href="@{/post/createFreePost}">글쓰기</a>
-            </div><!--searchBox-->
+            </div><!--optionBox-->
 
             <!--list-->
             <div class="list">
@@ -122,8 +131,6 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         </div><!--tableBox-->
         <div th:replace="fragments/footer :: footer"/>
     </div><!--contents-->
-
-
 
 </div>
 </body>

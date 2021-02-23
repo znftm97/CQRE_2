@@ -14,6 +14,7 @@ import com.cqre.cqre.service.PostService;
 import com.cqre.cqre.service.RecommendationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -39,9 +40,9 @@ public class PostController {
 
     /*자유게시판 페이지*/
     @GetMapping("/board/freeBoard")
-    public String freeBoard(Model model, @PageableDefault(size = 6, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
-
-        Page<ListPostDto> posts = postService.findFreePosts(pageable);
+    public String freeBoard(@RequestParam(value = "sortSelect", required = false) String sortOption,
+                            @RequestParam(value = "page", required = false, defaultValue = "0") int page, Model model){
+        Page<ListPostDto> posts = postService.findFreePosts(sortOption, page);
         model.addAttribute("posts", posts);
 
         return "/board/freeBoard";
@@ -49,9 +50,10 @@ public class PostController {
 
     /*공지사항 게시판 페이지*/
     @GetMapping("/board/noticeBoard")
-    public String noticeBoard(Model model, @PageableDefault(size = 6, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+    public String noticeBoard(@RequestParam(value = "sortSelect", required = false) String sortOption,
+                              @RequestParam(value = "page", required = false, defaultValue = "0") int page, Model model){
 
-        Page<ListPostDto> posts = postService.findNoticePosts(pageable);
+        Page<ListPostDto> posts = postService.findNoticePosts(sortOption, page);
         model.addAttribute("posts", posts);
 
         return "/board/noticeBoard";

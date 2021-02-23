@@ -10,10 +10,14 @@
   margin: 0 auto;
   visibility: visible !important;
   /*list*/ }
-  #tableBox .searchBox > a {
-    display: inline-block;
-    position: absolute;
-    margin: -42px 0 0 595px; }
+  #tableBox .optionBox {
+    display: flex;
+    justify-content: space-between; }
+    #tableBox .optionBox form:nth-child(2) {
+      display: inline-block;
+      width: 500px; }
+      #tableBox .optionBox form:nth-child(2) div {
+        display: inline-block; }
   #tableBox .list {
     width: 100%;
     margin: 0 auto;

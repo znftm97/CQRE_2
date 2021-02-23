@@ -1,6 +1,9 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.dto.post.*;
+import com.cqre.cqre.dto.post.CreateAndUpdatePostDto;
+import com.cqre.cqre.dto.post.ListPostDto;
+import com.cqre.cqre.dto.post.PostFileDto;
+import com.cqre.cqre.dto.post.ReadPostDto;
 import com.cqre.cqre.entity.User;
 import com.cqre.cqre.entity.post.*;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
@@ -11,7 +14,8 @@ import com.cqre.cqre.repository.RecommendationRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,13 +33,35 @@ public class PostService {
     private final ModelMapper modelMapper;
 
     /*자유게시판 글 목록 출력*/
-    public Page<ListPostDto> findFreePosts(Pageable pageable){
-        return postRepository.findByPostAll(Board.FREE, pageable).map(post -> new ListPostDto(post));
+    public Page<ListPostDto> findFreePosts(String sortOption, int page){
+        PageRequest pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "id"));
+
+        if(sortOption == null){
+        }
+        else if(sortOption.equals("recommendation")){
+            pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, sortOption));
+        }
+        else if (sortOption.equals("postViews")) {
+            pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, sortOption));
+        }
+
+        return postRepository.findByPostAll(Board.FREE, pageRequest).map(post -> new ListPostDto(post));
     }
 
     /*공지사항 글 목록 출력*/
-    public Page<ListPostDto> findNoticePosts(Pageable pageable){
-        return postRepository.findByPostAll(Board.NOTICE, pageable).map(post -> new ListPostDto(post));
+    public Page<ListPostDto> findNoticePosts(String sortOption, int page){
+        PageRequest pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "id"));
+
+        if(sortOption == null){
+        }
+        else if(sortOption.equals("recommendation")){
+            pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, sortOption));
+        }
+        else if (sortOption.equals("postViews")) {
+            pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, sortOption));
+        }
+
+        return postRepository.findByPostAll(Board.NOTICE, pageRequest).map(post -> new ListPostDto(post));
     }
 
     /*자유게시판 글 생성*/

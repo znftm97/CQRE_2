@@ -18,10 +18,17 @@ $grayTextColor: #777;
   margin: 0 auto;
   visibility: visible!important;
 
-  .searchBox > a{
-    display: inline-block;
-    position: absolute;
-    margin: -42px 0 0 595px;
+  .optionBox{
+    display: flex;
+    justify-content: space-between;
+
+    form:nth-child(2){
+      display: inline-block;
+      width: 500px;
+      div{
+        display: inline-block;
+      }
+    }
   }
 
   .list{
