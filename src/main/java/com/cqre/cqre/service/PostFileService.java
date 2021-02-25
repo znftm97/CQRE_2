@@ -5,7 +5,7 @@ import com.cqre.cqre.entity.post.Post;
 import com.cqre.cqre.entity.post.PostFile;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
 import com.cqre.cqre.repository.PostFileRepository;
-import com.cqre.cqre.repository.PostRepository;
+import com.cqre.cqre.repository.post.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

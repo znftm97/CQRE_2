@@ -1,5 +1,6 @@
 package com.cqre.cqre;
 
+import com.cqre.cqre.entity.User;
 import com.cqre.cqre.entity.post.Comment;
 import com.cqre.cqre.entity.post.Post;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,8 +44,7 @@ class CqreApplicationTests {
 				.stream()
 				.map(c -> c.getId())
 				.collect(Collectors.toList());
-
-		System.out.println(collect);
 	}
+
 
 }

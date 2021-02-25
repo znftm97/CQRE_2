@@ -1,4 +1,4 @@
-package com.cqre.cqre.repository;
+package com.cqre.cqre.repository.comment;
 
 import com.cqre.cqre.entity.QUser;
 import com.cqre.cqre.entity.post.Comment;

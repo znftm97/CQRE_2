@@ -7,10 +7,10 @@ import com.cqre.cqre.dto.post.ReadPostDto;
 import com.cqre.cqre.entity.User;
 import com.cqre.cqre.entity.post.*;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
-import com.cqre.cqre.repository.CommentRepository;
 import com.cqre.cqre.repository.PostFileRepository;
-import com.cqre.cqre.repository.PostRepository;
+import com.cqre.cqre.repository.comment.CommentRepository;
 import com.cqre.cqre.repository.RecommendationRepository;
+import com.cqre.cqre.repository.post.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -45,7 +45,7 @@ public class PostService {
             pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, sortOption));
         }
 
-        return postRepository.findByPostAll(Board.FREE, pageRequest).map(post -> new ListPostDto(post));
+        return postRepository.findPostByBoard(Board.FREE, pageRequest).map(post -> new ListPostDto(post));
     }
 
     /*공지사항 글 목록 출력*/
@@ -61,7 +61,7 @@ public class PostService {
             pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, sortOption));
         }
 
-        return postRepository.findByPostAll(Board.NOTICE, pageRequest).map(post -> new ListPostDto(post));
+        return postRepository.findPostByBoard(Board.NOTICE, pageRequest).map(post -> new ListPostDto(post));
     }
 
     /*자유게시판 글 생성*/

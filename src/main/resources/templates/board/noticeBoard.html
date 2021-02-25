@@ -40,11 +40,20 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         </div><!--lnb-->
 
         <div id="tableBox">
-            <!--searchBox-->
-            <div class="searchBox">
-                <form class="form-inline">
+            <!--optionBox-->
+            <div class="optionBox">
+                <form class="form-group mx-sm-1 mb-2" th:action="@{/board/noticeBoard}" method="get">
+                    <select name="sortSelect">
+                        <option>정렬기준선택</option>
+                        <option value="recommendation">추천순</option>
+                        <option value="postViews">조회순</option>
+                    </select>
+                    <button class="btn btn-primary" type="submit">정렬</button>
+                </form>
+
+                <form class="form-inline" th:action="@{/board/noticeBoard/search}" method="get">
                     <div class="form-group mx-sm-1 mb-2">
-                        <select name="searchOption">
+                        <select name="searchSelect">
                             <option value="name">검색 조건 선택</option>
                             <option value="title">글제목</option>
                             <option value="name">글쓴이</option>
@@ -68,6 +77,8 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                             <h5 th:text="${post.title}"></h5>
                             <p th:text="${post.content}"></p>
                             <div>
+                                <span>글쓴이: </span>
+                                <span>&nbsp;[[${post.name}]]</span>
                                 <span>추천: </span>
                                 <span th:text="${post.recommendation}"></span>
                                 <span>조회수: </span>

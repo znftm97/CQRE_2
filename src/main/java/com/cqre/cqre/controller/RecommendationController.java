@@ -1,7 +1,6 @@
 package com.cqre.cqre.controller;
 
 import com.cqre.cqre.dto.post.RecommendationResponseDto;
-import com.cqre.cqre.repository.PostRepository;
 import com.cqre.cqre.service.RecommendationService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
