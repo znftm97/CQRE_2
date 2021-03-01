@@ -61,19 +61,9 @@ public class homeController {
         return "/user/updatePassword";
     }
 
-    @GetMapping("/gallery")
-    public String gallery(){
-        return "/gallery/gallery";
-    }
-
     @GetMapping("/shop")
     public String shop(){
         return "/shop/shop";
-    }
-
-    @GetMapping("/createGallery")
-    public String createGallery(){
-        return "/gallery/createGallery";
     }
 
     @GetMapping("/createOrder")

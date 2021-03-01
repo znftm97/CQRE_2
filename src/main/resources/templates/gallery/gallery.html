@@ -14,9 +14,6 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     <link rel="stylesheet" th:href="@{/css/common/fragments.css}">
     <link rel="stylesheet" th:href="@{/css/common/infoCommon.css}">
     <link rel="stylesheet" th:href="@{/css/gallery/gallery.css}">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 </head>
 <body>
 <div class="containerCustom">
@@ -59,14 +56,14 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     <button type="submit" class="btn btn-primary mb-2">검색</button>
                 </form>
 
-                <a class="btn btn-primary mb-2" th:href="@{/createGallery}">업로드</a>
+                <a class="btn btn-primary mb-2" th:href="@{/gallery/create}">업로드</a>
             </div><!--searchBox-->
 
             <!--list-->
             <div class="list">
                 <div class="topPic">
                     <li>
-                        <a href="/images/board.jpg" data-lightbox="example-set">
+                        <a th:href="@{/galleryView}">
                             <img src="/images/instagramFrame.png"/>
                             <img src="/images/board.jpg">
                         </a>
@@ -77,7 +74,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                         </div>
                     </li>
                     <li>
-                        <a href="/images/board.jpg" data-lightbox="example-set">
+                        <a href="/images/board.jpg">
                             <img src="/images/instagramFrame.png"/>
                             <img src="/images/board.jpg">
                         </a>
@@ -88,7 +85,40 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                         </div>
                     </li>
                     <li>
-                        <a href="/images/board.jpg" data-lightbox="example-set">
+                        <a href="/images/board.jpg">
+                            <img src="/images/instagramFrame.png"/>
+                            <img src="/images/board.jpg">
+                        </a>
+                        <div>
+                            <p>작성자</p>
+                            <p>제목</p>
+                            <p>2021.01.23</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="/images/board.jpg">
+                            <img src="/images/instagramFrame.png"/>
+                            <img src="/images/board.jpg">
+                        </a>
+                        <div>
+                            <p>작성자</p>
+                            <p>제목</p>
+                            <p>2021.01.23</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="/images/board.jpg">
+                            <img src="/images/instagramFrame.png"/>
+                            <img src="/images/board.jpg">
+                        </a>
+                        <div>
+                            <p>작성자</p>
+                            <p>제목</p>
+                            <p>2021.01.23</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="/images/board.jpg">
                             <img src="/images/instagramFrame.png"/>
                             <img src="/images/board.jpg">
                         </a>
@@ -99,42 +129,6 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                         </div>
                     </li>
                 </div><!--topPic-->
-
-                <div class="bottomPic">
-                    <li>
-                        <a href="/images/board.jpg" data-lightbox="example-set">
-                            <img src="/images/instagramFrame.png"/>
-                            <img src="/images/board.jpg">
-                        </a>
-                        <div>
-                            <p>작성자</p>
-                            <p>제목</p>
-                            <p>2021.01.23</p>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="/images/board.jpg" data-lightbox="example-set">
-                            <img src="/images/instagramFrame.png"/>
-                            <img src="/images/board.jpg">
-                        </a>
-                        <div>
-                            <p>작성자</p>
-                            <p>제목</p>
-                            <p>2021.01.23</p>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="/images/board.jpg" data-lightbox="example-set">
-                            <img src="/images/instagramFrame.png"/>
-                            <img src="/images/board.jpg">
-                        </a>
-                        <div>
-                            <p>작성자</p>
-                            <p>제목</p>
-                            <p>2021.01.23</p>
-                        </div>
-                    </li>
-                </div><!--bottomPic-->
             </div><!--list-->
 
             <!--paging-->

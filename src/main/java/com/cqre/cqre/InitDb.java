@@ -35,9 +35,8 @@ public class InitDb {
                     .studentId("20144339")
                     .loginId("znftm97")
                     .password(passwordEncoder.encode("wprkfrhdaud12!"))
-                    .email("znftm93@gmail.com")
+                    .email("znftm97@gmail.com")
                     .build();
-
 
             User user2 = User.builder()
                     .name("홍길동")

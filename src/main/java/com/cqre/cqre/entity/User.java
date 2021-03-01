@@ -23,6 +23,7 @@ public class User extends BaseEntity{
 
     private String password;
 
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Embedded

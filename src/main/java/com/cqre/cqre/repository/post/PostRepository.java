@@ -16,10 +16,6 @@ public interface PostRepository extends JpaRepository<Post, Long>, PostRepositor
     Optional<Post> CFindByPostId(@Param("id") Long id);
 
     /*정상 동작*/
-    /*@Query(value = "select p from Post p where p.board = :board")
-    Page<Post> findPostByBoard(@Param("board") Board board, Pageable pageable);*/
-
-    /*정상 동작*/
     @Query(value = "select p from Post p join fetch p.user where p.board = :board", countQuery = "select count(p.id) from Post p where p.board = :board")
     Page<Post> findPostByBoard(@Param("board") Board board, Pageable pageable);
 

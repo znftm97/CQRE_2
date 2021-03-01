@@ -1,0 +1,44 @@
+$pinkColor: #f3ade1;
+$purpleColor: #a873f9;
+$blueColor: #0070ff;
+$blueLightColor: #4e9bff;
+$grayTextColor: #777;
+
+.galleryBox {
+  border: 1px solid $blueLightColor;
+  border-radius: 5px;
+  width: 1330px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  box-shadow: rgba(0,0,0,.14) 3px 6px 12px;
+}
+
+.btnBox{
+  border-bottom: 1px solid $blueLightColor;
+  height: 70px;
+  text-align: center;
+  button{
+    float: left;
+    margin-top: 15px;
+    margin-left: 10px;
+    background: #5D81EC;
+    border: 1px solid #5D81EC;
+  }
+  h2{
+    font-weight:bold;
+    display: inline-block;
+    margin-top: 15px;
+    margin-right: 150px;
+  }
+}
+
+.photos{
+  width: inherit;
+  height: inherit;
+  margin: 0 0 30px 0;
+  > div{
+    width: 350px;
+    margin-top: 30px;
+  }
+}

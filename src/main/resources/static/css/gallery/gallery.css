@@ -34,55 +34,55 @@
     position: relative;
     overflow-x: hidden;
     height: 1000px; }
-    #tableBox .list .topPic,
-    #tableBox .list .bottomPic {
+    #tableBox .list .topPic {
       width: 100%;
-      height: 500px;
-      display: flex;
-      justify-content: space-between; }
-    #tableBox .list li {
-      list-style: none;
-      position: relative;
-      height: 450px;
-      float: left;
-      box-sizing: border-box;
-      border: 2px solid lightgray;
-      box-shadow: rgba(0, 0, 0, 0.14) 3px 6px 12px; }
-      #tableBox .list li a {
-        cursor: pointer;
-        display: block;
-        text-decoration: none;
-        height: 400px;
-        padding-top: 5%;
-        text-align: center;
+      height: 1000px; }
+      #tableBox .list .topPic li {
+        list-style: none;
+        position: relative;
+        height: 450px;
+        float: left;
         box-sizing: border-box;
-        /*인스타 프레임*/
-        /*프레임 안에 들어갈 사진*/ }
-        #tableBox .list li a img:nth-child(2n-1) {
-          width: 350px;
-          height: 396px;
-          z-index: 1;
-          margin-top: -17px; }
-        #tableBox .list li a img:nth-child(2n) {
-          width: 312px;
-          height: 220px;
-          z-index: 2;
-          position: absolute;
-          left: 20px;
-          top: 68px; }
-      #tableBox .list li div {
-        width: 90%;
-        height: 50px;
-        display: flex;
-        justify-content: space-between;
-        margin: 0 auto; }
-        #tableBox .list li div p {
-          margin-top: 10px; }
-        #tableBox .list li div p:last-child,
-        #tableBox .list li div p:first-child {
-          color: #888;
-          font-size: 12px;
-          margin-top: 15px; }
+        border: 2px solid lightgray;
+        box-shadow: rgba(0, 0, 0, 0.14) 3px 6px 12px;
+        margin: 0 0 5% 5%; }
+        #tableBox .list .topPic li a {
+          cursor: pointer;
+          display: block;
+          text-decoration: none;
+          height: 400px;
+          padding-top: 5%;
+          text-align: center;
+          box-sizing: border-box;
+          /*인스타 프레임*/
+          /*프레임 안에 들어갈 사진*/ }
+          #tableBox .list .topPic li a img:nth-child(2n-1) {
+            width: 350px;
+            height: 396px;
+            z-index: 1;
+            margin-top: -17px; }
+          #tableBox .list .topPic li a img:nth-child(2n) {
+            width: 312px;
+            height: 220px;
+            z-index: 2;
+            position: absolute;
+            left: 20px;
+            top: 68px; }
+        #tableBox .list .topPic li div {
+          width: 90%;
+          height: 50px;
+          display: flex;
+          justify-content: space-between;
+          margin: 0 auto; }
+          #tableBox .list .topPic li div p {
+            margin-top: 10px; }
+          #tableBox .list .topPic li div p:nth-child(2) {
+            margin-left: 10px; }
+          #tableBox .list .topPic li div p:last-child,
+          #tableBox .list .topPic li div p:first-child {
+            color: #888;
+            font-size: 12px;
+            margin-top: 15px; }
     #tableBox .list li:nth-child(2n) {
       margin-right: 0; }
 
@@ -100,15 +100,15 @@
   border-image: linear-gradient(to right, #f3ade1, #0070ff) !important;
   border-image-slice: 1 !important; }
 
-.list .bottomPic > li:nth-child(1):hover {
+.list .topPic > li:nth-child(4):hover {
   border-image: linear-gradient(to right, #f3ade1, #0070ff) !important;
   border-image-slice: 1 !important; }
 
-.list .bottomPic > li:nth-child(2):hover {
+.list .topPic > li:nth-child(5):hover {
   border-image: linear-gradient(to right, #f3ade1, #0070ff) !important;
   border-image-slice: 1 !important; }
 
-.list .bottomPic > li:nth-child(3):hover {
+.list .topPic > li:nth-child(6):hover {
   border-image: linear-gradient(to right, #f3ade1, #0070ff) !important;
   border-image-slice: 1 !important; }
 

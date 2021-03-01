@@ -23,6 +23,10 @@ public class GalleryFile extends BaseEntity{
 
     private String filePath;
 
+    private Long bundleId;
+
+    private Long bundleOrder;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

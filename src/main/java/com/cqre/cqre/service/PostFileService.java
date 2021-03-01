@@ -27,7 +27,7 @@ public class PostFileService {
         Post findPost = postRepository.findById(postId).orElseThrow(CPostNotFoundException::new);
 
         /*실행되는 위치 즉 프로젝트 폴더에 files 폴더에 파일 저장됨*/
-        String savePath = System.getProperty("user.dir") + "\\files";
+        String savePath = System.getProperty("user.dir") + "\\files" + "\\postFiles";
 
         /*파일 저장되는 폴더 없으면 생성*/
         if (!new java.io.File(savePath).exists()) {

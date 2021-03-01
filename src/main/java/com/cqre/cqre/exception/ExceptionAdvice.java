@@ -1,8 +1,11 @@
 package com.cqre.cqre.exception;
 
+import com.cqre.cqre.exception.customexception.CGalleryFileIsNotImage;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
 import com.cqre.cqre.exception.customexception.user.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 @RequiredArgsConstructor
+@Slf4j
 public class ExceptionAdvice {
 
     private final ResponseService responseService;
@@ -52,5 +56,17 @@ public class ExceptionAdvice {
     @ExceptionHandler(ClassCastException.class)
     protected String userNotLogin(){
         return "/user/exception/userNotFoundException";
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    protected String emailOverlapCheck(Model model){
+        model.addAttribute("emailOverlap", "true");
+        return "/home/home";
+    }
+
+    @ExceptionHandler(CGalleryFileIsNotImage.class)
+    protected String notImageFile(Model model){
+        model.addAttribute("notImageFile", "true");
+        return "/gallery/createGallery";
     }
 }

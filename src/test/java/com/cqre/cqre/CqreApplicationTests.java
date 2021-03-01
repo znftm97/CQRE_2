@@ -1,11 +1,19 @@
 package com.cqre.cqre;
 
+import com.cqre.cqre.controller.PostController;
+import com.cqre.cqre.dto.post.ListPostDto;
 import com.cqre.cqre.entity.User;
+import com.cqre.cqre.entity.post.Board;
 import com.cqre.cqre.entity.post.Comment;
 import com.cqre.cqre.entity.post.Post;
+import com.cqre.cqre.repository.post.PostRepository;
+import com.cqre.cqre.service.PostService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -17,33 +25,41 @@ import java.util.stream.Collectors;
 @SpringBootTest
 class CqreApplicationTests {
 
+	@Autowired
+	private PostRepository postRepository;
+	@Autowired
+	private PostService postService;
+	@Autowired
+	private PostController postController;
+
 	@Test
 	void contextLoads() {
-		Post post = Post.builder()
+		Post post1 = Post.builder()
 				.content("aaaa")
-				.title("123")
+				.title("aaaa")
+				.board(Board.FREE)
+				.postViews(1)
 				.build();
 
-		Comment comment1 = Comment.builder()
-				.content("111")
-				.id(1L)
-				.post(post)
+		Post post2 = Post.builder()
+				.content("bbbb")
+				.title("bbbb")
+				.board(Board.FREE)
+				.postViews(2)
 				.build();
 
-		Comment comment2 = Comment.builder()
-				.content("222")
-				.id(2L)
-				.post(post)
+		User user = User.builder()
+				.name("userA")
+				.email("asd@naver.com")
+				.loginId("userA")
 				.build();
 
-		List<Comment> comments = new ArrayList<>();
-		comments.add(comment1);
-		comments.add(comment2);
+		PageRequest pageRequest = PageRequest.of(0, 6, Sort.by(Sort.Direction.DESC, "id"));
+		Page<Post> posts1 = postRepository.findPostByBoard(Board.FREE, pageRequest);
+		Page<Post> posts2 = postRepository.findPostByBoard2(Board.FREE, pageRequest);
 
-		List<Long> collect = comments
-				.stream()
-				.map(c -> c.getId())
-				.collect(Collectors.toList());
+
+
 	}
 
 
