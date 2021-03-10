@@ -1,9 +1,13 @@
 package com.cqre.cqre.controller;
 
 import com.cqre.cqre.dto.CreateGalleryDto;
-import com.cqre.cqre.exception.customexception.CGalleryFileIsNotImage;
+import com.cqre.cqre.dto.FindGalleryFileDto;
+import com.cqre.cqre.repository.gallery.GalleryRepository;
 import com.cqre.cqre.service.GalleryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +24,10 @@ public class GalleryController {
 
     /*갤러리 페이지*/
     @GetMapping("/gallery")
-    public String gallery(){
+    public String gallery(Model model, @PageableDefault(size = 6, sort = "id") Pageable pageable){
+        Page<FindGalleryFileDto> galleryFiles = galleryService.findGalleryFiles(pageable);
+        model.addAttribute("galleryFiles", galleryFiles);
+
         return "/gallery/gallery";
     }
 

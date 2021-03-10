@@ -47,6 +47,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                             <option value="name">검색 조건 선택</option>
                             <option value="title">글제목</option>
                             <option value="name">글쓴이</option>
+
                         </select>
                     </div>
 
@@ -62,70 +63,15 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <!--list-->
             <div class="list">
                 <div class="topPic">
-                    <li>
+                    <li th:each = "galleryFile : ${galleryFiles}">
                         <a th:href="@{/galleryView}">
-                            <img src="/images/instagramFrame.png"/>
-                            <img src="/images/board.jpg">
+                            <img th:src="@{/images/instagramFrame.png}"/>
+                            <img th:src="@{'/images/' + ${galleryFile.filename}}"/>
                         </a>
                         <div>
-                            <p>작성자</p>
-                            <p>제목</p>
-                            <p>2021.01.23</p>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="/images/board.jpg">
-                            <img src="/images/instagramFrame.png"/>
-                            <img src="/images/board.jpg">
-                        </a>
-                        <div>
-                            <p>작성자</p>
-                            <p>제목</p>
-                            <p>2021.01.23</p>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="/images/board.jpg">
-                            <img src="/images/instagramFrame.png"/>
-                            <img src="/images/board.jpg">
-                        </a>
-                        <div>
-                            <p>작성자</p>
-                            <p>제목</p>
-                            <p>2021.01.23</p>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="/images/board.jpg">
-                            <img src="/images/instagramFrame.png"/>
-                            <img src="/images/board.jpg">
-                        </a>
-                        <div>
-                            <p>작성자</p>
-                            <p>제목</p>
-                            <p>2021.01.23</p>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="/images/board.jpg">
-                            <img src="/images/instagramFrame.png"/>
-                            <img src="/images/board.jpg">
-                        </a>
-                        <div>
-                            <p>작성자</p>
-                            <p>제목</p>
-                            <p>2021.01.23</p>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="/images/board.jpg">
-                            <img src="/images/instagramFrame.png"/>
-                            <img src="/images/board.jpg">
-                        </a>
-                        <div>
-                            <p>작성자</p>
-                            <p>제목</p>
-                            <p>2021.01.23</p>
+                            <p th:text="${galleryFile.username}"></p>
+                            <p th:text="${galleryFile.title}"></p>
+                            <p>[[${#temporals.format(galleryFile.createDate, 'yyyy-MM-dd hh:mm')}]]</p>
                         </div>
                     </li>
                 </div><!--topPic-->
@@ -133,37 +79,39 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
             <!--paging-->
             <nav style="text-align: center;">
-                <ul class="pagination justify-content-center">
+                <ul class="pagination justify-content-center"
+                    th:with="start=${T(Math).floor(galleryFiles.number/10)*10 + 1},
+                    last=(${start + 9 < galleryFiles.totalPages ? start + 9 : galleryFiles.totalPages})">
 
                     <!--  first  -->
                     <li class="page-item">
-                        <a class="page-link"  aria-label="First">
+                        <a class="page-link" th:href="@{/gallery(page=0)}" aria-label="First">
                             <span aria-hidden="true">First</span>
                         </a>
                     </li>
 
                     <!--  <  -->
                     <li class="page-item">
-                        <a class="page-link" aria-label="Previous" >
+                        <a class="page-link" th:href="${galleryFiles.first} ? '#' :@{/gallery(page=${galleryFiles.number - 1})}" aria-label="Previous" >
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
                     <!--  1,2,3  -->
-                    <li class="page-item">
-                        <a class="page-link"></a>
+                    <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == galleryFiles.number + 1} ? 'page-item active'">
+                        <a class="page-link" th:text="${page}" th:href="@{/gallery(page=${page - 1})}"></a>
                     </li>
 
                     <!--  > -->
-                    <li class="page-item">
-                        <a class="page-link" aria-label="Next">
+                    <li class="page-item" th:class="${galleryFiles.last} ? 'disabled'">
+                        <a class="page-link" th:href="${galleryFiles.last} ? '#' : @{/gallery(page=${galleryFiles.number + 1})}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
 
                     <!--  Last  -->
                     <li class="page-item">
-                        <a class="page-link" aria-label="Last">
+                        <a class="page-link" th:href="@{/gallery(page=${galleryFiles.totalPages - 1})}" aria-label="Last">
                             <span aria-hidden="true">Last</span>
                         </a>
                     </li>

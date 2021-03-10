@@ -72,7 +72,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <!--list-->
             <div class="list">
                 <li th:each="post : ${posts}">
-                    <a th:href="@{/post/readPost/{postId} (postId=${post.id})}">
+                    <a th:href="@{/post/{postId}/readPost (postId=${post.id})}">
                         <div>
                             <h5 th:text="${post.title}"></h5>
                             <p th:text="${post.content}"></p>

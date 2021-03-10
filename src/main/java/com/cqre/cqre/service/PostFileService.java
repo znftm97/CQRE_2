@@ -7,10 +7,19 @@ import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
 import com.cqre.cqre.repository.PostFileRepository;
 import com.cqre.cqre.repository.post.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +36,7 @@ public class PostFileService {
         Post findPost = postRepository.findById(postId).orElseThrow(CPostNotFoundException::new);
 
         /*실행되는 위치 즉 프로젝트 폴더에 files 폴더에 파일 저장됨*/
-        String savePath = System.getProperty("user.dir") + "\\files" + "\\postFiles";
+        String savePath = "C:\\Users\\leejihoon\\Desktop\\CQRE\\files\\postFiles";
 
         /*파일 저장되는 폴더 없으면 생성*/
         if (!new java.io.File(savePath).exists()) {
@@ -62,6 +71,23 @@ public class PostFileService {
                 e.printStackTrace();
             }
         }
+    }
+
+    /*파일 다운로드*/
+    public ResponseEntity<Resource> PostFileDownload(Long postFileId){
+        PostFile findPostFile = postFileRepository.findById(postFileId).get();
+
+        Path path = Paths.get(findPostFile.getFilePath());
+        try {
+            Resource resource = new InputStreamResource(Files.newInputStream(path));
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType("application/octet-stream"))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + findPostFile.getOriginFilename() + "\"")
+                    .body(resource);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /*파일 읽기*/

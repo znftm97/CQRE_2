@@ -143,7 +143,7 @@ public class PostController {
     }
 
     /*글 읽기 페이지*/
-    @GetMapping("/post/readPost/{postId}")
+    @GetMapping("/post/{postId}/readPost")
     public String readFreePost(@PathVariable("postId") Long postId, Model model){
         /*글 조회*/
         ReadPostDto readPostDto = postService.readPost(postId);

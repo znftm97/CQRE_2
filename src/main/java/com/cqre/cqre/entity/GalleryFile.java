@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class GalleryFile extends BaseEntity{
 
     @Id @GeneratedValue
-    @Column(name = "glleryfile_id")
+    @Column(name = "galleryfile_id")
     private Long id;
 
     private String title;

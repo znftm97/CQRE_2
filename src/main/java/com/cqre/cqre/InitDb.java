@@ -1,5 +1,6 @@
 package com.cqre.cqre;
 
+import com.cqre.cqre.entity.GalleryFile;
 import com.cqre.cqre.entity.User;
 import com.cqre.cqre.entity.post.Board;
 import com.cqre.cqre.entity.post.Post;
@@ -51,86 +52,16 @@ public class InitDb {
             em.persist(user1);
             em.persist(user2);
 
-            Post post1 = Post.builder()
-                    .title("1111")
-                    .content("ssadasd")
-                    .postViews(0)
-                    .recommendation(0)
-                    .user(user1)
-                    .board(Board.FREE)
-                    .build();
+            Post post1 = createPost("1111", "1111", 0, 0, user1, Board.FREE);
+            Post post2 = createPost("2222", "2222", 0, 0, user1, Board.FREE);
+            Post post3 = createPost("3333", "3333", 0, 0, user1, Board.FREE);
+            Post post4 = createPost("4444", "4444", 0, 0, user1, Board.FREE);
+            Post post5 = createPost("5555", "5555", 0, 0, user2, Board.FREE);
+            Post post6 = createPost("6666", "6666", 0, 0, user2, Board.FREE);
+            Post post7 = createPost("7777", "7777", 0, 0, user2, Board.FREE);
+            Post post8 = createPost("1111", "1111", 0, 0, user2, Board.NOTICE);
+            Post post9 = createPost("2222", "2222", 0, 0, user2, Board.NOTICE);
 
-            Post post2 = Post.builder()
-                    .title("2222")
-                    .content("ssadasd")
-                    .postViews(0)
-                    .recommendation(0)
-                    .user(user1)
-                    .board(Board.FREE)
-                    .build();
-
-            Post post3 = Post.builder()
-                    .title("3333")
-                    .content("ssadasd")
-                    .postViews(0)
-                    .recommendation(0)
-                    .user(user1)
-                    .board(Board.FREE)
-                    .build();
-
-            Post post4 = Post.builder()
-                    .title("4444")
-                    .content("ssadasd")
-                    .postViews(0)
-                    .recommendation(0)
-                    .user(user2)
-                    .board(Board.FREE)
-                    .build();
-
-            Post post5 = Post.builder()
-                    .title("5555")
-                    .content("ssadasd")
-                    .postViews(0)
-                    .recommendation(0)
-                    .user(user2)
-                    .board(Board.FREE)
-                    .build();
-
-            Post post6 = Post.builder()
-                    .title("6666")
-                    .content("ssadasd")
-                    .postViews(0)
-                    .recommendation(0)
-                    .user(user2)
-                    .board(Board.FREE)
-                    .build();
-
-            Post post7 = Post.builder()
-                    .title("7777")
-                    .content("ssadasd")
-                    .postViews(0)
-                    .recommendation(0)
-                    .user(user2)
-                    .board(Board.FREE)
-                    .build();
-
-            Post post8 = Post.builder()
-                    .title("1111")
-                    .content("ssadasd")
-                    .postViews(0)
-                    .recommendation(0)
-                    .user(user2)
-                    .board(Board.NOTICE)
-                    .build();
-
-            Post post9 = Post.builder()
-                    .title("2222")
-                    .content("ssadasd")
-                    .postViews(0)
-                    .recommendation(0)
-                    .user(user2)
-                    .board(Board.NOTICE)
-                    .build();
 
             em.persist(post1);
             em.persist(post2);
@@ -143,6 +74,25 @@ public class InitDb {
             em.persist(post9);
         }
 
+        private Post createPost(String title, String content, int postVies, int recommendation, User user, Board board){
+            return Post.builder()
+                    .title(title)
+                    .content(content)
+                    .postViews(postVies)
+                    .recommendation(recommendation)
+                    .user(user)
+                    .board(board)
+                    .build();
+        }
+
+        private GalleryFile createGalleryFile(String title, String originFilename, Long bundleId, Long bundleOrder) {
+            return GalleryFile.builder()
+                    .title(title)
+                    .originFilename(originFilename)
+                    .bundleId(bundleId)
+                    .bundleOrder(bundleOrder)
+                    .build();
+        }
 
 
 
