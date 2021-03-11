@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -85,7 +88,19 @@ public class GalleryService {
     /*갤러리 상세 조회 페이지*/
     public Page<FindGalleryFileDetailDto> findGalleryFiles(Pageable pageable, Long bundleId){
         return galleryRepository
-                .findGalleryFileByBundleId(bundleId, pageable)
+                .findGalleryFileByBundleIdPaging(bundleId, pageable)
                 .map(g -> new FindGalleryFileDetailDto(g));
+    }
+
+    /*삭제*/
+    @Transactional
+    public void galleryFileDelete(Long bundleId){
+        List<GalleryFile> findGalleryFiles = galleryRepository.findGalleryFileByBundleId(bundleId);
+
+        List<Long> GalleryFileIds = findGalleryFiles.stream()
+                .map(g -> g.getId())
+                .collect(Collectors.toList());
+
+        galleryRepository.deleteAllByIdInQuery(GalleryFileIds);
     }
 }

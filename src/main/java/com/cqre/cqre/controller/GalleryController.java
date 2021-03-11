@@ -61,4 +61,11 @@ public class GalleryController {
 
         return "/gallery/galleryView";
     }
+
+    /*삭제*/
+    @PostMapping("/gallery/delete")
+    public String galleryDelete(Long bundleId){
+        galleryService.galleryFileDelete(bundleId);
+        return "redirect:/gallery";
+
 }
