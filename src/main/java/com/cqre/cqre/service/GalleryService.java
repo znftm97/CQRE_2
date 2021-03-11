@@ -1,7 +1,8 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.dto.CreateGalleryDto;
-import com.cqre.cqre.dto.FindGalleryFileDto;
+import com.cqre.cqre.dto.gallery.CreateGalleryDto;
+import com.cqre.cqre.dto.gallery.FindGalleryFileDetailDto;
+import com.cqre.cqre.dto.gallery.FindGalleryFileDto;
 import com.cqre.cqre.entity.GalleryFile;
 import com.cqre.cqre.entity.User;
 import com.cqre.cqre.exception.customexception.CGalleryFileIsNotImage;
@@ -14,8 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -79,7 +78,14 @@ public class GalleryService {
     }
 
     /*갤러리 파일 중복 제거 조회*/
-    public Page<FindGalleryFileDto> findGalleryFiles(Pageable pageable){
+    public Page<FindGalleryFileDto> findGalleryFilesDistinct(Pageable pageable){
         return galleryRepository.findAllDistinctByBundleId(pageable);
+    }
+
+    /*갤러리 상세 조회 페이지*/
+    public Page<FindGalleryFileDetailDto> findGalleryFiles(Pageable pageable, Long bundleId){
+        return galleryRepository
+                .findGalleryFileByBundleId(bundleId, pageable)
+                .map(g -> new FindGalleryFileDetailDto(g));
     }
 }

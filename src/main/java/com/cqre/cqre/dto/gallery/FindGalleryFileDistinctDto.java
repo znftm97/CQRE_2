@@ -1,4 +1,4 @@
-package com.cqre.cqre.dto;
+package com.cqre.cqre.dto.gallery;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;

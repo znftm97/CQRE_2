@@ -55,37 +55,12 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <div class="btnBox">
             <button class="btn btn-success">수정</button>
             <button class="btn btn-danger">삭제</button>
-            <h2>제목 샬라샬라</h2>
+            <h2 th:text="${title}"></h2>
         </div>
         <div class="row photos">
-            <div class="col-sm-6 col-md-3 col-lg-4 item">
-                <a href="/images/board.jpg" data-lightbox="photos">
-                    <img class="img-fluid" src="/images/board.jpg">
-                </a>
-            </div>
-            <div class="col-sm-6 col-md-3 col-lg-4 item">
-                <a href="/images/board.jpg" data-lightbox="photos">
-                    <img class="img-fluid" src="/images/board.jpg">
-                </a>
-            </div>
-            <div class="col-sm-6 col-md-3 col-lg-4 item">
-                <a href="/images/board.jpg" data-lightbox="photos">
-                    <img class="img-fluid" src="/images/board.jpg">
-                </a>
-            </div>
-            <div class="col-sm-6 col-md-3 col-lg-4 item">
-                <a href="/images/board.jpg" data-lightbox="photos">
-                    <img class="img-fluid" src="/images/board.jpg">
-                </a>
-            </div>
-            <div class="col-sm-6 col-md-3 col-lg-4 item">
-                <a href="/images/board.jpg" data-lightbox="photos">
-                    <img class="img-fluid" src="/images/board.jpg">
-                </a>
-            </div>
-            <div class="col-sm-6 col-md-3 col-lg-4 item">
-                <a href="/images/board.jpg" data-lightbox="photos">
-                    <img class="img-fluid" src="/images/board.jpg">
+            <div class="col-sm-6 col-md-3 col-lg-4 item" th:each="galleryFile : ${galleryFiles}">
+                <a th:href="@{'/images/' + ${galleryFile.filename}}" data-lightbox="photos">
+                    <img class="img-fluid" th:src="@{'/images/' + ${galleryFile.filename}}" />
                 </a>
             </div>
         </div>
@@ -93,37 +68,39 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
     <!--paging-->
     <nav style="text-align: center;">
-        <ul class="pagination justify-content-center">
+        <ul class="pagination justify-content-center"
+            th:with="start=${T(Math).floor(galleryFiles.number/10)*10 + 1},
+                    last=(${start + 9 < galleryFiles.totalPages ? start + 9 : galleryFiles.totalPages})">
 
             <!--  first  -->
             <li class="page-item">
-                <a class="page-link"  aria-label="First">
+                <a class="page-link" th:href="@{'/galleryView/' + ${bundleId}(page=0)}" aria-label="First">
                     <span aria-hidden="true">First</span>
                 </a>
             </li>
 
             <!--  <  -->
             <li class="page-item">
-                <a class="page-link" aria-label="Previous" >
+                <a class="page-link" th:href="${galleryFiles.first} ? '#' :@{'/galleryView/' + ${bundleId}(page=${galleryFiles.number - 1})}" aria-label="Previous" >
                     <span aria-hidden="true">&lt;</span>
                 </a>
             </li>
 
             <!--  1,2,3  -->
-            <li class="page-item">
-                <a class="page-link"></a>
+            <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == galleryFiles.number + 1} ? 'page-item active'">
+                <a class="page-link" th:text="${page}" th:href="@{'/galleryView/' + ${bundleId}(page=${page - 1})}"></a>
             </li>
 
             <!--  > -->
-            <li class="page-item">
-                <a class="page-link" aria-label="Next">
+            <li class="page-item" th:class="${galleryFiles.last} ? 'disabled'">
+                <a class="page-link" th:href="${galleryFiles.last} ? '#' : @{'/galleryView/' + ${bundleId}(page=${galleryFiles.number + 1})}" aria-label="Next">
                     <span aria-hidden="true">&gt;</span>
                 </a>
             </li>
 
             <!--  Last  -->
             <li class="page-item">
-                <a class="page-link" aria-label="Last">
+                <a class="page-link" th:href="@{'/galleryView/' + ${bundleId}(page=${galleryFiles.totalPages - 1})}" aria-label="Last">
                     <span aria-hidden="true">Last</span>
                 </a>
             </li>

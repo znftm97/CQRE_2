@@ -64,7 +64,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <div class="list">
                 <div class="topPic">
                     <li th:each = "galleryFile : ${galleryFiles}">
-                        <a th:href="@{/galleryView}">
+                        <a th:href="@{/galleryView/{bundleId} (bundleId=${galleryFile.bundleId})}">
                             <img th:src="@{/images/instagramFrame.png}"/>
                             <img th:src="@{'/images/' + ${galleryFile.filename}}"/>
                         </a>
