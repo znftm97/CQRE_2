@@ -8,6 +8,8 @@ import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
 import com.cqre.cqre.repository.comment.CommentRepository;
 import com.cqre.cqre.repository.post.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -84,5 +86,11 @@ public class CommentService {
                 .build();
 
         commentRepository.save(comment);
+    }
+
+    /*내 댓글 조회*/
+    public Page<MyCommentDto> myComments(Pageable pageable){
+        Page<Comment> findComments = commentRepository.findCommentByUserId(userService.getLoginUser().getId(), true, pageable);
+        return findComments.map(c -> new MyCommentDto(c));
     }
 }

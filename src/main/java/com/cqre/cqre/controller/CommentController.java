@@ -3,7 +3,11 @@ package com.cqre.cqre.controller;
 import com.cqre.cqre.dto.comment.*;
 import com.cqre.cqre.service.CommentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,5 +51,13 @@ public class CommentController {
     @ResponseBody
     public void createReComment(@RequestBody CreateReCommentDto createReCommentDto){
         commentService.createReComment(createReCommentDto);
+    }
+
+    /*내 댓글*/
+    @GetMapping("/commentList")
+    public String commentList(Model model, @PageableDefault(size = 5, sort = "id") Pageable pageable){
+        Page<MyCommentDto> myCommentDtos = commentService.myComments(pageable);
+        model.addAttribute("commentList", myCommentDtos);
+        return "/comment/commentList";
     }
 }

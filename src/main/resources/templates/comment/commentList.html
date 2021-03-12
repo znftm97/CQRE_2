@@ -76,80 +76,56 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <!--table-->
             <table class="table table-hover table-dark">
                 <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
+                    <tr>
+                        <th scope="col">댓글 내용</th>
+                        <th scope="col">글 제목</th>
+                        <th scope="col">작성일</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                    <tr th:each="comment, state : ${commentList}">
+                        <td th:text="${comment.content}"></td>
+                        <td th:text="${comment.title}"></td>
+                        <td>[[${#temporals.format(comment.createDate, 'yyyy-MM-dd일 hh:mm분')}]]</td>
+                    </tr>
                 </tbody>
             </table><!--table-->
 
             <!--paging-->
             <nav style="text-align: center;">
-                <ul class="pagination justify-content-center">
+                <ul class="pagination justify-content-center"
+                    th:with="start=${T(Math).floor(commentList.number/10)*10 + 1},
+                    last=(${start + 9 < commentList.totalPages ? start + 9 : commentList.totalPages})">
 
                     <!--  first  -->
                     <li class="page-item">
-                        <a class="page-link"  aria-label="First">
+                        <a class="page-link" th:href="@{/commentList(page=0)}" aria-label="First">
                             <span aria-hidden="true">First</span>
                         </a>
                     </li>
 
                     <!--  <  -->
                     <li class="page-item">
-                        <a class="page-link" aria-label="Previous" >
+                        <a class="page-link" th:href="${commentList.first} ? '#' :@{/commentList(page=${commentList.number - 1})}" aria-label="Previous" >
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
                     <!--  1,2,3  -->
-                    <li class="page-item">
-                        <a class="page-link"></a>
+                    <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == commentList.number + 1} ? 'page-item active'">
+                        <a class="page-link" th:text="${page}" th:href="@{/commentList(page=${page - 1})}"></a>
                     </li>
 
                     <!--  > -->
-                    <li class="page-item">
-                        <a class="page-link" aria-label="Next">
+                    <li class="page-item" th:class="${commentList.last} ? 'disabled'">
+                        <a class="page-link" th:href="${commentList.last} ? '#' : @{/commentList(page=${commentList.number + 1})}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
 
                     <!--  Last  -->
                     <li class="page-item">
-                        <a class="page-link" aria-label="Last">
+                        <a class="page-link" th:href="@{/commentList(page=${commentList.totalPages - 1})}" aria-label="Last">
                             <span aria-hidden="true">Last</span>
                         </a>
                     </li>
