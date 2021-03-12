@@ -67,5 +67,5 @@ public class GalleryController {
     public String galleryDelete(Long bundleId){
         galleryService.galleryFileDelete(bundleId);
         return "redirect:/gallery";
-
+    }
 }

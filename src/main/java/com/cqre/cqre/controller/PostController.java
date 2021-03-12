@@ -203,4 +203,11 @@ public class PostController {
         }
     }
 
+    @GetMapping("/postList")
+    public String postList(Model model, @PageableDefault(size=5, sort = "id") Pageable pageable){
+        Page<ListPostDto> listPostDtos = postService.myPost(pageable);
+        model.addAttribute("listPostDtos", listPostDtos);
+        return "/post/postList";
+    }
+
 }

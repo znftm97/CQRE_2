@@ -76,80 +76,60 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <!--table-->
             <table class="table table-hover table-dark">
                 <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">추천수</th>
+                        <th scope="col">조회수</th>
+                        <th scope="col">작성일</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                    <tr th:each="post, state : ${listPostDtos}">
+                        <th scope="row">[[${state.count}]]</th>
+                        <td th:text="${post.title}"></td>
+                        <td th:text="${post.recommendation}"></td>
+                        <td th:text="${post.postViews}"></td>
+                        <td>[[${#temporals.format(post.createDate, 'yyyy-MM-dd일 hh:mm분')}]]</td>
+                    </tr>
                 </tbody>
             </table><!--table-->
 
             <!--paging-->
             <nav style="text-align: center;">
-                <ul class="pagination justify-content-center">
+                <ul class="pagination justify-content-center"
+                    th:with="start=${T(Math).floor(listPostDtos.number/10)*10 + 1},
+                    last=(${start + 9 < listPostDtos.totalPages ? start + 9 : listPostDtos.totalPages})">
 
                     <!--  first  -->
                     <li class="page-item">
-                        <a class="page-link"  aria-label="First">
+                        <a class="page-link" th:href="@{/postList(page=0)}" aria-label="First">
                             <span aria-hidden="true">First</span>
                         </a>
                     </li>
 
                     <!--  <  -->
                     <li class="page-item">
-                        <a class="page-link" aria-label="Previous" >
+                        <a class="page-link" th:href="${listPostDtos.first} ? '#' :@{/postList(page=${listPostDtos.number - 1})}" aria-label="Previous" >
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
                     <!--  1,2,3  -->
-                    <li class="page-item">
-                        <a class="page-link"></a>
+                    <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == listPostDtos.number + 1} ? 'page-item active'">
+                        <a class="page-link" th:text="${page}" th:href="@{/postList(page=${page - 1})}"></a>
                     </li>
 
                     <!--  > -->
-                    <li class="page-item">
-                        <a class="page-link" aria-label="Next">
+                    <li class="page-item" th:class="${listPostDtos.last} ? 'disabled'">
+                        <a class="page-link" th:href="${listPostDtos.last} ? '#' : @{/postList(page=${listPostDtos.number + 1})}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
 
                     <!--  Last  -->
                     <li class="page-item">
-                        <a class="page-link" aria-label="Last">
+                        <a class="page-link" th:href="@{/postList(page=${listPostDtos.totalPages - 1})}" aria-label="Last">
                             <span aria-hidden="true">Last</span>
                         </a>
                     </li>

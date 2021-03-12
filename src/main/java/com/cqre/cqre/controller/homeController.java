@@ -31,11 +31,6 @@ public class homeController {
         return "/coupon/myCouponList";
     }
 
-    @GetMapping("/postList")
-    public String postList(){
-        return "/post/postList";
-    }
-
     @GetMapping("/commentList")
     public String commentList(){
         return "/comment/commentList";

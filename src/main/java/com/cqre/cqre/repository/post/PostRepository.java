@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Long>, PostRepositoryCustom {
@@ -18,6 +19,9 @@ public interface PostRepository extends JpaRepository<Post, Long>, PostRepositor
     /*정상 동작*/
     @Query(value = "select p from Post p join fetch p.user where p.board = :board", countQuery = "select count(p.id) from Post p where p.board = :board")
     Page<Post> findPostByBoard(@Param("board") Board board, Pageable pageable);
+
+    @Query("select p from Post p where p.user.id = :userId")
+    Page<Post> findPostByUserId(@Param("userId") Long userId, Pageable pageable);
 
     /*에러*/
     /*@Query(value = "select p from Post p join fetch p.user where p.board = :board")
