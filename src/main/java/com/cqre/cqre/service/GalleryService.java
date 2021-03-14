@@ -87,9 +87,16 @@ public class GalleryService {
 
     /*갤러리 상세 조회 페이지*/
     public Page<FindGalleryFileDetailDto> findGalleryFiles(Pageable pageable, Long bundleId){
-        return galleryRepository
-                .findGalleryFileByBundleIdPaging(bundleId, pageable)
-                .map(g -> new FindGalleryFileDetailDto(g));
+        Page<GalleryFile> findGalleryFiles = galleryRepository.findGalleryFileByBundleIdPaging(bundleId, pageable);
+
+        Long loginUserId = userService.getLoginUser().getId();
+        Long galleryFileCreatorUserId = findGalleryFiles.getContent().get(0).getUser().getId();
+
+        if (loginUserId.equals(galleryFileCreatorUserId)) {
+            return findGalleryFiles.map(g -> new FindGalleryFileDetailDto(g, "true"));
+        }else {
+            return findGalleryFiles.map(g -> new FindGalleryFileDetailDto(g, "false"));
+        }
     }
 
     /*삭제*/

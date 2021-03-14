@@ -54,7 +54,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     <div class="galleryBox">
         <div class="btnBox">
             <form method="post" th:action="@{/gallery/delete}">
-                <button class="btn btn-danger">삭제</button>
+                <button class="btn btn-danger" th:if="${authorCheck} == 'true'" >삭제</button>
                 <input type="hidden" name="bundleId" th:value="${bundleId}">
             </form>
             <h2 th:text="${title}"></h2>

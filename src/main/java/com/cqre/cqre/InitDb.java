@@ -52,6 +52,7 @@ public class InitDb {
             em.persist(user1);
             em.persist(user2);
 
+            /**/
             Post post1 = createPost("1111", "1111", 0, 0, user1, Board.FREE);
             Post post2 = createPost("2222", "2222", 0, 0, user1, Board.FREE);
             Post post3 = createPost("3333", "3333", 0, 0, user1, Board.FREE);
@@ -62,7 +63,6 @@ public class InitDb {
             Post post8 = createPost("1111", "1111", 0, 0, user2, Board.NOTICE);
             Post post9 = createPost("2222", "2222", 0, 0, user2, Board.NOTICE);
 
-
             em.persist(post1);
             em.persist(post2);
             em.persist(post3);
@@ -72,6 +72,38 @@ public class InitDb {
             em.persist(post7);
             em.persist(post8);
             em.persist(post9);
+
+            /**/
+            String filename1 = "111.jpg";
+            String filename2 = "222.png";
+            String filename3 = "333.jpg";
+            String filename4 = "444.jpg";
+            String filename5 = "555.jpg";
+            String filename6 = "666.jpg";
+
+            GalleryFile galleryFile1 = createGalleryFile("test", "test", filename1, "test", user2, 1L, 111111L);
+            GalleryFile galleryFile2 = createGalleryFile("test", "test", filename2, "test", user2, 1L, 111111L);
+            GalleryFile galleryFile3 = createGalleryFile("test", "test", filename3, "test", user2, 1L, 111111L);
+            GalleryFile galleryFile4 = createGalleryFile("test", "test", filename2, "test", user2, 2L, 111111L);
+            GalleryFile galleryFile5 = createGalleryFile("test", "test", filename3, "test", user2, 2L, 111111L);
+            GalleryFile galleryFile6 = createGalleryFile("test", "test", filename4, "test", user2, 2L, 111111L);
+            GalleryFile galleryFile7 = createGalleryFile("test", "test", filename3, "test", user2, 3L, 111111L);
+            GalleryFile galleryFile8 = createGalleryFile("test", "test", filename4, "test", user1, 4L, 111111L);
+            GalleryFile galleryFile9 = createGalleryFile("test", "test", filename5, "test", user1, 5L, 111111L);
+            GalleryFile galleryFile10 = createGalleryFile("test", "test", filename6, "test", user1, 6L, 111111L);
+            GalleryFile galleryFile11 = createGalleryFile("test", "test", filename6, "test", user1, 7L, 111111L);
+
+            em.persist(galleryFile1);
+            em.persist(galleryFile2);
+            em.persist(galleryFile3);
+            em.persist(galleryFile4);
+            em.persist(galleryFile5);
+            em.persist(galleryFile6);
+            em.persist(galleryFile7);
+            em.persist(galleryFile8);
+            em.persist(galleryFile9);
+            em.persist(galleryFile10);
+            em.persist(galleryFile11);
         }
 
         private Post createPost(String title, String content, int postVies, int recommendation, User user, Board board){
@@ -85,10 +117,13 @@ public class InitDb {
                     .build();
         }
 
-        private GalleryFile createGalleryFile(String title, String originFilename, Long bundleId, Long bundleOrder) {
+        private GalleryFile createGalleryFile(String title, String originFilename, String filename, String filepath, User user, Long bundleId, Long bundleOrder) {
             return GalleryFile.builder()
                     .title(title)
+                    .filename(filename)
+                    .filePath(filepath)
                     .originFilename(originFilename)
+                    .user(user)
                     .bundleId(bundleId)
                     .bundleOrder(bundleOrder)
                     .build();

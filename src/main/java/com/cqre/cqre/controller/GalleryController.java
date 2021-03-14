@@ -55,9 +55,13 @@ public class GalleryController {
         Page<FindGalleryFileDetailDto> galleryFiles = galleryService.findGalleryFiles(pageable, bundleId);
 
         String title = galleryFiles.getContent().get(0).getTitle();
+        String authorCheck = galleryFiles.getContent().get(0).getAuthorCheck();
+
+        /*나중에 title, bundleId, authorCheck 를 포함하는 DTO하나 만들자*/
         model.addAttribute("galleryFiles", galleryFiles);
         model.addAttribute("title", title);
         model.addAttribute("bundleId", bundleId);
+        model.addAttribute("authorCheck", authorCheck);
 
         return "/gallery/galleryView";
     }
