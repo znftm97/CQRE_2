@@ -1,8 +1,8 @@
 package com.cqre.cqre.entity.shop.item;
 
 import com.cqre.cqre.entity.BaseEntity;
+import com.cqre.cqre.entity.shop.Category;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,4 +25,8 @@ public abstract class Item extends BaseEntity {
     private int price;
 
     private int stockQuantity;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
 }
