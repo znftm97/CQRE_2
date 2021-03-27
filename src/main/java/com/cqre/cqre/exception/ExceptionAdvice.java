@@ -1,6 +1,6 @@
 package com.cqre.cqre.exception;
 
-import com.cqre.cqre.exception.customexception.CGalleryFileIsNotImage;
+import com.cqre.cqre.exception.customexception.CFileIsNotImage;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
 import com.cqre.cqre.exception.customexception.user.*;
 import lombok.RequiredArgsConstructor;
@@ -64,7 +64,7 @@ public class ExceptionAdvice {
         return "/home/home";
     }
 
-    @ExceptionHandler(CGalleryFileIsNotImage.class)
+    @ExceptionHandler(CFileIsNotImage.class)
     protected String notImageFile(Model model){
         model.addAttribute("notImageFile", "true");
         return "/gallery/createGallery";

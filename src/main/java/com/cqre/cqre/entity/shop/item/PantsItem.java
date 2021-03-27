@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class DailyNecessity extends Item{
+public class PantsItem extends Item {
 
-    private String manufacturer;
-    private String lifeSpan;
+    private int length;
+    private int circumferenceLength;
 }

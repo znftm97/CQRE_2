@@ -17,6 +17,37 @@
   background-size: 100% 100%;
   opacity: 0.8; }
 
+#categoryBox {
+  float: left;
+  width: 270px;
+  border-right: 1px solid #b2b2b2;
+  border-top: 1px solid #b2b2b2;
+  margin-top: 70px; }
+  #categoryBox > div {
+    border-bottom: 1px solid #b2b2b2;
+    width: 270px;
+    height: 200px; }
+  #categoryBox a {
+    text-decoration: none;
+    color: black; }
+  #categoryBox .categoryTitle {
+    padding-bottom: 10px;
+    text-align: center;
+    margin-top: 10px; }
+    #categoryBox .categoryTitle span {
+      font-size: 20px; }
+    #categoryBox .categoryTitle span:first-child {
+      font-weight: bold;
+      color: #4e9bff; }
+    #categoryBox .categoryTitle span:last-child {
+      text-decoration: none solid #b2b2b2;
+      color: #b2b2b2; }
+  #categoryBox ul {
+    margin-top: 20px; }
+    #categoryBox ul li {
+      list-style: none;
+      padding-bottom: 8px; }
+
 #tableBox {
   width: 70%;
   margin: 0 auto;

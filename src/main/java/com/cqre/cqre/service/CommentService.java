@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class CommentService {
-    Long bundleId= 1L;
+    private Long bundleId= 1L;
 
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;

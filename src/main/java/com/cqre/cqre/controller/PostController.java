@@ -173,7 +173,7 @@ public class PostController {
         CreateAndUpdatePostDto createAndUpdatePostDto = postService.updatePostPage(postId);
         model.addAttribute("createAndUpdatePostDto", createAndUpdatePostDto);
 
-        
+
         if (createAndUpdatePostDto.getBoard() == Board.FREE) {
             return "/post/updatePostFree";
         }else {
@@ -203,6 +203,7 @@ public class PostController {
         }
     }
 
+    /*내가 쓴 글 조회*/
     @GetMapping("/postList")
     public String postList(Model model, @PageableDefault(size=5, sort = "id") Pageable pageable){
         Page<ListPostDto> listPostDtos = postService.myPost(pageable);

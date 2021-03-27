@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>createItem</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrinkto-fit=no">
+    <!-- Bootstrap CSS , jQuery-->
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" integrity="sha384-
+ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <script th:src="@{/js/jquery-3.5.1.min.js}"> </script>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/common/fragments.css}">
+    <link rel="stylesheet" th:href="@{/css/common/infoCommon.css}">
+    <link rel="stylesheet" th:href="@{/css/board/freeCreate.css}">
+
+</head>
+<body>
+<div class="containerCustom">
+    <div th:replace="fragments/top :: top"/>
+
+    <div class="boardTitle">
+        <h2>상품 등록</h2>
+    </div>
+
+    <form role="form" method="post" enctype="multipart/form-data" th:action="@{/createItem}">
+        <div class="form-group">
+            <label th:for="title"><strong>상품명</strong></label>
+            <input name="itemName" type="text" class="form-control" placeholder="상품명을 입력하세요">
+        </div>
+        <div class="form-group">
+            <label th:for="title"><strong>상품설명</strong></label>
+            <input name="itemExplanation" type="text" class="form-control" placeholder="상품설명을 입력하세요">
+        </div>
+        <div class="form-group">
+            <label th:for="title"><strong>금액</strong></label>
+            <input name="price" type="text" class="form-control" placeholder="금액을 입력하세요">
+        </div>
+        <div class="form-group">
+            <label th:for="title"><strong>재고</strong></label>
+            <input name="stockCount" type="text" class="form-control" placeholder="재고 수량을 입력하세요">
+        </div>
+        <select name="categorySelect">
+            <option>카테고리 선택</option>
+            <option value="1-1">반팔 티셔츠</option>
+            <option value="1-2">긴팔 티셔츠</option>
+            <option value="1-3">셔츠/블라우스</option>
+            <option value="2-1">코튼팬츠</option>
+            <option value="2-2">데님팬츠</option>
+            <option value="2-3">레깅스</option>
+            <option value="3-1">운동화</option>
+            <option value="3-2">구두</option>
+            <option value="3-3">샌들</option>
+        </select>
+        <select name="gender">
+            <option>성별 선택</option>
+            <option value="MEN">남성용</option>
+            <option value="WOMEN">여성용</option>
+            <option value="PUBLIC">공용</option>
+        </select>
+
+        <div class="form-group">
+            <label th:for="inputFile"><strong>첨부 사진</strong></label>
+            <div class="col-sm-10">
+                <div class="custom-file" id="inputFile">
+                    <input multiple="multiple" name="file" type="file" class="custom-file-input" id="file">
+                    <label class="custom-file-label" for="file">사진 선택</label>
+                </div>
+            </div>
+            <p> </p>
+            <strong>파일명</strong>
+            <div class="zero" id="zero"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+<script th:inline="javascript">
+    $(".custom-file-input").on("change", function() {
+        var files=$('input[name="file"]')[0].files;
+
+        for(var i= 0; i<files.length; i++){
+            var p = document.createElement('p');
+            var text = document.createTextNode(i+1 + ". " + files[i].name);
+            p.appendChild(text);
+
+            document.getElementById('zero').appendChild(p);
+        }
+    });
+
+    let notImageFile = [[${notImageFile}]];
+    if (notImageFile == "true") {
+        alert("이미지 파일만 업로드 가능합니다.")
+    }
+
+</script>
+</body>
+</html>

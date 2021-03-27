@@ -51,16 +51,6 @@ public class homeController {
         return "/user/updatePassword";
     }
 
-    @GetMapping("/shop")
-    public String shop(){
-        return "/shop/shop";
-    }
-
-    @GetMapping("/createOrder")
-    public String createOrder(){
-        return "/order/createOrder";
-    }
-
     @GetMapping("/couponList")
     public String couponList(){
         return "/coupon/couponList";
@@ -69,11 +59,6 @@ public class homeController {
     @GetMapping("/createCoupon")
     public String createCoupon(){
         return "/coupon/createCoupon";
-    }
-
-    @GetMapping("/selectItemType")
-    public String selectItemType(){
-        return "/item/selectItemType";
     }
 
     @GetMapping("/createBook")

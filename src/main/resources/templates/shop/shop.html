@@ -42,6 +42,92 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             </ul>
         </div><!--lnb-->
 
+        <div id="categoryBox">
+            <div>
+                <div class="categoryTitle">
+                    <a href="#">
+                        <span>상의</span>
+                        <span> - Top</span>
+                    </a>
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            <a>
+                                <span>반팔 티셔츠</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>긴팔 티셔츠</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>셔츠/블라우스</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <div class="categoryTitle">
+                    <a href="#">
+                        <span>하의 -</span>
+                        <span>Pants</span>
+                    </a>
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            <a>
+                                <span>코튼 팬츠</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>데님 팬츠</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>레깅스</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div><!--top-->
+
+            <div>
+                <div class="categoryTitle">
+                    <a href="#">
+                        <span>신발 -</span>
+                        <span>shoes</span>
+                    </a>
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            <a>
+                                <span>운동화</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>구두</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>샌들</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div><!--top-->
+        </div><!--categoryBox-->
+
         <div id="tableBox">
             <!--searchBox-->
             <div class="searchBox">
@@ -62,7 +148,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             </div><!--searchBox-->
 
             <div class="buttonBoxShop">
-                <a class="btn btn-primary mb-2" th:href="@{/selectItemType}">상품 등록</a>
+                <a class="btn btn-primary mb-2" th:href="@{/createItem}">상품 등록</a>
                 <a class="btn btn-primary mb-2" th:href="@{/createCoupon}">쿠폰 생성</a>
                 <a class="btn btn-primary mb-2" th:href="@{/couponList}">쿠폰 목록</a>
             </div>
@@ -78,7 +164,6 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                             <p><strong>상품명안경</strong></p>
                             <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
                             <p>20,000원</p>
-                            <a th:href="@{/createOrder}" class="btn btn-success">주문</a>
                         </div>
                     </li>
                     <li>
@@ -89,7 +174,6 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                             <p><strong>상품명안경</strong></p>
                             <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
                             <p>20,000원</p>
-                            <a th:href="@{/createOrder}" class="btn btn-success">주문</a>
                         </div>
                     </li>
                     <li>
@@ -100,7 +184,6 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                             <p><strong>상품명안경</strong></p>
                             <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
                             <p>20,000원</p>
-                            <a th:href="@{/createOrder}" class="btn btn-success">주문</a>
                         </div>
                     </li>
                 </div><!--topPic-->
@@ -114,7 +197,6 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                             <p><strong>상품명안경</strong></p>
                             <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
                             <p>20,000원</p>
-                            <a th:href="@{/createOrder}" class="btn btn-success">주문</a>
                         </div>
                     </li>
                     <li>
@@ -125,7 +207,6 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                             <p><strong>상품명안경</strong></p>
                             <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
                             <p>20,000원</p>
-                            <a th:href="@{/createOrder}" class="btn btn-success">주문</a>
                         </div>
                     </li>
                     <li>
@@ -136,7 +217,6 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                             <p><strong>상품명안경</strong></p>
                             <p>상품설명가나다라마바사아 물티슈 공드 생 유산균 락토핏 프링글스 컵 칙촉입니다 프로바이오틱스 가나</p>
                             <p>20,000원</p>
-                            <a th:href="@{/createOrder}" class="btn btn-success">주문</a>
                         </div>
                     </li>
                 </div><!--bottomPic-->

@@ -1,4 +1,4 @@
-package com.cqre.cqre.entity.shop;
+package com.cqre.cqre.entity.shop.item;
 
 import lombok.*;
 
@@ -18,5 +18,7 @@ public class Category {
     @Column(name = "category_id")
     private Long id;
 
-    private String categoryName;
+    private String name;
+
+    private String identificationCode;
 }

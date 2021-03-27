@@ -24,9 +24,9 @@ public class OrderItem extends BaseEntity {
 
     private int count;
 
-    @OneToMany
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
-    private List<Item> items = new ArrayList<>();
+    private Item item;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")

@@ -9,8 +9,7 @@ import javax.persistence.Entity;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PcParts extends Item{
+public class ShoesItem extends Item {
 
-    private String usage;
-    private String size;
+    private int stiffHeight;
 }

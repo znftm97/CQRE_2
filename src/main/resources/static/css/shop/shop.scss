@@ -26,6 +26,53 @@ $grayTextColor: #777;
   opacity: 0.8;
 }
 
+#categoryBox{
+  float: left;
+  width: 270px;
+  border-right: 1px solid #b2b2b2;
+  border-top: 1px solid #b2b2b2;
+  margin-top: 70px;
+
+  > div{
+    border-bottom: 1px solid #b2b2b2;
+    width: 270px;
+    height: 200px;
+  }
+
+  a{
+    text-decoration: none;
+    color: black;
+  }
+
+  .categoryTitle{
+    padding-bottom: 10px;
+    text-align: center;
+    margin-top: 10px;
+
+    span{
+      font-size: 20px;
+    }
+    span:first-child{
+      font-weight: bold;
+      color: $blueLightColor;
+    }
+    span:last-child{
+      text-decoration: none solid rgb(178, 178, 178);
+      color: #b2b2b2;
+    }
+  }
+
+  ul{
+    margin-top: 20px;
+
+    li{
+      list-style: none;
+      padding-bottom: 8px;
+    }
+  }
+
+}
+
 #tableBox{
   width: 70%;
   margin: 0 auto;

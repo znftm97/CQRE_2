@@ -4,6 +4,7 @@ import com.cqre.cqre.entity.GalleryFile;
 import com.cqre.cqre.entity.User;
 import com.cqre.cqre.entity.post.Board;
 import com.cqre.cqre.entity.post.Post;
+import com.cqre.cqre.entity.shop.item.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,7 @@ public class InitDb {
     @PostConstruct
     public void init(){
         initService.init();
+        initService.categoryInit();
     }
 
     @Component
@@ -52,7 +54,7 @@ public class InitDb {
             em.persist(user1);
             em.persist(user2);
 
-            /**/
+            /*post*/
             Post post1 = createPost("1111", "1111", 0, 0, user1, Board.FREE);
             Post post2 = createPost("2222", "2222", 0, 0, user1, Board.FREE);
             Post post3 = createPost("3333", "3333", 0, 0, user1, Board.FREE);
@@ -73,7 +75,7 @@ public class InitDb {
             em.persist(post8);
             em.persist(post9);
 
-            /**/
+            /*galleryFile*/
             String filename1 = "111.jpg";
             String filename2 = "222.png";
             String filename3 = "333.jpg";
@@ -106,6 +108,18 @@ public class InitDb {
             em.persist(galleryFile11);
         }
 
+        public void categoryInit(){
+            em.persist(createCategory("반팔 티셔츠", "1-1"));
+            em.persist(createCategory("긴팔 티셔츠", "1-2"));
+            em.persist(createCategory("셔츠/블라우스", "1-3"));
+            em.persist(createCategory("코튼 팬츠", "2-1"));
+            em.persist(createCategory("데님 팬츠", "2-2"));
+            em.persist(createCategory("레깅스", "2-3"));
+            em.persist(createCategory("운동화", "3-1"));
+            em.persist(createCategory("구두", "3-2"));
+            em.persist(createCategory("샌들", "3-3"));
+        }
+
         private Post createPost(String title, String content, int postVies, int recommendation, User user, Board board){
             return Post.builder()
                     .title(title)
@@ -130,6 +144,12 @@ public class InitDb {
         }
 
 
+        private Category createCategory(String name, String identificationCode) {
+             return Category.builder()
+                    .name(name)
+                     .identificationCode(identificationCode)
+                    .build();
+        }
 
     }
 }

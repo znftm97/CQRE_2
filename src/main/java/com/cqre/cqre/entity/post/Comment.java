@@ -45,4 +45,8 @@ public class Comment extends BaseEntity {
     public void removeComment(){
         this.existsCheck = false;
     }
+
+    public Long cGetBundleId() {
+        return this.bundleId++;
+    }
 }

@@ -5,7 +5,7 @@ import com.cqre.cqre.dto.gallery.FindGalleryFileDetailDto;
 import com.cqre.cqre.dto.gallery.FindGalleryFileDto;
 import com.cqre.cqre.entity.GalleryFile;
 import com.cqre.cqre.entity.User;
-import com.cqre.cqre.exception.customexception.CGalleryFileIsNotImage;
+import com.cqre.cqre.exception.customexception.CFileIsNotImage;
 import com.cqre.cqre.repository.gallery.GalleryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,7 @@ public class GalleryService {
     @Value("${custom.path.gallery-images}")
     private String savePath;
 
-    Long bundleId = 1L;
+    private Long bundleId = 1L;
 
     /*갤러리 파일 생성*/
     @Transactional
@@ -49,7 +49,7 @@ public class GalleryService {
         /*이미지 파일인지 검사*/
         for (MultipartFile uploadFile : files) {
             if (uploadFile.getContentType().startsWith("image") == false) {
-                throw new CGalleryFileIsNotImage();
+                throw new CFileIsNotImage();
             }
         }
 
