@@ -1,5 +1,6 @@
-package com.cqre.cqre.entity;
+package com.cqre.cqre.entity.shop;
 
+import com.cqre.cqre.entity.BaseEntity;
 import com.cqre.cqre.entity.shop.item.Item;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemImage extends BaseEntity{
+public class ItemImage extends BaseEntity {
 
     @Id
     @GeneratedValue

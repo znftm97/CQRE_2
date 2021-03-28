@@ -1,11 +1,10 @@
 package com.cqre.cqre.entity.shop.item;
 
 import com.cqre.cqre.entity.BaseEntity;
-import com.cqre.cqre.entity.ItemImage;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

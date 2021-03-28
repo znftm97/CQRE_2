@@ -2,8 +2,8 @@ package com.cqre.cqre.repository.gallery;
 
 import com.cqre.cqre.dto.gallery.FindGalleryFileDistinctDto;
 import com.cqre.cqre.dto.gallery.FindGalleryFileDto;
-import com.cqre.cqre.dto.QFindGalleryFileDistinctDto;
-import com.cqre.cqre.dto.QFindGalleryFileDto;
+import com.cqre.cqre.dto.gallery.QFindGalleryFileDistinctDto;
+import com.cqre.cqre.dto.gallery.QFindGalleryFileDto;
 import com.cqre.cqre.entity.QUser;
 import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;

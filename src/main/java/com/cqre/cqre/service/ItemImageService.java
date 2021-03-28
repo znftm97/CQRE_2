@@ -1,6 +1,6 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.entity.ItemImage;
+import com.cqre.cqre.entity.shop.ItemImage;
 import com.cqre.cqre.entity.shop.item.CommonItem;
 import com.cqre.cqre.exception.customexception.CFileIsNotImage;
 import com.cqre.cqre.repository.itemImage.ItemImageRepository;

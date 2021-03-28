@@ -1,10 +1,15 @@
 package com.cqre.cqre;
 
+import com.cqre.cqre.dto.item.CreateItemDto;
 import com.cqre.cqre.entity.GalleryFile;
 import com.cqre.cqre.entity.User;
 import com.cqre.cqre.entity.post.Board;
 import com.cqre.cqre.entity.post.Post;
+import com.cqre.cqre.entity.shop.ItemImage;
 import com.cqre.cqre.entity.shop.item.Category;
+import com.cqre.cqre.entity.shop.item.CommonItem;
+import com.cqre.cqre.entity.shop.item.Item;
+import com.cqre.cqre.entity.shop.item.ItemGender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -109,8 +114,10 @@ public class InitDb {
         }
 
         public void categoryInit(){
-            em.persist(createCategory("반팔 티셔츠", "1-1"));
-            em.persist(createCategory("긴팔 티셔츠", "1-2"));
+            Category category1 = createCategory("반팔 티셔츠", "1-1");
+            Category category2 = createCategory("긴팔 티셔츠", "1-2");
+            em.persist(category1);
+            em.persist(category2);
             em.persist(createCategory("셔츠/블라우스", "1-3"));
             em.persist(createCategory("코튼 팬츠", "2-1"));
             em.persist(createCategory("데님 팬츠", "2-2"));
@@ -118,7 +125,41 @@ public class InitDb {
             em.persist(createCategory("운동화", "3-1"));
             em.persist(createCategory("구두", "3-2"));
             em.persist(createCategory("샌들", "3-3"));
+
+
+            CommonItem item1 = createItem("1-1", "설명설명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ", "상품1", 10000, 100, "MEN", category1);
+            CommonItem item2 = createItem("1-1", "설명설명~~~", "상품2", 10000, 100, "MEN", category1);
+            CommonItem item3 = createItem("1-1", "설명설명~~~", "상품3", 10000, 100, "MEN", category1);
+            CommonItem item4 = createItem("1-2", "설명설명~~~", "상품4", 10000, 100, "WOMEN", category2);
+            CommonItem item5 = createItem("1-2", "설명설명~~~", "상품5", 10000, 100, "WOMEN", category2);
+            CommonItem item6 = createItem("1-2", "설명설명~~~", "상품6", 10000, 100, "PUBLIC", category2);
+            CommonItem item7 = createItem("1-2", "설명설명~~~", "상품7", 10000, 100, "PUBLIC", category2);
+            em.persist(item1);
+            em.persist(item2);
+            em.persist(item3);
+            em.persist(item4);
+            em.persist(item5);
+            em.persist(item6);
+            em.persist(item7);
+
+            String filename1 = "shop111.jpg";
+            String filename2 = "shop222.jpg";
+            String filename3 = "shop333.jpg";
+            String filename4 = "shop444.png";
+            String filename5 = "shop555.jpg";
+            String filename6 = "shop666.jpg";
+
+            em.persist(createItemImage(item1, 1L, filename1, "test", "test"));
+            em.persist(createItemImage(item1, 1L, filename2, "test", "test"));
+            em.persist(createItemImage(item2, 2L, filename2, "test", "test"));
+            em.persist(createItemImage(item2, 2L, filename3, "test", "test"));
+            em.persist(createItemImage(item3, 3L, filename3, "test", "test"));
+            em.persist(createItemImage(item4, 4L, filename4, "test", "test"));
+            em.persist(createItemImage(item5, 5L, filename5, "test", "test"));
+            em.persist(createItemImage(item6, 6L, filename6, "test", "test"));
+            em.persist(createItemImage(item7, 7L, filename6, "test", "test"));
         }
+
 
         private Post createPost(String title, String content, int postVies, int recommendation, User user, Board board){
             return Post.builder()
@@ -151,5 +192,21 @@ public class InitDb {
                     .build();
         }
 
+        private CommonItem createItem(String categorySelect, String itemExplanation, String name, int price, int stockCount, String gender, Category category){
+            CreateItemDto dto = new CreateItemDto(name, itemExplanation, price, stockCount, categorySelect, gender);
+            CommonItem commonItem = new CommonItem();
+            return commonItem.createCommonItem(dto, category);
+        }
+
+        private ItemImage createItemImage(Item item, Long bundleId, String filename, String filePath, String originFilename) {
+            return ItemImage.builder()
+                    .item(item)
+                    .bundleId(bundleId)
+                    .bundleOrder(System.currentTimeMillis())
+                    .filename(filename)
+                    .filePath(filePath)
+                    .originFilename(originFilename)
+                    .build();
+        }
     }
 }
