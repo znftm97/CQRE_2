@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ItemImageService {
@@ -55,5 +58,12 @@ public class ItemImageService {
             }
         }
         bundleId++;
+    }
+
+    public List<String> findItemImageDetail(Long bundleId) {
+        List<ItemImage> findItemImages = itemImageRepository.findItemImageByBundleId(bundleId);
+        return findItemImages.stream()
+                .map(i -> i.getFilename())
+                .collect(Collectors.toList());
     }
 }

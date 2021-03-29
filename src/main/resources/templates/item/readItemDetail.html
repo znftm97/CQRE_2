@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>readItemDetail</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrinkto-fit=no">
+    <!-- Bootstrap CSS , jQuery-->
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" integrity="sha384-
+ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <script th:src="@{/js/jquery-3.5.1.min.js}"> </script>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/common/fragments.css}">
+    <link rel="stylesheet" th:href="@{/css/common/infoCommon.css}">
+    <link rel="stylesheet" th:href="@{/css/shop/shop.css}">
+    <link rel="stylesheet" th:href="@{/css/shop/itemDetail.css}">
+    <!--lightbox2-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+
+</head>
+<body>
+<div class="containerCustom">
+    <div th:replace="fragments/top :: top"/>
+
+    <div class="visual">
+        <h2>
+            <p>shop</p>
+            <p>쇼핑몰</p>
+        </h2>
+    </div>
+
+    <div class="contents">
+        <div class="lnb">
+            <ul>
+                <li>
+                    <a th:href="@{/gallery}">갤러리</a>
+                </li>
+                <li>
+                    <a th:href="@{/shop}">쇼핑몰</a>
+                </li>
+            </ul>
+        </div><!--lnb-->
+
+        <div id="tableBox">
+            <div class="representationImgBox">
+                <img th:src="@{'/images/shop/' + ${itemImageDetail.get(0)}}">
+            </div>
+
+            <div class="itemBox">
+                <div class="itemName">
+                    <h2 th:text="${itemDetail.name}"></h2>
+                </div>
+                <div class="itemInfo">
+                    <div><span th:text="'카테고리 : ' + ${itemDetail.category}"></span></div>
+                    <div><span th:text="'가격 : ' + ${itemDetail.price}"></span></div>
+                    <div><span th:text="'재고 : ' + ${itemDetail.stockCount}"></span></div>
+                    <div><span th:text="'성별 : ' + ${itemDetail.gender}"></span></div>
+                    <div><span>등록일 : </span><span>[[${#temporals.format(itemDetail.createDate, 'yyyy-MM-dd')}]]</span></div>
+                    <div>
+                        <form>
+                            <span>주문개수 </span><input type="text"/>
+                            <button type="submit" class="btn btn-primary">주문</button>
+                            <button type="submit" class="btn btn-success">장바구니 추가</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="imgBox">
+                <ul>
+                    <li th:each="itemImage : ${itemImageDetail}">
+                        <img th:src="@{'/images/shop/' + ${itemImage}}">
+                    </li>
+                </ul>
+            </div>
+        </div><!--tableBox-->
+
+        <div th:replace="fragments/footer :: footer"/>
+    </div><!--contents-->
+</div><!--containerCustom-->
+</body>
+</html>
+

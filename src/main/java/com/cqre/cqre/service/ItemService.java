@@ -1,9 +1,11 @@
 package com.cqre.cqre.service;
 
 import com.cqre.cqre.dto.item.CreateItemDto;
+import com.cqre.cqre.dto.item.FindItemDetailDto;
 import com.cqre.cqre.dto.item.FindItemDto;
 import com.cqre.cqre.entity.shop.item.Category;
 import com.cqre.cqre.entity.shop.item.CommonItem;
+import com.cqre.cqre.entity.shop.item.Item;
 import com.cqre.cqre.repository.Item.ItemRepository;
 import com.cqre.cqre.repository.category.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +36,11 @@ public class ItemService {
     }
 
     public Page<FindItemDto> findItems(Pageable pageable){
-        Page<FindItemDto> itemsWithImagesDistinct = itemRepository.findItemsWithImagesDistinct(pageable);
-        return itemsWithImagesDistinct;
+        return itemRepository.findItemsWithImagesDistinct(pageable);
+    }
+
+    public FindItemDetailDto findItemDetail(Long itemId) {
+        Item findItem = itemRepository.findItemsWithCategory(itemId);
+        return new FindItemDetailDto(findItem);
     }
 }

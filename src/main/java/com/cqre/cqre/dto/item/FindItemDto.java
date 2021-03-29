@@ -1,5 +1,6 @@
 package com.cqre.cqre.dto.item;
 
+import com.cqre.cqre.entity.shop.ItemImage;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 
@@ -14,7 +15,6 @@ public class FindItemDto {
     private Long bundleId;
 
     @QueryProjection
-
     public FindItemDto(Long id, String name, String itemExplanation, int price, String filename, Long bundleId) {
         this.id = id;
         this.name = name;

@@ -1,0 +1,51 @@
+#tableBox{
+  height: 800px;
+
+  .representationImgBox{
+    display: inline-block;
+    float: left;
+    margin-left: 100px;
+
+    img{
+      width: 400px;
+      height: 300px;
+    }
+  }
+
+  .itemBox{
+    width: 700px;
+    height: 300px;
+    display: inline-block;
+    float: right;
+
+    .itemName, .itemInfo{
+      text-align: left;
+    }
+
+    .itemName{
+      border-bottom: 1px solid lightslategray;
+
+    }
+
+    .itemInfo{
+      margin-top: 13px;
+      padding-top: 10px;
+      >div{
+        padding-top: 10px;
+      }
+    }
+  }
+
+  .imgBox{
+    margin-top: 50px;
+    padding-top: 400px;
+    li{
+      list-style: none;
+      display: inline-block;
+    }
+    img{
+      width: 400px;
+      height: 300px;
+    }
+  }
+}

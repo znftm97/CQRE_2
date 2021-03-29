@@ -1,0 +1,34 @@
+#tableBox {
+  height: 800px; }
+  #tableBox .representationImgBox {
+    display: inline-block;
+    float: left;
+    margin-left: 100px; }
+    #tableBox .representationImgBox img {
+      width: 400px;
+      height: 300px; }
+  #tableBox .itemBox {
+    width: 700px;
+    height: 300px;
+    display: inline-block;
+    float: right; }
+    #tableBox .itemBox .itemName, #tableBox .itemBox .itemInfo {
+      text-align: left; }
+    #tableBox .itemBox .itemName {
+      border-bottom: 1px solid lightslategray; }
+    #tableBox .itemBox .itemInfo {
+      margin-top: 13px;
+      padding-top: 10px; }
+      #tableBox .itemBox .itemInfo > div {
+        padding-top: 10px; }
+  #tableBox .imgBox {
+    margin-top: 50px;
+    padding-top: 400px; }
+    #tableBox .imgBox li {
+      list-style: none;
+      display: inline-block; }
+    #tableBox .imgBox img {
+      width: 400px;
+      height: 300px; }
+
+/*# sourceMappingURL=itemDetail.css.map */

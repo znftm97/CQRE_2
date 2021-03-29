@@ -88,17 +88,17 @@ public class InitDb {
             String filename5 = "555.jpg";
             String filename6 = "666.jpg";
 
-            GalleryFile galleryFile1 = createGalleryFile("test", "test", filename1, "test", user2, 1L, 111111L);
-            GalleryFile galleryFile2 = createGalleryFile("test", "test", filename2, "test", user2, 1L, 111111L);
-            GalleryFile galleryFile3 = createGalleryFile("test", "test", filename3, "test", user2, 1L, 111111L);
-            GalleryFile galleryFile4 = createGalleryFile("test", "test", filename2, "test", user2, 2L, 111111L);
-            GalleryFile galleryFile5 = createGalleryFile("test", "test", filename3, "test", user2, 2L, 111111L);
-            GalleryFile galleryFile6 = createGalleryFile("test", "test", filename4, "test", user2, 2L, 111111L);
-            GalleryFile galleryFile7 = createGalleryFile("test", "test", filename3, "test", user2, 3L, 111111L);
-            GalleryFile galleryFile8 = createGalleryFile("test", "test", filename4, "test", user1, 4L, 111111L);
-            GalleryFile galleryFile9 = createGalleryFile("test", "test", filename5, "test", user1, 5L, 111111L);
-            GalleryFile galleryFile10 = createGalleryFile("test", "test", filename6, "test", user1, 6L, 111111L);
-            GalleryFile galleryFile11 = createGalleryFile("test", "test", filename6, "test", user1, 7L, 111111L);
+            GalleryFile galleryFile1 = createGalleryFile("test", "test", filename1, "test", user2, 1000L, 111111L);
+            GalleryFile galleryFile2 = createGalleryFile("test", "test", filename2, "test", user2, 1000L, 111111L);
+            GalleryFile galleryFile3 = createGalleryFile("test", "test", filename3, "test", user2, 1000L, 111111L);
+            GalleryFile galleryFile4 = createGalleryFile("test", "test", filename2, "test", user2, 2000L, 111111L);
+            GalleryFile galleryFile5 = createGalleryFile("test", "test", filename3, "test", user2, 2000L, 111111L);
+            GalleryFile galleryFile6 = createGalleryFile("test", "test", filename4, "test", user2, 2000L, 111111L);
+            GalleryFile galleryFile7 = createGalleryFile("test", "test", filename3, "test", user2, 3000L, 111111L);
+            GalleryFile galleryFile8 = createGalleryFile("test", "test", filename4, "test", user1, 4000L, 111111L);
+            GalleryFile galleryFile9 = createGalleryFile("test", "test", filename5, "test", user1, 5000L, 111111L);
+            GalleryFile galleryFile10 = createGalleryFile("test", "test", filename6, "test", user1, 6000L, 111111L);
+            GalleryFile galleryFile11 = createGalleryFile("test", "test", filename6, "test", user1, 7000L, 111111L);
 
             em.persist(galleryFile1);
             em.persist(galleryFile2);
@@ -149,15 +149,15 @@ public class InitDb {
             String filename5 = "shop555.jpg";
             String filename6 = "shop666.jpg";
 
-            em.persist(createItemImage(item1, 1L, filename1, "test", "test"));
-            em.persist(createItemImage(item1, 1L, filename2, "test", "test"));
-            em.persist(createItemImage(item2, 2L, filename2, "test", "test"));
-            em.persist(createItemImage(item2, 2L, filename3, "test", "test"));
-            em.persist(createItemImage(item3, 3L, filename3, "test", "test"));
-            em.persist(createItemImage(item4, 4L, filename4, "test", "test"));
-            em.persist(createItemImage(item5, 5L, filename5, "test", "test"));
-            em.persist(createItemImage(item6, 6L, filename6, "test", "test"));
-            em.persist(createItemImage(item7, 7L, filename6, "test", "test"));
+            em.persist(createItemImage(item1, 1000L, filename1, "test", "test"));
+            em.persist(createItemImage(item1, 1000L, filename2, "test", "test"));
+            em.persist(createItemImage(item2, 2000L, filename2, "test", "test"));
+            em.persist(createItemImage(item2, 2000L, filename3, "test", "test"));
+            em.persist(createItemImage(item3, 3000L, filename3, "test", "test"));
+            em.persist(createItemImage(item4, 4000L, filename4, "test", "test"));
+            em.persist(createItemImage(item5, 5000L, filename5, "test", "test"));
+            em.persist(createItemImage(item6, 6000L, filename6, "test", "test"));
+            em.persist(createItemImage(item7, 7000L, filename6, "test", "test"));
         }
 
 
