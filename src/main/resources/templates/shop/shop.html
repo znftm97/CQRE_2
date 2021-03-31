@@ -43,89 +43,24 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         </div><!--lnb-->
 
         <div id="categoryBox">
-            <div>
-                <div class="categoryTitle">
-                    <a href="#">
-                        <span>상의</span>
-                        <span> - Top</span>
-                    </a>
+            <div class="category">
+                <div>
+                    <div><span>상의</span><span> - Top</span></div>
                 </div>
                 <div>
-                    <ul>
-                        <li>
-                            <a>
-                                <span>반팔 티셔츠</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <span>긴팔 티셔츠</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <span>셔츠/블라우스</span>
-                            </a>
-                        </li>
-                    </ul>
+                    <div><span>하의</span><span> - Pants</span></div>
+                </div>
+                <div>
+                    <div><span>신발</span><span> - Shoes</span></div>
                 </div>
             </div>
-
-            <div>
-                <div class="categoryTitle">
-                    <a href="#">
-                        <span>하의 -</span>
-                        <span>Pants</span>
-                    </a>
-                </div>
-                <div>
-                    <ul>
-                        <li>
-                            <a>
-                                <span>코튼 팬츠</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <span>데님 팬츠</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <span>레깅스</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div><!--top-->
-
-            <div>
-                <div class="categoryTitle">
-                    <a href="#">
-                        <span>신발 -</span>
-                        <span>shoes</span>
-                    </a>
-                </div>
-                <div>
-                    <ul>
-                        <li>
-                            <a>
-                                <span>운동화</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <span>구두</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <span>샌들</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div><!--top-->
+            <div class="categoryDetail">
+                <ul>
+                    <li th:each="name : ${categoryNames}">
+                        <a th:href="@{/shop/{categoryName} (categoryName = ${name}) }"><span th:text="${name}"></span></a>
+                    </li>
+                </ul>
+            </div>
         </div><!--categoryBox-->
 
         <div id="tableBox">

@@ -1,3 +1,21 @@
+.contents .lnb > ul > li:first-child > a {
+  background-color: #4e9bff !important;
+  /*background: linear-gradient(to right, $pinkColor, $blueLightColor);*/
+  color: white !important; }
+
+.contents .lnb > ul > li {
+  width: 50%; }
+  .contents .lnb > ul > li a {
+    width: 672px;
+    border-right: none; }
+
+.visual {
+  width: 100%;
+  height: 350px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/galleryShop.png") no-repeat;
+  background-size: 100% 100%;
+  opacity: 0.8; }
+
 .galleryBox {
   border: 1px solid #4e9bff;
   border-radius: 5px;

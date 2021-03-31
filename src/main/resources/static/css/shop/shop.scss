@@ -29,48 +29,64 @@ $grayTextColor: #777;
 #categoryBox{
   float: left;
   width: 270px;
-  border-right: 1px solid #b2b2b2;
-  border-top: 1px solid #b2b2b2;
+  border: 1px solid #b2b2b2;
   margin-top: 70px;
+  height: 360px;
 
-  > div{
-    border-bottom: 1px solid #b2b2b2;
-    width: 270px;
-    height: 200px;
+  .category, .categoryDetail{
+    display: inline-block;
+    height: inherit;
+  }
+
+  .category{
+    border-right: 1px solid #b2b2b2;
+    float: left;
+    width: 115px;
+
+    > div{
+      height: 120px;
+      margin-left: 10px;
+      div{
+        margin-top: 40px;
+        display: inline-block;
+
+        span:first-child {
+          color: $blueLightColor;
+          font-size: 20px;
+        }
+        span:last-child{
+          color : #b2b2b2;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .categoryDetail{
+    float: right;
+    width: 150px;
+
+    ul{
+      margin-top: 18px;
+    }
+    li{
+      list-style: none;
+      padding-bottom: 8px;
+    }
+
+    li:nth-child(3n + 1){
+      border-top: 1px solid $blueLightColor;
+      padding-top: 20px;
+    }
+    li:first-child{
+      border: none;
+      padding-top: 0px;
+    }
   }
 
   a{
     text-decoration: none;
     color: black;
   }
-
-  .categoryTitle{
-    padding-bottom: 10px;
-    text-align: center;
-    margin-top: 10px;
-
-    span{
-      font-size: 20px;
-    }
-    span:first-child{
-      font-weight: bold;
-      color: $blueLightColor;
-    }
-    span:last-child{
-      text-decoration: none solid rgb(178, 178, 178);
-      color: #b2b2b2;
-    }
-  }
-
-  ul{
-    margin-top: 20px;
-
-    li{
-      list-style: none;
-      padding-bottom: 8px;
-    }
-  }
-
 }
 
 #tableBox{
@@ -85,7 +101,7 @@ $grayTextColor: #777;
   .buttonBoxShop{
     display: inline-block;
     height: 37px;
-    width: 350px;
+    width: 450px;
     float: right;
     a{
       margin-left: 24px;

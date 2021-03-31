@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -25,6 +27,7 @@ public class ItemService {
     private final ItemRepository itemRepository;
     private final ItemImageService itemImageService;
 
+    /*상품 생성*/
     @Transactional
     public void createItem(CreateItemDto dto, MultipartFile[] files) {
         Category findCategory = categoryRepository.findCategoryByCode(dto.getCategorySelect());
@@ -35,12 +38,19 @@ public class ItemService {
         itemImageService.createItemImage(files, createCommonItem);
     }
 
+    /*모든 상품 조회*/
     public Page<FindItemDto> findItems(Pageable pageable){
         return itemRepository.findItemsWithImagesDistinct(pageable);
     }
 
+    /*상품 상세 조회*/
     public FindItemDetailDto findItemDetail(Long itemId) {
         Item findItem = itemRepository.findItemsWithCategory(itemId);
         return new FindItemDetailDto(findItem);
+    }
+
+    /*카테고리별 상품 조회*/
+    public Page<FindItemDto> findItemsByCategory(Pageable pageable, String categoryName) {
+        return itemRepository.findItemsWithImagesByCategory(pageable, categoryName);
     }
 }

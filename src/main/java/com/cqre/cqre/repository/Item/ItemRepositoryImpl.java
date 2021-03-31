@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.cqre.cqre.entity.shop.QItemImage.itemImage;
+import static com.cqre.cqre.entity.shop.item.QCategory.category;
 import static com.cqre.cqre.entity.shop.item.QItem.item;
 
 @RequiredArgsConstructor
@@ -44,10 +45,50 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
                         item.itemExplanation,
                         item.price,
                         itemImage.filename,
-                        itemImage.bundleId))
+                        itemImage.bundleId,
+                        item.category.id))
                 .from(itemImage)
                 .where(itemImage.id.in(collect))
                 .leftJoin(itemImage.item, item)
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetchResults();
+
+        List<FindItemDto> content = result.getResults();
+        long total = result.getTotal();
+
+        return new PageImpl<>(content, pageable, total);
+    }
+
+    @Override
+    public Page<FindItemDto> findItemsWithImagesByCategory(Pageable pageable, String categoryName) {
+        List<FindItemImageDistinctDto> fetch = queryFactory
+                .select(new QFindItemImageDistinctDto(
+                        itemImage.bundleId,
+                        itemImage.id.min()
+                ))
+                .from(itemImage)
+                .groupBy(itemImage.bundleId)
+                .fetch();
+
+        List<Long> collect = fetch.stream()
+                .map(i -> i.getId())
+                .collect(Collectors.toList());
+
+        QueryResults<FindItemDto> result = queryFactory
+                .select(new QFindItemDto(
+                        item.id,
+                        item.name,
+                        item.itemExplanation,
+                        item.price,
+                        itemImage.filename,
+                        itemImage.bundleId,
+                        item.category.id))
+                .from(itemImage)
+                .where(itemImage.id.in(collect))
+                .where(item.category.name.eq(categoryName))
+                .leftJoin(itemImage.item, item)
+                .leftJoin(itemImage.item.category, category)
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetchResults();

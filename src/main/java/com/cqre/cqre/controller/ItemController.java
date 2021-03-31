@@ -3,6 +3,7 @@ package com.cqre.cqre.controller;
 import com.cqre.cqre.dto.item.CreateItemDto;
 import com.cqre.cqre.dto.item.FindItemDetailDto;
 import com.cqre.cqre.dto.item.FindItemDto;
+import com.cqre.cqre.service.CategoryService;
 import com.cqre.cqre.service.ItemImageService;
 import com.cqre.cqre.service.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -22,11 +23,27 @@ public class ItemController {
 
     private final ItemService itemService;
     private final ItemImageService itemImageService;
+    private final CategoryService categoryService;
 
     @GetMapping("/shop")
     public String shop(@PageableDefault(size = 6, sort = "id") Pageable pageable, Model model){
         Page<FindItemDto> items = itemService.findItems(pageable);
+        List<String> categoryNames = categoryService.findCategoryNames();
+
         model.addAttribute("items", items);
+        model.addAttribute("categoryNames", categoryNames);
+
+        return "/shop/shop";
+    }
+
+    @GetMapping("/shop/{categoryName}")
+    public String shop(@PageableDefault(size = 6, sort = "id") Pageable pageable, Model model,
+                       @PathVariable(value = "categoryName") String categoryName){
+        Page<FindItemDto> items = itemService.findItemsByCategory(pageable, categoryName);
+        List<String> categoryNames = categoryService.findCategoryNames();
+
+        model.addAttribute("items", items);
+        model.addAttribute("categoryNames", categoryNames);
 
         return "/shop/shop";
     }

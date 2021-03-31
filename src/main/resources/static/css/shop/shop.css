@@ -19,33 +19,45 @@
 #categoryBox {
   float: left;
   width: 270px;
-  border-right: 1px solid #b2b2b2;
-  border-top: 1px solid #b2b2b2;
-  margin-top: 70px; }
-  #categoryBox > div {
-    border-bottom: 1px solid #b2b2b2;
-    width: 270px;
-    height: 200px; }
+  border: 1px solid #b2b2b2;
+  margin-top: 70px;
+  height: 360px; }
+  #categoryBox .category, #categoryBox .categoryDetail {
+    display: inline-block;
+    height: inherit; }
+  #categoryBox .category {
+    border-right: 1px solid #b2b2b2;
+    float: left;
+    width: 115px; }
+    #categoryBox .category > div {
+      height: 120px;
+      margin-left: 10px; }
+      #categoryBox .category > div div {
+        margin-top: 40px;
+        display: inline-block; }
+        #categoryBox .category > div div span:first-child {
+          color: #4e9bff;
+          font-size: 20px; }
+        #categoryBox .category > div div span:last-child {
+          color: #b2b2b2;
+          font-size: 12px; }
+  #categoryBox .categoryDetail {
+    float: right;
+    width: 150px; }
+    #categoryBox .categoryDetail ul {
+      margin-top: 18px; }
+    #categoryBox .categoryDetail li {
+      list-style: none;
+      padding-bottom: 8px; }
+    #categoryBox .categoryDetail li:nth-child(3n + 1) {
+      border-top: 1px solid #4e9bff;
+      padding-top: 20px; }
+    #categoryBox .categoryDetail li:first-child {
+      border: none;
+      padding-top: 0px; }
   #categoryBox a {
     text-decoration: none;
     color: black; }
-  #categoryBox .categoryTitle {
-    padding-bottom: 10px;
-    text-align: center;
-    margin-top: 10px; }
-    #categoryBox .categoryTitle span {
-      font-size: 20px; }
-    #categoryBox .categoryTitle span:first-child {
-      font-weight: bold;
-      color: #4e9bff; }
-    #categoryBox .categoryTitle span:last-child {
-      text-decoration: none solid #b2b2b2;
-      color: #b2b2b2; }
-  #categoryBox ul {
-    margin-top: 20px; }
-    #categoryBox ul li {
-      list-style: none;
-      padding-bottom: 8px; }
 
 #tableBox {
   width: 70%;
@@ -58,7 +70,7 @@
   #tableBox .buttonBoxShop {
     display: inline-block;
     height: 37px;
-    width: 350px;
+    width: 450px;
     float: right; }
     #tableBox .buttonBoxShop a {
       margin-left: 24px; }

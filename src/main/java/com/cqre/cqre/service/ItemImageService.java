@@ -24,6 +24,7 @@ public class ItemImageService {
 
     private Long bundleId = 1L;
 
+    /*상품 이미지 생성*/
     @Transactional
     public void createItemImage(MultipartFile[] files, CommonItem commonItem) {
 
@@ -60,6 +61,7 @@ public class ItemImageService {
         bundleId++;
     }
 
+    /*상품 상세 이미지 조회*/
     public List<String> findItemImageDetail(Long bundleId) {
         List<ItemImage> findItemImages = itemImageRepository.findItemImageByBundleId(bundleId);
         return findItemImages.stream()

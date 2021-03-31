@@ -7,4 +7,5 @@ import org.springframework.data.domain.Pageable;
 public interface ItemRepositoryCustom {
 
     Page<FindItemDto> findItemsWithImagesDistinct(Pageable pageable);
+    Page<FindItemDto> findItemsWithImagesByCategory(Pageable pageable, String categoryName);
 }

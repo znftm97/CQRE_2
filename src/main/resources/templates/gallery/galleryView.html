@@ -19,21 +19,18 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 </head>
 <body>
 <div class="containerCustom">
-    <header style="position: relative">
-        <a th:href="@{/}">
-            <img th:src="@{/images/mainLogo4.png}" type="images" alt="">
-        </a>
-        <div class="menu">
+    <div th:replace="fragments/top :: top"/>
+
+    <div class="visual">
+        <h2>
+            <p>gallery</p>
+            <p>갤러리</p>
+        </h2>
+    </div>
+
+    <div class="contents">
+        <div class="lnb">
             <ul>
-                <li>
-                    <a th:href="@{/history}">연혁</a>
-                </li>
-                <li>
-                    <a th:href="@{/board/noticeBoard}">공지사항</a>
-                </li>
-                <li>
-                    <a th:href="@{/board/freeBoard}">자유게시판</a>
-                </li>
                 <li>
                     <a th:href="@{/gallery}">갤러리</a>
                 </li>
@@ -41,33 +38,25 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     <a th:href="@{/shop}">쇼핑몰</a>
                 </li>
             </ul>
-        </div>
-        <div class="sign">
-            <a th:href="@{/user/sign}" sec:authorize="isAnonymous()">SignIn/SignUp</a>
-            <form role="form" th:action="@{/user/logout}" method="post">
-                <button sec:authorize="isAuthenticated()">Logout</button>
-            </form>
-            <a th:href="@{/user/userInfo}" sec:authorize="isAuthenticated()">MyInfo</a>
-        </div>
-    </header>
+        </div><!--lnb-->
 
-    <div class="galleryBox">
-        <div class="btnBox">
-            <form method="post" th:action="@{/gallery/delete}">
-                <button class="btn btn-danger" th:if="${authorCheck} == 'true'" >삭제</button>
-                <input type="hidden" name="bundleId" th:value="${bundleId}">
-            </form>
-            <h2 th:text="${title}"></h2>
-        </div>
-        <div class="row photos">
-            <div class="col-sm-6 col-md-3 col-lg-4 item" th:each="galleryFile : ${galleryFiles}">
-                <a th:href="@{'/images/' + ${galleryFile.filename}}" data-lightbox="photos">
-                    <img class="img-fluid" th:src="@{'/images/' + ${galleryFile.filename}}" />
-                </a>
+        <div class="galleryBox">
+            <div class="btnBox">
+                <form method="post" th:action="@{/gallery/delete}">
+                    <button class="btn btn-danger" th:if="${authorCheck} == 'true'" >삭제</button>
+                    <input type="hidden" name="bundleId" th:value="${bundleId}">
+                </form>
+                <h2 th:text="${title}"></h2>
+            </div>
+            <div class="row photos">
+                <div class="col-sm-6 col-md-3 col-lg-4 item" th:each="galleryFile : ${galleryFiles}">
+                    <a th:href="@{'/images/' + ${galleryFile.filename}}" data-lightbox="photos">
+                        <img class="img-fluid" th:src="@{'/images/' + ${galleryFile.filename}}" />
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-
+    </div><!--contents-->
     <!--paging-->
     <nav style="text-align: center;">
         <ul class="pagination justify-content-center"

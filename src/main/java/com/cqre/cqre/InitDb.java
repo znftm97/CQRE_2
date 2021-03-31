@@ -116,24 +116,32 @@ public class InitDb {
         public void categoryInit(){
             Category category1 = createCategory("반팔 티셔츠", "1-1");
             Category category2 = createCategory("긴팔 티셔츠", "1-2");
+            Category category3 = createCategory("셔츠", "1-3");
+            Category category4 = createCategory("코튼 팬츠", "2-1");
+            Category category5 = createCategory("데님 팬츠", "2-2");
+            Category category6 = createCategory("레깅스", "2-3");
+            Category category7 = createCategory("운동화", "3-1");
+            Category category8 = createCategory("구두", "3-2");
+            Category category9 = createCategory("샌들", "3-3");
             em.persist(category1);
             em.persist(category2);
-            em.persist(createCategory("셔츠/블라우스", "1-3"));
-            em.persist(createCategory("코튼 팬츠", "2-1"));
-            em.persist(createCategory("데님 팬츠", "2-2"));
-            em.persist(createCategory("레깅스", "2-3"));
-            em.persist(createCategory("운동화", "3-1"));
-            em.persist(createCategory("구두", "3-2"));
-            em.persist(createCategory("샌들", "3-3"));
-
+            em.persist(category3);
+            em.persist(category4);
+            em.persist(category5);
+            em.persist(category6);
+            em.persist(category7);
+            em.persist(category8);
+            em.persist(category9);
 
             CommonItem item1 = createItem("1-1", "설명설명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ", "상품1", 10000, 100, "MEN", category1);
-            CommonItem item2 = createItem("1-1", "설명설명~~~", "상품2", 10000, 100, "MEN", category1);
-            CommonItem item3 = createItem("1-1", "설명설명~~~", "상품3", 10000, 100, "MEN", category1);
-            CommonItem item4 = createItem("1-2", "설명설명~~~", "상품4", 10000, 100, "WOMEN", category2);
-            CommonItem item5 = createItem("1-2", "설명설명~~~", "상품5", 10000, 100, "WOMEN", category2);
-            CommonItem item6 = createItem("1-2", "설명설명~~~", "상품6", 10000, 100, "PUBLIC", category2);
-            CommonItem item7 = createItem("1-2", "설명설명~~~", "상품7", 10000, 100, "PUBLIC", category2);
+            CommonItem item2 = createItem("1-2", "설명설명~~~", "상품2", 10000, 100, "MEN", category2);
+            CommonItem item3 = createItem("1-3", "설명설명~~~", "상품3", 10000, 100, "MEN", category3);
+            CommonItem item4 = createItem("2-1", "설명설명~~~", "상품4", 10000, 100, "WOMEN", category4);
+            CommonItem item5 = createItem("2-2", "설명설명~~~", "상품5", 10000, 100, "WOMEN", category5);
+            CommonItem item6 = createItem("2-3", "설명설명~~~", "상품6", 10000, 100, "PUBLIC", category6);
+            CommonItem item7 = createItem("3-1", "설명설명~~~", "상품7", 10000, 100, "PUBLIC", category7);
+            CommonItem item8 = createItem("3-2", "설명설명~~~", "상품8", 10000, 100, "PUBLIC", category8);
+            CommonItem item9 = createItem("3-3", "설명설명~~~", "상품9", 10000, 100, "PUBLIC", category9);
             em.persist(item1);
             em.persist(item2);
             em.persist(item3);
@@ -141,6 +149,8 @@ public class InitDb {
             em.persist(item5);
             em.persist(item6);
             em.persist(item7);
+            em.persist(item8);
+            em.persist(item9);
 
             String filename1 = "shop111.jpg";
             String filename2 = "shop222.jpg";
@@ -158,6 +168,8 @@ public class InitDb {
             em.persist(createItemImage(item5, 5000L, filename5, "test", "test"));
             em.persist(createItemImage(item6, 6000L, filename6, "test", "test"));
             em.persist(createItemImage(item7, 7000L, filename6, "test", "test"));
+            em.persist(createItemImage(item8, 8000L, filename6, "test", "test"));
+            em.persist(createItemImage(item9, 9000L, filename6, "test", "test"));
         }
 
 
