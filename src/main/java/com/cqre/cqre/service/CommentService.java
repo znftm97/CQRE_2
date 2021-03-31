@@ -14,12 +14,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class CommentService {
-    private Long bundleId= 1L;
+    AtomicLong bundleId = new AtomicLong(1);
 
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
@@ -46,7 +47,7 @@ public class CommentService {
                 .user(loginUser)
                 .post(findPost)
                 .depth(1)
-                .bundleId(bundleId++)
+                .bundleId(bundleId.getAndIncrement())
                 .bundleOrder(System.currentTimeMillis())
                 .existsCheck(true)
                 .build();

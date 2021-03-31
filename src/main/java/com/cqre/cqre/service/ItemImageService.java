@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,7 +23,7 @@ public class ItemImageService {
     @Value("${custom.path.shop-images}")
     private String savePath;
 
-    private Long bundleId = 1L;
+    AtomicLong bundleId = new AtomicLong(1);
 
     /*상품 이미지 생성*/
     @Transactional
@@ -48,7 +49,7 @@ public class ItemImageService {
                         .filename(filename)
                         .filePath(filePath)
                         .bundleOrder(System.currentTimeMillis())
-                        .bundleId(bundleId)
+                        .bundleId(bundleId.get())
                         .item(commonItem)
                         .build();
 
@@ -58,7 +59,8 @@ public class ItemImageService {
                 e.printStackTrace();
             }
         }
-        bundleId++;
+
+        bundleId.incrementAndGet();
     }
 
     /*상품 상세 이미지 조회*/

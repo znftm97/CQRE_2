@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,7 +31,7 @@ public class GalleryService {
     @Value("${custom.path.gallery-images}")
     private String savePath;
 
-    private Long bundleId = 1L;
+    AtomicLong bundleId = new AtomicLong(1);
 
     /*갤러리 파일 생성*/
     @Transactional
@@ -67,7 +68,7 @@ public class GalleryService {
                         .filePath(filePath)
                         .originFilename(origFilename)
                         .user(loginUser)
-                        .bundleId(bundleId)
+                        .bundleId(bundleId.get())
                         .bundleOrder(System.currentTimeMillis())
                         .build();
 
@@ -77,7 +78,8 @@ public class GalleryService {
                 e.printStackTrace();
             }
         }
-        bundleId++;
+
+        bundleId.incrementAndGet();
     }
 
     /*갤러리 파일 중복 제거 조회*/

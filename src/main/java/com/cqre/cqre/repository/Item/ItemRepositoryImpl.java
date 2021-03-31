@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.cqre.cqre.entity.shop.QItemImage.itemImage;
-import static com.cqre.cqre.entity.shop.item.QCategory.category;
 import static com.cqre.cqre.entity.shop.item.QItem.item;
 
 @RequiredArgsConstructor
@@ -45,8 +44,8 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
                         item.itemExplanation,
                         item.price,
                         itemImage.filename,
-                        itemImage.bundleId,
-                        item.category.id))
+                        itemImage.bundleId
+                        ))
                 .from(itemImage)
                 .where(itemImage.id.in(collect))
                 .leftJoin(itemImage.item, item)
@@ -82,13 +81,12 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
                         item.itemExplanation,
                         item.price,
                         itemImage.filename,
-                        itemImage.bundleId,
-                        item.category.id))
+                        itemImage.bundleId
+                        ))
                 .from(itemImage)
                 .where(itemImage.id.in(collect))
                 .where(item.category.name.eq(categoryName))
                 .leftJoin(itemImage.item, item)
-                .leftJoin(itemImage.item.category, category)
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetchResults();
