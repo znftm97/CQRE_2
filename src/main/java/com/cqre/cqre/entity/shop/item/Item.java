@@ -1,6 +1,7 @@
 package com.cqre.cqre.entity.shop.item;
 
 import com.cqre.cqre.entity.BaseEntity;
+import com.cqre.cqre.exception.customexception.CNotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,4 +33,12 @@ public abstract class Item extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
+
+    public void removeStock(int stockCount) {
+        int restStock = this.stockCount - stockCount;
+        if( restStock < 0){
+            throw new CNotEnoughStockException();
+        }
+        this.stockCount = restStock;
+    }
 }

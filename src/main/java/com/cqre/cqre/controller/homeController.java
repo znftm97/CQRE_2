@@ -11,11 +11,6 @@ public class homeController {
         return "/home/home";
     }
 
-    @GetMapping("/orderList")
-    public String orderList(){
-        return "/order/orderList";
-    }
-
     @GetMapping("/basketList")
     public String basketList(){
         return "/basket/basketList";
@@ -31,24 +26,9 @@ public class homeController {
         return "/coupon/myCouponList";
     }
 
-    @GetMapping("/noticeBoard")
-    public String noticeBoard(){
-        return "/board/noticeBoard";
-    }
-
-    @GetMapping("/createNoticePost")
-    public String createNoticePost(){
-        return "/post/createNoticePost";
-    }
-
     @GetMapping("/history")
     public String history(){
         return "/history/history";
-    }
-
-    @GetMapping("/updatePassword")
-    public String updatePassword(){
-        return "/user/updatePassword";
     }
 
     @GetMapping("/couponList")
@@ -60,26 +40,5 @@ public class homeController {
     public String createCoupon(){
         return "/coupon/createCoupon";
     }
-
-    @GetMapping("/createBook")
-    public String createBook(){
-        return "/item/createBook";
-    }
-
-    @GetMapping("/createDailyNecessity")
-    public String createDailyNecessity(){
-        return "/item/createDailyNecessity";
-    }
-
-    @GetMapping("/createPcParts")
-    public String createPcParts(){
-        return "/item/createPcParts";
-    }
-
-    @GetMapping("/readPost")
-    public String readPost(){
-        return "/post/readPost";
-    }
-
 
 }

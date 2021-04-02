@@ -9,4 +9,7 @@ public interface ItemRepository extends JpaRepository<Item, Long>, ItemRepositor
 
     @Query("select i from Item i join fetch i.category where i.id = :itemId")
     Item findItemsWithCategory(@Param("itemId") Long itemId);
+
+    @Query("select i from Item i where i.id = :itemId")
+    Item findItemById(@Param("itemId") Long itemId);
 }

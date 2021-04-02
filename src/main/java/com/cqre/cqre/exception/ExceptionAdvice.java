@@ -1,6 +1,7 @@
 package com.cqre.cqre.exception;
 
 import com.cqre.cqre.exception.customexception.CFileIsNotImage;
+import com.cqre.cqre.exception.customexception.CNotEnoughStockException;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
 import com.cqre.cqre.exception.customexception.user.*;
 import lombok.RequiredArgsConstructor;
@@ -68,5 +69,11 @@ public class ExceptionAdvice {
     protected String notImageFile(Model model){
         model.addAttribute("notImageFile", "true");
         return "/gallery/createGallery";
+    }
+
+    @ExceptionHandler(CNotEnoughStockException.class)
+    protected String notEnoughStock(Model model){
+        model.addAttribute("notEnoughStock", "true");
+        return "redirect:/shop";
     }
 }

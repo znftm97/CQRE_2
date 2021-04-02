@@ -154,7 +154,7 @@ public class UserService {
             throw e;
         }
 
-        return userRepository.findByName(loginUser.getName()).orElseThrow(CUserNotFoundException::new);
+        return userRepository.CFindById(loginUser.getId()).orElseThrow(CUserNotFoundException::new);
     }
 
     /*회원 정보 수정*/

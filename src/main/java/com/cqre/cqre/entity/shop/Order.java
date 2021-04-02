@@ -34,4 +34,14 @@ public class Order extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "coupon_id")
     private Coupon coupon;
+
+    public static Order createOrder(User user, OrderItem orderItem) {
+        Order order = new Order();
+        order.user = user;
+        order.orderItems.add(orderItem);
+        orderItem.setOrder(order);
+        order.status = OrderStatus.ORDER;
+
+        return order;
+    }
 }

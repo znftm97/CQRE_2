@@ -5,8 +5,6 @@ import com.cqre.cqre.entity.shop.item.Item;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -31,4 +29,8 @@ public class OrderItem extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 }
