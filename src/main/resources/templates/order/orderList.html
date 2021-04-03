@@ -82,15 +82,21 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     <th scope="col">주문금액</th>
                     <th scope="col">주문수량</th>
                     <th scope="col">주문일자</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="order, state : ${orders}">
+                <tr th:each="orderItem, state : ${orderItems}">
                     <td>[[${state.count}]]</td>
-                    <td th:text="${order.itemName}"></td>
-                    <td th:text="${order.orderPrice}"></td>
-                    <td th:text="${order.orderCount}"></td>
-                    <td>[[${#temporals.format(order.createDate, 'yyyy-MM-dd일 hh:mm분')}]]</td>
+                    <td th:text="${orderItem.itemName}"></td>
+                    <td th:text="${orderItem.orderPrice}"></td>
+                    <td th:text="${orderItem.orderCount}"></td>
+                    <td>[[${#temporals.format(orderItem.createDate, 'yyyy-MM-dd일 hh:mm분')}]]</td>
+                    <td>
+                        <form method="post" th:action="@{/orderCancel/{orderItemId} (orderItemId = ${orderItem.id})}">
+                            <button type="submit" class="btn-danger">Cancel</button>
+                        </form>
+                    </td>
                 </tr>
                 </tbody>
             </table><!--table-->
@@ -98,8 +104,8 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <!--paging-->
             <nav style="text-align: center;">
                 <ul class="pagination justify-content-center"
-                    th:with="start=${T(Math).floor(orders.number/10)*10 + 1},
-                    last=(${start + 9 < orders.totalPages ? start + 9 : orders.totalPages})">
+                    th:with="start=${T(Math).floor(orderItems.number/10)*10 + 1},
+                    last=(${start + 9 < orderItems.totalPages ? start + 9 : orderItems.totalPages})">
 
                     <!--  first  -->
                     <li class="page-item">
@@ -110,26 +116,26 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
                     <!--  <  -->
                     <li class="page-item">
-                        <a class="page-link" th:href="${orders.first} ? '#' :@{/orderList(page=${orders.number - 1})}" aria-label="Previous" >
+                        <a class="page-link" th:href="${orderItems.first} ? '#' :@{/orderList(page=${orderItems.number - 1})}" aria-label="Previous" >
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
                     <!--  1,2,3  -->
-                    <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == orders.number + 1} ? 'page-item active'">
+                    <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == orderItems.number + 1} ? 'page-item active'">
                         <a class="page-link" th:text="${page}" th:href="@{/orderList(page=${page - 1})}"></a>
                     </li>
 
                     <!--  > -->
-                    <li class="page-item" th:class="${orders.last} ? 'disabled'">
-                        <a class="page-link" th:href="${orders.last} ? '#' : @{/orderList(page=${orders.number + 1})}" aria-label="Next">
+                    <li class="page-item" th:class="${orderItems.last} ? 'disabled'">
+                        <a class="page-link" th:href="${orderItems.last} ? '#' : @{/orderList(page=${orderItems.number + 1})}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
 
                     <!--  Last  -->
                     <li class="page-item">
-                        <a class="page-link" th:href="@{/orderList(page=${orders.totalPages - 1})}" aria-label="Last">
+                        <a class="page-link" th:href="@{/orderList(page=${orderItems.totalPages - 1})}" aria-label="Last">
                             <span aria-hidden="true">Last</span>
                         </a>
                     </li>

@@ -4,6 +4,7 @@ import com.cqre.cqre.dto.order.FindOrderItemDto;
 import com.cqre.cqre.entity.User;
 import com.cqre.cqre.entity.shop.Order;
 import com.cqre.cqre.entity.shop.OrderItem;
+import com.cqre.cqre.entity.shop.OrderStatus;
 import com.cqre.cqre.entity.shop.item.Item;
 import com.cqre.cqre.repository.Item.ItemRepository;
 import com.cqre.cqre.repository.order.OrderItemRepository;
@@ -45,7 +46,29 @@ public class OrderService {
     /*주문 목록 조회*/
     public Page<FindOrderItemDto> findOrders(Pageable pageable) {
         User loginUser = userService.getLoginUser();
-        Page<OrderItem> findOrderItems = orderItemRepository.findOrderItemByUserId(loginUser.getId(), pageable);
+        Page<OrderItem> findOrderItems = orderItemRepository.findOrderItemByUserId(loginUser.getId(), OrderStatus.ORDER ,pageable);
         return findOrderItems.map(o -> new FindOrderItemDto(o));
     }
+
+    /*주문 취소*/
+    @Transactional
+    public void orderCancel(Long orderItemId) {
+        OrderItem findOrderItem = orderItemRepository.findOrderItemWithOrder(orderItemId);
+        findOrderItem.getOrder().cancelOrder();
+    }
+
+    /*주문 취소 목록 조회*/
+    public Page<FindOrderItemDto> findCancelOrders(Pageable pageable) {
+        User loginUser = userService.getLoginUser();
+        Page<OrderItem> findOrderItems = orderItemRepository.findCancelOrderByUserId(loginUser.getId(), OrderStatus.CANCEL, pageable);
+        return findOrderItems.map(o -> new FindOrderItemDto(o));
+    }
+
+    /*재 주문*/
+    @Transactional
+    public void reOrder(Long orderItemId) {
+        OrderItem findOrderItem = orderItemRepository.findOrderItemWithOrder(orderItemId);
+        findOrderItem.getOrder().reOrder();
+    }
+
 }

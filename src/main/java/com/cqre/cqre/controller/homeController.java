@@ -16,11 +16,6 @@ public class homeController {
         return "/basket/basketList";
     }
 
-    @GetMapping("/orderCancelList")
-    public String orderCancelList(){
-        return "/order/orderCancelList";
-    }
-
     @GetMapping("/myCouponList")
     public String myCouponList(){
         return "/coupon/myCouponList";

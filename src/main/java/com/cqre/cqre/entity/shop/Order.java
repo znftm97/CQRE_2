@@ -44,4 +44,14 @@ public class Order extends BaseEntity {
 
         return order;
     }
+
+    /*주문취소*/
+    public void cancelOrder() {
+        this.status = OrderStatus.CANCEL;
+    }
+
+    /*재 주문*/
+    public void reOrder() {
+        this.status = OrderStatus.ORDER;
+    }
 }

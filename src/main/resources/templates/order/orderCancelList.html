@@ -78,78 +78,63 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">상품명</th>
+                    <th scope="col">주문금액</th>
+                    <th scope="col">주문수량</th>
+                    <th scope="col">주문일자</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                    <tr th:each="orderItem, state : ${orderItems}">
+                        <td>[[${state.count}]]</td>
+                        <td th:text="${orderItem.itemName}"></td>
+                        <td th:text="${orderItem.orderPrice}"></td>
+                        <td th:text="${orderItem.orderCount}"></td>
+                        <td>[[${#temporals.format(orderItem.createDate, 'yyyy-MM-dd일 hh:mm분')}]]</td>
+                        <td>
+                            <form method="post" th:action="@{/reOrder/{orderItemId} (orderItemId = ${orderItem.id})}">
+                                <button type="submit" class="btn-primary">재주문</button>
+                            </form>
+                        </td>
+                    </tr>
                 </tbody>
             </table><!--table-->
 
             <!--paging-->
             <nav style="text-align: center;">
-                <ul class="pagination justify-content-center">
+                <ul class="pagination justify-content-center"
+                    th:with="start=${T(Math).floor(orderItems.number/10)*10 + 1},
+                    last=(${start + 9 < orderItems.totalPages ? start + 9 : orderItems.totalPages})">
 
                     <!--  first  -->
                     <li class="page-item">
-                        <a class="page-link"  aria-label="First">
+                        <a class="page-link" th:href="@{/orderList(page=0)}" aria-label="First">
                             <span aria-hidden="true">First</span>
                         </a>
                     </li>
 
                     <!--  <  -->
                     <li class="page-item">
-                        <a class="page-link" aria-label="Previous" >
+                        <a class="page-link" th:href="${orderItems.first} ? '#' :@{/orderList(page=${orderItems.number - 1})}" aria-label="Previous" >
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
                     <!--  1,2,3  -->
-                    <li class="page-item">
-                        <a class="page-link"></a>
+                    <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == orderItems.number + 1} ? 'page-item active'">
+                        <a class="page-link" th:text="${page}" th:href="@{/orderList(page=${page - 1})}"></a>
                     </li>
 
                     <!--  > -->
-                    <li class="page-item">
-                        <a class="page-link" aria-label="Next">
+                    <li class="page-item" th:class="${orderItems.last} ? 'disabled'">
+                        <a class="page-link" th:href="${orderItems.last} ? '#' : @{/orderList(page=${orderItems.number + 1})}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
 
                     <!--  Last  -->
                     <li class="page-item">
-                        <a class="page-link" aria-label="Last">
+                        <a class="page-link" th:href="@{/orderList(page=${orderItems.totalPages - 1})}" aria-label="Last">
                             <span aria-hidden="true">Last</span>
                         </a>
                     </li>
