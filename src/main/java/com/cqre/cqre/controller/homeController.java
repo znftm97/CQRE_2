@@ -11,11 +11,6 @@ public class homeController {
         return "/home/home";
     }
 
-    @GetMapping("/basketList")
-    public String basketList(){
-        return "/basket/basketList";
-    }
-
     @GetMapping("/myCouponList")
     public String myCouponList(){
         return "/coupon/myCouponList";

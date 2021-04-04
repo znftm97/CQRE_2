@@ -35,6 +35,7 @@ public class Order extends BaseEntity {
     @JoinColumn(name = "coupon_id")
     private Coupon coupon;
 
+    /*주문 생성*/
     public static Order createOrder(User user, OrderItem orderItem) {
         Order order = new Order();
         order.user = user;
@@ -45,12 +46,23 @@ public class Order extends BaseEntity {
         return order;
     }
 
-    /*주문취소*/
+    /*장바구니 생성*/
+    public static Order createBasket(User user, OrderItem orderItem) {
+        Order order = new Order();
+        order.user = user;
+        order.orderItems.add(orderItem);
+        orderItem.setOrder(order);
+        order.status = OrderStatus.BASKET;
+
+        return order;
+    }
+
+    /*주문 취소*/
     public void cancelOrder() {
         this.status = OrderStatus.CANCEL;
     }
 
-    /*재 주문*/
+    /*재 주문, 장바구니 바로 주문*/
     public void reOrder() {
         this.status = OrderStatus.ORDER;
     }
