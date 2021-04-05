@@ -5,9 +5,11 @@ import com.cqre.cqre.entity.User;
 import com.cqre.cqre.entity.shop.Order;
 import com.cqre.cqre.entity.shop.OrderItem;
 import com.cqre.cqre.entity.shop.OrderStatus;
+import com.cqre.cqre.entity.shop.UserCoupon;
 import com.cqre.cqre.entity.shop.item.Item;
 import com.cqre.cqre.exception.customexception.CNotEnoughStockException;
 import com.cqre.cqre.repository.Item.ItemRepository;
+import com.cqre.cqre.repository.UserCouponRepository;
 import com.cqre.cqre.repository.order.OrderItemRepository;
 import com.cqre.cqre.repository.order.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,7 @@ public class OrderService {
     private final ItemRepository itemRepository;
     private final OrderItemRepository orderItemRepository;
     private final UserService userService;
+    private final UserCouponRepository userCouponRepository;
 
     /*주문 생성*/
     @Transactional
@@ -41,6 +44,26 @@ public class OrderService {
 
         Order order = Order.createOrder(findUser, orderItem);
 
+        orderRepository.save(order);
+    }
+
+    /*쿠폰같이 주문 생성*/
+    @Transactional
+    public void createOrderWithCoupon(Long itemId, int count, Long userCouponId) {
+        UserCoupon findUserCoupon = userCouponRepository.findUserCouponByUserCouponIdWithCoupon(userCouponId);
+        Item findItem = itemRepository.findItemById(itemId);
+        User findUser = userService.getLoginUser();
+        int discountPrice = (findItem.getPrice() * count) / (findUserCoupon.getCoupon().getDiscountRate()).intValue();
+
+        OrderItem orderItem = OrderItem.builder()
+                .item(findItem)
+                .count(count)
+                .orderPrice(discountPrice)
+                .build();
+
+        findItem.removeStock(orderItem.getCount());
+
+        Order order = Order.createOrderWithCoupon(findUser, orderItem, findUserCoupon);
         orderRepository.save(order);
     }
 

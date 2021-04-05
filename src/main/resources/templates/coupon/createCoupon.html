@@ -24,22 +24,35 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <h2>쿠폰 생성</h2>
     </div>
 
-    <form role="form" method="post" enctype="multipart/form-data">
+    <form role="form" method="post" th:action="@{createCoupon}">
         <div class="form-group">
             <label th:for="title"><strong>쿠폰명</strong></label>
-            <input type="text" class="form-control" placeholder="쿠폰명을 입력하세요">
+            <input name="name" type="text" class="form-control" placeholder="쿠폰명을 입력하세요">
         </div>
 
         <div class="form-group">
             <label th:for="title"><strong>할인율</strong></label>
-            <input type="text" class="form-control" placeholder="할인율을 입력하세요">
+            <input name="discountRate" type="text" class="form-control" placeholder="할인율을 입력하세요">
         </div>
 
+        <div class="form-group">
+            <label th:for="title"><strong>수량</strong></label>
+            <input name="totalCount" type="text" class="form-control" placeholder="수량을 입력하세요">
+        </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
     <div th:replace="fragments/footer :: footer"/>
 </div> <!-- /container -->
+<script th:inline="javascript">
+    let discountRateExceeded = [[${discountRateExceeded}]];
+    let emptyValueCouponName = [[${emptyValueCouponName}]];
+    if (discountRateExceeded == "true") {
+        alert("할인율은 100 미만이여야 합니다.");
+    }else if (emptyValueCouponName == "true") {
+        alert("쿠폰명을 입력해 주세요.");
+    }
+</script>
 </body>
 </html>

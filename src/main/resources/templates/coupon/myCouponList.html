@@ -55,101 +55,59 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         </div><!--lnb-->
 
         <div id="tableBox">
-            <!--searchBox-->
-            <div class="searchBox">
-                <form class="form-inline">
-                    <div class="form-group mx-sm-1 mb-2">
-                        <select name="searchOption">
-                            <option value="name">검색 조건 선택</option>
-                            <option value="title">글제목</option>
-                            <option value="name">글쓴이</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group mb-2">
-                        <input type="text" id="searchWord" name="searchWord" class="form-control" placeholder="검색어"/>
-                    </div>
-                    <button type="submit" class="btn btn-primary mb-2">검색</button>
-                </form>
-            </div><!--searchBox-->
-
             <!--table-->
             <table class="table table-hover table-dark">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">쿠폰명</th>
+                    <th scope="col">할인율</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
+                <tr th:each="coupon, state : ${coupons}">
+                    <td>[[${state.count}]]</td>
+                    <td th:text="${coupon.name}"></td>
+                    <td th:text="${coupon.discountRate}"></td>
                 </tr>
                 </tbody>
             </table><!--table-->
 
             <!--paging-->
             <nav style="text-align: center;">
-                <ul class="pagination justify-content-center">
+                <ul class="pagination justify-content-center"
+                    th:with="start=${T(Math).floor(coupons.number/10)*10 + 1},
+                    last=(${start + 9 < coupons.totalPages ? start + 9 : coupons.totalPages})">
 
                     <!--  first  -->
                     <li class="page-item">
-                        <a class="page-link"  aria-label="First">
+                        <a class="page-link" th:href="@{/myCouponList(page=0)}" aria-label="First">
                             <span aria-hidden="true">First</span>
                         </a>
                     </li>
 
                     <!--  <  -->
                     <li class="page-item">
-                        <a class="page-link" aria-label="Previous" >
+                        <a class="page-link" th:href="${coupons.first} ? '#' :@{/myCouponList(page=${coupons.number - 1})}" aria-label="Previous" >
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
                     <!--  1,2,3  -->
-                    <li class="page-item">
-                        <a class="page-link"></a>
+                    <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == coupons.number + 1} ? 'page-item active'">
+                        <a class="page-link" th:text="${page}" th:href="@{/myCouponList(page=${page - 1})}"></a>
                     </li>
 
                     <!--  > -->
-                    <li class="page-item">
-                        <a class="page-link" aria-label="Next">
+                    <li class="page-item" th:class="${coupons.last} ? 'disabled'">
+                        <a class="page-link" th:href="${coupons.last} ? '#' : @{/myCouponList(page=${coupons.number + 1})}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
 
                     <!--  Last  -->
                     <li class="page-item">
-                        <a class="page-link" aria-label="Last">
+                        <a class="page-link" th:href="@{/myCouponList(page=${coupons.totalPages - 1})}" aria-label="Last">
                             <span aria-hidden="true">Last</span>
                         </a>
                     </li>

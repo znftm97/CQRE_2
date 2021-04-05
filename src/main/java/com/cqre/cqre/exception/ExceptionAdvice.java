@@ -1,5 +1,7 @@
 package com.cqre.cqre.exception;
 
+import com.cqre.cqre.exception.customexception.CDiscountRateExceededException;
+import com.cqre.cqre.exception.customexception.CEmptyValueException;
 import com.cqre.cqre.exception.customexception.CFileIsNotImage;
 import com.cqre.cqre.exception.customexception.CNotEnoughStockException;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
@@ -75,5 +77,17 @@ public class ExceptionAdvice {
     protected String notEnoughStock(Model model){
         model.addAttribute("notEnoughStock", "true");
         return "redirect:/shop";
+    }
+
+    @ExceptionHandler(CDiscountRateExceededException.class)
+    protected String discountRateExceeded(Model model){
+        model.addAttribute("discountRateExceeded", "true");
+        return "/coupon/createCoupon";
+    }
+
+    @ExceptionHandler(CEmptyValueException.class)
+    protected String emptyValueCouponName(Model model){
+        model.addAttribute("emptyValueCouponName", "true");
+        return "/coupon/createCoupon";
     }
 }

@@ -32,8 +32,8 @@ public class Order extends BaseEntity {
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "coupon_id")
-    private Coupon coupon;
+    @JoinColumn(name = "usercoupon_id")
+    private UserCoupon coupon;
 
     /*주문 생성*/
     public static Order createOrder(User user, OrderItem orderItem) {
@@ -42,6 +42,18 @@ public class Order extends BaseEntity {
         order.orderItems.add(orderItem);
         orderItem.setOrder(order);
         order.status = OrderStatus.ORDER;
+
+        return order;
+    }
+
+    /*쿠폰같이 주문 생성*/
+    public static Order createOrderWithCoupon(User user, OrderItem orderItem, UserCoupon coupon) {
+        Order order = new Order();
+        order.user = user;
+        order.orderItems.add(orderItem);
+        orderItem.setOrder(order);
+        order.status = OrderStatus.ORDER;
+        order.coupon = coupon;
 
         return order;
     }

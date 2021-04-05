@@ -1,9 +1,12 @@
 package com.cqre.cqre.controller;
 
+import com.cqre.cqre.dto.coupon.CouponDto;
+import com.cqre.cqre.dto.coupon.FindCouponDto;
 import com.cqre.cqre.dto.item.CreateItemDto;
 import com.cqre.cqre.dto.item.FindItemDetailDto;
 import com.cqre.cqre.dto.item.FindItemDto;
 import com.cqre.cqre.service.CategoryService;
+import com.cqre.cqre.service.CouponService;
 import com.cqre.cqre.service.ItemImageService;
 import com.cqre.cqre.service.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +27,7 @@ public class ItemController {
     private final ItemService itemService;
     private final ItemImageService itemImageService;
     private final CategoryService categoryService;
+    private final CouponService couponService;
 
     /*상품 페이지*/
     @GetMapping("/shop")
@@ -77,8 +81,11 @@ public class ItemController {
 
         FindItemDetailDto itemDetail = itemService.findItemDetail(itemId);
         List<String> itemImageDetail = itemImageService.findItemImageDetail(bundleId);
+        List<FindCouponDto> coupons = couponService.myCouponsNotPaging();
+
         model.addAttribute("itemDetail", itemDetail);
         model.addAttribute("itemImageDetail", itemImageDetail);
+        model.addAttribute("coupons", coupons);
 
         return "/item/readItemDetail";
     }

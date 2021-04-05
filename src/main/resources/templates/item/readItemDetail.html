@@ -64,6 +64,13 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                             <button formaction="/order" type="submit" class="btn btn-primary">주문</button>
                             <button formaction="/basket" type="submit" class="btn btn-success">장바구니 추가</button>
                             <input type="hidden" name="itemId" th:value="${itemDetail.id}">
+                            <select name="userCouponId" class="form-control">
+                                <option>쿠폰 선택</option>
+                                <option th:each="coupon : ${coupons}"
+                                        th:value="${coupon.userCouponId}"
+                                        th:text="${coupon.name}"
+                                />
+                            </select>
                         </form>
                     </div>
                 </div>

@@ -11,26 +11,19 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Coupon extends BaseEntity {
+public class UserCoupon extends BaseEntity {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "coupon_id")
+    @Id @GeneratedValue
+    @Column(name = "usercoupon_id")
     private Long id;
 
-    private String name;
-
-    private Long discountRate;
-
-    private int totalCount;
-
-    private int remainCount;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "coupon_id")
+    private Coupon coupon;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    public void removeCount(int sendCount) {
-        this.remainCount = totalCount - sendCount;
-    }
+    private int count;
 }

@@ -5,7 +5,9 @@ import com.cqre.cqre.entity.GalleryFile;
 import com.cqre.cqre.entity.User;
 import com.cqre.cqre.entity.post.Board;
 import com.cqre.cqre.entity.post.Post;
+import com.cqre.cqre.entity.shop.Coupon;
 import com.cqre.cqre.entity.shop.ItemImage;
+import com.cqre.cqre.entity.shop.Order;
 import com.cqre.cqre.entity.shop.item.Category;
 import com.cqre.cqre.entity.shop.item.CommonItem;
 import com.cqre.cqre.entity.shop.item.Item;
@@ -33,17 +35,18 @@ public class InitDb {
     @Component
     @Transactional
     @RequiredArgsConstructor
-    static class InitService{
+    static class InitService {
         private final EntityManager em;
         private final PasswordEncoder passwordEncoder;
 
-        public void init(){
+        public void init() {
             User user1 = User.builder()
                     .name("이지훈")
                     .studentId("20144339")
                     .loginId("znftm97")
                     .password(passwordEncoder.encode("wprkfrhdaud12!"))
                     .email("znftm97@gmail.com")
+                    .role("ROLE_USER")
                     .build();
 
             User user2 = User.builder()
@@ -52,12 +55,37 @@ public class InitDb {
                     .loginId("123")
                     .password(passwordEncoder.encode("123"))
                     .email("znftm93@gmail.com")
+                    .role("ROLE_USER")
+                    .build();
+
+            User admin = User.builder()
+                    .name("관리자")
+                    .loginId("admin")
+                    .studentId("admin")
+                    .password(passwordEncoder.encode("1234"))
+                    .role("ROLE_ADMIN")
+                    .email("admin")
                     .build();
 
             user1.setEmailVerified("true");
             user2.setEmailVerified("true");
+            admin.setEmailVerified("true");
             em.persist(user1);
             em.persist(user2);
+            em.persist(admin);
+
+            /*coupon*/
+            Coupon coupon1 = createCoupon(10, 50L, "연말기념 쿠폰", admin);
+            Coupon coupon2 = createCoupon(10, 40L, "연초기념 쿠폰", admin);
+            Coupon coupon3 = createCoupon(50, 30L, "크리스마스기념 쿠폰", admin);
+            Coupon coupon4 = createCoupon(100, 20L, "생일 쿠폰", admin);
+            Coupon coupon5 = createCoupon(1000, 10L, "그냥 쿠폰", admin);
+
+            em.persist(coupon1);
+            em.persist(coupon2);
+            em.persist(coupon3);
+            em.persist(coupon4);
+            em.persist(coupon5);
 
             /*post*/
             Post post1 = createPost("1111", "1111", 0, 0, user1, Board.FREE);
@@ -113,7 +141,7 @@ public class InitDb {
             em.persist(galleryFile11);
         }
 
-        public void categoryInit(){
+        public void categoryInit() {
             Category category1 = createCategory("반팔 티셔츠", "1-1");
             Category category2 = createCategory("긴팔 티셔츠", "1-2");
             Category category3 = createCategory("셔츠", "1-3");
@@ -134,14 +162,14 @@ public class InitDb {
             em.persist(category9);
 
             CommonItem item1 = createItem("1-1", "설명설명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ", "상품1", 10000, 100, "MEN", category1);
-            CommonItem item2 = createItem("1-2", "설명설명~~~", "상품2", 10000, 100, "MEN", category2);
-            CommonItem item3 = createItem("1-3", "설명설명~~~", "상품3", 10000, 100, "MEN", category3);
-            CommonItem item4 = createItem("2-1", "설명설명~~~", "상품4", 10000, 100, "WOMEN", category4);
-            CommonItem item5 = createItem("2-2", "설명설명~~~", "상품5", 10000, 100, "WOMEN", category5);
-            CommonItem item6 = createItem("2-3", "설명설명~~~", "상품6", 10000, 100, "PUBLIC", category6);
-            CommonItem item7 = createItem("3-1", "설명설명~~~", "상품7", 10000, 100, "PUBLIC", category7);
-            CommonItem item8 = createItem("3-2", "설명설명~~~", "상품8", 10000, 100, "PUBLIC", category8);
-            CommonItem item9 = createItem("3-3", "설명설명~~~", "상품9", 10000, 100, "PUBLIC", category9);
+            CommonItem item2 = createItem("1-2", "설명설명~~~", "상품2", 20000, 100, "MEN", category2);
+            CommonItem item3 = createItem("1-3", "설명설명~~~", "상품3", 32000, 100, "MEN", category3);
+            CommonItem item4 = createItem("2-1", "설명설명~~~", "상품4", 40000, 100, "WOMEN", category4);
+            CommonItem item5 = createItem("2-2", "설명설명~~~", "상품5", 50000, 100, "WOMEN", category5);
+            CommonItem item6 = createItem("2-3", "설명설명~~~", "상품6", 60000, 100, "PUBLIC", category6);
+            CommonItem item7 = createItem("3-1", "설명설명~~~", "상품7", 70000, 100, "PUBLIC", category7);
+            CommonItem item8 = createItem("3-2", "설명설명~~~", "상품8", 80000, 100, "PUBLIC", category8);
+            CommonItem item9 = createItem("3-3", "설명설명~~~", "상품9", 55000, 100, "PUBLIC", category9);
             em.persist(item1);
             em.persist(item2);
             em.persist(item3);
@@ -172,8 +200,8 @@ public class InitDb {
             em.persist(createItemImage(item9, 9000L, filename6, "test", "test"));
         }
 
-
-        private Post createPost(String title, String content, int postVies, int recommendation, User user, Board board){
+        /*생성자*/
+        private Post createPost(String title, String content, int postVies, int recommendation, User user, Board board) {
             return Post.builder()
                     .title(title)
                     .content(content)
@@ -198,13 +226,13 @@ public class InitDb {
 
 
         private Category createCategory(String name, String identificationCode) {
-             return Category.builder()
+            return Category.builder()
                     .name(name)
-                     .identificationCode(identificationCode)
+                    .identificationCode(identificationCode)
                     .build();
         }
 
-        private CommonItem createItem(String categorySelect, String itemExplanation, String name, int price, int stockCount, String gender, Category category){
+        private CommonItem createItem(String categorySelect, String itemExplanation, String name, int price, int stockCount, String gender, Category category) {
             CreateItemDto dto = new CreateItemDto(name, itemExplanation, price, stockCount, categorySelect, gender);
             CommonItem commonItem = new CommonItem();
             return commonItem.createCommonItem(dto, category);
@@ -220,5 +248,16 @@ public class InitDb {
                     .originFilename(originFilename)
                     .build();
         }
+
+        private Coupon createCoupon(int count, Long discountRate, String name, User user) {
+            return Coupon.builder()
+                    .totalCount(count)
+                    .remainCount(count)
+                    .discountRate(discountRate)
+                    .name(name)
+                    .user(user)
+                    .build();
+        }
+
     }
 }

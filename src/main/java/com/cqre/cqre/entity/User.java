@@ -36,7 +36,7 @@ public class User extends BaseEntity{
     private String role = "ROLE_USER";
 
     @Builder
-    public User(String name, String studentId, String loginId, String password, String email){
+    public User(String name, String studentId, String loginId, String password, String email, String role){
         Address address = new Address("Not yet Entered", "Not yet Entered");
 
         this.name = name;
@@ -47,6 +47,7 @@ public class User extends BaseEntity{
         this.address = address;
         this.emailVerified = "false";
         this.emailCheckToken = UUID.randomUUID().toString();
+        this.role = role;
     }
 
     // == 비즈니스 로직 == //

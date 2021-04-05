@@ -22,8 +22,13 @@ public class OrderController {
     /*주문*/
     @PostMapping("/order")
     public String createOrder(@RequestParam("itemId") Long itemId,
-                              @RequestParam("count") int count) {
-        orderService.createOrder(itemId, count);
+                              @RequestParam("count") int count,
+                              @RequestParam("userCouponId") Long userCouponId) {
+        if (userCouponId == null) {
+            orderService.createOrder(itemId, count);
+        } else {
+            orderService.createOrderWithCoupon(itemId, count, userCouponId);
+        }
 
         return "redirect:/orderList";
     }
