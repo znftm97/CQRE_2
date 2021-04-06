@@ -103,6 +103,7 @@ $grayTextColor: #777;
     height: 37px;
     width: 450px;
     float: right;
+    margin-bottom: 33px;
     a{
       margin-left: 24px;
     }
@@ -208,16 +209,5 @@ $grayTextColor: #777;
   border-image-slice: 1!important;
 }
 /*hover*/
-
-/*footer*/
-footer{
-  bottom: 0;
-  position: relative;
-  height: 70px;
-
-  p:first-child{
-    padding-top: 10px;
-  }
-}/*footer*/
 
 

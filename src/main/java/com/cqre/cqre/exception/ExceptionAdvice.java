@@ -42,7 +42,7 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(CPwNotEquals.class)
     protected String pwNotEquals(Model model){
-        model.addAttribute("notEquals", "notEquals");
+        model.addAttribute("notEquals", "true");
         return "redirect:/user/userInfo";
     }
 

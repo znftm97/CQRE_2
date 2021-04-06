@@ -14,4 +14,9 @@ public class homeController {
     public String history(){
         return "/history/history";
     }
+
+    @GetMapping("/authorityException")
+    public String authority() {
+        return "/exception/authorityException";
+    }
 }

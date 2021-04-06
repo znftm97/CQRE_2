@@ -32,7 +32,8 @@ public class CouponService {
     /*쿠폰생성*/
     @Transactional
     public void createCoupon(CouponDto dto) {
-        /*admin 계정 찾고 쿠폰 생성 시 user에 넣어주기*/
+        User admin = userRepository.findByEmail("admin");
+
         if (dto.getDiscountRate() >= 100) {
             throw new CDiscountRateExceededException();
         } else if (dto.getName().equals("")) {
@@ -44,6 +45,7 @@ public class CouponService {
                 .discountRate(dto.getDiscountRate())
                 .totalCount(dto.getTotalCount())
                 .remainCount(dto.getTotalCount())
+                .user(admin)
                 .build();
 
         couponRepository.save(coupon);

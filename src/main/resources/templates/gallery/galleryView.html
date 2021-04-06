@@ -51,7 +51,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <div class="row photos">
                 <div class="col-sm-6 col-md-3 col-lg-4 item" th:each="galleryFile : ${galleryFiles}">
                     <a th:href="@{'/images/' + ${galleryFile.filename}}" data-lightbox="photos">
-                        <img class="img-fluid" th:src="@{'/images/' + ${galleryFile.filename}}" />
+                        <img class="img-fluid" th:src="@{'/images/gallery/' + ${galleryFile.filename}}" />
                     </a>
                 </div>
             </div>

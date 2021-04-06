@@ -44,27 +44,11 @@ header {
   }
 }
 
-footer {
-  width: 100%;
-  /*하단에 고정*/
-  position: absolute;
-  bottom: 0;
-  z-index: 2;
-
-  font-size: 12px;
-  letter-spacing: -0.35px;
-  line-height: 14px;
-  text-align: center;
-  color: white!important;
-  text-decoration: none solid rgb(255, 255, 255)!important;
-}  /*header , footer*/
-
-
 /*social login button*/
 .socialLogin{
   width: 500px;
   position: absolute;
-  margin: -180px 0 0 -12px;
+  margin: -150px 0 0 -12px;
 
   li{
     float: left;

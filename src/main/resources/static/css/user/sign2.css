@@ -4,7 +4,7 @@
 
 h1 {
   font-weight: bold;
-  margin: 0; }
+  margin-bottom: 30px; }
 
 h2 {
   text-align: center; }
@@ -13,7 +13,10 @@ a {
   color: #333;
   font-size: 14px;
   text-decoration: none;
-  margin: 15px 0; }
+  margin: 15px 0;
+  font-weight: bold; }
+  a a:first-child {
+    margin-top: 30px; }
 
 button {
   border-radius: 20px;
@@ -81,7 +84,10 @@ input {
   width: 50%;
   z-index: 2; }
   .sign-up-container button {
-    background-color: #0070ff; }
+    background-color: #f3ade1;
+    margin-top: 30px; }
+  .sign-up-container form {
+    padding-bottom: 100px; }
 
 .container.right-panel-active .sign-up-container {
   transform: translateX(100%); }
@@ -92,9 +98,7 @@ input {
   opacity: 0;
   z-index: 1; }
   .sign-in-container button {
-    background-color: #f3ade1; }
-  .sign-in-container form {
-    padding-bottom: 100px; }
+    background-color: #0070ff; }
 
 .remember {
   width: 100%;
@@ -104,6 +108,8 @@ input {
   .remember input {
     width: 13px;
     height: 13px; }
+  .remember span {
+    font-weight: bold; }
 
 .sign-in-container form p {
   font-size: 14px;

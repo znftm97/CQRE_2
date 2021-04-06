@@ -12,19 +12,15 @@
   text-align: center;
   margin-top: 20px; }
 
-#passwordCheck1, #passwordCheck2, #passwordCheck3 {
+#passwordCheck {
   width: 50%;
   height: 30%;
   z-index: 9999; }
-  #passwordCheck1 form > input,
-  #passwordCheck1 form > .btn-primary, #passwordCheck2 form > input,
-  #passwordCheck2 form > .btn-primary, #passwordCheck3 form > input,
-  #passwordCheck3 form > .btn-primary {
+  #passwordCheck form > input,
+  #passwordCheck form > .btn-primary {
     display: block; }
-  #passwordCheck1 form > button,
-  #passwordCheck1 form > a > button, #passwordCheck2 form > button,
-  #passwordCheck2 form > a > button, #passwordCheck3 form > button,
-  #passwordCheck3 form > a > button {
+  #passwordCheck form > button,
+  #passwordCheck form > a > button {
     margin-top: 15px;
     text-align: center; }
 

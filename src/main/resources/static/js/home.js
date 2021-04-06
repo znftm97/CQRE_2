@@ -30,7 +30,7 @@ $(document).ready(function (){
 
     $(perbox3).hover(function (){
         $(perbox3Child).css('opacity', '1.0').css('margin-top', '100px');
-        $(perbox3).css({"background":"url(/images/freeMain.png)"});
+        $(perbox3).css({"background":"url(/images/freeMain2.png)"});
     }, function (){
         $(perbox3Child).css('opacity', '0').css('margin-top', '40px');
         $(perbox3).css({"background": "url(/images/none.png)"});

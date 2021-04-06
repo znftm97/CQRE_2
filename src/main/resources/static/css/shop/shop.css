@@ -71,7 +71,8 @@
     display: inline-block;
     height: 37px;
     width: 450px;
-    float: right; }
+    float: right;
+    margin-bottom: 33px; }
     #tableBox .buttonBoxShop a {
       margin-left: 24px; }
   #tableBox .list {
@@ -158,14 +159,5 @@
   border-image-slice: 1 !important; }
 
 /*hover*/
-/*footer*/
-footer {
-  bottom: 0;
-  position: relative;
-  height: 70px; }
-  footer p:first-child {
-    padding-top: 10px; }
-
-/*footer*/
 
 /*# sourceMappingURL=shop.css.map */

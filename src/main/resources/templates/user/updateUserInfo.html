@@ -13,7 +13,6 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     <!-- Custom styles for this template -->
     <link rel="stylesheet" th:href="@{/css/common/fragments.css}">
     <link rel="stylesheet" th:href="@{/css/common/infoCommon.css}">
-    <link rel="stylesheet" th:href="@{/css/user/userInfo.css}">
     <script rel="stylesheet" th:src="@{/js/common/infoCommon.js}"></script>
     <!-- jQuery Modal -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
@@ -34,7 +33,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <div class="lnb">
             <ul>
                 <li>
-                    <a href="">회원 정보</a>
+                    <a th:href="@{/user/userInfo}">회원 정보</a>
                 </li>
                 <li>
                     <a th:href="@{/orderList}">나의 주문 내역</a>

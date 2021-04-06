@@ -141,21 +141,61 @@ header .menu > ul > li:nth-child(5):hover{
 /*footer*/
 footer {
   width: 100%;
+  height: 210px;
   /*하단에 고정*/
   position: absolute;
-  bottom: 0;
   z-index: 2;
-  background-color: lightgray;
-
+  background-color: #0c2340;
   font-size: 12px;
   letter-spacing: -0.35px;
   line-height: 14px;
-  text-align: center;
-  color: black!important;
+  color: #B0B0B0!important;
   text-decoration: none solid rgb(255, 255, 255)!important;
 
-  p:first-child{
-    margin-top: 10px;
+  .footerBox{
+    width: 70%;
+    height: 180px;
+    margin: 0 auto;
+
+    .box1{
+      border-bottom: 1px solid #213650;
+      margin-top: 30px;
+      height: 45px;
+      span:first-child{
+        font-size: 25px;
+      }
+    }
+
+    .box2{
+      div:first-child{
+        display: inline-block;
+        width: 600px;
+        float: left;
+        height: 95px;
+        p:first-child{
+          margin-top: 25px;
+        }
+      }
+      div:last-child{
+        width: 600px;
+        display: inline-block;
+        float: right;
+        height: 95px;
+        text-align: center;
+
+        >span{
+          margin-top: 30px;
+          display: inline-block;
+          border: 1px solid white;
+          width: 100px;
+          height: 30px;
+          font-size: 20px;
+          padding-top: 5px;
+          margin-right: 20px;
+        }
+      }
+
+    }
   }
 }/*footer*/
 

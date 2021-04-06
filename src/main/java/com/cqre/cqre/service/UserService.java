@@ -3,13 +3,14 @@ package com.cqre.cqre.service;
 import com.cqre.cqre.dto.user.*;
 import com.cqre.cqre.entity.Address;
 import com.cqre.cqre.entity.User;
-import com.cqre.cqre.exception.customexception.user.*;
+import com.cqre.cqre.exception.customexception.user.CFindIdUserNotFoundException;
+import com.cqre.cqre.exception.customexception.user.CFindPwUserNotFoundException;
+import com.cqre.cqre.exception.customexception.user.CUserNotFoundException;
+import com.cqre.cqre.exception.customexception.user.CValidationEmailException;
 import com.cqre.cqre.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,7 +30,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JavaMailSender javaMailSender;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final ModelMapper modelMapper;
 
     /*회원가입*/
     @Transactional
@@ -170,9 +170,10 @@ public class UserService {
     }
 
     /*회원 탈퇴*/
-    @Transactional
+    /*post, galleryFile, UserCoupon, Comment, PostFile, Recommendation 등등... 다 삭제해줘야함*/
+    /*@Transactional
     public void removeUser(){
         User loginUser = getLoginUser();
         userRepository.delete(loginUser);
-    }
+    }*/
 }

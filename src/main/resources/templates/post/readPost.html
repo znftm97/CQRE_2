@@ -5,6 +5,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrinkto-fit=no">
+    <!--csrf token-->
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <!-- Bootstrap CSS , jQuery-->
     <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" integrity="sha384-
 ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -82,6 +85,9 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 </div><!--containerCustom-->
 
 <script th:inline="javascript">
+    let token = $("meta[name='_csrf']").attr("content");
+    let header = $("meta[name='_csrf_header']").attr("content");
+
     /*댓글 조회 후 동적 생성*/
     function getCommentList(){
         let readPostDto = [[${readPostDto}]];
@@ -164,6 +170,9 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 url: "/comment/create",
                 type: "post",
                 data: JSON.stringify(form),
+                beforeSend: function (xhr) {
+                                xhr.setRequestHeader(header, token);
+                            },
                 contentType: "application/json; charset=utf-8",
             }).done(function (){
                 getCommentList();
@@ -185,6 +194,9 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             url: "/comment/delete",
             type: "delete",
             data: JSON.stringify(form),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(header, token);
+            },
             contentType: "application/json; charset=utf-8",
         }).done(function () {
             getCommentList();
@@ -219,6 +231,9 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             url: "/comment/update",
             type: "post",
             data: JSON.stringify(form),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(header, token);
+            },
             contentType: "application/json; charset=utf-8",
         }).done(function () {
             getCommentList();
@@ -257,6 +272,9 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             url: "/reComment/create",
             type: "post",
             data: JSON.stringify(form),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(header, token);
+            },
             contentType: "application/json; charset=utf-8",
         }).done(function (){
             getCommentList();
@@ -283,6 +301,9 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             url: "/recommendation",
             type: "post",
             data: JSON.stringify(form),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(header, token);
+            },
             contentType: "application/json; charset=utf-8",
         }).done(function (resp){
 

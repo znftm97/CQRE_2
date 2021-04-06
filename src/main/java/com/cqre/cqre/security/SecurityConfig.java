@@ -36,9 +36,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .anyRequest().permitAll();
+                .antMatchers("/user/sign", "/user/findId", "/user/findPw", "/user/validationEmailRe", "/", "/home").permitAll()
+                .antMatchers("/post/createNoticePost", "/createCoupon", "/couponList").hasRole("ADMIN")
+                .anyRequest().authenticated();
         http
-                .csrf().disable();
+                .csrf();
         http
                 .formLogin()
                 .loginPage("/user/sign")
@@ -59,6 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .rememberMe()
                 .userDetailsService(cUserDetailsService)
                 .tokenValiditySeconds(604800);
+        http
+                .exceptionHandling().accessDeniedPage("/authorityException");
     }
 
     @Override

@@ -101,21 +101,6 @@ header {
         height: 60px; }
 
 /*total box*/
-/*footer*/
-footer {
-  width: 100%;
-  /*하단에 고정*/
-  position: absolute;
-  bottom: 0;
-  z-index: 2;
-  font-size: 12px;
-  letter-spacing: -0.35px;
-  line-height: 14px;
-  text-align: center;
-  color: white !important;
-  text-decoration: none solid white !important; }
-
-/*footer*/
 .slideDown {
   animation-name: slideDown;
   animation-duration: 1s;

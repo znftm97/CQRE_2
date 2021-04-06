@@ -11,7 +11,7 @@ $grayTextColor: #777;
 
 h1 {
   font-weight: bold;
-  margin: 0;
+  margin-bottom: 30px;
 }
 
 h2 {
@@ -23,6 +23,11 @@ a {
   font-size: 14px;
   text-decoration: none;
   margin: 15px 0;
+  font-weight: bold;
+
+  a:first-child{
+    margin-top: 30px;
+  }
 }
 
 button {
@@ -103,7 +108,11 @@ input {
   width: 50%;
   z-index: 2;
   button{
-    background-color: $blueColor;
+    background-color: $pinkColor;
+    margin-top: 30px;
+  }
+  form{
+    padding-bottom: 100px;
   }
 }
 
@@ -117,10 +126,7 @@ input {
   opacity: 0;
   z-index: 1;
   button{
-    background-color: $pinkColor;
-  }
-  form{
-    padding-bottom: 100px;
+    background-color: $blueColor;
   }
 }
 
@@ -133,6 +139,9 @@ input {
   input{
     width: 13px;
     height: 13px;
+  }
+  span{
+    font-weight: bold;
   }
 }
 
