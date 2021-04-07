@@ -25,23 +25,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     </div>
 
     <form role="form" method="post" enctype="multipart/form-data" th:action="@{/createItem}">
-        <div class="form-group">
-            <label th:for="title"><strong>상품명</strong></label>
-            <input name="itemName" type="text" class="form-control" placeholder="상품명을 입력하세요">
-        </div>
-        <div class="form-group">
-            <label th:for="title"><strong>상품설명</strong></label>
-            <input name="itemExplanation" type="text" class="form-control" placeholder="상품설명을 입력하세요">
-        </div>
-        <div class="form-group">
-            <label th:for="title"><strong>금액</strong></label>
-            <input name="price" type="text" class="form-control" placeholder="금액을 입력하세요">
-        </div>
-        <div class="form-group">
-            <label th:for="title"><strong>재고</strong></label>
-            <input name="stockCount" type="text" class="form-control" placeholder="재고 수량을 입력하세요">
-        </div>
-        <select name="categorySelect">
+        <select name="categorySelect" style="margin: 15px 0 15px 0">
             <option>카테고리 선택</option>
             <option value="1-1">반팔 티셔츠</option>
             <option value="1-2">긴팔 티셔츠</option>
@@ -59,6 +43,28 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <option value="WOMEN">여성용</option>
             <option value="PUBLIC">공용</option>
         </select>
+
+        <div class="form-group">
+            <label th:for="title"><strong>상품명</strong></label>
+            <input name="itemName" type="text" class="form-control" placeholder="상품명을 입력하세요">
+        </div>
+
+        <div class="form-group">
+            <label th:for="title"><strong>상품명</strong></label>
+            <input name="itemName" type="text" class="form-control" placeholder="상품명을 입력하세요">
+        </div>
+        <div class="form-group">
+            <label th:for="title"><strong>상품설명</strong></label>
+            <input name="itemExplanation" type="text" class="form-control" placeholder="상품설명을 입력하세요">
+        </div>
+        <div class="form-group">
+            <label th:for="title"><strong>금액</strong></label>
+            <input name="price" type="text" class="form-control" placeholder="금액을 입력하세요">
+        </div>
+        <div class="form-group">
+            <label th:for="title"><strong>재고</strong></label>
+            <input name="stockCount" type="text" class="form-control" placeholder="재고 수량을 입력하세요">
+        </div>
 
         <div class="form-group">
             <label th:for="inputFile"><strong>첨부 사진</strong></label>

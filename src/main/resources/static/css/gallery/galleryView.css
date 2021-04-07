@@ -9,13 +9,6 @@
     width: 672px;
     border-right: none; }
 
-.visual {
-  width: 100%;
-  height: 350px;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/galleryShop.png") no-repeat;
-  background-size: 100% 100%;
-  opacity: 0.8; }
-
 .galleryBox {
   border: 1px solid #4e9bff;
   border-radius: 5px;
@@ -51,5 +44,165 @@
     .photos > div img {
       width: 400px;
       height: 280px; }
+
+.visual {
+  width: 100%;
+  height: 350px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/galleryShop.png") no-repeat;
+  background-size: 100% 100%;
+  opacity: 0.8; }
+  .visual img {
+    width: 100%;
+    height: 400px;
+    display: inline-block;
+    position: absolute; }
+  .visual h2 {
+    position: relative;
+    top: 45%;
+    text-align: center; }
+    .visual h2 p:first-child {
+      display: block;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 25px;
+      letter-spacing: 0.5pt; }
+    .visual h2 p:last-child {
+      display: block;
+      color: white;
+      font-size: 55px;
+      line-height: 100%;
+      z-index: 10; }
+
+/*visual*/
+/*contents*/
+.contents {
+  width: 100%;
+  /*lnb*/ }
+  .contents .lnb {
+    width: 70.7%;
+    height: 70px;
+    margin: 0 auto;
+    top: -40px;
+    box-shadow: rgba(0, 0, 0, 0.14) 3px 6px 12px;
+    display: block;
+    position: relative;
+    background: white; }
+    .contents .lnb ul {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      margin: 0;
+      padding: 0; }
+      .contents .lnb ul li {
+        float: left;
+        list-style: none;
+        width: 672px;
+        height: 70px; }
+        .contents .lnb ul li a {
+          width: 672px;
+          height: 70px;
+          display: block;
+          text-decoration: none;
+          font-size: 17px;
+          letter-spacing: -0.4pt;
+          line-height: 135%;
+          border-right: 2px solid #eee;
+          box-sizing: border-box;
+          padding-top: 20px;
+          color: #777;
+          transition: 0.5s all; }
+      .contents .lnb ul li:last-child > a {
+        border-right: none; }
+
+/*contents*/
+/*lnb hover*/
+.lnb > ul > li:nth-child(1) > a:hover {
+  background-color: darkgray;
+  color: white; }
+
+.lnb > ul > li:nth-child(1) > a:after {
+  background-color: white;
+  color: #777; }
+
+.lnb > ul > li:nth-child(2) > a:hover {
+  background-color: darkgray;
+  color: white; }
+
+.lnb > ul > li:nth-child(2) > a:after {
+  background-color: white;
+  color: #777; }
+
+.lnb > ul > li:nth-child(3) > a:hover {
+  background-color: darkgray;
+  color: white; }
+
+.lnb > ul > li:nth-child(3) > a:after {
+  background-color: white;
+  color: #777; }
+
+.lnb > ul > li:nth-child(4) > a:hover {
+  background-color: darkgray;
+  color: white; }
+
+.lnb > ul > li:nth-child(4) > a:after {
+  background-color: white;
+  color: #777; }
+
+.lnb > ul > li:nth-child(5) > a:hover {
+  background-color: darkgray;
+  color: white; }
+
+.lnb > ul > li:nth-child(5) > a:after {
+  background-color: white;
+  color: #777; }
+
+.lnb > ul > li:nth-child(6) > a:hover {
+  background-color: darkgray;
+  color: white; }
+
+.lnb > ul > li:nth-child(6) > a:after {
+  background-color: white;
+  color: #777; }
+
+.lnb > ul > li:nth-child(7) > a:hover {
+  background-color: darkgray;
+  color: white; }
+
+.lnb > ul > li:nth-child(7) > a:after {
+  background-color: white;
+  color: #777; }
+
+/*hover*/
+/*tableBox*/
+#tableBox {
+  visibility: hidden;
+  text-align: center;
+  margin-top: 5px; }
+  #tableBox .searchBox {
+    display: inline-block;
+    padding-bottom: 5px; }
+    #tableBox .searchBox select {
+      height: 37px; }
+  #tableBox .table-dark {
+    width: 60%;
+    margin: 0 auto;
+    box-shadow: rgba(0, 0, 0, 0.14) 3px 6px 12px;
+    /*background: rgba(40, 57, 101, .8);*/
+    border-bottom-color: 1 #f3ade1 !important; }
+  #tableBox nav {
+    padding-top: 15px; }
+
+.slideDown {
+  animation-name: slideDown;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  visibility: visible !important; }
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-10%); }
+  100% {
+    transform: translateY(0%); } }
+
+/*tableBox*/
 
 /*# sourceMappingURL=galleryView.css.map */

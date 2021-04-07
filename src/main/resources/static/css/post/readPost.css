@@ -4,21 +4,45 @@
   width: 50%;
   margin: 0 auto;
   /*좋아요 버튼*/ }
-  .postBox .postInfo table tbody > tr > td > a {
-    display: block; }
+  .postBox .boardTitle {
+    font-weight: bold;
+    border-bottom: 3px solid black;
+    width: 100%; }
+  .postBox .postInfo {
+    margin-top: 10px; }
+    .postBox .postInfo .postInfoSubBox1 {
+      width: 100%;
+      border-bottom: 1px solid #eeeeee;
+      padding-bottom: 12px; }
+      .postBox .postInfo .postInfoSubBox1 span:first-child {
+        font-weight: 800; }
+      .postBox .postInfo .postInfoSubBox1 span:last-child {
+        font-weight: 300; }
+    .postBox .postInfo .postInfoSubBox2 {
+      padding-top: 12px; }
+      .postBox .postInfo .postInfoSubBox2 span:nth-child(2n-1) {
+        font-weight: 800; }
+      .postBox .postInfo .postInfoSubBox2 span:nth-child(2n) {
+        font-weight: 300; }
+    .postBox .postInfo table tbody > tr > td > a {
+      display: block; }
   .postBox .content {
     width: 100%;
     border: 1px solid lightgray;
     box-shadow: rgba(0, 0, 0, 0.14) 3px 6px 12px;
     height: 500px;
     margin: 20px 0 10px 0;
+    font-weight: 300;
+    color: #666666;
     /*좋아요 버튼*/ }
+    .postBox .content p {
+      margin: 15px 0 0 15px; }
     .postBox .content div {
       width: 50px;
       height: 40px;
       position: relative;
       margin: 0 auto;
-      margin-top: 410px; }
+      margin-top: 395px; }
       .postBox .content div i {
         cursor: pointer;
         padding: 10px 12px 8px;

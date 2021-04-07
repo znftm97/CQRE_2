@@ -9,7 +9,40 @@ $grayTextColor: #777;
   width: 50%;
   margin: 0 auto;
 
+  .boardTitle{
+    font-weight: bold;
+    border-bottom: 3px solid black;
+    width: 100%;
+  }
+
   .postInfo{
+    margin-top: 10px;
+
+
+    .postInfoSubBox1{
+      width: 100%;
+      border-bottom: 1px solid #eeeeee;
+      padding-bottom: 12px;
+
+      span:first-child{
+        font-weight: 800;
+      }
+      span:last-child{
+        font-weight: 300;
+      }
+    }
+
+    .postInfoSubBox2{
+      padding-top: 12px;
+      span:nth-child(2n-1){
+        font-weight: 800;
+      }
+
+      span:nth-child(2n){
+        font-weight: 300;
+      }
+    }
+
     table{
       tbody > tr > td > a{
         display: block;
@@ -22,13 +55,20 @@ $grayTextColor: #777;
     box-shadow: rgba(0,0,0,.14) 3px 6px 12px;
     height: 500px;
     margin: 20px 0 10px 0;
+    font-weight: 300;
+    color: #666666;
+
+    p{
+      margin: 15px 0 0 15px;
+    }
+
     /*좋아요 버튼*/
     div{
       width: 50px;
       height:40px;
       position: relative;
       margin: 0 auto;
-      margin-top: 410px;
+      margin-top: 395px;
 
       i {
         cursor:pointer;
