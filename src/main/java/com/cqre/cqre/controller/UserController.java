@@ -185,7 +185,7 @@ public class UserController {
             return "/user/updateUserInfo";
 
         } else if(userPwCheckDto.getIdentifier() == 2){
-            userService.removeUser();
+            /*userService.removeUser();*/
             session.invalidate();
             /*글, 댓글, 등 다 삭제하는 로직 추가해야함*/
 

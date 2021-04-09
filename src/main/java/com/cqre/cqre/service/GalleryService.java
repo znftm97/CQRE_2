@@ -1,5 +1,13 @@
 package com.cqre.cqre.service;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.cqre.cqre.dto.gallery.CreateGalleryDto;
 import com.cqre.cqre.dto.gallery.FindGalleryFileDetailDto;
 import com.cqre.cqre.dto.gallery.FindGalleryFileDto;
@@ -16,7 +24,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
@@ -28,10 +42,85 @@ public class GalleryService {
     private final UserService userService;
     private final GalleryRepository galleryRepository;
 
+    private AmazonS3 amazonS3Client;
+
     @Value("${custom.path.gallery-images}")
     private String savePath;
 
+    @Value("${custom.path.temp}")
+    private String tempPath;
+
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucket;
+
+    @Value("${cloud.aws.credentials.access-key}")
+    private String accessKey;
+
+    @Value("${cloud.aws.credentials.secret-key}")
+    private String secretKey;
+
+    @Value("${cloud.aws.region.static}")
+    private String region;
+
     AtomicLong bundleId = new AtomicLong(1);
+
+    @PostConstruct
+    public void setAmazonS3Client() {
+        AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
+
+        amazonS3Client = AmazonS3ClientBuilder.standard()
+                .withCredentials(new AWSStaticCredentialsProvider(credentials))
+                .withRegion(region)
+                .build();
+    }
+
+    public String upload1(List<MultipartFile> multipartFiles, String dirName) throws IOException {
+        List<File> convertFiles = convert(multipartFiles);
+        return upload2(convertFiles, dirName);
+    }
+
+    private String upload2(List<File> uploadFile, String dirName) {
+        String fileName = "";
+        String uploadImageUrl = "";
+        for (int i = 0; i < uploadFile.size(); i++) {
+             fileName = dirName + "/" + uploadFile.get(i).getName();
+             uploadImageUrl = putS3(uploadFile.get(i), fileName);
+             removeNewFile(uploadFile);
+        }
+
+        return uploadImageUrl;
+    }
+
+    private String putS3(File uploadFile, String fileName) {
+        amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
+        return amazonS3Client.getUrl(bucket, fileName).toString();
+    }
+
+    private void removeNewFile(List<File> targetFile) {
+        for (int i = 0; i < targetFile.size(); i++) {
+            if (targetFile.get(i).delete()) {
+                return;
+            }
+            log.info("임시 파일이 삭제 되지 못했습니다. 파일 이름: {}", targetFile.get(i).getName());
+        }
+    }
+
+
+    private List<File> convert(List<MultipartFile> multipartFiles) throws IOException {
+        List<File> files = new ArrayList<>();
+
+        for (int i = 0; i < multipartFiles.size(); i++) {
+            File convertFile = new File(tempPath + multipartFiles.get(i).getOriginalFilename());
+            if (convertFile.createNewFile()) {
+                try (FileOutputStream fos = new FileOutputStream(convertFile)) {
+                    fos.write(multipartFiles.get(i).getBytes());
+                }
+                files.add(convertFile);
+            }
+        }
+
+        return files;
+    }
 
     /*갤러리 파일 생성*/
     @Transactional

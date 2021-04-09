@@ -14,6 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @Slf4j
@@ -40,9 +43,10 @@ public class GalleryController {
     /*갤러리 생성*/
     @PostMapping("/gallery/create")
     public String PCreateGallery(@ModelAttribute("createGalleryDto") CreateGalleryDto createGalleryDto,
-                                 @RequestParam("file") MultipartFile[] files) {
+                                 @RequestParam("file") List<MultipartFile> files) throws IOException {
 
-        galleryService.createGallery(files, createGalleryDto);
+        /*galleryService.createGallery(files, createGalleryDto);*/
+        galleryService.upload1(files, "static");
 
         return "redirect:/gallery";
     }
