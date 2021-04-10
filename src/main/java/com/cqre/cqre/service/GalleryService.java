@@ -74,21 +74,54 @@ public class GalleryService {
                 .build();
     }
 
-    public String upload1(List<MultipartFile> multipartFiles, String dirName) throws IOException {
+    public void upload1(List<MultipartFile> multipartFiles, String dirName, String title) throws IOException {
+        User loginUser = userService.getLoginUser();
+
+        /*이미지 파일인지 검증*/
+        for (MultipartFile uploadFile : multipartFiles) {
+            if (uploadFile.getContentType().startsWith("image") == false) {
+                throw new CFileIsNotImage();
+            }
+        }
+
         List<File> convertFiles = convert(multipartFiles);
-        return upload2(convertFiles, dirName);
+        List<String> uploadImageUrls = upload2(convertFiles, dirName);
+
+        for (int i = 0; i < multipartFiles.size(); i++) {
+            String origFilename = multipartFiles.get(i).getOriginalFilename(); /*원본 파일 명*/
+            String filename = System.currentTimeMillis() + "_" + origFilename; /*파일 이름 중복되지 않도록*/
+            String filePath = uploadImageUrls.get(i);
+
+            GalleryFile galleryFile = GalleryFile.builder()
+                    .title(title)
+                    .filename(filename)
+                    .filePath(filePath)
+                    .originFilename(origFilename)
+                    .user(loginUser)
+                    .bundleId(bundleId.get())
+                    .bundleOrder(System.currentTimeMillis())
+                    .build();
+
+            galleryRepository.save(galleryFile);
+        }
+
+        bundleId.incrementAndGet();
     }
 
-    private String upload2(List<File> uploadFile, String dirName) {
+    private List<String> upload2(List<File> uploadFile, String dirName) {
         String fileName = "";
         String uploadImageUrl = "";
+        List<String> uploadImageUrls = new ArrayList<>();
+
         for (int i = 0; i < uploadFile.size(); i++) {
-             fileName = dirName + "/" + uploadFile.get(i).getName();
+             fileName = dirName + "/" + System.currentTimeMillis() + "_" + uploadFile.get(i).getName(); // 파일명/랜덤숫자_파일이름
              uploadImageUrl = putS3(uploadFile.get(i), fileName);
+
+             uploadImageUrls.add(uploadImageUrl);
              removeNewFile(uploadFile);
         }
 
-        return uploadImageUrl;
+        return uploadImageUrls;
     }
 
     private String putS3(File uploadFile, String fileName) {
@@ -122,55 +155,6 @@ public class GalleryService {
         return files;
     }
 
-    /*갤러리 파일 생성*/
-    @Transactional
-    public void createGallery(MultipartFile[] files, CreateGalleryDto createGalleryDto) {
-        User loginUser = userService.getLoginUser();
-
-        if (!new java.io.File(savePath).exists()) {
-            try{
-                new java.io.File(savePath).mkdir();
-            }
-            catch(Exception e){
-                e.getStackTrace();
-            }
-        }
-
-        /*이미지 파일인지 검사*/
-        for (MultipartFile uploadFile : files) {
-            if (uploadFile.getContentType().startsWith("image") == false) {
-                throw new CFileIsNotImage();
-            }
-        }
-
-        for(int i=0; i<files.length; i++){
-            try {
-                String origFilename = files[i].getOriginalFilename(); /*원본 파일 명*/
-                String filename = System.currentTimeMillis() + "_" + origFilename; /*파일 이름 중복되지 않도록*/
-                String filePath = savePath + "\\" + filename;
-
-                files[i].transferTo(new java.io.File(filePath));
-
-                GalleryFile galleryFile = GalleryFile.builder()
-                        .title(createGalleryDto.getTitle())
-                        .filename(filename)
-                        .filePath(filePath)
-                        .originFilename(origFilename)
-                        .user(loginUser)
-                        .bundleId(bundleId.get())
-                        .bundleOrder(System.currentTimeMillis())
-                        .build();
-
-                galleryRepository.save(galleryFile);
-
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        bundleId.incrementAndGet();
-    }
-
     /*갤러리 파일 중복 제거 조회*/
     public Page<FindGalleryFileDto> findGalleryFilesDistinct(Pageable pageable){
         return galleryRepository.findAllDistinctByBundleId(pageable);
@@ -201,4 +185,53 @@ public class GalleryService {
 
         galleryRepository.deleteAllByIdInQuery(GalleryFileIds);
     }
+
+    /*갤러리 파일 생성*/
+    /*@Transactional
+    public void createGallery(MultipartFile[] files, CreateGalleryDto createGalleryDto) {
+        User loginUser = userService.getLoginUser();
+
+        if (!new java.io.File(savePath).exists()) {
+            try{
+                new java.io.File(savePath).mkdir();
+            }
+            catch(Exception e){
+                e.getStackTrace();
+            }
+        }
+
+        *//*이미지 파일인지 검사*//*
+        for (MultipartFile uploadFile : files) {
+            if (uploadFile.getContentType().startsWith("image") == false) {
+                throw new CFileIsNotImage();
+            }
+        }
+
+        for(int i=0; i<files.length; i++){
+            try {
+                String origFilename = files[i].getOriginalFilename(); *//*원본 파일 명*//*
+                String filename = System.currentTimeMillis() + "_" + origFilename; *//*파일 이름 중복되지 않도록*//*
+                String filePath = savePath + "\\" + filename;
+
+                files[i].transferTo(new java.io.File(filePath));
+
+                GalleryFile galleryFile = GalleryFile.builder()
+                        .title(createGalleryDto.getTitle())
+                        .filename(filename)
+                        .filePath(filePath)
+                        .originFilename(origFilename)
+                        .user(loginUser)
+                        .bundleId(bundleId.get())
+                        .bundleOrder(System.currentTimeMillis())
+                        .build();
+
+                galleryRepository.save(galleryFile);
+
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        bundleId.incrementAndGet();
+    }*/
 }

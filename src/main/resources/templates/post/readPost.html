@@ -68,7 +68,8 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 <td>
                     [[${state.count}]]
                     <span>. </span>
-                    <a th:href="@{/postFile/{postFileId}/download (postFileId=${postFile.id})}" th:text="${postFile.originFilename}"></a>
+                    <!--<a th:href="@{/postFile/{postFileId}/download (postFileId=${postFile.id})}" th:text="${postFile.originFilename}"></a>-->
+                    <a th:href="@{${postFile.filePath}}" th:text="${postFile.originFilename}"></a>
                 </td>
             </tr>
             </tbody>

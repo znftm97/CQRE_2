@@ -42,11 +42,11 @@ public class GalleryController {
 
     /*갤러리 생성*/
     @PostMapping("/gallery/create")
-    public String PCreateGallery(@ModelAttribute("createGalleryDto") CreateGalleryDto createGalleryDto,
-                                 @RequestParam("file") List<MultipartFile> files) throws IOException {
+    public String PCreateGallery(@RequestParam("file") List<MultipartFile> files,
+                                 @RequestParam("title") String title) throws IOException {
 
         /*galleryService.createGallery(files, createGalleryDto);*/
-        galleryService.upload1(files, "static");
+        galleryService.upload1(files, "galleryImages", title);
 
         return "redirect:/gallery";
     }

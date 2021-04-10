@@ -43,7 +43,7 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
                         item.name,
                         item.itemExplanation,
                         item.price,
-                        itemImage.filename,
+                        itemImage.filePath,
                         itemImage.bundleId
                         ))
                 .from(itemImage)
@@ -80,7 +80,7 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
                         item.name,
                         item.itemExplanation,
                         item.price,
-                        itemImage.filename,
+                        itemImage.filePath,
                         itemImage.bundleId
                         ))
                 .from(itemImage)

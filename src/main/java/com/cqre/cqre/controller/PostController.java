@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -112,14 +113,15 @@ public class PostController {
     /*자유게시판 글 생성*/
     @PostMapping("/post/createFreePost")
     public String PCreateFreePost(@ModelAttribute("createAndUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
-                                  @RequestParam(value = "file", required = false) List<MultipartFile> files){
+                                  @RequestParam(value = "file", required = false) List<MultipartFile> files) throws IOException {
         if (result.hasErrors()) {
             return "/post/createFreePost";
         }
 
         Long postId = postService.createFreePost(createAndUpdatePostDto);
         if (!((files.get(0).getOriginalFilename()).isEmpty())){
-            postFileService.saveFile(files, postId);
+            /*postFileService.saveFile(files, postId);*/
+            postFileService.upload1(files, "postFiles", postId);
         }
 
         return "redirect:/board/freeBoard";
@@ -128,7 +130,7 @@ public class PostController {
     /*공지사항 글 생성*/
     @PostMapping("/post/createNoticePost")
     public String PCreateNoticePost(@ModelAttribute("createAndUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
-                                    @RequestParam(value = "file", required = false) List<MultipartFile> files){
+                                    @RequestParam(value = "file", required = false) List<MultipartFile> files) throws IOException {
 
         if (result.hasErrors()) {
             return "/post/createNoticePost";
@@ -136,7 +138,7 @@ public class PostController {
 
         Long postId = postService.createNoticePost(createAndUpdatePostDto);
         if (!((files.get(0).getOriginalFilename()).isEmpty())){
-            postFileService.saveFile(files, postId);
+            postFileService.upload1(files, "postFiles", postId);
         }
 
         return "redirect:/board/noticeBoard";
@@ -184,7 +186,7 @@ public class PostController {
     /*글 수정*/
     @PostMapping("/post/update")
     public String PUpdatePost(@ModelAttribute("createAndUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
-                              @RequestParam(value = "file", required = false) List<MultipartFile> files){
+                              @RequestParam(value = "file", required = false) List<MultipartFile> files) throws IOException {
         if (result.hasErrors() && (createAndUpdatePostDto.getBoard()==Board.FREE) ) {
             return "/post/updatePostFree";
         } else if (result.hasErrors() && (createAndUpdatePostDto.getBoard() == Board.NOTICE)) {
@@ -193,7 +195,7 @@ public class PostController {
 
         Post updatePost = postService.updatePost(createAndUpdatePostDto);
         if (!((files.get(0).getOriginalFilename()).isEmpty())){
-            postFileService.saveFile(files, createAndUpdatePostDto.getId());
+            postFileService.upload1(files, "postFiles", createAndUpdatePostDto.getId());
         }
 
         if(updatePost.getBoard() == Board.FREE){

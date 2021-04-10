@@ -75,7 +75,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 <div class="topPic">
                     <li th:each = "item : ${items}">
                         <a th:href="@{/itemDetail/{itemId}/{bundleId} (itemId=${item.id} ,bundleId=${item.bundleId}) }">
-                            <img th:src="@{'/images/shop/' + ${item.filename}}"/>
+                            <img th:src="@{${item.filePath}}"/>
                         </a>
                         <div>
                             <p><strong th:text="${item.name}"></strong></p>

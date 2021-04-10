@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,13 +31,14 @@ public class ItemService {
 
     /*상품 생성*/
     @Transactional
-    public void createItem(CreateItemDto dto, MultipartFile[] files) {
+    public void createItem(CreateItemDto dto, List<MultipartFile> files, String dirName) throws IOException {
         Category findCategory = categoryRepository.findCategoryByCode(dto.getCategorySelect());
         CommonItem commonItem = new CommonItem();
         CommonItem createCommonItem = commonItem.createCommonItem(dto, findCategory);
 
         itemRepository.save(createCommonItem);
-        itemImageService.createItemImage(files, createCommonItem);
+        /*itemImageService.createItemImage(files, createCommonItem);*/
+        itemImageService.upload1(files, dirName, createCommonItem);
     }
 
     /*모든 상품 조회*/

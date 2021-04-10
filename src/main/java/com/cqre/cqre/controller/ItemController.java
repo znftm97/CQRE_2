@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -67,9 +68,9 @@ public class ItemController {
     /*상품 생성*/
     @PostMapping("/createItem")
     public String pCreateItem(@ModelAttribute CreateItemDto dto,
-                              @RequestParam("file") MultipartFile[] files) {
+                              @RequestParam("file") List<MultipartFile> files) throws IOException {
 
-        itemService.createItem(dto, files);
+        itemService.createItem(dto, files, "shopImages");
         return "redirect:/shop";
     }
 

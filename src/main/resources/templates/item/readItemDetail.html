@@ -45,7 +45,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
         <div id="tableBox">
             <div class="representationImgBox">
-                <img th:src="@{'/images/shop/' + ${itemImageDetail.get(0)}}">
+                <img th:src="@{${itemImageDetail.get(0)}}">
             </div>
 
             <div class="itemBox">
@@ -79,7 +79,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <div class="imgBox">
                 <ul>
                     <li th:each="itemImage : ${itemImageDetail}">
-                        <img th:src="@{'/images/shop/' + ${itemImage}}">
+                        <img th:src="@{${itemImage}}">
                     </li>
                 </ul>
             </div>

@@ -7,13 +7,13 @@ import lombok.Data;
 public class FindGalleryFileDetailDto {
 
     private String title;
-    private String filename;
+    private String filePath;
     private Long bundleId;
     private String authorCheck;
 
     public FindGalleryFileDetailDto(GalleryFile galleryFile, String authorCheck) {
         this.title = galleryFile.getTitle();
-        this.filename = galleryFile.getFilename();
+        this.filePath = galleryFile.getFilePath();
         this.bundleId = galleryFile.getBundleId();
         this.authorCheck = authorCheck;
     }

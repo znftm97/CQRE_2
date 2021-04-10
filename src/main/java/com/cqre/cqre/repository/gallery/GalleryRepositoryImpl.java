@@ -41,7 +41,7 @@ public class GalleryRepositoryImpl implements GalleryRepositoryCustom{
                 .select(new QFindGalleryFileDto(
                         galleryFile.id,
                         galleryFile.title,
-                        galleryFile.filename,
+                        galleryFile.filePath,
                         galleryFile.createDate,
                         QUser.user.name,
                         galleryFile.bundleId,
