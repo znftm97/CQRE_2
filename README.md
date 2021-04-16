@@ -15,5 +15,5 @@
 - Spring Security
 - Spring Data Jpa
 - Querydsl
-### Bulid tool
+### Build tool
 - Gradle
