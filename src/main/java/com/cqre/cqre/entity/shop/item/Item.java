@@ -41,4 +41,8 @@ public abstract class Item extends BaseEntity {
         }
         this.stockCount = restStock;
     }
+
+    public void addStock(int stockCount) {
+        this.stockCount += stockCount;
+    }
 }

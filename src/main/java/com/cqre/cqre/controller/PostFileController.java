@@ -15,8 +15,8 @@ public class PostFileController {
     private final PostFileService postFileService;
 
     /*파일 다운로드*/
-    @GetMapping("/postFile/{postFileId}/download")
+    /*@GetMapping("/postFile/{postFileId}/download")
     public ResponseEntity<Resource> PostFileDownload(@PathVariable("postFileId") Long postFileId){
         return postFileService.PostFileDownload(postFileId);
-    }
+    }*/
 }

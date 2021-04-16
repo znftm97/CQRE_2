@@ -23,7 +23,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 <img th:src="@{/images/mainLogo4.png}" type="images" alt="">
             </a>
             <div class="sign">
-                <a th:href="@{/user/sign}" sec:authorize="isAnonymous()">SignIn/SignUp</a>
+                <a th:href="@{/user/sign}" sec:authorize="isAnonymous()">SignIn / SignUp</a>
                 <form role="form" th:action="@{/user/logout}" method="post">
                     <button type="submit" sec:authorize="isAuthenticated()">Logout</button>
                 </form>

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +27,7 @@ public class GalleryController {
 
     /*갤러리 페이지*/
     @GetMapping("/gallery")
-    public String gallery(Model model, @PageableDefault(size = 6, sort = "id") Pageable pageable){
+    public String gallery(Model model, @PageableDefault(size = 6) Pageable pageable){
         Page<FindGalleryFileDto> galleryFiles = galleryService.findGalleryFilesDistinct(pageable);
         model.addAttribute("galleryFiles", galleryFiles);
 

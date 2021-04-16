@@ -131,7 +131,7 @@ public class PostFileService {
         List<File> files = new ArrayList<>();
 
         for (int i = 0; i < multipartFiles.size(); i++) {
-            File convertFile = new File(tempPath + multipartFiles.get(i).getOriginalFilename());
+            File convertFile = new File(tempPath + System.currentTimeMillis() + "_" + multipartFiles.get(i).getOriginalFilename());
             if (convertFile.createNewFile()) {
                 try (FileOutputStream fos = new FileOutputStream(convertFile)) {
                     fos.write(multipartFiles.get(i).getBytes());

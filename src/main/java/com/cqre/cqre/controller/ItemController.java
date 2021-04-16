@@ -32,7 +32,7 @@ public class ItemController {
 
     /*상품 페이지*/
     @GetMapping("/shop")
-    public String shop(@PageableDefault(size = 6, sort = "id") Pageable pageable,
+    public String shop(@PageableDefault(size = 6) Pageable pageable,
                        @RequestParam(value = "notEnoughStock", required = false) String notEnoughStock,
                        Model model){
         Page<FindItemDto> items = itemService.findItems(pageable);

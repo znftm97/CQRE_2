@@ -36,9 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/user/sign", "/user/findId", "/user/findPw", "/user/validationEmailRe", "/", "/home").permitAll()
                 .antMatchers("/post/createNoticePost", "/createCoupon", "/couponList").hasRole("ADMIN")
-                .anyRequest().authenticated();
+                .antMatchers("/history", "/board/noticeBoard", "/board/freeBoard", "/gallery", "/shop").hasAnyRole("USER", "ADMIN")
+                .anyRequest().permitAll();
         http
                 .csrf();
         http
@@ -50,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
         http
                 .logout()
+
                 .logoutUrl("/user/logout")
                 .logoutSuccessUrl("/user/sign")
                 .permitAll();

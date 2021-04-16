@@ -23,8 +23,8 @@ public class OrderController {
     @PostMapping("/order")
     public String createOrder(@RequestParam("itemId") Long itemId,
                               @RequestParam("count") int count,
-                              @RequestParam("userCouponId") Long userCouponId) {
-        if (userCouponId == null) {
+                              @RequestParam("userCouponId") String userCouponId) {
+        if (userCouponId.equals("null")) {
             orderService.createOrder(itemId, count);
         } else {
             orderService.createOrderWithCoupon(itemId, count, userCouponId);

@@ -65,7 +65,8 @@ header {
       margin-top: 40px; }
       header .sign form button {
         background: none;
-        border: none; }
+        border: none;
+        font-size: 20px; }
     header .sign a {
       display: inline-block;
       font-size: 20px;

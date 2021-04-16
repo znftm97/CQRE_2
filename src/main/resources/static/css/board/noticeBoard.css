@@ -1,6 +1,5 @@
 .contents .lnb > ul > li:first-child > a {
   background-color: #4e9bff !important;
-  /*background: linear-gradient(to right, $pinkColor, $blueLightColor);*/
   color: white !important; }
 
 .visual {

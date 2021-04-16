@@ -80,13 +80,15 @@ public class OAuthAttributes {
                 .build();
     }
 
-    public User toEntity(){
+    public User toEntity(String registrationId){
+        String OAuth2Of = registrationId;
         User buildUser = User.builder()
                             .name(name)
                             .email(email)
-                            .studentId("OAuth2")
+                            .studentId("OAuth2_"+OAuth2Of)
                             .password("OAuth2")
-                            .loginId("OAuth2")
+                            .loginId("OAuth2_"+OAuth2Of)
+                            .role("ROLE_USER")
                             .build();
 
         buildUser.setEmailVerified("true");

@@ -1,8 +1,6 @@
 package com.cqre.cqre.dto.item;
 
-import com.cqre.cqre.entity.shop.ItemImage;
 import com.cqre.cqre.entity.shop.item.Item;
-import com.cqre.cqre.entity.shop.item.ItemGender;
 import lombok.Data;
 
 import java.time.LocalDateTime;

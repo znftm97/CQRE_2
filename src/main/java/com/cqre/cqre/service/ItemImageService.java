@@ -7,8 +7,6 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
-import com.cqre.cqre.entity.GalleryFile;
 import com.cqre.cqre.entity.User;
 import com.cqre.cqre.entity.shop.ItemImage;
 import com.cqre.cqre.entity.shop.item.CommonItem;
@@ -18,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
@@ -121,7 +118,6 @@ public class ItemImageService {
 
     private String putS3(File uploadFile, String fileName) {
         amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
-        S3Object object = amazonS3Client.getObject(bucket, accessKey);
         return amazonS3Client.getUrl(bucket, fileName).toString();
     }
 
@@ -138,7 +134,7 @@ public class ItemImageService {
         List<File> files = new ArrayList<>();
 
         for (int i = 0; i < multipartFiles.size(); i++) {
-            File convertFile = new File(tempPath + multipartFiles.get(i).getOriginalFilename());
+            File convertFile = new File(tempPath + System.currentTimeMillis() + "_" + multipartFiles.get(i).getOriginalFilename());
             if (convertFile.createNewFile()) {
                 try (FileOutputStream fos = new FileOutputStream(convertFile)) {
                     fos.write(multipartFiles.get(i).getBytes());

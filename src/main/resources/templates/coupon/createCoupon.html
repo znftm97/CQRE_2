@@ -18,13 +18,14 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 </head>
 <body>
 <div class="containerCustom">
-    <div th:replace="fragments/top :: top"/>
+    <div th:replace="/fragments/top :: top"/>
 
     <div class="boardTitle">
         <h2>쿠폰 생성</h2>
     </div>
 
     <form role="form" method="post" th:action="@{createCoupon}">
+
         <div class="form-group">
             <label th:for="title"><strong>쿠폰명</strong></label>
             <input name="name" type="text" class="form-control" placeholder="쿠폰명을 입력하세요">
@@ -42,8 +43,6 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
-    <div th:replace="fragments/footer :: footer"/>
 </div> <!-- /container -->
 <script th:inline="javascript">
     let discountRateExceeded = [[${discountRateExceeded}]];

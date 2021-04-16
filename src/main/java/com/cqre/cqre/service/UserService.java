@@ -9,27 +9,31 @@ import com.cqre.cqre.exception.customexception.user.CUserNotFoundException;
 import com.cqre.cqre.exception.customexception.user.CValidationEmailException;
 import com.cqre.cqre.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JavaMailSender javaMailSender;
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /*회원가입*/
     @Transactional
@@ -40,6 +44,7 @@ public class UserService {
                 .loginId(signUpDto.getLoginId())
                 .password(passwordEncoder.encode(signUpDto.getPassword()))
                 .email(signUpDto.getEmail())
+                .role("ROLE_USER")
                 .build();
 
         userRepository.save(user);
@@ -49,13 +54,13 @@ public class UserService {
 
     /*메일 전송*/
     public void emailSend(User user) throws MessagingException, UnsupportedEncodingException {
-
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
+        /*ec2 환경에서 사용하기위한 코드 수정 부분*/
         String html = "<h1>이메일 인증</h1><br>" +
                 "아래 버튼을 클릭하시면 이메일 인증이 완료됩니다.<br>" +
-                "<a href='http://localhost:8080/user/validationEmail?email=" +
+                "<a href='http://15.165.245.31:8080/user/validationEmail?email=" +
                 user.getEmail() +
                 "&emailCheckToken=" +
                 user.getEmailCheckToken() +
@@ -75,9 +80,10 @@ public class UserService {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
+        /*ec2 환경에서 사용하기위한 코드 수정 부분*/
         String html = "<h1>이메일 인증</h1><br>" +
                 "아래 버튼을 클릭하시면 이메일 인증이 완료됩니다.<br>" +
-                "<a href='http://localhost:8080/user/validationEmail?email=" +
+                "<a href='http://15.165.245.31:8080/user/validationEmail?email=" +
                 findUser.getEmail() +
                 "&emailCheckToken=" +
                 findUser.getEmailCheckToken() +
@@ -107,7 +113,7 @@ public class UserService {
         User findUser = userRepository.OpFindByEmail(userDto.getEmail()).orElseThrow(CFindIdUserNotFoundException::new);
 
         if (!findUser.getName().equals(userDto.getName())) {
-            logger.error("엔티티 조회 에러");
+            log.error("엔티티 조회 에러");
             throw new CFindIdUserNotFoundException();
         }
 
@@ -124,9 +130,10 @@ public class UserService {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
+        /*ec2 환경에서 사용하기위한 코드 수정 부분*/
         String html = "<h1>비밀번호 변경 본인확인</h1><br>" +
                 "아래 버튼을 클릭하시면 본인 인증이 완료됩니다.<br>" +
-                "<a href='http://localhost:8080/user/updatePassword?email=" +
+                "<a href='http://15.165.245.31:8080/user/updatePassword?email=" +
                 findUser.getEmail() +
                 "' target='_blank'><button>인증 하기</button></a>";
 
@@ -146,15 +153,27 @@ public class UserService {
 
     /*로그인 사용자 가져오기*/
     public User getLoginUser() {
-        User loginUser;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User loginUser = User.builder().build();
 
-        try {
-             loginUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        } catch (ClassCastException e) {
-            throw e;
+        /*일반 로그인 사용자*/
+        if (principal.getClass().getName().equals(loginUser.getClass().getName())) {
+            loginUser = (User) principal;
+            return userRepository.findByEmail(loginUser.getEmail());
+
+        /*OAuth2 로그인 사용자*/
+        } else {
+            DefaultOAuth2User defaultOAuth2User = (DefaultOAuth2User) principal;
+            Map<String, Object> attributes = defaultOAuth2User.getAttributes();
+
+            /*카카오는 이중 Map 구조라 다르게 구현*/
+            if (Objects.isNull(attributes.get("email"))) {
+                Map<String, Object> kakao_account = (Map<String, Object>) attributes.get("kakao_account");
+                return userRepository.findByEmail(kakao_account.get("email").toString());
+            } else {
+                return userRepository.findByEmail(attributes.get("email").toString());
+            }
         }
-
-        return userRepository.CFindById(loginUser.getId()).orElseThrow(CUserNotFoundException::new);
     }
 
     /*회원 정보 수정*/

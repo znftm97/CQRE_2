@@ -23,7 +23,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 </head>
 <body>
 <div class="containerCustom">
-    <div th:replace="fragments/top :: top"/>
+    <div th:replace="/fragments/top :: top"/>
     <div class="postBox">
         <div class="boardTitle">
             <h1 th:text="${readPostDto.title}">제목</h1>
@@ -86,7 +86,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             </div>
         </div><!--commetBox-->
     </div> <!--postBox-->
-    <div th:replace="fragments/footer :: footer"/>
+    <div th:replace="/fragments/footer :: footer"/>
 </div><!--containerCustom-->
 
 <script th:inline="javascript">

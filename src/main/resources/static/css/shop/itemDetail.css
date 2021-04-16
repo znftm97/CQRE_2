@@ -1,5 +1,5 @@
 #tableBox {
-  height: 800px; }
+  height: 500px; }
   #tableBox .representationImgBox {
     display: inline-block;
     float: left;
@@ -21,14 +21,27 @@
       padding-top: 10px; }
       #tableBox .itemBox .itemInfo > div {
         padding-top: 10px; }
-  #tableBox .imgBox {
-    margin-top: 50px;
-    padding-top: 400px; }
-    #tableBox .imgBox li {
-      list-style: none;
-      display: inline-block; }
-    #tableBox .imgBox img {
-      width: 400px;
-      height: 300px; }
+      #tableBox .itemBox .itemInfo select {
+        display: inline-block;
+        width: 300px; }
+      #tableBox .itemBox .itemInfo form:last-child {
+        margin-top: 20px; }
+  #tableBox .itemExplanation {
+    width: 900px;
+    margin-left: 200px;
+    margin-top: 400px;
+    position: absolute; }
+
+.imgBox {
+  margin: 0 auto;
+  width: 1500px;
+  border-top: 1px solid #b2b2b2;
+  padding-left: 110px; }
+  .imgBox li {
+    list-style: none;
+    display: inline-block; }
+  .imgBox img {
+    width: 400px;
+    height: 300px; }
 
 /*# sourceMappingURL=itemDetail.css.map */

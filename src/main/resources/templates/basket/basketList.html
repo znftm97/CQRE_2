@@ -18,7 +18,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 </head>
 <body>
 <div class="containerCustom">
-    <div th:replace="fragments/top :: top"/>
+    <div th:replace="/fragments/top :: top"/>
 
     <div class="visual">
         <h2>
@@ -75,9 +75,11 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                         <td th:text="${orderItem.orderCount}"></td>
                         <td>[[${#temporals.format(orderItem.createDate, 'yyyy-MM-dd일 hh:mm분')}]]</td>
                         <td>
-                            <form method="post">
-                                <button th:formaction="@{/basketOrder/{orderItemId} (orderItemId = ${orderItem.id})}" type="submit" class="btn-primary">Order</button>
-                                <button th:formaction="@{/basketCancel/{orderItemId} (orderItemId = ${orderItem.id})}" type="submit" class="btn-danger">Cancel</button>
+                            <form method="post" th:action="@{/basketOrder/{orderItemId} (orderItemId = ${orderItem.id})}" style="display: inline-block">
+                                <button type="submit" class="btn-primary">Order</button>
+                            </form>
+                            <form method="post" th:action="@{/basketCancel/{orderItemId} (orderItemId = ${orderItem.id})}" style="display: inline-block">
+                                <button type="submit" class="btn-danger">Cancel</button>
                             </form>
                         </td>
                     </tr>
@@ -129,7 +131,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
 
 
-    <div th:replace="fragments/footer :: footer"/>
+    <div th:replace="/fragments/footer :: footer"/>
 </div>
 </body>
 </html>

@@ -33,6 +33,8 @@ header {
     width: 300px;
     height: inherit;
     margin-right: 20px; }
+    header .sign a:first-child {
+      width: 200px; }
     header .sign a {
       display: inline-block;
       font-size: 20px;

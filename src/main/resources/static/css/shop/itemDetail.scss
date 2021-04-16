@@ -1,5 +1,5 @@
 #tableBox{
-  height: 800px;
+  height: 500px;
 
   .representationImgBox{
     display: inline-block;
@@ -33,19 +33,37 @@
       >div{
         padding-top: 10px;
       }
+
+      select{
+        display: inline-block;
+        width: 300px;
+      }
+
+      form:last-child{
+        margin-top: 20px;
+      }
     }
   }
 
-  .imgBox{
-    margin-top: 50px;
-    padding-top: 400px;
-    li{
-      list-style: none;
-      display: inline-block;
-    }
-    img{
-      width: 400px;
-      height: 300px;
-    }
+  .itemExplanation{
+    width: 900px;
+    margin-left: 200px;
+    margin-top: 400px;
+    position: absolute;
+  }
+}
+
+.imgBox{
+  margin: 0 auto;
+  width: 1500px;
+  border-top: 1px solid #b2b2b2;
+  padding-left: 110px;
+  li{
+    list-style: none;
+    display: inline-block;
+  }
+  img{
+    width: 400px;
+    height: 300px;
   }
 }

@@ -1,5 +1,5 @@
 package com.cqre.cqre;
-
+/*
 import com.cqre.cqre.dto.item.CreateItemDto;
 import com.cqre.cqre.entity.GalleryFile;
 import com.cqre.cqre.entity.User;
@@ -7,11 +7,9 @@ import com.cqre.cqre.entity.post.Board;
 import com.cqre.cqre.entity.post.Post;
 import com.cqre.cqre.entity.shop.Coupon;
 import com.cqre.cqre.entity.shop.ItemImage;
-import com.cqre.cqre.entity.shop.Order;
 import com.cqre.cqre.entity.shop.item.Category;
 import com.cqre.cqre.entity.shop.item.CommonItem;
 import com.cqre.cqre.entity.shop.item.Item;
-import com.cqre.cqre.entity.shop.item.ItemGender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -41,11 +39,11 @@ public class InitDb {
 
         public void init() {
             User user1 = User.builder()
-                    .name("이지훈")
-                    .studentId("20144339")
+                    .name("김딱딱")
+                    .studentId("20202020")
                     .loginId("znftm97")
                     .password(passwordEncoder.encode("wprkfrhdaud12!"))
-                    .email("znftm97@gmail.com")
+                    .email("test1@gmail.com")
                     .role("ROLE_USER")
                     .build();
 
@@ -54,7 +52,7 @@ public class InitDb {
                     .studentId("12341234")
                     .loginId("123")
                     .password(passwordEncoder.encode("123"))
-                    .email("znftm93@gmail.com")
+                    .email("test2@gmail.com")
                     .role("ROLE_USER")
                     .build();
 
@@ -74,7 +72,7 @@ public class InitDb {
             em.persist(user2);
             em.persist(admin);
 
-            /*coupon*/
+
             Coupon coupon1 = createCoupon(10, 50L, "연말기념 쿠폰", admin);
             Coupon coupon2 = createCoupon(10, 40L, "연초기념 쿠폰", admin);
             Coupon coupon3 = createCoupon(50, 30L, "크리스마스기념 쿠폰", admin);
@@ -87,7 +85,7 @@ public class InitDb {
             em.persist(coupon4);
             em.persist(coupon5);
 
-            /*post*/
+
             Post post1 = createPost("1111", "1111", 0, 0, user1, Board.FREE);
             Post post2 = createPost("2222", "2222", 0, 0, user1, Board.FREE);
             Post post3 = createPost("3333", "3333", 0, 0, user1, Board.FREE);
@@ -95,8 +93,13 @@ public class InitDb {
             Post post5 = createPost("5555", "5555", 0, 0, user2, Board.FREE);
             Post post6 = createPost("6666", "6666", 0, 0, user2, Board.FREE);
             Post post7 = createPost("7777", "7777", 0, 0, user2, Board.FREE);
-            Post post8 = createPost("1111", "1111", 0, 0, user2, Board.NOTICE);
-            Post post9 = createPost("2222", "2222", 0, 0, user2, Board.NOTICE);
+            Post post8 = createPost("공지사항1", "ㅁㄴㅇㅇㄹ", 0, 0, admin, Board.NOTICE);
+            Post post9 = createPost("공지사항2", "ㅍㅊㅍㅊ", 0, 0, admin, Board.NOTICE);
+            Post post10 = createPost("공지사항3", "ㅁㄴㅇㅁㄴㅇ", 0, 0, admin, Board.NOTICE);
+            Post post11 = createPost("공지사항4", "ㅇㄴㅁㅇㅁㄴㅇㅁㄴ", 0, 0, admin, Board.NOTICE);
+            Post post12 = createPost("공지사항5", "22ㅇㄴㅁㅇ22", 0, 0, admin, Board.NOTICE);
+            Post post13 = createPost("공지사항6", "ㄹㄹㄹ", 0, 0, admin, Board.NOTICE);
+            Post post14 = createPost("공지사항7", "22ㄹㄹ22", 0, 0, admin, Board.NOTICE);
 
             em.persist(post1);
             em.persist(post2);
@@ -107,8 +110,13 @@ public class InitDb {
             em.persist(post7);
             em.persist(post8);
             em.persist(post9);
+            em.persist(post10);
+            em.persist(post11);
+            em.persist(post12);
+            em.persist(post13);
+            em.persist(post14);
 
-            /*galleryFile*/
+
             String filePath1 = "https://cqrebucket.s3.ap-northeast-2.amazonaws.com/galleryImages/temp-canola-4029105_1920.jpg";
             String filePath2 = "https://cqrebucket.s3.ap-northeast-2.amazonaws.com/galleryImages/temp-caravansary-4519442_1920.jpg";
             String filePath3 = "https://cqrebucket.s3.ap-northeast-2.amazonaws.com/galleryImages/temp-loveourplanet-4851331_1920.jpg";
@@ -162,15 +170,15 @@ public class InitDb {
             em.persist(category8);
             em.persist(category9);
 
-            CommonItem item1 = createItem("1-1", "설명설명ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ", "상품1", 10000, 100, "MEN", category1);
-            CommonItem item2 = createItem("1-2", "설명설명~~~", "상품2", 20000, 100, "MEN", category2);
-            CommonItem item3 = createItem("1-3", "설명설명~~~", "상품3", 32000, 100, "MEN", category3);
-            CommonItem item4 = createItem("2-1", "설명설명~~~", "상품4", 40000, 100, "WOMEN", category4);
-            CommonItem item5 = createItem("2-2", "설명설명~~~", "상품5", 50000, 100, "WOMEN", category5);
-            CommonItem item6 = createItem("2-3", "설명설명~~~", "상품6", 60000, 100, "PUBLIC", category6);
-            CommonItem item7 = createItem("3-1", "설명설명~~~", "상품7", 70000, 100, "PUBLIC", category7);
-            CommonItem item8 = createItem("3-2", "설명설명~~~", "상품8", 80000, 100, "PUBLIC", category8);
-            CommonItem item9 = createItem("3-3", "설명설명~~~", "상품9", 55000, 100, "PUBLIC", category9);
+            CommonItem item1 = createItem("1-1", "상품설명~~~", "반팔티1", 10000, 100, "MEN", category1);
+            CommonItem item2 = createItem("1-2", "상품설명~~~", "긴팔티1", 20000, 100, "MEN", category2);
+            CommonItem item3 = createItem("1-3", "상품설명~~~", "셔츠1", 32000, 100, "MEN", category3);
+            CommonItem item4 = createItem("2-1", "상품설명~~~", "코튼팬츠1", 40000, 100, "WOMEN", category4);
+            CommonItem item5 = createItem("2-2", "상품설명~~~", "데님팬츠1", 50000, 100, "WOMEN", category5);
+            CommonItem item6 = createItem("2-3", "상품설명~~~", "레깅스1", 60000, 100, "PUBLIC", category6);
+            CommonItem item7 = createItem("3-1", "상품설명~~~", "운동화1", 70000, 100, "PUBLIC", category7);
+            CommonItem item8 = createItem("3-2", "상품설명~~~", "구두1", 80000, 100, "PUBLIC", category8);
+            CommonItem item9 = createItem("3-3", "상품설명~~~", "샌들1", 55000, 100, "PUBLIC", category9);
             em.persist(item1);
             em.persist(item2);
             em.persist(item3);
@@ -204,7 +212,7 @@ public class InitDb {
             em.persist(createItemImage(item9, 9000L, "test", filePath9, "test"));
         }
 
-        /*생성자*/
+
         private Post createPost(String title, String content, int postVies, int recommendation, User user, Board board) {
             return Post.builder()
                     .title(title)
@@ -264,4 +272,4 @@ public class InitDb {
         }
 
     }
-}
+}*/

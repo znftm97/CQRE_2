@@ -49,16 +49,18 @@ public class OrderService {
 
     /*쿠폰같이 주문 생성*/
     @Transactional
-    public void createOrderWithCoupon(Long itemId, int count, Long userCouponId) {
-        UserCoupon findUserCoupon = userCouponRepository.findUserCouponByUserCouponIdWithCoupon(userCouponId);
+    public void createOrderWithCoupon(Long itemId, int count, String userCouponId) {
+        UserCoupon findUserCoupon = userCouponRepository.findUserCouponByUserCouponIdWithCoupon(Long.parseLong(userCouponId));
         Item findItem = itemRepository.findItemById(itemId);
         User findUser = userService.getLoginUser();
+
         int discountPrice = (findItem.getPrice() * count) / (findUserCoupon.getCoupon().getDiscountRate()).intValue();
+        int orderPrice = (findItem.getPrice() * count) - discountPrice;
 
         OrderItem orderItem = OrderItem.builder()
                 .item(findItem)
                 .count(count)
-                .orderPrice(discountPrice)
+                .orderPrice(orderPrice)
                 .build();
 
         findItem.removeStock(orderItem.getCount());
@@ -78,6 +80,7 @@ public class OrderService {
     @Transactional
     public void orderCancel(Long orderItemId) {
         OrderItem findOrderItem = orderItemRepository.findOrderItemWithOrder(orderItemId);
+        findOrderItem.getItem().addStock(findOrderItem.getCount());
         findOrderItem.getOrder().cancelOrder();
     }
 
@@ -92,6 +95,7 @@ public class OrderService {
     @Transactional
     public void reOrder(Long orderItemId) {
         OrderItem findOrderItem = orderItemRepository.findOrderItemWithOrder(orderItemId);
+        findOrderItem.getItem().removeStock(findOrderItem.getCount());
         findOrderItem.getOrder().reOrder();
     }
 
@@ -126,6 +130,7 @@ public class OrderService {
     @Transactional
     public void basketOrder(Long orderItemId) {
         OrderItem findOrderItem = orderItemRepository.findOrderItemWithOrder(orderItemId);
+        findOrderItem.getItem().removeStock(findOrderItem.getCount());
         findOrderItem.getOrder().reOrder();
     }
 
