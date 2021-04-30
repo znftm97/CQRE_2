@@ -2,7 +2,7 @@
 ## 배포 URL
 - ec2-15-165-245-31.ap-northeast-2.compute.amazonaws.com:8080
 ## 배포환경
-- AWS EC2
+- AWS EC2 (Ubuntu 20.04)
 - AWS RDS (Mysql)
 - AWS S3
 - Docker
