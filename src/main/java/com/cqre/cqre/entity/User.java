@@ -36,7 +36,7 @@ public class User extends BaseEntity{
     private String role = "ROLE_USER";
 
     @Builder
-    public User(String name, String studentId, String loginId, String password, String email, String role){
+    public User(String name, String studentId, String loginId, String password, String email, String emailVerified, String emailCheckToken, String role){
         Address address = new Address("Not yet Entered", "Not yet Entered");
 
         this.name = name;
@@ -45,8 +45,8 @@ public class User extends BaseEntity{
         this.password = password;
         this.email = email;
         this.address = address;
-        this.emailVerified = "false";
-        this.emailCheckToken = UUID.randomUUID().toString();
+        this.emailVerified = emailVerified;
+        this.emailCheckToken = emailCheckToken;
         this.role = role;
     }
 

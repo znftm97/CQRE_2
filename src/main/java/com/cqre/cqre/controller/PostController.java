@@ -120,7 +120,6 @@ public class PostController {
 
         Long postId = postService.createFreePost(createAndUpdatePostDto);
         if (!((files.get(0).getOriginalFilename()).isEmpty())){
-            /*postFileService.saveFile(files, postId);*/
             postFileService.upload1(files, "postFiles", postId);
         }
 

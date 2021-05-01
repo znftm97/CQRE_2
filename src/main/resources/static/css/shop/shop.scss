@@ -32,6 +32,9 @@ $grayTextColor: #777;
   border: 1px solid #b2b2b2;
   margin-top: 70px;
   height: 360px;
+  position: fixed;
+  z-index: 100;
+  background-color: white;
 
   .category, .categoryDetail{
     display: inline-block;

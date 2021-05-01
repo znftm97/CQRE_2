@@ -21,7 +21,10 @@
   width: 270px;
   border: 1px solid #b2b2b2;
   margin-top: 70px;
-  height: 360px; }
+  height: 360px;
+  position: fixed;
+  z-index: 100;
+  background-color: white; }
   #categoryBox .category, #categoryBox .categoryDetail {
     display: inline-block;
     height: inherit; }

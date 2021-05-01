@@ -44,6 +44,8 @@ public class UserService {
                 .loginId(signUpDto.getLoginId())
                 .password(passwordEncoder.encode(signUpDto.getPassword()))
                 .email(signUpDto.getEmail())
+                .emailVerified("false")
+                .emailCheckToken(UUID.randomUUID().toString())
                 .role("ROLE_USER")
                 .build();
 
@@ -110,20 +112,22 @@ public class UserService {
 
     /*id 찾기*/
     public String findId(UserDto userDto){
-        User findUser = userRepository.OpFindByEmail(userDto.getEmail()).orElseThrow(CFindIdUserNotFoundException::new);
+        User findUserByEmail = userRepository.OpFindByEmail(userDto.getEmail()).orElseThrow(CFindIdUserNotFoundException::new);
+        User findUserByName = userRepository.findByName(userDto.getName()).orElseThrow(CFindIdUserNotFoundException::new);
 
-        if (!findUser.getName().equals(userDto.getName())) {
+        if (!findUserByEmail.getEmail().equals(findUserByName.getEmail())) {
             log.error("엔티티 조회 에러");
             throw new CFindIdUserNotFoundException();
         }
 
-        return findUser.getLoginId();
+        return findUserByName.getLoginId();
     }
 
     /*비밀번호 변경 본인확인 메일 전송*/
     public void emailSendPw(UserDto userDto) throws MessagingException, UnsupportedEncodingException {
-        User findUser = userRepository.OpFindByEmail(userDto.getEmail()).orElseThrow(CFindPwUserNotFoundException::new);
-        if (!userDto.getLoginId().equals(findUser.getLoginId())) {
+        User findUserByEmail = userRepository.OpFindByEmail(userDto.getEmail()).orElseThrow(CFindPwUserNotFoundException::new);
+        User findUserByLoginId = userRepository.CFindByLoginId(userDto.getLoginId()).orElseThrow(CFindPwUserNotFoundException::new);
+        if (!findUserByEmail.getEmail().equals(findUserByLoginId.getEmail())) {
             throw new CFindPwUserNotFoundException();
         }
 
@@ -134,12 +138,12 @@ public class UserService {
         String html = "<h1>비밀번호 변경 본인확인</h1><br>" +
                 "아래 버튼을 클릭하시면 본인 인증이 완료됩니다.<br>" +
                 "<a href='http://15.165.245.31:8080/user/updatePassword?email=" +
-                findUser.getEmail() +
+                findUserByEmail.getEmail() +
                 "' target='_blank'><button>인증 하기</button></a>";
 
         messageHelper.setSubject("CQRE 본인 확인");
         messageHelper.setText(html, true);
-        messageHelper.setTo(findUser.getEmail());
+        messageHelper.setTo(findUserByEmail.getEmail());
 
         javaMailSender.send(message);
     }
