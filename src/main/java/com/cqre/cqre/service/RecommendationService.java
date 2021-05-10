@@ -51,10 +51,9 @@ public class RecommendationService {
     }
 
     public String recommendationCheck(Long postId){
-        Post findPost = postRepository.CFindByPostId(postId).orElseThrow(CPostNotFoundException::new);
         User loginUser = userService.getLoginUser();
 
-        Recommendation recommendation = recommendationRepository.CFindRecommendationByPostIdAndUserId(findPost.getId(), loginUser.getId());
+        Recommendation recommendation = recommendationRepository.CFindRecommendationByPostIdAndUserId(postId, loginUser.getId());
         if (recommendation == null) {
             return "notExist";
         }else{

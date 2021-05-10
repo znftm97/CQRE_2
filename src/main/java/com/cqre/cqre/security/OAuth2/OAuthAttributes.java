@@ -91,7 +91,7 @@ public class OAuthAttributes {
                             .role("ROLE_USER")
                             .build();
 
-        buildUser.setEmailVerified("true");
+        buildUser.updateEmailVerified();
 
         return buildUser;
     }

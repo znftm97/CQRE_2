@@ -1,5 +1,6 @@
 package com.cqre.cqre.entity;
 
+import com.cqre.cqre.dto.user.UserAddressDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -7,7 +8,6 @@ import java.util.UUID;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseEntity{
 
@@ -57,6 +57,24 @@ public class User extends BaseEntity{
         this.name = name;
 
         return this;
+    }
+
+    /*비밀번호 변경*/
+    public void updatePassword(String password) {
+        this.password = password;
+    }
+
+    /*이메일 인증 성공*/
+    public void updateEmailVerified() {
+        this.emailVerified = "true";
+    }
+
+    /*회원 정보 수정*/
+    public void updateUserInfo(UserAddressDto dto) {
+        this.address = new Address(dto.getStreet(), dto.getDetail());
+        this.name = dto.getName();
+        this.studentId = dto.getStudentId();
+        this.loginId = dto.getLoginId();
     }
 }
 

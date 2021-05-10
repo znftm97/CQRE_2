@@ -143,7 +143,7 @@ public class PostController {
         return "redirect:/board/noticeBoard";
     }
 
-    /*글 읽기 페이지*/
+    /*글 조회 페이지*/
     @GetMapping("/post/{postId}/readPost")
     public String readFreePost(@PathVariable("postId") Long postId, Model model){
         /*글 조회*/

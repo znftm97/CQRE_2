@@ -11,6 +11,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 @EnableJpaAuditing
 @SpringBootApplication
@@ -35,4 +36,5 @@ public class CqreApplication {
 	JPAQueryFactory jpaQueryFactory(EntityManager em){
 		return new JPAQueryFactory(em);
 	}
+
 }

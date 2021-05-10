@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -55,8 +57,6 @@ public class UserController {
         }
 
         userService.signUp(signUpDto);
-
-        /*return "/home/home";*/
 
         return "/user/validationEmail";
     }

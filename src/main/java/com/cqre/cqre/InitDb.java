@@ -1,5 +1,5 @@
 package com.cqre.cqre;
-/*
+
 import com.cqre.cqre.dto.item.CreateItemDto;
 import com.cqre.cqre.entity.GalleryFile;
 import com.cqre.cqre.entity.User;
@@ -65,9 +65,9 @@ public class InitDb {
                     .email("admin")
                     .build();
 
-            user1.setEmailVerified("true");
-            user2.setEmailVerified("true");
-            admin.setEmailVerified("true");
+            user1.updateEmailVerified();
+            user2.updateEmailVerified();
+            admin.updateEmailVerified();
             em.persist(user1);
             em.persist(user2);
             em.persist(admin);
@@ -272,4 +272,4 @@ public class InitDb {
         }
 
     }
-}*/
+}

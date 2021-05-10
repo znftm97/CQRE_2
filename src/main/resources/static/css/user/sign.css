@@ -17,6 +17,14 @@ html, body {
   z-index: -100;
   opacity: 0.7; }
 
+.notice {
+  background-color: #90cafe;
+  border: 1px solid red;
+  position: absolute;
+  width: 400px;
+  height: 200px;
+  margin: 320px 0 0 10px; }
+
 /*header*/
 header {
   width: 1920px;

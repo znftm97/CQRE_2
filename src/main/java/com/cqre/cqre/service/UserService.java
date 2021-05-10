@@ -107,7 +107,7 @@ public class UserService {
             throw new CValidationEmailException();
         }
 
-        findUser.setEmailVerified("true");
+        findUser.updateEmailVerified();
     }
 
     /*id 찾기*/
@@ -152,7 +152,7 @@ public class UserService {
     @Transactional
     public void updatePassword(UpdatePasswordDto updatePasswordDto) {
         User findUser = userRepository.OpFindByEmail(updatePasswordDto.getEmail()).orElseThrow(CFindPwUserNotFoundException::new);
-        findUser.setPassword(passwordEncoder.encode(updatePasswordDto.getUpdatePassword()));
+        findUser.updatePassword(passwordEncoder.encode(updatePasswordDto.getUpdatePassword()));
     }
 
     /*로그인 사용자 가져오기*/
@@ -183,13 +183,8 @@ public class UserService {
     /*회원 정보 수정*/
     @Transactional
     public void updateUserInfo(UserAddressDto userAddressDto){
-        Address address = new Address(userAddressDto.getStreet(), userAddressDto.getDetail());
-
         User loginUser = getLoginUser();
-        loginUser.setName(userAddressDto.getName());
-        loginUser.setStudentId(userAddressDto.getStudentId());
-        loginUser.setLoginId(userAddressDto.getLoginId());
-        loginUser.setAddress(address);
+        loginUser.updateUserInfo(userAddressDto);
     }
 
     /*회원 탈퇴*/
