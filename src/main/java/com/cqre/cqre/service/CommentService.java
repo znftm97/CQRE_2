@@ -20,11 +20,33 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class CommentService {
-    AtomicLong bundleId = new AtomicLong(1);
+    private final AtomicLong bundleId = new AtomicLong(1);
 
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
     private final UserService userService;
+
+    /*댓글 생성*/
+    @Transactional
+     public void createComment(CreateCommentDto dto) {
+        Post findPost = postRepository.findById(dto.getPostId()).orElseThrow(CPostNotFoundException::new);
+        User loginUser = userService.getLoginUser();
+
+        Comment comment = Comment.builder()
+                    .content(dto.getContent())
+                    .user(loginUser)
+                    .post(findPost)
+                    .depth(1)
+                    .bundleOrder(System.currentTimeMillis())
+                    .existsCheck(true)
+                    .build();
+
+        synchronized (bundleId) {
+            comment.setBundleId(bundleId);
+        }
+
+        commentRepository.save(comment);
+    }
 
     /*댓글 조회*/
     public List<ResponseCommentDto> readComment(Long postId){
@@ -36,24 +58,6 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
-    /*댓글 생성*/
-    @Transactional
-    public void createComment(CreateCommentDto dto) {
-        Post findPost = postRepository.findById(dto.getPostId()).orElseThrow(CPostNotFoundException::new);
-        User loginUser = userService.getLoginUser();
-
-        Comment comment = Comment.builder()
-                .content(dto.getContent())
-                .user(loginUser)
-                .post(findPost)
-                .depth(1)
-                .bundleId(bundleId.getAndIncrement())
-                .bundleOrder(System.currentTimeMillis())
-                .existsCheck(true)
-                .build();
-
-        commentRepository.save(comment);
-    }
 
     /*댓글 삭제*/
     @Transactional

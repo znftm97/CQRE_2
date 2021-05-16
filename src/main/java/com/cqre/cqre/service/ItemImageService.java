@@ -55,7 +55,7 @@ public class ItemImageService {
     @Value("${cloud.aws.region.static}")
     private String region;
 
-    AtomicLong bundleId = new AtomicLong(1);
+    private final AtomicLong bundleId = new AtomicLong(1);
 
     @PostConstruct
     public void setAmazonS3Client() {
@@ -90,9 +90,12 @@ public class ItemImageService {
                     .filename(filename)
                     .filePath(filePath)
                     .bundleOrder(System.currentTimeMillis())
-                    .bundleId(bundleId.get())
                     .item(commonItem)
                     .build();
+
+            synchronized (bundleId) {
+                itemImage.setBundleId(bundleId);
+            }
 
             itemImageRepository.save(itemImage);
         }

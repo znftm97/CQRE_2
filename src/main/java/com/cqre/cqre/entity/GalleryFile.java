@@ -3,6 +3,7 @@ package com.cqre.cqre.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Entity
 @Getter
@@ -30,4 +31,8 @@ public class GalleryFile extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    public void setBundleId(AtomicLong bundleId) {
+        this.bundleId = bundleId.getAndIncrement();
+    }
 }

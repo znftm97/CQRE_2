@@ -5,6 +5,7 @@ import com.cqre.cqre.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Entity
 @Getter
@@ -48,5 +49,9 @@ public class Comment extends BaseEntity {
 
     public Long cGetBundleId() {
         return this.bundleId++;
+    }
+
+    public void setBundleId(AtomicLong bundleId) {
+        this.bundleId = bundleId.getAndIncrement();
     }
 }

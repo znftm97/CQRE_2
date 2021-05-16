@@ -123,23 +123,23 @@ public class PostService {
     public void removePost(Long postId){
         List<Comment> comments = commentRepository.findCommentByPostId(postId);
         List<Long> commentIds = comments
-                                    .stream()
-                                    .map(c -> c.getId())
-                                    .collect(Collectors.toList());
+                .stream()
+                .map(c -> c.getId())
+                .collect(Collectors.toList());
         commentRepository.deleteAllByIdInQuery(commentIds);
 
         List<PostFile> postFiles = postFileRepository.findPostFileByPostId(postId);
         List<Long> postFileIds = postFiles
-                                    .stream()
-                                    .map(p -> p.getId())
-                                    .collect(Collectors.toList());
+                .stream()
+                .map(p -> p.getId())
+                .collect(Collectors.toList());
         postFileRepository.deleteAllByIdInQuery(postFileIds);
 
         List<Recommendation> recommendations = recommendationRepository.findRecommendationByPostId(postId);
         List<Long> recommendationIds = recommendations
-                                            .stream()
-                                            .map(r -> r.getId())
-                                            .collect(Collectors.toList());
+                .stream()
+                .map(r -> r.getId())
+                .collect(Collectors.toList());
         recommendationRepository.deleteAllByIdInQuery(recommendationIds);
 
         Post findPost = postRepository.CFindByPostId(postId).orElseThrow(CPostNotFoundException::new);

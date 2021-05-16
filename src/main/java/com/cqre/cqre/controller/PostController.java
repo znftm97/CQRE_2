@@ -77,7 +77,7 @@ public class PostController {
     /*공시사항 검색*/
     @GetMapping("/board/noticeBoard/search")
     public String searchNoticeBoard(Model model, PostSearchCondition condition,
-                                  @PageableDefault(size = 6, sort = "id")Pageable pageable){
+                                    @PageableDefault(size = 6, sort = "id")Pageable pageable){
 
         if(condition.getSearchSelect().equals("title")){
             condition.setTitle(condition.getSearchWord());

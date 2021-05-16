@@ -62,7 +62,7 @@ public class GalleryService {
     @Value("${cloud.aws.region.static}")
     private String region;
 
-    AtomicLong bundleId = new AtomicLong(1);
+    private final AtomicLong bundleId = new AtomicLong(1);
 
     @PostConstruct
     public void setAmazonS3Client() {
@@ -98,9 +98,12 @@ public class GalleryService {
                     .filePath(filePath)
                     .originFilename(origFilename)
                     .user(loginUser)
-                    .bundleId(bundleId.get())
                     .bundleOrder(System.currentTimeMillis())
                     .build();
+
+            synchronized (bundleId) {
+                galleryFile.setBundleId(bundleId);
+            }
 
             galleryRepository.save(galleryFile);
         }

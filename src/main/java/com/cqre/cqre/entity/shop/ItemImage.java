@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Entity
 @Getter
@@ -34,4 +35,8 @@ public class ItemImage extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
+
+    public void setBundleId(AtomicLong bundleId) {
+        this.bundleId = bundleId.getAndIncrement();
+    }
 }
