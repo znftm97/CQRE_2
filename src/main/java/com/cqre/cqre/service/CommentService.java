@@ -28,7 +28,7 @@ public class CommentService {
 
     /*댓글 생성*/
     @Transactional
-     public void createComment(CreateCommentDto dto) {
+    public void createComment(CreateCommentDto dto) {
         Post findPost = postRepository.findById(dto.getPostId()).orElseThrow(CPostNotFoundException::new);
         User loginUser = userService.getLoginUser();
 

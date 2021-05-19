@@ -158,11 +158,10 @@ public class UserService {
     /*로그인 사용자 가져오기*/
     public User getLoginUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User loginUser = User.builder().build();
 
         /*일반 로그인 사용자*/
-        if (principal.getClass().getName().equals(loginUser.getClass().getName())) {
-            loginUser = (User) principal;
+        if (principal instanceof User) {
+            User loginUser = (User) principal;
             return userRepository.findByEmail(loginUser.getEmail());
 
         /*OAuth2 로그인 사용자*/
