@@ -37,13 +37,10 @@ public class CommentService {
                     .user(loginUser)
                     .post(findPost)
                     .depth(1)
+                    .bundleId(bundleId.getAndIncrement())
                     .bundleOrder(System.currentTimeMillis())
                     .existsCheck(true)
                     .build();
-
-        synchronized (bundleId) {
-            comment.setBundleId(bundleId);
-        }
 
         commentRepository.save(comment);
     }

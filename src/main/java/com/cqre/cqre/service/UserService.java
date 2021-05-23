@@ -155,7 +155,7 @@ public class UserService {
         findUser.updatePassword(passwordEncoder.encode(updatePasswordDto.getUpdatePassword()));
     }
 
-    /*로그인 사용자 가져오기*/
+    /*로그인 사용자 조회*/
     public User getLoginUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 

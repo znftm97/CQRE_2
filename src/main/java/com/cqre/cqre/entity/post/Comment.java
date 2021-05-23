@@ -46,12 +46,4 @@ public class Comment extends BaseEntity {
     public void removeComment(){
         this.existsCheck = false;
     }
-
-    public Long cGetBundleId() {
-        return this.bundleId++;
-    }
-
-    public void setBundleId(AtomicLong bundleId) {
-        this.bundleId = bundleId.getAndIncrement();
-    }
 }

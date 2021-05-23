@@ -35,8 +35,4 @@ public class ItemImage extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
-
-    public void setBundleId(AtomicLong bundleId) {
-        this.bundleId = bundleId.getAndIncrement();
-    }
 }

@@ -89,13 +89,10 @@ public class ItemImageService {
                     .originFilename(origFilename)
                     .filename(filename)
                     .filePath(filePath)
+                    .bundleId(bundleId.get())
                     .bundleOrder(System.currentTimeMillis())
                     .item(commonItem)
                     .build();
-
-            synchronized (bundleId) {
-                itemImage.setBundleId(bundleId);
-            }
 
             itemImageRepository.save(itemImage);
         }

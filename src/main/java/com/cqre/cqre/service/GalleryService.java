@@ -98,12 +98,9 @@ public class GalleryService {
                     .filePath(filePath)
                     .originFilename(origFilename)
                     .user(loginUser)
+                    .bundleId(bundleId.get())
                     .bundleOrder(System.currentTimeMillis())
                     .build();
-
-            synchronized (bundleId) {
-                galleryFile.setBundleId(bundleId);
-            }
 
             galleryRepository.save(galleryFile);
         }

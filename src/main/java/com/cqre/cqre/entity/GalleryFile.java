@@ -31,8 +31,4 @@ public class GalleryFile extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
-    public void setBundleId(AtomicLong bundleId) {
-        this.bundleId = bundleId.getAndIncrement();
-    }
 }
