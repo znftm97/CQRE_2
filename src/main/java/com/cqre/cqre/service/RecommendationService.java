@@ -12,6 +12,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
+
 @Service
 @RequiredArgsConstructor
 public class RecommendationService {
@@ -27,22 +29,18 @@ public class RecommendationService {
         User loginUser = userService.getLoginUser();
         Recommendation findRecommendation = recommendationRepository.CFindRecommendationByPostIdAndUserId(findPost.getId(), loginUser.getId());
 
-        if(findRecommendation == null){
+        if(Objects.isNull(findRecommendation)){
             findPost.addRecommendation();
 
             Recommendation recommendation = Recommendation.builder()
-                    .post(findPost)
-                    .user(loginUser)
-                    .check(1)
-                    .build();
+                                                            .post(findPost)
+                                                            .user(loginUser)
+                                                            .build();
 
             recommendationRepository.save(recommendation);
+            return modelMapper.map(recommendation, RecommendationResponseDto.class);
 
-            RecommendationResponseDto recommendationResponseDto = modelMapper.map(recommendation, RecommendationResponseDto.class);
-
-            return recommendationResponseDto;
-
-        }else if(findRecommendation.getCheck() == 1){
+        }else {
             findPost.subtractRecommendation();
             recommendationRepository.delete(findRecommendation);
         }

@@ -17,9 +17,6 @@ public class Recommendation extends BaseEntity {
     @Column(name = "recommendation_id")
     private Long id;
 
-    @Column(name = "checks")
-    private int check = 0;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

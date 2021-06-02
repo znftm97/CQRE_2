@@ -6,8 +6,10 @@ import com.cqre.cqre.entity.User;
 import com.cqre.cqre.entity.post.Board;
 import com.cqre.cqre.entity.post.Comment;
 import com.cqre.cqre.entity.post.Post;
+import com.cqre.cqre.entity.post.Recommendation;
 import com.cqre.cqre.repository.post.PostRepository;
 import com.cqre.cqre.service.PostService;
+import com.cqre.cqre.service.RecommendationService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,21 +33,16 @@ class CqreApplicationTests {
 	private PostService postService;
 	@Autowired
 	private PostController postController;
+	@Autowired
+	private RecommendationService recommendationService;
 
 	@Test
 	void contextLoads() {
-		Post post1 = Post.builder()
+		Post post = Post.builder()
 				.content("aaaa")
 				.title("aaaa")
 				.board(Board.FREE)
 				.postViews(1)
-				.build();
-
-		Post post2 = Post.builder()
-				.content("bbbb")
-				.title("bbbb")
-				.board(Board.FREE)
-				.postViews(2)
 				.build();
 
 		User user = User.builder()
@@ -54,11 +51,14 @@ class CqreApplicationTests {
 				.loginId("userA")
 				.build();
 
-		PageRequest pageRequest = PageRequest.of(0, 6, Sort.by(Sort.Direction.DESC, "id"));
-		Page<Post> posts1 = postRepository.findPostByBoard(Board.FREE, pageRequest);
-		Page<Post> posts2 = postRepository.findPostByBoard2(Board.FREE, pageRequest);
+		Recommendation re = Recommendation.builder()
+							.check(1)
+							.user(user)
+							.post(post)
+							.id(1L)
+							.build();
 
-
+		recommendationService.recommendation(post.getId());
 
 	}
 

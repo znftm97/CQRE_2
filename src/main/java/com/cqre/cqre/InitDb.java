@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
+import java.util.UUID;
+
 
 @Component
 @RequiredArgsConstructor
@@ -39,11 +41,13 @@ public class InitDb {
 
         public void init() {
             User user1 = User.builder()
-                    .name("김딱딱")
+                    .name("아무개")
                     .studentId("20202020")
                     .loginId("znftm97")
                     .password(passwordEncoder.encode("wprkfrhdaud12!"))
                     .email("test1@gmail.com")
+                    .emailVerified("false")
+                    .emailCheckToken(UUID.randomUUID().toString())
                     .role("ROLE_USER")
                     .build();
 
@@ -53,6 +57,8 @@ public class InitDb {
                     .loginId("123")
                     .password(passwordEncoder.encode("123"))
                     .email("test2@gmail.com")
+                    .emailVerified("false")
+                    .emailCheckToken(UUID.randomUUID().toString())
                     .role("ROLE_USER")
                     .build();
 
@@ -63,6 +69,8 @@ public class InitDb {
                     .password(passwordEncoder.encode("1234"))
                     .role("ROLE_ADMIN")
                     .email("admin")
+                    .emailVerified("false")
+                    .emailCheckToken(UUID.randomUUID().toString())
                     .build();
 
             user1.updateEmailVerified();
@@ -71,7 +79,6 @@ public class InitDb {
             em.persist(user1);
             em.persist(user2);
             em.persist(admin);
-
 
             Coupon coupon1 = createCoupon(10, 50L, "연말기념 쿠폰", admin);
             Coupon coupon2 = createCoupon(10, 40L, "연초기념 쿠폰", admin);
@@ -85,21 +92,20 @@ public class InitDb {
             em.persist(coupon4);
             em.persist(coupon5);
 
-
-            Post post1 = createPost("1111", "1111", 0, 0, user1, Board.FREE);
-            Post post2 = createPost("2222", "2222", 0, 0, user1, Board.FREE);
-            Post post3 = createPost("3333", "3333", 0, 0, user1, Board.FREE);
-            Post post4 = createPost("4444", "4444", 0, 0, user1, Board.FREE);
-            Post post5 = createPost("5555", "5555", 0, 0, user2, Board.FREE);
-            Post post6 = createPost("6666", "6666", 0, 0, user2, Board.FREE);
-            Post post7 = createPost("7777", "7777", 0, 0, user2, Board.FREE);
-            Post post8 = createPost("공지사항1", "ㅁㄴㅇㅇㄹ", 0, 0, admin, Board.NOTICE);
-            Post post9 = createPost("공지사항2", "ㅍㅊㅍㅊ", 0, 0, admin, Board.NOTICE);
-            Post post10 = createPost("공지사항3", "ㅁㄴㅇㅁㄴㅇ", 0, 0, admin, Board.NOTICE);
-            Post post11 = createPost("공지사항4", "ㅇㄴㅁㅇㅁㄴㅇㅁㄴ", 0, 0, admin, Board.NOTICE);
-            Post post12 = createPost("공지사항5", "22ㅇㄴㅁㅇ22", 0, 0, admin, Board.NOTICE);
-            Post post13 = createPost("공지사항6", "ㄹㄹㄹ", 0, 0, admin, Board.NOTICE);
-            Post post14 = createPost("공지사항7", "22ㄹㄹ22", 0, 0, admin, Board.NOTICE);
+            Post post1 = createPost("1111", "1111", 55, 16, user1, Board.FREE);
+            Post post2 = createPost("2222", "2222", 21, 12, user1, Board.FREE);
+            Post post3 = createPost("3333", "3333", 32, 13, user1, Board.FREE);
+            Post post4 = createPost("4444", "4444", 10, 3, user1, Board.FREE);
+            Post post5 = createPost("5555", "5555", 22, 5, user2, Board.FREE);
+            Post post6 = createPost("6666", "6666", 19, 4, user2, Board.FREE);
+            Post post7 = createPost("7777", "7777", 5, 1, user2, Board.FREE);
+            Post post8 = createPost("공지사항1", "ㅁㄴㅇㅇㄹ", 11, 3, admin, Board.NOTICE);
+            Post post9 = createPost("공지사항2", "ㅍㅊㅍㅊ", 24, 8, admin, Board.NOTICE);
+            Post post10 = createPost("공지사항3", "ㅁㄴㅇㅁㄴㅇ", 15, 2, admin, Board.NOTICE);
+            Post post11 = createPost("공지사항4", "ㅇㄴㅁㅇㅁㄴㅇㅁㄴ", 4, 2, admin, Board.NOTICE);
+            Post post12 = createPost("공지사항5", "22ㅇㄴㅁㅇ22", 3, 1, admin, Board.NOTICE);
+            Post post13 = createPost("공지사항6", "ㄹㄹㄹ", 4, 2, admin, Board.NOTICE);
+            Post post14 = createPost("공지사항7", "22ㄹㄹ22", 8, 6, admin, Board.NOTICE);
 
             em.persist(post1);
             em.persist(post2);
