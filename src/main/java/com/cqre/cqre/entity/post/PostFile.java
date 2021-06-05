@@ -26,4 +26,18 @@ public class PostFile extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
+
+    //== 연관관계 편의 메서드 ==//
+    public void setPost(Post post) {
+        this.post = post;
+        post.getPostFiles().add(this);
+    }
+
+    @Builder
+    public PostFile(String originFilename, String filename, String filePath, Post post){
+        this.originFilename = originFilename;
+        this.filename = filename;
+        this.filePath = filePath;
+        setPost(post);
+    }
 }

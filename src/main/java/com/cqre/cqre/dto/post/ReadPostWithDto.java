@@ -2,13 +2,16 @@ package com.cqre.cqre.dto.post;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Data
+@Setter
+@Getter
 public class ReadPostWithDto {
 
-    private Long id;
+    private Long id; // postId
     private String title;
     private String content;
     private int postViews;
@@ -31,6 +34,5 @@ public class ReadPostWithDto {
         this.userName = userName;
         this.originFilename = originFilename;
         this.filePath = filePath;
-        this.recommendationCheck = recommendationCheck;
     }
 }

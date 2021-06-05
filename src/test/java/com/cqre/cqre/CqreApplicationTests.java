@@ -52,7 +52,6 @@ class CqreApplicationTests {
 				.build();
 
 		Recommendation re = Recommendation.builder()
-							.check(1)
 							.user(user)
 							.post(post)
 							.id(1L)

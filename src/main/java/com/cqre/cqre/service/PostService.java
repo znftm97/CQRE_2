@@ -1,9 +1,6 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.dto.post.CreateAndUpdatePostDto;
-import com.cqre.cqre.dto.post.ListPostDto;
-import com.cqre.cqre.dto.post.PostFileDto;
-import com.cqre.cqre.dto.post.ReadPostDto;
+import com.cqre.cqre.dto.post.*;
 import com.cqre.cqre.entity.User;
 import com.cqre.cqre.entity.post.*;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
@@ -69,14 +66,17 @@ public class PostService {
     @Transactional
     public Long createFreePost(CreateAndUpdatePostDto createAndUpdatePostDto){
         User loginUser = userService.getLoginUser();
-        Post post = Post.builder()
+        /*Post post = Post.builder()
                 .title(createAndUpdatePostDto.getTitle())
                 .content(createAndUpdatePostDto.getContent())
                 .postViews(0)
                 .recommendation(0)
                 .user(loginUser)
                 .board(Board.FREE)
-                .build();
+                .build();*/
+
+        Post post = Post.createPost(createAndUpdatePostDto.getTitle(), createAndUpdatePostDto.getContent(),
+                                0, 0, loginUser, Board.FREE);
 
         postRepository.save(post);
 
@@ -117,6 +117,12 @@ public class PostService {
 
         return dto;
     }
+
+    /*글 읽기*/
+    /*@Transactional
+    public ReadPostWithDto readPost2(Long postId) {
+        postRepository.readPost(postId);
+    }*/
 
     /*글 삭제*/
     @Transactional

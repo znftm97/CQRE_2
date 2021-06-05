@@ -3,10 +3,9 @@ package com.cqre.cqre.repository.post;
 import com.cqre.cqre.dto.post.ListPostDto;
 import com.cqre.cqre.dto.post.PostSearchCondition;
 import com.cqre.cqre.dto.post.QListPostDto;
+import com.cqre.cqre.dto.post.ReadPostWithDto;
 import com.cqre.cqre.entity.QUser;
-import com.cqre.cqre.entity.post.Board;
-import com.cqre.cqre.entity.post.Post;
-import com.cqre.cqre.entity.post.QPost;
+import com.cqre.cqre.entity.post.*;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -19,6 +18,8 @@ import java.util.List;
 
 import static com.cqre.cqre.entity.QUser.*;
 import static com.cqre.cqre.entity.post.QPost.*;
+import static com.cqre.cqre.entity.post.QPostFile.*;
+import static com.cqre.cqre.entity.post.QRecommendation.*;
 
 @RequiredArgsConstructor
 public class PostRepositoryImpl implements PostRepositoryCustom{
@@ -63,4 +64,5 @@ public class PostRepositoryImpl implements PostRepositoryCustom{
     private BooleanExpression boardEq(Board boardParam){
         return boardParam != null ? post.board.eq(boardParam) : null;
     }
+
 }

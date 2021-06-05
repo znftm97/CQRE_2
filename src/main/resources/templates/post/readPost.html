@@ -34,9 +34,11 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 <span th:text="${readPostDto.userName}"></span>
             </div>
             <div class="postInfoSubBox2">
-                <span>조회수 : </span>
-                <span th:text="${readPostDto.postViews}"></span>
-                <span>            작성시간 : </span>
+                <span>조회 수 : </span>
+                <span th:text="${readPostDto.postViews}"></span>&nbsp&nbsp
+                <span>추천 수 : </span>
+                <span th:text="${readPostDto.recommendation}"></span>&nbsp&nbsp
+                <span>작성시간 : </span>
                 <span>[[${#temporals.format(readPostDto.createDate, 'yyyy-MM-dd일 hh:mm분')}]]</span>
             </div>
         </div>

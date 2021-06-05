@@ -6,6 +6,8 @@ import com.cqre.cqre.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -33,6 +35,12 @@ public class Post extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Board board;
 
+    @OneToMany(mappedBy = "post")
+    private List<PostFile> postFiles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "post")
+    private List<Recommendation> recommendations = new ArrayList<>();
+
     /*조회수 증가*/
     public void addPostViews(){
         this.postViews++;
@@ -52,6 +60,19 @@ public class Post extends BaseEntity {
     public void updatePost(CreateAndUpdatePostDto dto){
         this.title = dto.getTitle();
         this.content = dto.getContent();
+    }
+
+    //==생성 메서드==//
+    public static Post createPost(String title, String content, int postViews, int recommendation, User user, Board board){
+        Post post = new Post();
+        post.title = title;
+        post.content = content;
+        post.postViews = postViews;
+        post.recommendation = recommendation;
+        post.user = user;
+        post.board = board;
+
+        return post;
     }
 }
 

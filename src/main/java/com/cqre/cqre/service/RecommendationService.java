@@ -32,10 +32,12 @@ public class RecommendationService {
         if(Objects.isNull(findRecommendation)){
             findPost.addRecommendation();
 
-            Recommendation recommendation = Recommendation.builder()
+            /*Recommendation recommendation = Recommendation.builder()
                                                             .post(findPost)
                                                             .user(loginUser)
-                                                            .build();
+                                                            .build();*/
+
+            Recommendation recommendation = Recommendation.createRecommendation(loginUser, findPost);
 
             recommendationRepository.save(recommendation);
             return modelMapper.map(recommendation, RecommendationResponseDto.class);

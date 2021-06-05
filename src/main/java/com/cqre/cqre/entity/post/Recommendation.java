@@ -24,4 +24,25 @@ public class Recommendation extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
+
+    //== 연관관계 편의 메서드 ==//
+    public void setPost(Post post) {
+        this.post = post;
+        post.getRecommendations().add(this);
+    }
+
+    @Builder
+    public Recommendation(User user, Post post){
+        this.user = user;
+        setPost(post);
+    }
+
+    //==생성 메서드==//
+    public static Recommendation createRecommendation(User user, Post post){
+        Recommendation recommendation = new Recommendation();
+        recommendation.user = user;
+        recommendation.setPost(post);
+
+        return recommendation;
+    }
 }
