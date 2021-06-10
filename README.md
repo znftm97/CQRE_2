@@ -2,43 +2,55 @@
 ## 배포 URL
 - http://ec2-15-165-245-31.ap-northeast-2.compute.amazonaws.com:8080
 ## 배포환경
-- AWS EC2 (Ubuntu 20.04)
-- AWS RDS (Mysql)
-- AWS S3
-- Docker
+<details>
+- AWS EC2 (Ubuntu 20.04)<br>
+- AWS RDS (Mysql)<br>
+- AWS S3<br>
+- Docker<br>
+</details>
+
 ## 사용기술
-- JAVA8
-- Thymeleaf
-- jQuery
-- Spring Boot
-- Spring MVC
-- Spring Security
-- Spring Data Jpa
-- Querydsl
+<details>
+- JAVA8<br>
+- Thymeleaf<br>
+- jQuery<br>
+- Spring Boot<br>
+- Spring MVC<br>
+- Spring Security<br>
+- Spring Data Jpa<br>
+- Querydsl<br>
+</details>
+
 ## 기능
-- 인증, 회원 관련
-  - 이메일인증(SMTP)를 통한 회원가입
-  - 로그인, 로그아웃, OAuth2 로그인
-  - ID찾기, 비밀번호찾기, 회원정보 수정
-  - 나의 글, 댓글, 주문목록, 주문취소 목록, 장바구니 목록, 쿠폰 조회
-- 인가(Admin 권한)
-  - 공지사항 글쓰기
-  - 쿠폰 생성, 회원에게 쿠폰 전송
-- 게시판
-  - 글 CRUD
-  - AJAX 댓글, 대댓글 CRUD
-  - AJAX 글 좋아요 버튼
-  - 조회수, 추천수에 따른 정렬
-  - 글 검색  
-- 갤러리
-  - AWS S3를 이용한 이미지 업로드, 다운로드, 조회, 삭제
-- 쇼핑몰
-  - 카테고리별 상품 조회
-  - 상품 CRUD
-  - 상품 주문, 주문취소, 재 주문, 장바구니
-  - 쿠폰 사용 주문
+<details>
+- <strong>인증, 회원 관련</strong><br>
+  &nbsp;&nbsp;- 이메일인증(SMTP)를 통한 회원가입<br>
+  &nbsp;&nbsp;- 로그인, 로그아웃, OAuth2 로그인<br>
+  &nbsp;&nbsp;- ID찾기, 비밀번호찾기, 회원정보 수정<br>
+  &nbsp;&nbsp;- 나의 글, 댓글, 주문목록, 주문취소 목록, 장바구니 목록, 쿠폰 조회<br><br>
+- 인가(Admin 권한)<br>
+  &nbsp;&nbsp;- 공지사항 글쓰기<br>
+  &nbsp;&nbsp;- 쿠폰 생성, 회원에게 쿠폰 전송<br><br>
+- 게시판<br>
+  &nbsp;&nbsp;- 글 CRUD<br>
+  &nbsp;&nbsp;- AJAX 댓글, 대댓글 CRUD<br>
+  &nbsp;&nbsp;- AJAX 글 좋아요 버튼<br>
+  &nbsp;&nbsp;- 조회수, 추천수에 따른 정렬<br>
+  &nbsp;&nbsp;- 글 검색  <br><br>
+- 갤러리<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;- AWS S3를 이용한 이미지 업로드, 다운로드, 조회, 삭제<br><br>
+- 쇼핑몰<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;- 카테고리별 상품 조회<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;- 상품 CRUD<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;- 상품 주문, 주문취소, 재 주문, 장바구니<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;- 쿠폰 사용 주문<br>
+</details>
+
 ## ERD
-![image](https://user-images.githubusercontent.com/57134526/119619566-19343100-be3f-11eb-89a6-1d10aab5933b.png)
+<details>
+  <img src="https://user-images.githubusercontent.com/57134526/119619566-19343100-be3f-11eb-89a6-1d10aab5933b.png"></img>
+</details>
+
 ## 이슈 및 해결
 ### 1. 동기화
 - 해당 주제로 [블로그](https://velog.io/@znftm97/%EC%8A%A4%ED%94%84%EB%A7%81%EC%97%90%EC%84%9C-%EB%8F%99%EC%8B%9C%EC%84%B1-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0%ED%95%98%EA%B8%B0-tl5imu04)에 자세히 포스팅하였습니다.
