@@ -1,20 +1,15 @@
 package com.cqre.cqre.service;
 
 import com.cqre.cqre.dto.user.*;
-import com.cqre.cqre.entity.Address;
 import com.cqre.cqre.entity.User;
 import com.cqre.cqre.exception.customexception.user.CFindIdUserNotFoundException;
 import com.cqre.cqre.exception.customexception.user.CFindPwUserNotFoundException;
-import com.cqre.cqre.exception.customexception.user.CUserNotFoundException;
 import com.cqre.cqre.exception.customexception.user.CValidationEmailException;
 import com.cqre.cqre.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
@@ -24,7 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor

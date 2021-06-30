@@ -51,7 +51,7 @@ public class GalleryRepositoryImpl implements GalleryRepositoryCustom{
                 .leftJoin(galleryFile.user, QUser.user)
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-                .orderBy(galleryFile.bundleId.asc())
+                .orderBy(galleryFile.bundleId.desc())
                 .fetchResults();
 
         List<FindGalleryFileDto> content = result.getResults();

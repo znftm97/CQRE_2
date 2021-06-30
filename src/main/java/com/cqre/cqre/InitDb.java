@@ -19,7 +19,6 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import java.util.UUID;
 
-
 @Component
 @RequiredArgsConstructor
 public class InitDb {
@@ -131,17 +130,17 @@ public class InitDb {
             String filePath6 = "https://cqrebucket.s3.ap-northeast-2.amazonaws.com/galleryImages/temp-volkswagen-569315_1920.jpg";
 
 
-            GalleryFile galleryFile1 = createGalleryFile("test", "test", "test", filePath1, user2, 1000L, 111111L);
-            GalleryFile galleryFile2 = createGalleryFile("test", "test", "test", filePath2, user2, 1000L, 111111L);
-            GalleryFile galleryFile3 = createGalleryFile("test", "test", "test", filePath3, user2, 1000L, 111111L);
-            GalleryFile galleryFile4 = createGalleryFile("test", "test", "test", filePath2, user2, 2000L, 111111L);
-            GalleryFile galleryFile5 = createGalleryFile("test", "test", "test", filePath4, user2, 2000L, 111111L);
-            GalleryFile galleryFile6 = createGalleryFile("test", "test", "test", filePath5, user2, 2000L, 111111L);
-            GalleryFile galleryFile7 = createGalleryFile("test", "test", "test", filePath3, user2, 3000L, 111111L);
-            GalleryFile galleryFile8 = createGalleryFile("test", "test", "test", filePath4, user1, 4000L, 111111L);
-            GalleryFile galleryFile9 = createGalleryFile("test", "test", "test", filePath5, user1, 5000L, 111111L);
-            GalleryFile galleryFile10 = createGalleryFile("test", "test", "test", filePath6, user1, 6000L, 111111L);
-            GalleryFile galleryFile11 = createGalleryFile("test", "test", "test", filePath4, user1, 7000L, 111111L);
+            GalleryFile galleryFile1 = createGalleryFile("test", "test", "test", filePath1, user2, -10L, 111111L);
+            GalleryFile galleryFile2 = createGalleryFile("test", "test", "test", filePath2, user2, -10L, 111111L);
+            GalleryFile galleryFile3 = createGalleryFile("test", "test", "test", filePath3, user2, -10L, 111111L);
+            GalleryFile galleryFile4 = createGalleryFile("test", "test", "test", filePath2, user2, -20L, 111111L);
+            GalleryFile galleryFile5 = createGalleryFile("test", "test", "test", filePath4, user2, -20L, 111111L);
+            GalleryFile galleryFile6 = createGalleryFile("test", "test", "test", filePath5, user2, -20L, 111111L);
+            GalleryFile galleryFile7 = createGalleryFile("test", "test", "test", filePath3, user2, -30L, 111111L);
+            GalleryFile galleryFile8 = createGalleryFile("test", "test", "test", filePath4, user1, -40L, 111111L);
+            GalleryFile galleryFile9 = createGalleryFile("test", "test", "test", filePath5, user1, -50L, 111111L);
+            GalleryFile galleryFile10 = createGalleryFile("test", "test", "test", filePath6, user1, -60L, 111111L);
+            GalleryFile galleryFile11 = createGalleryFile("test", "test", "test", filePath4, user1, -70L, 111111L);
 
             em.persist(galleryFile1);
             em.persist(galleryFile2);
@@ -205,17 +204,17 @@ public class InitDb {
             String filePath8 = "https://cqrebucket.s3.ap-northeast-2.amazonaws.com/shopImages/temp-nordwood-themes-6V-vJpPzvh8-unsplash.jpg";
             String filePath9 = "https://cqrebucket.s3.ap-northeast-2.amazonaws.com/shopImages/temp-jakob-owens-WzncgWs3RJ4-unsplash.jpg";
 
-            em.persist(createItemImage(item1, 1000L, "test", filePath1, "test"));
-            em.persist(createItemImage(item1, 1000L, "test", filePath2, "test"));
-            em.persist(createItemImage(item2, 2000L, "test", filePath2, "test"));
-            em.persist(createItemImage(item2, 2000L, "test", filePath3, "test"));
-            em.persist(createItemImage(item3, 3000L, "test", filePath3, "test"));
-            em.persist(createItemImage(item4, 4000L, "test", filePath4, "test"));
-            em.persist(createItemImage(item5, 5000L, "test", filePath5, "test"));
-            em.persist(createItemImage(item6, 6000L, "test", filePath6, "test"));
-            em.persist(createItemImage(item7, 7000L, "test", filePath7, "test"));
-            em.persist(createItemImage(item8, 8000L, "test", filePath8, "test"));
-            em.persist(createItemImage(item9, 9000L, "test", filePath9, "test"));
+            em.persist(createItemImage(item1, -10L, "test", filePath1, "test"));
+            em.persist(createItemImage(item1, -10L, "test", filePath2, "test"));
+            em.persist(createItemImage(item2, -20L, "test", filePath2, "test"));
+            em.persist(createItemImage(item2, -20L, "test", filePath3, "test"));
+            em.persist(createItemImage(item3, -30L, "test", filePath3, "test"));
+            em.persist(createItemImage(item4, -40L, "test", filePath4, "test"));
+            em.persist(createItemImage(item5, -50L, "test", filePath5, "test"));
+            em.persist(createItemImage(item6, -60L, "test", filePath6, "test"));
+            em.persist(createItemImage(item7, -70L, "test", filePath7, "test"));
+            em.persist(createItemImage(item8, -80L, "test", filePath8, "test"));
+            em.persist(createItemImage(item9, -90L, "test", filePath9, "test"));
         }
 
 

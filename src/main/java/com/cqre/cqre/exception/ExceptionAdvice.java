@@ -46,11 +46,6 @@ public class ExceptionAdvice {
         return "redirect:/user/userInfo";
     }
 
-    @ExceptionHandler(CUserNotFoundException.class)
-    protected String userNotFound(){
-        return "/user/exception/userNotFoundException";
-    }
-
     @ExceptionHandler(CPostNotFoundException.class)
     protected String postNotFound(){
         return "/post/postNotFoundException";
