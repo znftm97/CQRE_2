@@ -44,12 +44,6 @@ public class GalleryService {
 
     private AmazonS3 amazonS3Client;
 
-    @Value("${custom.path.gallery-images}")
-    private String savePath;
-
-    @Value("${custom.path.temp}")
-    private String tempPath;
-
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
@@ -124,11 +118,13 @@ public class GalleryService {
         return uploadImageUrls;
     }
 
+    /*s3에 이미지 업로드*/
     private String putS3(File uploadFile, String fileName) {
         amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
         return amazonS3Client.getUrl(bucket, fileName).toString();
     }
 
+    /*MultipartFile을 File로 변환하면서 생긴 로컬에 생성된 File 삭제*/
     private void removeNewFile(List<File> targetFile) {
         for (int i = 0; i < targetFile.size(); i++) {
             if (targetFile.get(i).delete()) {
@@ -138,12 +134,12 @@ public class GalleryService {
         }
     }
 
-
+    /*MultipartFile을 File로 변환 (s3에는 MultipartFile 타입 전송 불가능 하기 때문)*/
     private List<File> convert(List<MultipartFile> multipartFiles) throws IOException {
         List<File> files = new ArrayList<>();
 
         for (int i = 0; i < multipartFiles.size(); i++) {
-            File convertFile = new File(tempPath + System.currentTimeMillis() + "_" + multipartFiles.get(i).getOriginalFilename());
+            File convertFile = new File(System.currentTimeMillis() + "_" + multipartFiles.get(i).getOriginalFilename());
             if (convertFile.createNewFile()) {
                 try (FileOutputStream fos = new FileOutputStream(convertFile)) {
                     fos.write(multipartFiles.get(i).getBytes());

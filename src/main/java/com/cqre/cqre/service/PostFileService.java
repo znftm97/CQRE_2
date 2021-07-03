@@ -50,9 +50,6 @@ public class PostFileService {
 
     private AmazonS3 amazonS3Client;
 
-    @Value("${custom.path.temp}")
-    private String tempPath;
-
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
@@ -131,7 +128,7 @@ public class PostFileService {
         List<File> files = new ArrayList<>();
 
         for (int i = 0; i < multipartFiles.size(); i++) {
-            File convertFile = new File(tempPath + System.currentTimeMillis() + "_" + multipartFiles.get(i).getOriginalFilename());
+            File convertFile = new File(System.currentTimeMillis() + "_" + multipartFiles.get(i).getOriginalFilename());
             if (convertFile.createNewFile()) {
                 try (FileOutputStream fos = new FileOutputStream(convertFile)) {
                     fos.write(multipartFiles.get(i).getBytes());
