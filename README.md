@@ -285,6 +285,38 @@
     - 이후 cpu가 100%를 찍는 경우가 발생해도 인스턴스가 멈추는 현상은 발생하지 않았습니다.  
   
 </details>
+  
+### 3. MAC OS 파일업로드 에러
+<details>
+
+- **상황**
+    - Window 환경에서 파일 업로드는 동작하지만, Mac 환경에서 파일 업로드는 동작하지 않는 문제
+  
+- **이슈**
+    - AWS S3 스토리지에 파일을 전송하기 위해서는 MultipartFile을 File형태로 convert 해야함
+    - convert 과정에서 로컬에 File을 생성하고 삭제하는 부분이 존재함. File을 생성 할 때 경로를 지정하는데
+      Window와 MAC은 경로 구분자가 다르다. Window는 -> /  ,  Mac은 -> \
+    - 또한 홈 디렉터리 경로도 다르다.
+
+- **해결**
+    1. System.getProperty() 메서드를 이용해 사용자의 OS에 맞는 홈 디렉터리 경로를 가져온다.
+    2. 경로 구분자가 들어가는 부분을 File클래스의 separator 필드로 대체한다.
+    ```java
+    private List<File> convert(List<MultipartFile> multipartFiles) throws IOException {
+        List<File> files = new ArrayList<>();
+        String home = System.getProperty("user.home");
+
+        for (int i = 0; i < multipartFiles.size(); i++) {
+            File convertFile = new File(home + File.separator + System.currentTimeMillis() + "_" + multipartFiles.get(i).getOriginalFilename());
+            
+            ... 생략
+        }
+
+        return files;
+    }
+    ```
+  
+</details>
 
 ## 리팩토링
 ### 1. 동기화
