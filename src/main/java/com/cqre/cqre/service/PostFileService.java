@@ -126,9 +126,10 @@ public class PostFileService {
 
     private List<File> convert(List<MultipartFile> multipartFiles) throws IOException {
         List<File> files = new ArrayList<>();
+        String home = System.getProperty("user.home");
 
         for (int i = 0; i < multipartFiles.size(); i++) {
-            File convertFile = new File(System.currentTimeMillis() + "_" + multipartFiles.get(i).getOriginalFilename());
+            File convertFile = new File(home + File.separator + System.currentTimeMillis() + "_" + multipartFiles.get(i).getOriginalFilename());
             if (convertFile.createNewFile()) {
                 try (FileOutputStream fos = new FileOutputStream(convertFile)) {
                     fos.write(multipartFiles.get(i).getBytes());
