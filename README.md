@@ -1,4 +1,4 @@
-# 게시판 + 
+# 게시판 + 쇼핑몰
 ## 배포 URL
 - http://ec2-15-165-245-31.ap-northeast-2.compute.amazonaws.com:8080
 ## 배포환경
