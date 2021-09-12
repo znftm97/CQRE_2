@@ -1,4 +1,4 @@
-package com.cqre.cqre.entity;
+package com.cqre.cqre.domain;
 
 import lombok.Getter;
 

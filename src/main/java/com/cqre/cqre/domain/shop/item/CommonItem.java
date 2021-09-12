@@ -1,4 +1,4 @@
-package com.cqre.cqre.entity.shop.item;
+package com.cqre.cqre.domain.shop.item;
 
 import com.cqre.cqre.dto.item.CreateItemDto;
 import lombok.Getter;

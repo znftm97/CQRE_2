@@ -1,6 +1,6 @@
-package com.cqre.cqre.entity.post;
+package com.cqre.cqre.domain.post;
 
-import com.cqre.cqre.entity.BaseEntity;
+import com.cqre.cqre.domain.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;

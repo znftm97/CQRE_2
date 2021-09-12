@@ -3,9 +3,9 @@ package com.cqre.cqre.service;
 import com.cqre.cqre.dto.item.CreateItemDto;
 import com.cqre.cqre.dto.item.FindItemDetailDto;
 import com.cqre.cqre.dto.item.FindItemDto;
-import com.cqre.cqre.entity.shop.item.Category;
-import com.cqre.cqre.entity.shop.item.CommonItem;
-import com.cqre.cqre.entity.shop.item.Item;
+import com.cqre.cqre.domain.shop.item.Category;
+import com.cqre.cqre.domain.shop.item.CommonItem;
+import com.cqre.cqre.domain.shop.item.Item;
 import com.cqre.cqre.repository.Item.ItemRepository;
 import com.cqre.cqre.repository.category.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

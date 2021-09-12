@@ -1,11 +1,10 @@
-package com.cqre.cqre.entity.post;
+package com.cqre.cqre.domain.post;
 
-import com.cqre.cqre.entity.BaseEntity;
-import com.cqre.cqre.entity.User;
+import com.cqre.cqre.domain.BaseEntity;
+import com.cqre.cqre.domain.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Entity
 @Getter

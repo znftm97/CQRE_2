@@ -1,4 +1,4 @@
-package com.cqre.cqre.entity.shop.item;
+package com.cqre.cqre.domain.shop.item;
 
 import lombok.*;
 
@@ -9,7 +9,8 @@ import javax.persistence.Entity;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ShoesItem extends Item {
+public class TopItem extends Item {
 
-    private int stiffHeight;
+    private int armLength;
+    private int bodyLength;
 }

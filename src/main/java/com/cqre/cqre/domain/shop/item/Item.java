@@ -1,6 +1,6 @@
-package com.cqre.cqre.entity.shop.item;
+package com.cqre.cqre.domain.shop.item;
 
-import com.cqre.cqre.entity.BaseEntity;
+import com.cqre.cqre.domain.BaseEntity;
 import com.cqre.cqre.exception.customexception.CNotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;

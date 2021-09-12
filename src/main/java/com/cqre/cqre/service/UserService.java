@@ -1,7 +1,7 @@
 package com.cqre.cqre.service;
 
 import com.cqre.cqre.dto.user.*;
-import com.cqre.cqre.entity.User;
+import com.cqre.cqre.domain.User;
 import com.cqre.cqre.exception.customexception.user.CFindIdUserNotFoundException;
 import com.cqre.cqre.exception.customexception.user.CFindPwUserNotFoundException;
 import com.cqre.cqre.exception.customexception.user.CValidationEmailException;

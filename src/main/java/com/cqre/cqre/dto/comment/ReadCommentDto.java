@@ -1,6 +1,6 @@
 package com.cqre.cqre.dto.comment;
 
-import com.cqre.cqre.entity.post.Comment;
+import com.cqre.cqre.domain.post.Comment;
 import lombok.Data;
 
 import java.time.LocalDateTime;

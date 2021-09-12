@@ -1,7 +1,7 @@
 package com.cqre.cqre.repository.order;
 
-import com.cqre.cqre.entity.shop.OrderItem;
-import com.cqre.cqre.entity.shop.OrderStatus;
+import com.cqre.cqre.domain.shop.OrderItem;
+import com.cqre.cqre.domain.shop.OrderStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

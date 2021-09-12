@@ -1,6 +1,6 @@
 package com.cqre.cqre.dto.post;
 
-import com.cqre.cqre.entity.post.PostFile;
+import com.cqre.cqre.domain.post.PostFile;
 import lombok.Data;
 
 @Data

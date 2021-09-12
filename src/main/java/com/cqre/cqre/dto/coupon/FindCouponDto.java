@@ -1,7 +1,7 @@
 package com.cqre.cqre.dto.coupon;
 
-import com.cqre.cqre.entity.shop.Coupon;
-import com.cqre.cqre.entity.shop.UserCoupon;
+import com.cqre.cqre.domain.shop.Coupon;
+import com.cqre.cqre.domain.shop.UserCoupon;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
 package com.cqre.cqre.dto.gallery;
 
-import com.cqre.cqre.entity.GalleryFile;
+import com.cqre.cqre.domain.GalleryFile;
 import lombok.Data;
 
 @Data

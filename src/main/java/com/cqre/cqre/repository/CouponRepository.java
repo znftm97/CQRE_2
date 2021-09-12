@@ -1,6 +1,6 @@
 package com.cqre.cqre.repository;
 
-import com.cqre.cqre.entity.shop.Coupon;
+import com.cqre.cqre.domain.shop.Coupon;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

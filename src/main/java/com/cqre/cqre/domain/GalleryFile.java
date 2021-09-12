@@ -1,9 +1,8 @@
-package com.cqre.cqre.entity;
+package com.cqre.cqre.domain;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Entity
 @Getter

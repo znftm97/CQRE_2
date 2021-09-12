@@ -1,4 +1,4 @@
-package com.cqre.cqre.entity.shop;
+package com.cqre.cqre.domain.shop;
 
 public enum OrderStatus {
     ORDER, CANCEL, BASKET

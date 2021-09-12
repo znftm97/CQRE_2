@@ -1,7 +1,7 @@
 package com.cqre.cqre.controller;
 
 import com.cqre.cqre.dto.user.*;
-import com.cqre.cqre.entity.User;
+import com.cqre.cqre.domain.User;
 import com.cqre.cqre.exception.customexception.user.CPwNotEquals;
 import com.cqre.cqre.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor

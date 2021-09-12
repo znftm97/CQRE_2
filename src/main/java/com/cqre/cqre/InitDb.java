@@ -1,15 +1,15 @@
 package com.cqre.cqre;
 
 import com.cqre.cqre.dto.item.CreateItemDto;
-import com.cqre.cqre.entity.GalleryFile;
-import com.cqre.cqre.entity.User;
-import com.cqre.cqre.entity.post.Board;
-import com.cqre.cqre.entity.post.Post;
-import com.cqre.cqre.entity.shop.Coupon;
-import com.cqre.cqre.entity.shop.ItemImage;
-import com.cqre.cqre.entity.shop.item.Category;
-import com.cqre.cqre.entity.shop.item.CommonItem;
-import com.cqre.cqre.entity.shop.item.Item;
+import com.cqre.cqre.domain.GalleryFile;
+import com.cqre.cqre.domain.User;
+import com.cqre.cqre.domain.post.Board;
+import com.cqre.cqre.domain.post.Post;
+import com.cqre.cqre.domain.shop.Coupon;
+import com.cqre.cqre.domain.shop.ItemImage;
+import com.cqre.cqre.domain.shop.item.Category;
+import com.cqre.cqre.domain.shop.item.CommonItem;
+import com.cqre.cqre.domain.shop.item.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.entity.shop.item.Category;
+import com.cqre.cqre.domain.shop.item.Category;
 import com.cqre.cqre.repository.category.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

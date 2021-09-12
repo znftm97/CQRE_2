@@ -1,10 +1,9 @@
-package com.cqre.cqre.entity;
+package com.cqre.cqre.domain;
 
 import com.cqre.cqre.dto.user.UserAddressDto;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Getter

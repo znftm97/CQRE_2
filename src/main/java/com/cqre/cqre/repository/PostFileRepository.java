@@ -1,6 +1,6 @@
 package com.cqre.cqre.repository;
 
-import com.cqre.cqre.entity.post.PostFile;
+import com.cqre.cqre.domain.post.PostFile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -1,14 +1,14 @@
 package com.cqre.cqre.repository.comment;
 
-import com.cqre.cqre.entity.QUser;
-import com.cqre.cqre.entity.post.Comment;
-import com.cqre.cqre.entity.post.QPost;
+import com.cqre.cqre.domain.QUser;
+import com.cqre.cqre.domain.post.Comment;
+import com.cqre.cqre.domain.post.QPost;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
-import static com.cqre.cqre.entity.post.QComment.comment;
+import static com.cqre.cqre.domain.post.QComment.comment;
 
 @RequiredArgsConstructor
 public class CommentRepositoryImpl implements CommentRepositoryCustom{

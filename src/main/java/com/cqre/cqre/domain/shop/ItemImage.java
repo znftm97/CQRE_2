@@ -1,14 +1,13 @@
-package com.cqre.cqre.entity.shop;
+package com.cqre.cqre.domain.shop;
 
-import com.cqre.cqre.entity.BaseEntity;
-import com.cqre.cqre.entity.shop.item.Item;
+import com.cqre.cqre.domain.BaseEntity;
+import com.cqre.cqre.domain.shop.item.Item;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Entity
 @Getter
