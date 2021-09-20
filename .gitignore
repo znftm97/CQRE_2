@@ -26,6 +26,8 @@ bin/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+/src/main/resources/static/images
+/src/main/resources/static/js
 files
 
 ### NetBeans ###
