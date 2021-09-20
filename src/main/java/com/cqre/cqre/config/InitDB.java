@@ -1,4 +1,4 @@
-package com.cqre.cqre;
+package com.cqre.cqre.config;
 
 import com.cqre.cqre.dto.item.CreateItemDto;
 import com.cqre.cqre.domain.GalleryFile;
@@ -21,7 +21,7 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-public class InitDb {
+public class InitDB {
 
     private final InitService initService;
 
@@ -40,10 +40,10 @@ public class InitDb {
 
         public void init() {
             User user1 = User.builder()
-                    .name("아무개")
+                    .name("테스터1")
                     .studentId("20202020")
-                    .loginId("znftm97")
-                    .password(passwordEncoder.encode("wprkfrhdaud12!"))
+                    .loginId("test1")
+                    .password(passwordEncoder.encode("test1"))
                     .email("test1@gmail.com")
                     .emailVerified("false")
                     .emailCheckToken(UUID.randomUUID().toString())
@@ -51,10 +51,10 @@ public class InitDb {
                     .build();
 
             User user2 = User.builder()
-                    .name("홍길동")
+                    .name("테스터2")
                     .studentId("12341234")
-                    .loginId("123")
-                    .password(passwordEncoder.encode("123"))
+                    .loginId("test2")
+                    .password(passwordEncoder.encode("test2"))
                     .email("test2@gmail.com")
                     .emailVerified("false")
                     .emailCheckToken(UUID.randomUUID().toString())
