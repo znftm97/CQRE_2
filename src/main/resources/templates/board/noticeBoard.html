@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>noticeBoard</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrinkto-fit=no">
+    <!-- Bootstrap CSS , jQuery-->
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" integrity="sha384-
+ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <script th:src="@{/js/jquery-3.5.1.min.js}"> </script>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/common/fragments.css}">
+    <link rel="stylesheet" th:href="@{/css/common/infoCommon.css}">
+    <link rel="stylesheet" th:href="@{/css/common/boardCommon.css}">
+    <link rel="stylesheet" th:href="@{/css/board/noticeBoard.css}">
+</head>
+<body>
+<div class="containerCustom">
+    <div th:replace="/fragments/top :: top"/>
+
+    <div class="visual">
+        <h2>
+            <p>noticeBoard</p>
+            <p>공지사항</p>
+        </h2>
+    </div>
+
+    <div class="contents">
+        <div class="lnb">
+            <ul>
+                <li>
+                    <a th:href="@{/board/noticeBoard}">공지시항</a>
+                </li>
+                <li>
+                    <a th:href="@{/board/freeBoard}">자유게시판</a>
+                </li>
+            </ul>
+        </div><!--lnb-->
+
+        <div id="tableBox">
+            <!--optionBox-->
+            <div class="optionBox">
+                <form class="form-group mx-sm-1 mb-2" th:action="@{/board/noticeBoard}" method="get">
+                    <select name="sortSelect">
+                        <option>정렬기준선택</option>
+                        <option value="recommendation">추천순</option>
+                        <option value="postViews">조회순</option>
+                    </select>
+                    <button class="btn btn-primary" type="submit">정렬</button>
+                </form>
+
+                <form class="form-inline" th:action="@{/board/noticeBoard/search}" method="get">
+                    <div class="form-group mx-sm-1 mb-2">
+                        <select name="searchSelect">
+                            <option value="name">검색 조건 선택</option>
+                            <option value="title">글제목</option>
+                            <option value="name">글쓴이</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <input type="text" id="searchWord" name="searchWord" class="form-control" placeholder="검색어"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">검색</button>
+                </form>
+
+                <a class="btn btn-primary mb-2" th:href="@{/post/createNoticePost}">글쓰기</a>
+           </div><!--searchBox-->
+
+            <!--list-->
+            <div class="list">
+                <li th:each="post : ${posts}">
+                    <a th:href="@{/post/{postId}/readPost (postId=${post.id})}">
+                        <div>
+                            <h5 th:text="${post.title}"></h5>
+                            <p th:text="${post.content}"></p>
+                            <div>
+                                <span>글쓴이: </span>
+                                <span>&nbsp;[[${post.name}]]</span>
+                                <span>추천: </span>
+                                <span th:text="${post.recommendation}"></span>
+                                <span>조회수: </span>
+                                <span th:text="${post.postViews}"></span>
+                                <p>[[${#temporals.format(post.createDate, 'yyyy-MM-dd일 hh:mm분')}]]</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </div>
+            <!--list-->
+
+            <!--paging-->
+            <nav style="text-align: center;">
+                <ul class="pagination justify-content-center"
+                    th:with="start=${T(Math).floor(posts.number/10)*10 + 1},
+                    last=(${start + 9 < posts.totalPages ? start + 9 : posts.totalPages})">
+
+                    <!--  first  -->
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{/board/noticeBoard(page=0)}" aria-label="First">
+                            <span aria-hidden="true">First</span>
+                        </a>
+                    </li>
+
+                    <!--  <  -->
+                    <li class="page-item">
+                        <a class="page-link" th:href="${posts.first} ? '#' :@{/board/noticeBoard(page=${posts.number - 1})}" aria-label="Previous" >
+                            <span aria-hidden="true">&lt;</span>
+                        </a>
+                    </li>
+
+                    <!--  1,2,3  -->
+                    <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == posts.number + 1} ? 'page-item active'">
+                        <a class="page-link" th:text="${page}" th:href="@{/board/noticeBoard(page=${page - 1})}"></a>
+                    </li>
+
+                    <!--  > -->
+                    <li class="page-item" th:class="${posts.last} ? 'disabled'">
+                        <a class="page-link" th:href="${posts.last} ? '#' : @{/board/noticeBoard(page=${posts.number + 1})}" aria-label="Next">
+                            <span aria-hidden="true">&gt;</span>
+                        </a>
+                    </li>
+
+                    <!--  Last  -->
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{/board/noticeBoard(page=${posts.totalPages - 1})}" aria-label="Last">
+                            <span aria-hidden="true">Last</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav><!--paging-->
+        </div><!--tableBox-->
+        <div th:replace="/fragments/footer :: footer"/>
+    </div><!--contents-->
+</div><!--containerCustom-->
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>couponList</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrinkto-fit=no">
+    <!-- Bootstrap CSS , jQuery-->
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" integrity="sha384-
+ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <script th:src="@{/js/jquery-3.5.1.min.js}"> </script>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/common/fragments.css}">
+    <link rel="stylesheet" th:href="@{/css/common/infoCommon.css}">
+    <link rel="stylesheet" th:href="@{/css/board/freeCreate.css}">
+
+</head>
+<body>
+<div class="containerCustom">
+    <div th:replace="/fragments/top :: top"/>
+
+    <div class="table-box">
+        <div class="boardTitle">
+            <h2>쿠폰 목록</h2>
+        </div>
+        <!--table-->
+        <table class="table table-hover table-dark">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">쿠폰명</th>
+                <th scope="col">총 생산 개수</th>
+                <th scope="col">남은 개수</th>
+                <th scope="col">할인율</th>
+                <th scope="col">생성일자</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="coupon, state : ${coupons}">
+                <td>[[${state.count}]]</td>
+                <td th:text="${coupon.name}"></td>
+                <td th:text="${coupon.totalCount}"></td>
+                <td th:text="${coupon.remainCount}"></td>
+                <td th:text="${coupon.discountRate}"></td>
+                <td>[[${#temporals.format(coupon.createDate, 'yyyy-MM-dd일 hh:mm분')}]]</td>
+            </tr>
+            </tbody>
+        </table><!--table-->
+    </div>
+
+    <!--paging-->
+    <nav style="text-align: center;">
+        <ul class="pagination justify-content-center"
+            th:with="start=${T(Math).floor(coupons.number/10)*10 + 1},
+                    last=(${start + 9 < coupons.totalPages ? start + 9 : coupons.totalPages})">
+
+            <!--  first  -->
+            <li class="page-item">
+                <a class="page-link" th:href="@{/couponList(page=0)}" aria-label="First">
+                    <span aria-hidden="true">First</span>
+                </a>
+            </li>
+
+            <!--  <  -->
+            <li class="page-item">
+                <a class="page-link" th:href="${coupons.first} ? '#' :@{/couponList(page=${coupons.number - 1})}" aria-label="Previous" >
+                    <span aria-hidden="true">&lt;</span>
+                </a>
+            </li>
+
+            <!--  1,2,3  -->
+            <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == coupons.number + 1} ? 'page-item active'">
+                <a class="page-link" th:text="${page}" th:href="@{/couponList(page=${page - 1})}"></a>
+            </li>
+
+            <!--  > -->
+            <li class="page-item" th:class="${coupons.last} ? 'disabled'">
+                <a class="page-link" th:href="${coupons.last} ? '#' : @{/couponList(page=${coupons.number + 1})}" aria-label="Next">
+                    <span aria-hidden="true">&gt;</span>
+                </a>
+            </li>
+
+            <!--  Last  -->
+            <li class="page-item">
+                <a class="page-link" th:href="@{/couponList(page=${coupons.totalPages - 1})}" aria-label="Last">
+                    <span aria-hidden="true">Last</span>
+                </a>
+            </li>
+        </ul>
+    </nav><!--paging-->
+
+    <div class="boardTitle" style="margin-top: 0px">
+        <h2>쿠폰 전송</h2>
+    </div>
+    <form role="form" method="post" th:action="@{/coupon/send}">
+        <div class="form-group">
+            <label th:for="title"><strong>사용자 이메일</strong></label>
+            <input name="email" type="text" class="form-control" placeholder="이메일을 입력하세요">
+        </div>
+        <div class="form-group">
+            <label th:for="title"><strong>쿠폰 이름</strong></label>
+            <input name="name" type="text" class="form-control" placeholder="쿠폰명을 입력하세요">
+        </div>
+        <div class="form-group">
+            <label th:for="title"><strong>개수</strong></label>
+            <input name="count" type="text" class="form-control" placeholder="보낼 수량을 입력하세요">
+        </div>
+        <button type="submit" class="btn-primary">submit</button>
+    </form>
+</div> <!-- /container -->
+</body>
+</html>

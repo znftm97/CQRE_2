@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "myCouponList.css",
+	"sources": [
+		"myCouponList.scss"
+	],
+	"names": [],
+	"mappings": "AAMA,AAAA,SAAS,CAAC,IAAI,GAAG,EAAE,GAAG,EAAE,AAAA,UAAW,CAAA,CAAC,IAAI,CAAC,CAAA;EACvC,gBAAgB,EAJD,OAAO,CAIW,UAAU;EAC3C,KAAK,EAAE,KAAK,CAAA,UAAU,GACvB"
+}

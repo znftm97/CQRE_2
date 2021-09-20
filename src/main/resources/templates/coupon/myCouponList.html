@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>myCouponList</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrinkto-fit=no">
+    <!-- Bootstrap CSS , jQuery-->
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css" integrity="sha384-
+ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <script th:src="@{/js/jquery-3.5.1.min.js}"> </script>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/common/fragments.css}">
+    <link rel="stylesheet" th:href="@{/css/common/infoCommon.css}">
+    <link rel="stylesheet" th:href="@{/css/coupon/myCouponList.css}">
+    <script rel="stylesheet" th:src="@{/js/common/infoCommon.js}"></script>
+</head>
+<body>
+<div class="containerCustom">
+    <div th:replace="/fragments/top :: top"/>
+
+    <div class="visual">
+        <h2>
+            <p>CouponList</p>
+            <p>쿠폰함</p>
+        </h2>
+    </div>
+
+    <div class="contents">
+        <div class="lnb">
+            <ul>
+                <li>
+                    <a th:href="@{/user/userInfo}">회원 정보</a>
+                </li>
+                <li>
+                    <a th:href="@{/orderList}">나의 주문 내역</a>
+                </li>
+                <li>
+                    <a th:href="@{/basketList}">장바구니 확인</a>
+                </li>
+                <li>
+                    <a th:href="@{orderCancelList}">주문 취소 내역</a>
+                </li>
+                <li>
+                    <a th:href="@{myCouponList}">내 쿠폰함</a>
+                </li>
+                <li>
+                    <a th:href="@{postList}">내 글</a>
+                </li>
+                <li>
+                    <a th:href="@{commentList}">내 댓글</a>
+                </li>
+            </ul>
+        </div><!--lnb-->
+
+        <div id="tableBox">
+            <!--table-->
+            <table class="table table-hover table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">쿠폰명</th>
+                    <th scope="col">할인율</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="coupon, state : ${coupons}">
+                    <td>[[${state.count}]]</td>
+                    <td th:text="${coupon.name}"></td>
+                    <td th:text="${coupon.discountRate}"></td>
+                </tr>
+                </tbody>
+            </table><!--table-->
+
+            <!--paging-->
+            <nav style="text-align: center;">
+                <ul class="pagination justify-content-center"
+                    th:with="start=${T(Math).floor(coupons.number/10)*10 + 1},
+                    last=(${start + 9 < coupons.totalPages ? start + 9 : coupons.totalPages})">
+
+                    <!--  first  -->
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{/myCouponList(page=0)}" aria-label="First">
+                            <span aria-hidden="true">First</span>
+                        </a>
+                    </li>
+
+                    <!--  <  -->
+                    <li class="page-item">
+                        <a class="page-link" th:href="${coupons.first} ? '#' :@{/myCouponList(page=${coupons.number - 1})}" aria-label="Previous" >
+                            <span aria-hidden="true">&lt;</span>
+                        </a>
+                    </li>
+
+                    <!--  1,2,3  -->
+                    <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == coupons.number + 1} ? 'page-item active'">
+                        <a class="page-link" th:text="${page}" th:href="@{/myCouponList(page=${page - 1})}"></a>
+                    </li>
+
+                    <!--  > -->
+                    <li class="page-item" th:class="${coupons.last} ? 'disabled'">
+                        <a class="page-link" th:href="${coupons.last} ? '#' : @{/myCouponList(page=${coupons.number + 1})}" aria-label="Next">
+                            <span aria-hidden="true">&gt;</span>
+                        </a>
+                    </li>
+
+                    <!--  Last  -->
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{/myCouponList(page=${coupons.totalPages - 1})}" aria-label="Last">
+                            <span aria-hidden="true">Last</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav><!--paging-->
+        </div><!--tableBox-->
+    </div><!--contents-->
+
+
+
+    <div th:replace="/fragments/footer :: footer"/>
+</div>
+</body>
+</html>

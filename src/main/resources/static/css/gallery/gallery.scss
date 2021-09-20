@@ -1,0 +1,141 @@
+$pinkColor: #f3ade1;
+$purpleColor: #a873f9;
+$blueColor: #0070ff;
+$blueLightColor: #4e9bff;
+$grayTextColor: #777;
+
+.contents .lnb > ul > li:first-child > a{
+  background-color: $blueLightColor!important;
+  /*background: linear-gradient(to right, $pinkColor, $blueLightColor);*/
+  color: white!important;
+}
+.contents .lnb > ul > li{
+  width: 50%;
+  a{
+    width: 672px;
+    border-right: none;
+  }
+}
+
+.visual{
+  width: 100%;
+  height: 350px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/galleryShop.png") no-repeat;
+  background-size: 100% 100%;
+  opacity: 0.8;
+}
+#tableBox{
+  width: 70%;
+  margin: 0 auto;
+  visibility: visible!important;
+
+  .searchBox > a{
+    display: inline-block;
+    position: absolute;
+    margin: -42px 0 0 595px;
+  }
+  /*list*/
+  .list{
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+    position: relative;
+    overflow-x: hidden;
+    height: 1000px;
+
+    .topPic{
+      width: 100%;
+      height: 1000px;
+
+      li{
+        list-style: none;
+        position: relative;
+        height: 450px;
+        float: left;
+        box-sizing: border-box;
+        border: 2px solid lightgray;
+        box-shadow: rgba(0,0,0,.14) 3px 6px 12px;
+        margin: 0 0 5% 5%;
+
+        a{
+          cursor: pointer;
+          display: block;
+          text-decoration: none;
+          height: 400px;
+          padding-top: 5%;
+          text-align: center;
+          box-sizing: border-box;
+
+          /*인스타 프레임*/
+          img:nth-child(2n-1){
+            width: 350px;
+            height: 396px;
+            z-index: 1;
+            margin-top: -17px;
+          }
+
+          /*프레임 안에 들어갈 사진*/
+          img:nth-child(2n){
+            width: 312px;
+            height: 220px;
+            z-index: 2;
+            position: absolute;
+            left: 20px;
+            top: 68px;
+          }
+        }
+
+        div{
+          width: 90%;
+          height: 50px;
+          display: flex;
+          justify-content: space-between;
+          margin: 0 auto;
+          p{
+            margin-top: 10px;
+          }
+          p:nth-child(2){
+            margin-left: 10px;
+          }
+          p:last-child,
+          p:first-child{
+            color: #888;
+            font-size: 12px;
+            margin-top: 15px;
+          }
+        }
+      }
+    }
+
+    li:nth-child(2n){
+      margin-right: 0;
+    }
+  }/*list*/
+}/*tableBox*/
+
+/*hover*/
+.list .topPic > li:nth-child(1):hover{
+  border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
+  border-image-slice: 1!important;
+}
+.list .topPic > li:nth-child(2):hover{
+  border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
+  border-image-slice: 1!important;
+}
+.list .topPic > li:nth-child(3):hover{
+  border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
+  border-image-slice: 1!important;
+}
+.list .topPic > li:nth-child(4):hover{
+  border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
+  border-image-slice: 1!important;
+}
+.list .topPic > li:nth-child(5):hover{
+  border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
+  border-image-slice: 1!important;
+}
+.list .topPic > li:nth-child(6):hover{
+  border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
+  border-image-slice: 1!important;
+}
+/*hover*/

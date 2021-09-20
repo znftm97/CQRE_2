@@ -1,0 +1,147 @@
+$pinkColor: #f3ade1;
+$purpleColor: #a873f9;
+$blueColor: #0070ff;
+$blueLightColor: #4e9bff;
+$grayTextColor: #777;
+html, body{
+  font-family: "Noto Sans CJK KR";
+}
+
+.bg-image{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("/images/background2.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  z-index: -1;
+  opacity: 0.7;
+}
+
+/*header*/
+header{
+  width: 1920px;
+  height: 100px;
+  /*가운데 정렬*/
+  text-align: center;
+  line-height: 14px;
+  z-index: 2;
+  position: absolute;
+
+  img{
+    position: absolute;
+    margin-top: 20px;
+    width: 160px;
+    height: 60px;
+    margin-left: 80px;
+  }
+
+  .sign{
+    float: right; /*sing 박스 오른쪽 정렬*/
+    width: 300px;
+    height: inherit;
+    margin-right: 20px;
+
+    a:first-child{
+      width: 200px;
+    }
+
+    a{
+      display: inline-block;
+      font-size: 20px;
+      color: white;
+      padding-left: 20px;
+      margin-top: 40px;
+      text-decoration: none;
+      width: 100px;
+      height: 20px;
+      text-align: center;
+    }
+
+    form{
+      width: 100px;
+      height: 20px;
+      display: inline-block;
+      font-size: 20px;
+      margin-top: 40px;
+    }
+    form > button{
+      border: none;
+      color: white;
+      background: none;
+    }
+
+  }
+}/*header*/
+
+.total-box{
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 94%;
+  height: 936px;
+  z-index: 1;
+
+  .personal-box{
+    width: 355px;
+    height: inherit;
+    display: flex;
+    flex-direction: column; // 내부 요소 세로정렬
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition-duration: 0.7s;
+
+    > div:first-child{
+      width: 300px;
+      height: 150px;
+      border-bottom: 2px solid ghostwhite;
+      margin: 0 auto;
+
+      p{
+        display: block;
+        color: white;
+        font-size: 30px;
+      }
+    }
+
+    > div:last-child{
+      width: 220px;
+      height: 60px;
+      border: 2px solid white;
+      margin: 0 auto;
+      margin-top: 40px;
+      display: block;
+      transition: 0.7s all;
+      opacity: 0;
+      text-align: center;
+
+      a{
+        display: inline-block;
+        margin-top: 14px;
+        text-decoration: none;
+        color: white;
+        width: 220px;
+        height: 60px;
+      }
+    }
+  }
+}/*total box*/
+.slideDown{
+  animation-name: slideDown;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  visibility: visible !important;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-10%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+}

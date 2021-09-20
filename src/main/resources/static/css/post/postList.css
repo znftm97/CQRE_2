@@ -1,0 +1,6 @@
+.contents .lnb > ul > li:nth-child(6) > a {
+  background-color: #4e9bff !important;
+  /*background: linear-gradient(to right, $pinkColor, $blueLightColor);*/
+  color: white !important; }
+
+/*# sourceMappingURL=postList.css.map */

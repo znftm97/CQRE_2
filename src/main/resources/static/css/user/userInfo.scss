@@ -1,0 +1,40 @@
+$pinkColor: #f3ade1;
+$purpleColor: #a873f9;
+$blueColor: #0070ff;
+$blueLightColor: #4e9bff;
+$grayTextColor: #777;
+
+.contents .lnb > ul > li:first-child > a{
+  background-color: $blueLightColor!important;
+  color: white!important;
+}
+
+.table-dark{
+  text-align: center;
+}
+
+.buttonBox{
+  width: 60%;
+  height: 50px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#passwordCheck{
+  width: 50%;
+  height: 30%;
+  z-index: 9999;
+
+  form > input,
+  form > .btn-primary{
+    display: block;
+  }
+
+  form > button,
+  form > a > button{
+    margin-top: 15px;
+    text-align: center;
+  }
+}
+

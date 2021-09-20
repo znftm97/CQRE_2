@@ -1,0 +1,175 @@
+@import url('https://use.fontawesome.com/releases/v5.0.9/css/all.css');
+$pinkColor: #f3ade1;
+$purpleColor: #a873f9;
+$blueColor: #0070ff;
+$blueLightColor: #4e9bff;
+$grayTextColor: #777;
+
+.postBox{
+  width: 50%;
+  margin: 0 auto;
+
+  .boardTitle{
+    font-weight: bold;
+    border-bottom: 3px solid black;
+    width: 100%;
+  }
+
+  .postInfo{
+    margin-top: 10px;
+
+
+    .postInfoSubBox1{
+      width: 100%;
+      border-bottom: 1px solid #eeeeee;
+      padding-bottom: 12px;
+
+      span:first-child{
+        font-weight: 800;
+      }
+      span:last-child{
+        font-weight: 300;
+      }
+    }
+
+    .postInfoSubBox2{
+      padding-top: 12px;
+      span:nth-child(2n-1){
+        font-weight: 800;
+      }
+
+      span:nth-child(2n){
+        font-weight: 300;
+      }
+    }
+
+    table{
+      tbody > tr > td > a{
+        display: block;
+      }
+    }
+  }
+  .content{
+    width: 100%;
+    border: 1px solid lightgray;
+    box-shadow: rgba(0,0,0,.14) 3px 6px 12px;
+    height: 500px;
+    margin: 20px 0 10px 0;
+    font-weight: 300;
+    color: #666666;
+
+    p{
+      margin: 15px 0 0 15px;
+    }
+
+    /*좋아요 버튼*/
+    div{
+      width: 50px;
+      height:40px;
+      position: relative;
+      margin: 0 auto;
+      margin-top: 395px;
+
+      i {
+        cursor:pointer;
+        padding:10px 12px 8px;
+        background:#f3ade1;
+        border-radius:50%;
+        display:inline-block;
+        margin:0 0 15px;
+        color:#aaa;
+        transition:.2s;
+      }
+
+      i:hover {
+        color:#666;
+      }
+
+      i:before {
+        font-family: fontawesome, serif;
+        content:'\f004';
+        font-style:normal;
+        font-size: 20px;
+      }
+
+      span {
+        position: absolute;
+        bottom:70px;
+        left:0;
+        right:0;
+        visibility: hidden;
+        transition:.6s;
+        z-index:-2;
+        font-size:2px;
+        color:transparent;
+        font-weight:400;
+      }
+
+      i.press {
+        animation: size .4s;
+        color:#e23b3b;
+      }
+
+      span.press {
+        bottom:50px;
+        font-size:14px;
+        visibility:visible;
+        animation: fade 1s;
+      }
+
+      @keyframes fade {
+        0% {color:#transparent;}
+        50% {color:#e23b3b;}
+        100% {color:#transparent;}
+      }
+
+      @keyframes size {
+        0% {padding:10px 12px 8px;}
+        50% {padding:14px 16px 12px;
+          margin-top:-4px;}
+        100% {padding:10px 12px 8px;}
+      }
+    }
+  }/*좋아요 버튼*/
+}
+
+.commentBox{
+  margin-bottom: 20px;
+
+  .commentList{
+
+    .comment{
+      border: 1px;
+      width: 100%;
+      height: 80px;
+      background: $blueLightColor;
+      border-bottom: 1px solid $pinkColor;
+
+      span{
+        margin-top: 25px;
+        width: 200px;
+        height: 30px;
+        display: inline-block;
+        margin-left: 20px;
+      }
+
+      span:nth-child(1){
+        width: 80px;
+      }
+
+      span:nth-child(2){
+        width: 400px;
+      }
+
+      span:nth-child(3){
+        width: 175px;
+      }
+
+      div{
+        width: 150px;
+        float: right;
+        margin-top: 25px;
+      }
+    }
+  }
+}

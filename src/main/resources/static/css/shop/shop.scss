@@ -1,0 +1,216 @@
+$pinkColor: #f3ade1;
+$purpleColor: #a873f9;
+$blueColor: #0070ff;
+$blueLightColor: #4e9bff;
+$grayTextColor: #777;
+
+.contents .lnb > ul > li:last-child > a{
+  background-color: $blueLightColor!important;
+  /*background: linear-gradient(to right, $pinkColor, $blueLightColor);*/
+  color: white!important;
+}
+
+.contents .lnb > ul > li{
+  width: 50%;
+  a{
+    width: 672px;
+    border-right: none;
+  }
+}
+
+.visual{
+  width: 100%;
+  height: 350px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/galleryShop.png") no-repeat;
+  background-size: 100% 100%;
+  opacity: 0.8;
+}
+
+#categoryBox{
+  float: left;
+  width: 270px;
+  border: 1px solid #b2b2b2;
+  margin-top: 70px;
+  height: 360px;
+  position: fixed;
+  z-index: 100;
+  background-color: white;
+
+  .category, .categoryDetail{
+    display: inline-block;
+    height: inherit;
+  }
+
+  .category{
+    border-right: 1px solid #b2b2b2;
+    float: left;
+    width: 115px;
+
+    > div{
+      height: 120px;
+      margin-left: 10px;
+      div{
+        margin-top: 40px;
+        display: inline-block;
+
+        span:first-child {
+          color: $blueLightColor;
+          font-size: 20px;
+        }
+        span:last-child{
+          color : #b2b2b2;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .categoryDetail{
+    float: right;
+    width: 150px;
+
+    ul{
+      margin-top: 18px;
+    }
+    li{
+      list-style: none;
+      padding-bottom: 8px;
+    }
+
+    li:nth-child(3n + 1){
+      border-top: 1px solid $blueLightColor;
+      padding-top: 20px;
+    }
+    li:first-child{
+      border: none;
+      padding-top: 0px;
+    }
+  }
+
+  a{
+    text-decoration: none;
+    color: black;
+  }
+}
+
+#tableBox{
+  width: 70%;
+  margin: 0 auto;
+  visibility: visible!important;
+
+  .searchBox{
+    margin-left: 340px;
+  }
+
+  .buttonBoxShop{
+    display: inline-block;
+    height: 37px;
+    width: 450px;
+    float: right;
+    margin-bottom: 33px;
+    a{
+      margin-left: 24px;
+    }
+  }
+
+  /*list*/
+  .list{
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+    position: relative;
+    overflow-x: hidden;
+    height: 1100px;
+
+    .topPic{
+      width: 100%;
+      height: 1000px;
+    }
+
+    li{
+      list-style: none;
+      position: relative;
+      width: 350px;
+      height: 460px;
+      float: left;
+      box-sizing: border-box;
+      border: 2px solid lightgray;
+      box-shadow: rgba(0,0,0,.14) 3px 6px 12px;
+      margin: 0 0 5% 5%;
+
+        a{
+          cursor: pointer;
+          display: block;
+          text-decoration: none;
+          height: 300px;
+          padding-top: 5%;
+          text-align: center;
+          box-sizing: border-box;
+
+          img{
+            width: 350px;
+            height: 300px;
+            margin-top: -19px;
+            margin-left: -2px;
+          }
+        }
+
+      div{
+        width: 90%;
+        height: 50px;
+        margin: 0 auto;
+        p{
+          margin-top: 10px;
+          display: block;
+          width: 100%;
+          height: 20px;
+          text-align: center;
+        }
+        p:nth-child(2){
+          border-top: 1px solid lightgray;
+          padding-top: 10px;
+          height: 60px;
+          white-space: normal;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp:2;
+          word-wrap: break-word;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+        }
+      }
+    }
+
+    li:nth-child(2n){
+      margin-right: 0;
+    }
+  }/*list*/
+}/*tableBox*/
+
+/*hover*/
+.list .topPic > li:nth-child(1):hover{
+  border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
+  border-image-slice: 1!important;
+}
+.list .topPic > li:nth-child(2):hover{
+  border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
+  border-image-slice: 1!important;
+}
+.list .topPic > li:nth-child(3):hover{
+  border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
+  border-image-slice: 1!important;
+}
+.list .topPic > li:nth-child(4):hover{
+  border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
+  border-image-slice: 1!important;
+}
+.list .topPic > li:nth-child(5):hover{
+  border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
+  border-image-slice: 1!important;
+}
+.list .topPic > li:nth-child(6):hover{
+  border-image: linear-gradient(to right, $pinkColor, $blueColor)!important;
+  border-image-slice: 1!important;
+}
+/*hover*/
+
+

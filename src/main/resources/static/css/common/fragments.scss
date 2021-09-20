@@ -1,0 +1,206 @@
+$pinkColor: #f3ade1;
+$purpleColor: #a873f9;
+$blueColor: #0070ff;
+$blueLightColor: #4e9bff;
+$grayTextColor: #777;
+
+html, body{
+  font-family: "Noto Sans CJK KR";
+  margin: 0;
+  padding: 0;
+}
+
+/*.containerCustom{
+  width: 100%;
+  height: 936px;
+  position: relative;
+}*/
+
+/*header*/
+header{
+  background-color: white;
+  box-shadow: rgba(0,0,0,.1) 5px 5px 8px;
+  position: fixed;
+  width: 1920px;
+  height: 100px;
+  text-align: center;
+  line-height: 14px;
+  z-index: 99;
+  display: flex;
+  justify-content: space-between;
+
+  img{
+    position: absolute;
+    margin-top: 20px;
+    width: 160px;
+    height: 60px;
+    margin-left: 80px;
+  }
+
+  .menu{
+    width: 1000px;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    margin-left: 300px;
+
+    ul{
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul > li{
+      list-style: none;
+      float: left;
+      width: 140px;
+      height: 100px;
+
+      a{
+        display: block;
+        text-decoration: none;
+        font-size: 20px;
+        letter-spacing: -0.4pt;
+        line-height: 135%;
+        box-sizing: border-box;
+        margin-top: 35px;
+        color: black;
+      }
+    }
+  }
+
+  .sign{
+    float: right; /*sing 박스 오른쪽 정렬*/
+    width: 350px;
+    height: inherit;
+    margin-right: 20px;
+
+    form{
+      width: 100px;
+      height: 20px;
+      display: inline-block;
+      font-size: 20px;
+      margin-top: 40px;
+
+      button{
+        background: none;
+        border: none;
+        font-size: 20px;
+      }
+    }
+
+    a{
+      display: inline-block;
+      font-size: 20px;
+      color: black;
+      margin-top: 40px;
+      text-decoration: none;
+      width: 100px;
+      height: 20px;
+    }
+
+    a:first-child{
+      margin-left: 90px;
+    }
+
+  }
+
+}
+
+header .menu > ul > li:nth-child(1):hover{
+  border-bottom: 5px solid white;
+  border-image: linear-gradient(to right, $pinkColor, $blueColor);
+  border-image-slice: 1;
+  transition: 0.5s all;
+}
+header .menu > ul > li:nth-child(2):hover{
+  border-bottom: 5px solid white;
+  border-image: linear-gradient(to right, $pinkColor, $blueColor);
+  border-image-slice: 1;
+  transition: 0.5s all;
+}
+header .menu > ul > li:nth-child(3):hover{
+  border-bottom: 5px solid white;
+  border-image: linear-gradient(to right, $pinkColor, $blueColor);
+  border-image-slice: 1;
+  transition: 0.5s all;
+}
+header .menu > ul > li:nth-child(4):hover{
+  border-bottom: 5px solid white;
+  border-image: linear-gradient(to right, $pinkColor, $blueColor);
+  border-image-slice: 1;
+  transition: 0.5s all;
+}
+header .menu > ul > li:nth-child(5):hover{
+  border-bottom: 5px solid white;
+  border-image: linear-gradient(to right, $pinkColor, $blueColor);
+  border-image-slice: 1;
+  transition: 0.5s all;
+}
+/*header*/
+
+/*footer*/
+footer {
+  width: 100%;
+  height: 210px;
+  /*하단에 고정*/
+  position: absolute;
+  z-index: 2;
+  background-color: #0c2340;
+  font-size: 12px;
+  letter-spacing: -0.35px;
+  line-height: 14px;
+  color: #B0B0B0!important;
+  text-decoration: none solid rgb(255, 255, 255)!important;
+
+  .footerBox{
+    width: 70%;
+    height: 180px;
+    margin: 0 auto;
+
+    .box1{
+      border-bottom: 1px solid #213650;
+      margin-top: 30px;
+      height: 45px;
+      span:first-child{
+        font-size: 25px;
+      }
+    }
+
+    .box2{
+      div:first-child{
+        display: inline-block;
+        width: 600px;
+        float: left;
+        height: 95px;
+        p:first-child{
+          margin-top: 25px;
+        }
+      }
+      div:last-child{
+        width: 600px;
+        display: inline-block;
+        float: right;
+        height: 95px;
+        text-align: center;
+
+        >span{
+          margin-top: 30px;
+          display: inline-block;
+          border: 1px solid white;
+          width: 100px;
+          height: 30px;
+          font-size: 20px;
+          padding-top: 5px;
+          margin-right: 20px;
+        }
+      }
+
+    }
+  }
+}/*footer*/
+
+
+
+
+
