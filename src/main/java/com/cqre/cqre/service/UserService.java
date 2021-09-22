@@ -1,7 +1,7 @@
 package com.cqre.cqre.service;
 
 import com.cqre.cqre.dto.user.*;
-import com.cqre.cqre.entity.User;
+import com.cqre.cqre.domain.User;
 import com.cqre.cqre.exception.customexception.user.CFindIdUserNotFoundException;
 import com.cqre.cqre.exception.customexception.user.CFindPwUserNotFoundException;
 import com.cqre.cqre.exception.customexception.user.CValidationEmailException;
@@ -59,7 +59,7 @@ public class UserService {
         /*ec2 환경에서 사용하기위한 코드 수정 부분*/
         String html = "<h1>이메일 인증</h1><br>" +
                 "아래 버튼을 클릭하시면 이메일 인증이 완료됩니다.<br>" +
-                "<a href='http://15.165.245.31:8080/user/validationEmail?email=" +
+                "<a href='http://ec2-13-125-217-61.ap-northeast-2.compute.amazonaws.com:8080/user/validationEmail?email=" +
                 user.getEmail() +
                 "&emailCheckToken=" +
                 user.getEmailCheckToken() +
@@ -82,7 +82,7 @@ public class UserService {
         /*ec2 환경에서 사용하기위한 코드 수정 부분*/
         String html = "<h1>이메일 인증</h1><br>" +
                 "아래 버튼을 클릭하시면 이메일 인증이 완료됩니다.<br>" +
-                "<a href='http://15.165.245.31:8080/user/validationEmail?email=" +
+                "<a href='http://ec2-13-125-217-61.ap-northeast-2.compute.amazonaws.com:8080/user/validationEmail?email=" +
                 findUser.getEmail() +
                 "&emailCheckToken=" +
                 findUser.getEmailCheckToken() +
@@ -131,10 +131,9 @@ public class UserService {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
-        /*ec2 환경에서 사용하기위한 코드 수정 부분*/
         String html = "<h1>비밀번호 변경 본인확인</h1><br>" +
                 "아래 버튼을 클릭하시면 본인 인증이 완료됩니다.<br>" +
-                "<a href='http://15.165.245.31:8080/user/updatePassword?email=" +
+                "<a href='http://ec2-13-125-217-61.ap-northeast-2.compute.amazonaws.com:8080/user/updatePassword?email=" +
                 findUserByEmail.getEmail() +
                 "' target='_blank'><button>인증 하기</button></a>";
 

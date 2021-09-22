@@ -1,6 +1,6 @@
 package com.cqre.cqre.repository.itemImage;
 
-import com.cqre.cqre.entity.shop.ItemImage;
+import com.cqre.cqre.domain.shop.ItemImage;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

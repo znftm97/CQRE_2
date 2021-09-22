@@ -1,6 +1,6 @@
 package com.cqre.cqre.dto.coupon;
 
-import com.cqre.cqre.entity.shop.Coupon;
+import com.cqre.cqre.domain.shop.Coupon;
 import lombok.Data;
 
 import java.time.LocalDateTime;

@@ -1,12 +1,12 @@
 package com.cqre.cqre.service;
 
 import com.cqre.cqre.dto.order.FindOrderItemDto;
-import com.cqre.cqre.entity.User;
-import com.cqre.cqre.entity.shop.Order;
-import com.cqre.cqre.entity.shop.OrderItem;
-import com.cqre.cqre.entity.shop.OrderStatus;
-import com.cqre.cqre.entity.shop.UserCoupon;
-import com.cqre.cqre.entity.shop.item.Item;
+import com.cqre.cqre.domain.User;
+import com.cqre.cqre.domain.shop.Order;
+import com.cqre.cqre.domain.shop.OrderItem;
+import com.cqre.cqre.domain.shop.OrderStatus;
+import com.cqre.cqre.domain.shop.UserCoupon;
+import com.cqre.cqre.domain.shop.item.Item;
 import com.cqre.cqre.exception.customexception.CNotEnoughStockException;
 import com.cqre.cqre.repository.Item.ItemRepository;
 import com.cqre.cqre.repository.UserCouponRepository;

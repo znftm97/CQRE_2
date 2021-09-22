@@ -1,6 +1,6 @@
 package com.cqre.cqre.repository.Item;
 
-import com.cqre.cqre.entity.shop.item.Item;
+import com.cqre.cqre.domain.shop.item.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

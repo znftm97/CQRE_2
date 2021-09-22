@@ -1,6 +1,6 @@
 package com.cqre.cqre.repository.gallery;
 
-import com.cqre.cqre.entity.GalleryFile;
+import com.cqre.cqre.domain.GalleryFile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

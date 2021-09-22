@@ -1,6 +1,6 @@
 package com.cqre.cqre.dto.order;
 
-import com.cqre.cqre.entity.shop.OrderItem;
+import com.cqre.cqre.domain.shop.OrderItem;
 import lombok.Data;
 
 import java.time.LocalDateTime;

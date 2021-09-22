@@ -4,7 +4,7 @@ import com.cqre.cqre.dto.gallery.FindGalleryFileDistinctDto;
 import com.cqre.cqre.dto.gallery.FindGalleryFileDto;
 import com.cqre.cqre.dto.gallery.QFindGalleryFileDistinctDto;
 import com.cqre.cqre.dto.gallery.QFindGalleryFileDto;
-import com.cqre.cqre.entity.QUser;
+import com.cqre.cqre.domain.QUser;
 import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.cqre.cqre.entity.QGalleryFile.galleryFile;
+import static com.cqre.cqre.domain.QGalleryFile.galleryFile;
 
 @RequiredArgsConstructor
 public class GalleryRepositoryImpl implements GalleryRepositoryCustom{

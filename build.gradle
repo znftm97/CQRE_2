@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.4.2'
+	id 'org.springframework.boot' version '2.5.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
@@ -8,8 +8,23 @@ plugins {
 
 group = 'com.cqre'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '8'
-targetCompatibility = '8'
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+bootRun {
+	String activeProfile = System.properties['spring.profiles.active']
+	systemProperty "spring.profiles.active", activeProfile
+}
+
+ext.profile = (!project.hasProperty('profile') || !profile) ? 'local' : profile
+
+sourceSets {
+	main {
+		resources {
+			srcDirs("src/main/resources", "src/main/resources/profiles", "src/main/resources/${profile}")
+		}
+	}
+}
 
 configurations {
 	compileOnly {
@@ -50,7 +65,11 @@ test {
 	useJUnitPlatform()
 }
 
-//querydsl 추가 시작
+jar {
+	enabled = false
+}
+
+//querydsl
 def querydslDir = "$buildDir/generated/querydsl"
 querydsl {
 	jpa = true
@@ -65,5 +84,4 @@ configurations {
 compileQuerydsl {
 	options.annotationProcessorPath = configurations.querydsl
 }
-//querydsl 추가 끝
 

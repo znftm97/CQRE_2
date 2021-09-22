@@ -1,6 +1,6 @@
 package com.cqre.cqre.security.OAuth2;
 
-import com.cqre.cqre.entity.User;
+import com.cqre.cqre.domain.User;
 import com.cqre.cqre.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

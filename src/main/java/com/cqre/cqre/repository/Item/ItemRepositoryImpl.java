@@ -14,8 +14,8 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.cqre.cqre.entity.shop.QItemImage.itemImage;
-import static com.cqre.cqre.entity.shop.item.QItem.item;
+import static com.cqre.cqre.domain.shop.QItemImage.itemImage;
+import static com.cqre.cqre.domain.shop.item.QItem.item;
 
 @RequiredArgsConstructor
 public class ItemRepositoryImpl implements ItemRepositoryCustom{

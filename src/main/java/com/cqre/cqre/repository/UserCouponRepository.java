@@ -1,6 +1,6 @@
 package com.cqre.cqre.repository;
 
-import com.cqre.cqre.entity.shop.UserCoupon;
+import com.cqre.cqre.domain.shop.UserCoupon;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
