@@ -15,39 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class CqreApplicationTests {
 
-	@Autowired
-	private PostRepository postRepository;
-	@Autowired
-	private PostService postService;
-	@Autowired
-	private PostController postController;
-	@Autowired
-	private RecommendationService recommendationService;
-
 	@Test
 	void contextLoads() {
-		Post post = Post.builder()
-				.content("aaaa")
-				.title("aaaa")
-				.board(Board.FREE)
-				.postViews(1)
-				.build();
-
-		User user = User.builder()
-				.name("userA")
-				.email("asd@naver.com")
-				.loginId("userA")
-				.build();
-
-		Recommendation re = Recommendation.builder()
-							.user(user)
-							.post(post)
-							.id(1L)
-							.build();
-
-		recommendationService.recommendation(post.getId());
 
 	}
-
-
 }
