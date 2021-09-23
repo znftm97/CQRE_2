@@ -51,7 +51,7 @@ jobs: # 여러 Step으로 구성되고, 가상 환경의 인스턴스에서 실�
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./dockerfile
+          file: ./Dockerfile
           platforms: linux/amd64
           push: true
           tags: ${{ secrets.DOCKERHUB_TAG }}
