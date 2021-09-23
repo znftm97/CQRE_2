@@ -13,9 +13,9 @@ cloud:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/cqre?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
-    username: root
-    password: 1234
+    url: ENC(IbgO4T1dbSt7DeJamWTLzDR0nc9An4jXlGk1YFtPzTAO1M34vztf7RjtxXhYwI2VNLlTOeYtVVS4vNtfeYn3pH1M9xlObf/CNPcEsccuWAphzbyFboAuLiL1/FF4gmvZ2qJOa9U7JtL9fsnkYugJ/Ne6c57/Ts+i+U1UiSlgRwk9E8Ou0X9jnQ==)
+    username: ENC(r+gbLBAEXbtJLPBhCi4ubA==)
+    password: ENC(fd0maz6hwV97RhTkhFjcR0wbK2O9X9sB)
     driver-class-name: com.mysql.cj.jdbc.Driver
   servlet:
     multipart:
