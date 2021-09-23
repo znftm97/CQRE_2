@@ -1,7 +1,7 @@
 name: CQRE-CI
 
 env:
-  JASYPT_PASSWORD: ${{ secrets.CQRE_JASYPT_PASSWORD }}
+  CQRE_JASYPT_PASSWORD: ${{ secrets.CQRE_JASYPT_PASSWORD }}
 
 on: # 지정한 이벤트가 해당 브랜치에서 발생할 때 Github Action 동작
   push:
