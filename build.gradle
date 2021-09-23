@@ -79,7 +79,7 @@ dependencyManagement {
 test {
 	useJUnitPlatform()
 	systemProperty "file.encoding", "utf-8"
-	systemProperty 'spring.profiles.active', 'local'
+	systemProperty 'spring.profiles.active', 'dev'
 }
 
 jar {
