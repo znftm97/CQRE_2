@@ -1,5 +1,8 @@
 name: CQRE-CI
 
+env:
+  JASYPT_PASSWORD: ${{ secrets.CQRE_JASYPT_PASSWORD }}
+
 on: # 지정한 이벤트가 해당 브랜치에서 발생할 때 Github Action 동작
   push:
     branches:
@@ -33,10 +36,6 @@ jobs: # 여러 Step으로 구성되고, 가상 환경의 인스턴스에서 실�
 
       - name : Build with Gradle # gradle로 빌드
         run: ./gradlew clean build
-        shell: bash
-
-      - name: error log
-        run: cat file:///home/runner/work/CQRE_2/CQRE_2/build/reports/tests/test/index.html
         shell: bash
 
       - name: Set up Docker Buildx # Dockerfile 빌드로 DockerImage 생성
