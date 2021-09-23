@@ -4,12 +4,6 @@ plugins {
 	id 'java'
 	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
-/*apply plugin: 'idea'*/
-
-group = 'com.cqre'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-targetCompatibility = '11'
 
 bootRun {
 	String activeProfile = System.properties['spring.profiles.active']
@@ -26,6 +20,10 @@ sourceSets {
 	}
 }
 
+group = 'com.cqre'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -41,7 +39,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	/*implementation 'org.springframework.boot:spring-boot-devtools'*/
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	implementation 'com.querydsl:querydsl-jpa'
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8'
@@ -54,7 +51,6 @@ dependencies {
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time'
 	compileOnly 'org.projectlombok:lombok'
 	compile 'org.webjars:jquery:3.5.1'
-	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -64,6 +60,8 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+	systemProperty "file.encoding", "utf-8"
+	systemProperty 'spring.profiles.active', 'local'
 }
 
 jar {
