@@ -27,7 +27,6 @@ out/
 !**/src/test/**/out/
 /src/main/resources/static/images
 /src/main/resources/static/js
-/src/main/resources/profiles
 files
 
 ### NetBeans ###
