@@ -1,11 +1,11 @@
 # 게시판 + 쇼핑몰
 ## 배포 URL
-- http://ec2-13-125-217-61.ap-northeast-2.compute.amazonaws.com:8080/
+- http://ec2-54-180-142-70.ap-northeast-2.compute.amazonaws.com:8080/
 ## 배포환경
 <details>
 
 - AWS EC2 (Ubuntu 20.04)<br>
-- AWS RDS (Mysql)<br>
+- AWS RDS (Mysql 8.0.23)<br>
 - AWS S3<br>
 - Docker<br>
 </details>
@@ -13,7 +13,7 @@
 ## 사용기술
 <details>
 
-- JAVA8<br>
+- JAVA11<br>
 - Thymeleaf<br>
 - jQuery<br>
 - Spring Boot<br>
@@ -428,7 +428,7 @@
     check의 필요성 부족
     - 현재 추천을 취소하는 경우 **delete 쿼리** 발생
     check로 추천 존재 여부를 구분하도록 변경하면 **update 쿼리** 발생<br>
-    - 여기서 문득 delete 쿼리와 update 쿼리 중 어느게 성능이 더 좋을까 라는 궁금점이 들어 Artillery 툴을 이용해 성능테스트를 해보고 성능이 더 좋은 방향으로 로직을 수정하기로 결정했습니다. 자세한 과정은 [블로그](https://velog.io/@znftm97/%EC%84%B1%EB%8A%A5%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%9B%84-%EC%82%AC%EC%9D%B4%EB%93%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81)에 있습니다.
+    - 여기서 문득 delete 쿼리와 update 쿼리 중 어느게 성능이 더 좋을까 라는 궁금점이 들어 Artillery 툴을 이용해 성능테스트를 해보고 성능이 더 좋은 방향으로 로직을 수정하기로 결정했습니다. 자세한 과정은 [Notion](https://languid-visage-6fe.notion.site/d83088a2380e42f49da34ffb126685d6)에 있습니다.
 
 - **결과**
     - 성능 테스트 결과 별 차이가 없었기 때문에, 굳이 check 값을 두어 사용할 필다고 판단하여
