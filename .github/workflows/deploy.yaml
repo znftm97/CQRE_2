@@ -35,9 +35,9 @@ jobs: # 여러 Step으로 구성되고, 가상 환경의 인스턴스에서 실�
         run: chmod +x ./gradlew
         shell: bash
 
-      - name : Build with Gradle # gradle로 빌드
-        run: ./gradlew clean build
-        shell: bash
+#      - name : Build with Gradle # gradle로 빌드
+#        run: ./gradlew clean build
+#        shell: bash
 
       - name: Set up Docker Buildx # Dockerfile 빌드로 DockerImage 생성
         uses: docker/setup-buildx-action@v1
