@@ -5,9 +5,6 @@ plugins {
 	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
-compileJava.options.encoding = 'UTF-8'
-compileTestJava.options.encoding = 'UTF-8'
-
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
@@ -79,7 +76,7 @@ dependencyManagement {
 test {
 	useJUnitPlatform()
 	systemProperty "file.encoding", "utf-8"
-	systemProperty 'spring.profiles.active', 'dev'
+	systemProperty 'spring.profiles.active', 'local'
 }
 
 jar {
