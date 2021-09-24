@@ -84,22 +84,22 @@ public class PostService {
     }
 
     /*공지사항 글 생성*/
-    @Transactional
-    public Long createNoticePost(CreateAndUpdatePostDto createAndUpdatePostDto){
-        User loginUser = userService.getLoginUser();
-        Post post = Post.builder()
-                .title(createAndUpdatePostDto.getTitle())
-                .content(createAndUpdatePostDto.getContent())
-                .postViews(0)
-                .recommendation(0)
-                .user(loginUser)
-                .board(Board.NOTICE)
-                .build();
-
-        postRepository.save(post);
-
-        return post.getId();
-    }
+//    @Transactional
+//    public Long createNoticePost(CreateAndUpdatePostDto createAndUpdatePostDto){
+//        User loginUser = userService.getLoginUser();
+//        Post post = Post.builder()
+//                .title(createAndUpdatePostDto.getTitle())
+//                .content(createAndUpdatePostDto.getContent())
+//                .postViews(0)
+//                .recommendation(0)
+//                .user(loginUser)
+//                .board(Board.NOTICE)
+//                .build();
+//
+//        postRepository.save(post);
+//
+//        return post.getId();
+//    }
 
     /*글 읽기*/
     @Transactional

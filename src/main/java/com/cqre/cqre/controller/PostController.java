@@ -127,21 +127,21 @@ public class PostController {
     }
 
     /*공지사항 글 생성*/
-    @PostMapping("/post/createNoticePost")
-    public String PCreateNoticePost(@ModelAttribute("createAndUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
-                                    @RequestParam(value = "file", required = false) List<MultipartFile> files) throws IOException {
-
-        if (result.hasErrors()) {
-            return "/post/createNoticePost";
-        }
-
-        Long postId = postService.createNoticePost(createAndUpdatePostDto);
-        if (!((files.get(0).getOriginalFilename()).isEmpty())){
-            postFileService.upload1(files, "postFiles", postId);
-        }
-
-        return "redirect:/board/noticeBoard";
-    }
+//    @PostMapping("/post/createNoticePost")
+//    public String PCreateNoticePost(@ModelAttribute("createAndUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
+//                                    @RequestParam(value = "file", required = false) List<MultipartFile> files) throws IOException {
+//
+//        if (result.hasErrors()) {
+//            return "/post/createNoticePost";
+//        }
+//
+//        Long postId = postService.createNoticePost(createAndUpdatePostDto);
+//        if (!((files.get(0).getOriginalFilename()).isEmpty())){
+//            postFileService.upload1(files, "postFiles", postId);
+//        }
+//
+//        return "redirect:/board/noticeBoard";
+//    }
 
     /*글 조회 페이지*/
     @GetMapping("/post/{postId}/readPost")
