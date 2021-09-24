@@ -1,3 +1,4 @@
+/*
 package com.cqre.cqre.config;
 
 import com.cqre.cqre.dto.item.CreateItemDto;
@@ -278,3 +279,4 @@ public class InitDB {
 
     }
 }
+*/
