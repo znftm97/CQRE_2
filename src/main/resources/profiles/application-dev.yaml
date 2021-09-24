@@ -29,9 +29,10 @@ spring:
       ddl-auto: none
     database: mysql
     show-sql: true
+    generate-ddl: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL57Dialect
+        dialect: org.hibernate.dialect.MySQL55Dialect
         naming:
           physical-strategy: org.hibernate.boot.model.naming.MySQL5InnoDBDialect
 
