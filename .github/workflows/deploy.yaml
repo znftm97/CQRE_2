@@ -36,7 +36,7 @@ jobs: # 여러 Step으로 구성되고, 가상 환경의 인스턴스에서 실�
         shell: bash
 
       - name : Build with Gradle # gradle로 빌드
-        run: ./gradlew clean build
+        run: ./gradlew clean build -Pprofile=local
         shell: bash
 
       - name: Set up Docker Buildx # Dockerfile 빌드로 DockerImage 생성
