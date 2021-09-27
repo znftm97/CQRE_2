@@ -8,8 +8,8 @@ cloud:
       auto: false
     credentials:
       instance-profile: true
-      access-key: ENC(6KkkjuJa5SWcphOoT/JutUe+WvdgLhEe5OQYOxr0eJU=)
-      secret-key: ENC(4XWCX4d5aaziqBOcJUF88vG10V+5pFsnUclRagNgfnQhQMkDR9piwTq3ou/j/sENv0UdBUOXT4g=)
+      access-key: ENC(ODF+yIW4WgRK/93CG3S/frZIIYfYybTlWW+AA9ZqyuQ=)
+      secret-key: ENC(0CLu4ubT7TwBDJPscsq7OxIpsan1LvdUO3meZkCxQVwxkK/mznDU/YE3hKrE2tfHH5KnoILhiQw=)
 
 spring:
   datasource:
@@ -26,7 +26,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     database: mysql
     show-sql: true
     properties:
