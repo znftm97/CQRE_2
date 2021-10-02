@@ -34,6 +34,16 @@ jobs: # 여러 Step으로 구성되고, 가상 환경의 인스턴스에서 실�
         run: chmod +x ./gradlew
         shell: bash
 
+      - name: cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
       - name : Build with Gradle # gradle로 빌드
         run: ./gradlew clean build
         shell: bash
