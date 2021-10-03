@@ -76,7 +76,7 @@ jobs: # 여러 Step으로 구성되고, 각 step 들은 가상 환경의 인스�
         run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}"
         shell: bash
 
-      - name: Invoke deployment webhook.
+      - name: Invoke deployment webhook
         uses: distributhor/workflow-webhook@v2
         env:
           webhook_url: ${{ secrets.WEBHOOK_URL }}
