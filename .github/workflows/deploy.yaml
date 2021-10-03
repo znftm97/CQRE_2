@@ -10,10 +10,6 @@ on: # 지정한 이벤트가 해당 브랜치에서 발생할 때 Github Action 
   pull_request:
     branches:
       - master
-  workflow_run:
-    branches: [main]
-    types:
-      - completed
 
 jobs: # 여러 Step으로 구성되고, 각 step 들은 가상 환경의 인스턴스에서 실행됨
   build:
@@ -79,3 +75,8 @@ jobs: # 여러 Step으로 구성되고, 각 step 들은 가상 환경의 인스�
       - name: Show Current Time
         run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}"
         shell: bash
+
+      - name: Invoke deployment hook
+        uses: distributhor/workflow-webhook@v2
+        env:
+          webhook_url: ${{ secrets.WEBHOOK_URL }}
