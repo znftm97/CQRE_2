@@ -76,10 +76,3 @@ jobs: # 여러 Step으로 구성되고, 가상 환경의 인스턴스에서 실�
       - name: Show Current Time
         run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}"
         shell: bash
-
-      - name: GitHub Webhook Trigger
-        uses: zzzze/webhook-trigger@master
-        with:
-          data: "{\"event_type\":\"build\"}"
-          webhook_url: ${{ secrets.WEBHOOK_URL }}
-          options: "-H \"Accept: application/vnd.github.everest-preview+json\""
