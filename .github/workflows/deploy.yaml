@@ -12,7 +12,7 @@ on: # 지정한 이벤트가 해당 브랜치에서 발생할 때 Github Action 
       - master
   workflow_dispatch:
 
-jobs: # 여러 Step으로 구성되고, 가상 환경의 인스턴스에서 실행됨
+jobs: # 여러 Step으로 구성되고, 각 step 들은 가상 환경의 인스턴스에서 실행됨
   build:
     runs-on: ubuntu-20.04 # 가상환경 OS
 
