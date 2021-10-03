@@ -80,3 +80,4 @@ jobs: # 여러 Step으로 구성되고, 각 step 들은 가상 환경의 인스�
         uses: distributhor/workflow-webhook@v2
         env:
           webhook_url: ${{ secrets.WEBHOOK_URL }}
+          webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
