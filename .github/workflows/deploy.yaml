@@ -80,6 +80,6 @@ jobs: # 여러 Step으로 구성되고, 각 step 들은 가상 환경의 인스�
         uses: appleboy/jenkins-action@master
         with:
           url: ${{ secrets.WEBHOOK_URL }}
-          user: "LJH"
+          user: "cqre"
           token: ${{ secrets.JENKINS_API_TOKEN }}
           job: "cqre_deploy"
