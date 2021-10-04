@@ -72,7 +72,7 @@ jobs: # 여러 Step으로 구성되고, 각 step 들은 가상 환경의 인스�
           format: YYYY-MM-DDTHH-mm-ss
           utcOffset: "+09:00"
 
-      - name: Show Current Time
+      - name: Show Current Time.
         run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}"
         shell: bash
 
