@@ -1,4 +1,4 @@
-package com.cqre.cqre.exceptionhandler;
+package com.cqre.cqre.exception;
 
 import com.cqre.cqre.exception.customexception.user.CEmailTokenFalseException;
 import org.springframework.security.authentication.AuthenticationServiceException;

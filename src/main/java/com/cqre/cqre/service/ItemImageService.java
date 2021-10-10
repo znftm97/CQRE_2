@@ -10,7 +10,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.cqre.cqre.domain.User;
 import com.cqre.cqre.domain.shop.ItemImage;
 import com.cqre.cqre.domain.shop.item.CommonItem;
-import com.cqre.cqre.exception.customexception.CFileIsNotImage;
+import com.cqre.cqre.exception.customexception.common.CFileIsNotImage;
 import com.cqre.cqre.repository.itemImage.ItemImageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

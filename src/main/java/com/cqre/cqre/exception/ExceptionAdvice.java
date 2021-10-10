@@ -1,9 +1,9 @@
 package com.cqre.cqre.exception;
 
-import com.cqre.cqre.exception.customexception.CDiscountRateExceededException;
-import com.cqre.cqre.exception.customexception.CEmptyValueException;
-import com.cqre.cqre.exception.customexception.CFileIsNotImage;
-import com.cqre.cqre.exception.customexception.CNotEnoughStockException;
+import com.cqre.cqre.exception.customexception.coupon.CDiscountRateExceededException;
+import com.cqre.cqre.exception.customexception.coupon.CEmptyValueException;
+import com.cqre.cqre.exception.customexception.common.CFileIsNotImage;
+import com.cqre.cqre.exception.customexception.item.CNotEnoughStockException;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
 import com.cqre.cqre.exception.customexception.user.*;
 import lombok.RequiredArgsConstructor;
@@ -16,17 +16,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-@RequiredArgsConstructor
 @Slf4j
 public class ExceptionAdvice {
-
-    private final ResponseService responseService;
-
-    @ExceptionHandler(CValidationEmailException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    protected CommonResult validationEmailFail(){
-        return responseService.getFailResultValidationEmail();
-    }
 
     @ExceptionHandler(CFindIdUserNotFoundException.class)
     protected String findIdEntityNotFound(Model model) {

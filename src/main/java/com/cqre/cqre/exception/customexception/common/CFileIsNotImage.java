@@ -1,4 +1,4 @@
-package com.cqre.cqre.exception.customexception;
+package com.cqre.cqre.exception.customexception.common;
 
 public class CFileIsNotImage extends RuntimeException{
     public CFileIsNotImage() {
