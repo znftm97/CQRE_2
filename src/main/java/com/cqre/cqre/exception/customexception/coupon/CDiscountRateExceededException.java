@@ -1,4 +1,4 @@
-package com.cqre.cqre.exception.customexception;
+package com.cqre.cqre.exception.customexception.coupon;
 
 public class CDiscountRateExceededException extends RuntimeException{
     public CDiscountRateExceededException() {
