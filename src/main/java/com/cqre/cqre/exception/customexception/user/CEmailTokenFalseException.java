@@ -7,7 +7,4 @@ public class CEmailTokenFalseException extends AuthenticationException {
         super(msg);
     }
 
-    public CEmailTokenFalseException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
 }

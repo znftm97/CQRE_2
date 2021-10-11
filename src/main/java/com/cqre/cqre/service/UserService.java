@@ -1,10 +1,8 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.dto.user.*;
 import com.cqre.cqre.domain.User;
-import com.cqre.cqre.exception.customexception.user.CFindIdUserNotFoundException;
-import com.cqre.cqre.exception.customexception.user.CFindPwUserNotFoundException;
-import com.cqre.cqre.exception.customexception.user.CValidationEmailException;
+import com.cqre.cqre.dto.user.*;
+import com.cqre.cqre.exception.customexception.user.*;
 import com.cqre.cqre.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -74,7 +72,7 @@ public class UserService {
 
     /*이메일 재전송*/
     public void emailSendRe(ValidationEmailReDto dto) throws MessagingException, UnsupportedEncodingException {
-        User findUser = userRepository.findByLoginId(dto.getLoginId());
+        User findUser = userRepository.findByLoginId(dto.getLoginId()).orElseThrow(CUserNotFoundExceptionToEmailPage::new);
 
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
@@ -98,7 +96,7 @@ public class UserService {
     /*이메일 토큰 값 검증*/
     @Transactional
     public void validationEmailToken(String email, String emailCheckToken){
-        User findUser = userRepository.findByEmail(email);
+        User findUser = userRepository.findByEmail(email).orElseThrow(CUserNotFoundExceptionToPwPage::new);
 
         if (!emailCheckToken.equals(findUser.getEmailCheckToken())) {
             throw new CValidationEmailException();
@@ -109,12 +107,12 @@ public class UserService {
 
     /*id 찾기*/
     public String findId(UserDto userDto){
-        User findUserByEmail = userRepository.OpFindByEmail(userDto.getEmail()).orElseThrow(CFindIdUserNotFoundException::new);
-        User findUserByName = userRepository.findByName(userDto.getName()).orElseThrow(CFindIdUserNotFoundException::new);
+        User findUserByEmail = userRepository.findByEmail(userDto.getEmail()).orElseThrow(CUserNotFoundExceptionToIdPage::new);
+        User findUserByName = userRepository.findByName(userDto.getName()).orElseThrow(CUserNotFoundExceptionToIdPage::new);
 
         if (!findUserByEmail.getEmail().equals(findUserByName.getEmail())) {
             log.error("엔티티 조회 에러");
-            throw new CFindIdUserNotFoundException();
+            throw new CUserNotFoundExceptionToPwPage();
         }
 
         return findUserByName.getLoginId();
@@ -122,10 +120,10 @@ public class UserService {
 
     /*비밀번호 변경 본인확인 메일 전송*/
     public void emailSendPw(UserDto userDto) throws MessagingException, UnsupportedEncodingException {
-        User findUserByEmail = userRepository.OpFindByEmail(userDto.getEmail()).orElseThrow(CFindPwUserNotFoundException::new);
-        User findUserByLoginId = userRepository.CFindByLoginId(userDto.getLoginId()).orElseThrow(CFindPwUserNotFoundException::new);
+        User findUserByEmail = userRepository.findByEmail(userDto.getEmail()).orElseThrow(CUserNotFoundExceptionToPwPage::new);
+        User findUserByLoginId = userRepository.findByLoginId(userDto.getLoginId()).orElseThrow(CUserNotFoundExceptionToPwPage::new);
         if (!findUserByEmail.getEmail().equals(findUserByLoginId.getEmail())) {
-            throw new CFindPwUserNotFoundException();
+            throw new CUserNotFoundExceptionToPwPage();
         }
 
         MimeMessage message = javaMailSender.createMimeMessage();
@@ -147,7 +145,7 @@ public class UserService {
     /*pw 변경*/
     @Transactional
     public void updatePassword(UpdatePasswordDto updatePasswordDto) {
-        User findUser = userRepository.OpFindByEmail(updatePasswordDto.getEmail()).orElseThrow(CFindPwUserNotFoundException::new);
+        User findUser = userRepository.findByEmail(updatePasswordDto.getEmail()).orElseThrow(CUserNotFoundExceptionToPwPage::new);
         findUser.updatePassword(passwordEncoder.encode(updatePasswordDto.getUpdatePassword()));
     }
 
@@ -158,7 +156,7 @@ public class UserService {
         /*일반 로그인 사용자*/
         if (principal instanceof User) {
             User loginUser = (User) principal;
-            return userRepository.findByEmail(loginUser.getEmail());
+            return userRepository.findByEmail(loginUser.getEmail()).orElseThrow(CUserNotFoundException::new);
 
         /*OAuth2 로그인 사용자*/
         } else {
@@ -168,9 +166,9 @@ public class UserService {
             /*카카오는 이중 Map 구조라 다르게 구현*/
             if (Objects.isNull(attributes.get("email"))) {
                 Map<String, Object> kakao_account = (Map<String, Object>) attributes.get("kakao_account");
-                return userRepository.findByEmail(kakao_account.get("email").toString());
+                return userRepository.findByEmail(kakao_account.get("email").toString()).orElseThrow(CUserNotFoundException::new);
             } else {
-                return userRepository.findByEmail(attributes.get("email").toString());
+                return userRepository.findByEmail(attributes.get("email").toString()).orElseThrow(CUserNotFoundException::new);
             }
         }
     }

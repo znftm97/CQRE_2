@@ -31,6 +31,10 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 <input type="text" name="LoginId" placeholder="Id" />
                 <input type="password" name="LoginPassword" placeholder="Password" />
                 <button class="btn btn-primary">인증 이메일 전송</button>
+
+                <div th:if="${notExist}" class="form-group" style="margin-top: 50px">
+                    <span class="btn-danger">해당 정보로 가입된 회원이 존재하지 않습니다.</span>
+                </div>
             </form>
         </div>
 

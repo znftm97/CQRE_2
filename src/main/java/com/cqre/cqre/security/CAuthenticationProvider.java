@@ -30,7 +30,7 @@ public class CAuthenticationProvider implements AuthenticationProvider {
         if (!passwordEncoder.matches(password, userContext.getUser().getPassword())) {
             throw new BadCredentialsException("");
         }else if (userContext.getUser().getEmailVerified().equals("false")) {
-            throw new CEmailTokenFalseException("");
+            throw new CEmailTokenFalseException("이메일 토큰값이 유효하지 않습니다.");
         }
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userContext.getUser(), null, userContext.getAuthorities());
