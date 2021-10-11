@@ -2,7 +2,7 @@ package com.cqre.cqre.controller;
 
 import com.cqre.cqre.dto.user.*;
 import com.cqre.cqre.domain.User;
-import com.cqre.cqre.exception.customexception.user.CPwNotEquals;
+import com.cqre.cqre.exception.customexception.user.CPwNotEqualsException;
 import com.cqre.cqre.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -177,7 +177,7 @@ public class UserController {
         User loginUser = userService.getLoginUser();
 
         if (!passwordEncoder.matches(userPwCheckDto.getPassword(), loginUser.getPassword())) {
-            throw new CPwNotEquals();
+            throw new CPwNotEqualsException();
         }
 
         if (userPwCheckDto.getIdentifier() == 1) {

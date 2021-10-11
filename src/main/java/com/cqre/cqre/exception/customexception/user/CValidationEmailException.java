@@ -1,15 +1,9 @@
 package com.cqre.cqre.exception.customexception.user;
 
-public class CValidationEmailException extends RuntimeException{
+import com.cqre.cqre.exception.BusinessException;
+import com.cqre.cqre.exception.ExceptionStatus;
 
-    public CValidationEmailException() {
-    }
+public class CValidationEmailException extends BusinessException {
+    public CValidationEmailException() { super(ExceptionStatus.VALIDATION_EMAIL_EXCEPTION); }
 
-    public CValidationEmailException(String message) {
-        super(message);
-    }
-
-    public CValidationEmailException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }
