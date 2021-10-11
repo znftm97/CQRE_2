@@ -11,7 +11,7 @@ import com.cqre.cqre.dto.gallery.FindGalleryFileDetailDto;
 import com.cqre.cqre.dto.gallery.FindGalleryFileDto;
 import com.cqre.cqre.domain.GalleryFile;
 import com.cqre.cqre.domain.User;
-import com.cqre.cqre.exception.customexception.CFileIsNotImage;
+import com.cqre.cqre.exception.customexception.common.CFileIsNotImageException;
 import com.cqre.cqre.repository.gallery.GalleryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -71,7 +71,7 @@ public class GalleryService {
         /*이미지 파일인지 검증*/
         for (MultipartFile uploadFile : multipartFiles) {
             if (uploadFile.getContentType().startsWith("image") == false) {
-                throw new CFileIsNotImage();
+                throw new CFileIsNotImageException();
             }
         }
 

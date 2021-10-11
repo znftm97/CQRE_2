@@ -107,6 +107,10 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <input name="count" type="text" class="form-control" placeholder="보낼 수량을 입력하세요">
         </div>
         <button type="submit" class="btn-primary">submit</button>
+
+        <div th:if="${notExist}" class="form-group" style="margin-top: 50px">
+            <span class="btn-danger">해당 정보로 가입된 회원이 존재하지 않습니다.</span>
+        </div>
     </form>
 </div> <!-- /container -->
 </body>

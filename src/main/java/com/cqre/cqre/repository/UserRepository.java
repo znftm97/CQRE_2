@@ -10,13 +10,13 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("select u from User u where u.email = :email")
-    User findByEmail(@Param("email") String email);
-
-    @Query("select u from User u where u.email = :email")
-    Optional<User> OpFindByEmail(@Param("email") String email);
+    Optional<User> findByEmail(@Param("email") String email);
 
     @Query("select u from User u where u.loginId = :loginId")
-    User findByLoginId(@Param("loginId") String loginId);
+    Optional<User> findByLoginId(@Param("loginId") String loginId);
+
+    @Query("select u from User u where u.loginId = :loginId")
+    User findByLoginIdNoneOptional(@Param("loginId") String loginId);
 
     @Query("select u from User u where u.email = :email")
     Optional<User> OAuth2FindByEmail(@Param("email") String email);
@@ -24,7 +24,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select u from User u where u.name = :name")
     Optional<User> findByName(@Param("name") String name);
 
-    @Query("select u from User u where u.loginId = :loginId")
-    Optional<User> CFindByLoginId(@Param("loginId") String
-                                          loginId);
 }

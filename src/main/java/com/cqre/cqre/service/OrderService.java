@@ -7,7 +7,7 @@ import com.cqre.cqre.domain.shop.OrderItem;
 import com.cqre.cqre.domain.shop.OrderStatus;
 import com.cqre.cqre.domain.shop.UserCoupon;
 import com.cqre.cqre.domain.shop.item.Item;
-import com.cqre.cqre.exception.customexception.CNotEnoughStockException;
+import com.cqre.cqre.exception.customexception.item.CNotEnoughStockException;
 import com.cqre.cqre.repository.Item.ItemRepository;
 import com.cqre.cqre.repository.UserCouponRepository;
 import com.cqre.cqre.repository.order.OrderItemRepository;

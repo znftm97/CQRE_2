@@ -29,6 +29,9 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	all {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
 }
 
 repositories {
@@ -47,15 +50,18 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.1.RELEASE'
 	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3'
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
 	compile 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	compile group: 'org.modelmapper', name: 'modelmapper', version: '2.1.1'
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time'
+	compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.10.3'
 	compileOnly 'org.projectlombok:lombok'
 	compile 'org.webjars:jquery:3.5.1'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-log4j2'
 
 }
 
