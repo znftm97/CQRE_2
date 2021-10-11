@@ -1,4 +1,4 @@
-package com.cqre.cqre.exception;
+package com.cqre.cqre.security;
 
 import com.cqre.cqre.exception.customexception.user.CEmailTokenFalseException;
 import lombok.extern.slf4j.Slf4j;
@@ -24,16 +24,16 @@ public class CLoginFailHandler extends SimpleUrlAuthenticationFailureHandler {
 
         if(exception instanceof BadCredentialsException){
             errorLogging(exception);
-            errorMsg = "password is incorrect. Please enter again.";
+            errorMsg = "비밀번호가 일치하지 않습니다.";
         } else if (exception instanceof UsernameNotFoundException) {
             errorLogging(exception);
-            errorMsg = "Id is incorrect. Please enter again.";
+            errorMsg = "아이디가 일치하지 않습니다.";
         } else if (exception instanceof AuthenticationServiceException) {
             errorLogging(exception);
-            errorMsg = "This user does not exist.";
+            errorMsg = "존재하지 않는 회원입니다.";
         } else if (exception instanceof CEmailTokenFalseException) {
             errorLogging(exception);
-            errorMsg = "You have to get email verification.";
+            errorMsg = "이메일 인증이 필요합니다.";
         }
 
         setDefaultFailureUrl("/user/sign?error=true&errorMsg=" + errorMsg);
