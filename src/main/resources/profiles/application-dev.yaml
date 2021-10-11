@@ -90,3 +90,6 @@ spring:
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
+
+logging:
+  config: classpath:logging/log4j2.yml

@@ -15,67 +15,78 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionAdvice {
 
     @ExceptionHandler(CUserNotFoundException.class)
-    private String userNotFoundException(Model model) {
+    private String userNotFoundException(Model model, CUserNotFoundException exception) {
+        errorLogging(exception);
         return "/userNotFoundException";
     }
 
     @ExceptionHandler(CUserNotFoundExceptionToIdPage.class)
-    private String userNotFoundExceptionToIdPage(Model model) {
+    private String userNotFoundExceptionToIdPage(Model model, CUserNotFoundExceptionToIdPage exception) {
+        errorLogging(exception);
         model.addAttribute("notExist", "notExist");
         return "/user/findId";
     }
 
     @ExceptionHandler(CUserNotFoundExceptionToPwPage.class)
-    private String userNotFoundExceptionToPwPage(Model model) {
+    private String userNotFoundExceptionToPwPage(Model model, CUserNotFoundExceptionToPwPage exception) {
+        errorLogging(exception);
         model.addAttribute("notExist", "notExist");
         return "/user/findPw";
 
     }
 
     @ExceptionHandler(CUserNotFoundExceptionToEmailPage.class)
-    private String userNotFoundExceptiontoEmailpage(Model model) {
+    private String userNotFoundExceptiontoEmailpage(Model model, CUserNotFoundExceptionToEmailPage exception) {
+        errorLogging(exception);
         model.addAttribute("notExist", "notExist");
         return "/user/validationEmailRe";
 
     }
 
     @ExceptionHandler(CUserNotFoundExceptionToCouponPage.class)
-    private String userNotFoundExceptionToCouponPage(Model model) {
+    private String userNotFoundExceptionToCouponPage(Model model, CUserNotFoundExceptionToCouponPage exception) {
+        errorLogging(exception);
         model.addAttribute("notExist", "notExist");
         return "/couponList";
 
     }
 
     @ExceptionHandler(CPwNotEqualsException.class)
-    private String pwNotEquals(Model model){
+    private String pwNotEquals(Model model, CPwNotEqualsException exception){
+        errorLogging(exception);
         model.addAttribute("notEquals", "true");
         return "redirect:/user/userInfo";
     }
 
     @ExceptionHandler(CPostNotFoundException.class)
-    private String postNotFound(){
+    private String postNotFound(CPostNotFoundException exception){
+        errorLogging(exception);
         return "/post/postNotFoundException";
     }
 
     @ExceptionHandler(ClassCastException.class)
-    private String userNotLogin(){
+    private String userNotLogin(ClassCastException exception){
+        errorLogging(exception);
         return "/user/exception/userNotFoundException";
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
-    private String emailOverlapCheck(Model model){
+    private String emailOverlapCheck(Model model, DataIntegrityViolationException exception){
+        errorLogging(exception);
         model.addAttribute("emailOverlap", "true");
         return "/home/home";
     }
 
     @ExceptionHandler(CFileIsNotImageException.class)
-    private String notImageFile(Model model){
+    private String notImageFile(Model model, CFileIsNotImageException exception){
+        errorLogging(exception);
         model.addAttribute("notImageFile", "true");
         return "/gallery/createGallery";
     }
 
     @ExceptionHandler(CNotEnoughStockException.class)
-    private String notEnoughStock(Model model){
+    private String notEnoughStock(Model model, CNotEnoughStockException exception){
+        errorLogging(exception);
         model.addAttribute("notEnoughStock", "true");
         return "redirect:/shop";
     }
@@ -91,4 +102,9 @@ public class ExceptionAdvice {
 //        model.addAttribute("emptyValueCouponName", "true");
 //        return "/coupon/createCoupon";
 //    }
+
+    private void errorLogging(Exception ex) {
+        log.error("Exception = {} , message = {}", ex.getClass().getSimpleName(),
+                ex.getLocalizedMessage());
+    }
 }
