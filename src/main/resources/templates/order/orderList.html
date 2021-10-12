@@ -73,7 +73,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                         <td th:text="${orderItem.itemName}"></td>
                         <td th:text="${orderItem.orderPrice}"></td>
                         <td th:text="${orderItem.orderCount}"></td>
-                        <td>[[${#temporals.format(orderItem.createDate, 'yyyy-MM-dd일 hh:mm분')}]]</td>
+                        <td>[[${#temporals.format(orderItem.createDate, 'yyyy-MM-dd일 HH:mm분')}]]</td>
                         <td>
                             <form method="post" th:action="@{/orderCancel/{orderItemId} (orderItemId = ${orderItem.id})}">
                                 <button type="submit" class="btn-danger">Cancel</button>
