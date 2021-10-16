@@ -3,10 +3,12 @@ package com.cqre.cqre.dto.coupon;
 import com.cqre.cqre.domain.shop.Coupon;
 import com.cqre.cqre.domain.shop.UserCoupon;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FindCouponDto {
 

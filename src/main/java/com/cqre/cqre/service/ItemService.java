@@ -36,8 +36,7 @@ public class ItemService {
         CommonItem createCommonItem = commonItem.createCommonItem(dto, findCategory);
 
         itemRepository.save(createCommonItem);
-        /*itemImageService.createItemImage(files, createCommonItem);*/
-        itemImageService.upload1(files, dirName, createCommonItem);
+        itemImageService.upload(files, dirName, createCommonItem);
     }
 
     /*모든 상품 조회*/

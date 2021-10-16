@@ -1,4 +1,4 @@
-package com.cqre.cqre.exception.customexception;
+package com.cqre.cqre.exception.customexception.item;
 
 public class CNotEnoughStockException extends RuntimeException{
 

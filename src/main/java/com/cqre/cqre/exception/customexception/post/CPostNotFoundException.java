@@ -1,14 +1,9 @@
 package com.cqre.cqre.exception.customexception.post;
 
-public class CPostNotFoundException extends RuntimeException{
-    public CPostNotFoundException() {
-    }
+import com.cqre.cqre.exception.BusinessException;
+import com.cqre.cqre.exception.ExceptionStatus;
 
-    public CPostNotFoundException(String message) {
-        super(message);
-    }
+public class CPostNotFoundException extends BusinessException {
+    public CPostNotFoundException() { super(ExceptionStatus.POST_NOT_FOUND_EXCEPTION); }
 
-    public CPostNotFoundException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }

@@ -1,6 +1,5 @@
 package com.cqre.cqre.security;
 
-import com.cqre.cqre.exceptionhandler.CLoginFailHandler;
 import com.cqre.cqre.security.OAuth2.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -13,8 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.List;
 
 @EnableWebSecurity
 @RequiredArgsConstructor

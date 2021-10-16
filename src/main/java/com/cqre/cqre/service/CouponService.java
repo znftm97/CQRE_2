@@ -1,13 +1,13 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.dto.coupon.CouponDto;
-import com.cqre.cqre.dto.coupon.FindCouponDto;
-import com.cqre.cqre.dto.coupon.SendCouponDto;
 import com.cqre.cqre.domain.User;
 import com.cqre.cqre.domain.shop.Coupon;
 import com.cqre.cqre.domain.shop.UserCoupon;
-import com.cqre.cqre.exception.customexception.CDiscountRateExceededException;
-import com.cqre.cqre.exception.customexception.CEmptyValueException;
+import com.cqre.cqre.dto.coupon.CouponDto;
+import com.cqre.cqre.dto.coupon.FindCouponDto;
+import com.cqre.cqre.dto.coupon.SendCouponDto;
+import com.cqre.cqre.exception.customexception.user.CUserNotFoundException;
+import com.cqre.cqre.exception.customexception.user.CUserNotFoundExceptionToCouponPage;
 import com.cqre.cqre.repository.CouponRepository;
 import com.cqre.cqre.repository.UserCouponRepository;
 import com.cqre.cqre.repository.UserRepository;
@@ -32,13 +32,7 @@ public class CouponService {
     /*쿠폰생성*/
     @Transactional
     public void createCoupon(CouponDto dto) {
-        User admin = userRepository.findByEmail("admin");
-
-        if (dto.getDiscountRate() >= 100) {
-            throw new CDiscountRateExceededException();
-        } else if (dto.getName().equals("")) {
-            throw new CEmptyValueException();
-        }
+        User admin = userRepository.findByEmail("admin").orElseThrow(CUserNotFoundException::new);
 
         Coupon coupon = Coupon.builder()
                 .name(dto.getName())
@@ -60,7 +54,7 @@ public class CouponService {
     /*쿠폰 전송*/
     @Transactional
     public void sendCoupon(SendCouponDto dto) {
-        User findUser = userRepository.findByEmail(dto.getEmail());
+        User findUser = userRepository.findByEmail(dto.getEmail()).orElseThrow(CUserNotFoundExceptionToCouponPage::new);
         Coupon findCoupon = couponRepository.findByName(dto.getName());
 
         UserCoupon userCoupon = UserCoupon.builder()

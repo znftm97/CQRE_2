@@ -1,6 +1,7 @@
-package com.cqre.cqre.exceptionhandler;
+package com.cqre.cqre.security;
 
 import com.cqre.cqre.exception.customexception.user.CEmailTokenFalseException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
+@Slf4j
 public class CLoginFailHandler extends SimpleUrlAuthenticationFailureHandler {
 
     @Override
@@ -21,18 +23,27 @@ public class CLoginFailHandler extends SimpleUrlAuthenticationFailureHandler {
         String errorMsg= "default errorMsg";
 
         if(exception instanceof BadCredentialsException){
-            errorMsg = "password is incorrect. Please enter again.";
+            errorLogging(exception);
+            errorMsg = "Wrong Password";
         } else if (exception instanceof UsernameNotFoundException) {
-            errorMsg = "Id is incorrect. Please enter again.";
+            errorLogging(exception);
+            errorMsg = "Wrong ID";
         } else if (exception instanceof AuthenticationServiceException) {
-            errorMsg = "This user does not exist.";
+            errorLogging(exception);
+            errorMsg = "Not Exist User";
         } else if (exception instanceof CEmailTokenFalseException) {
-            errorMsg = "You have to get email verification.";
+            errorLogging(exception);
+            errorMsg = "Email Verification Required";
         }
 
         setDefaultFailureUrl("/user/sign?error=true&errorMsg=" + errorMsg);
         super.onAuthenticationFailure(request, response, exception);
-
     }
+
+    private void errorLogging(Exception ex) {
+        log.error("Exception = {} , message = {}", ex.getClass().getSimpleName(),
+                ex.getLocalizedMessage());
+    }
+
 }
 

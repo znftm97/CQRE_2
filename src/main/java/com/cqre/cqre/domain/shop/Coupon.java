@@ -22,7 +22,7 @@ public class Coupon extends BaseEntity {
 
     private Long discountRate;
 
-    private int totalCount;
+    private Integer totalCount;
 
     private int remainCount;
 
