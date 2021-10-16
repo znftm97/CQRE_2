@@ -24,16 +24,16 @@ public class CLoginFailHandler extends SimpleUrlAuthenticationFailureHandler {
 
         if(exception instanceof BadCredentialsException){
             errorLogging(exception);
-            errorMsg = "비밀번호가 일치하지 않습니다.";
+            errorMsg = "Wrong Password";
         } else if (exception instanceof UsernameNotFoundException) {
             errorLogging(exception);
-            errorMsg = "아이디가 일치하지 않습니다.";
+            errorMsg = "Wrong ID";
         } else if (exception instanceof AuthenticationServiceException) {
             errorLogging(exception);
-            errorMsg = "존재하지 않는 회원입니다.";
+            errorMsg = "Not Exist User";
         } else if (exception instanceof CEmailTokenFalseException) {
             errorLogging(exception);
-            errorMsg = "이메일 인증이 필요합니다.";
+            errorMsg = "Email Verification Required";
         }
 
         setDefaultFailureUrl("/user/sign?error=true&errorMsg=" + errorMsg);

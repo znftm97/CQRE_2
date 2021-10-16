@@ -120,7 +120,7 @@ public class PostController {
 
         Long postId = postService.createFreePost(createAndUpdatePostDto);
         if (!((files.get(0).getOriginalFilename()).isEmpty())){
-            postFileService.upload1(files, "postFiles", postId);
+            postFileService.upload(files, "postFiles", postId);
         }
 
         return "redirect:/board/freeBoard";
@@ -137,7 +137,7 @@ public class PostController {
 
         Long postId = postService.createNoticePost(createAndUpdatePostDto);
         if (!((files.get(0).getOriginalFilename()).isEmpty())){
-            postFileService.upload1(files, "postFiles", postId);
+            postFileService.upload(files, "postFiles", postId);
         }
 
         return "redirect:/board/noticeBoard";
@@ -194,7 +194,7 @@ public class PostController {
 
         Post updatePost = postService.updatePost(createAndUpdatePostDto);
         if (!((files.get(0).getOriginalFilename()).isEmpty())){
-            postFileService.upload1(files, "postFiles", createAndUpdatePostDto.getId());
+            postFileService.upload(files, "postFiles", createAndUpdatePostDto.getId());
         }
 
         if(updatePost.getBoard() == Board.FREE){

@@ -59,11 +59,11 @@ public class PostFileService {
                 .build();
     }
 
-    public void upload1(List<MultipartFile> multipartFiles, String dirName, Long postId) throws IOException {
+    public void upload(List<MultipartFile> multipartFiles, String dirName, Long postId) throws IOException {
         Post findPost = postRepository.findById(postId).orElseThrow(CPostNotFoundException::new);
 
         List<File> convertFiles = convert(multipartFiles);
-        List<String> uploadImageUrls = upload2(convertFiles, dirName);
+        List<String> uploadImageUrls = uploadToS3(convertFiles, dirName);
 
         for (int i = 0; i < multipartFiles.size(); i++) {
             String origFilename = multipartFiles.get(i).getOriginalFilename(); /*원본 파일 명*/
@@ -81,7 +81,7 @@ public class PostFileService {
         }
     }
 
-    private List<String> upload2(List<File> uploadFile, String dirName) {
+    private List<String> uploadToS3(List<File> uploadFile, String dirName) {
         String fileName = "";
         String uploadImageUrl = "";
         List<String> uploadImageUrls = new ArrayList<>();
