@@ -1,9 +1,9 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.dto.post.RecommendationResponseDto;
 import com.cqre.cqre.domain.User;
 import com.cqre.cqre.domain.post.Post;
 import com.cqre.cqre.domain.post.Recommendation;
+import com.cqre.cqre.dto.post.RecommendationResponseDto;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
 import com.cqre.cqre.repository.RecommendationRepository;
 import com.cqre.cqre.repository.post.PostRepository;
@@ -11,8 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +27,7 @@ public class RecommendationService {
         User loginUser = userService.getLoginUser();
         Recommendation findRecommendation = recommendationRepository.CFindRecommendationByPostIdAndUserId(findPost.getId(), loginUser.getId());
 
-        if(Objects.isNull(findRecommendation)){
+        if(findRecommendation == null){
             findPost.addRecommendation();
 
             /*Recommendation recommendation = Recommendation.builder()

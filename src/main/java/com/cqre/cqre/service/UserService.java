@@ -18,7 +18,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -164,7 +163,7 @@ public class UserService {
             Map<String, Object> attributes = defaultOAuth2User.getAttributes();
 
             /*카카오는 이중 Map 구조라 다르게 구현*/
-            if (Objects.isNull(attributes.get("email"))) {
+            if (attributes.get("email") == null) {
                 Map<String, Object> kakao_account = (Map<String, Object>) attributes.get("kakao_account");
                 return userRepository.findByEmail(kakao_account.get("email").toString()).orElseThrow(CUserNotFoundException::new);
             } else {
