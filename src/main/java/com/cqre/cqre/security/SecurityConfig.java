@@ -42,15 +42,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf();
         http
                 .formLogin()
-                .loginPage("/user/sign")
-                .loginProcessingUrl("/user/signIn")
+                .loginPage("/users/sign")
+                .loginProcessingUrl("/users/sign-in")
                 .defaultSuccessUrl("/home")
                 .failureHandler(cLoginFailHandler)
                 .permitAll();
         http
                 .logout()
-                .logoutUrl("/user/logout")
-                .logoutSuccessUrl("/user/sign")
+                .logoutUrl("/users/logout")
+                .logoutSuccessUrl("/users/sign")
                 .permitAll();
         http
                 .oauth2Login()

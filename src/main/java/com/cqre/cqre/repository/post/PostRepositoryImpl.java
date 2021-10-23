@@ -14,8 +14,8 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-import static com.cqre.cqre.domain.QUser.*;
 import static com.cqre.cqre.domain.board.QPost.*;
+import static com.cqre.cqre.domain.user.QUser.user;
 
 @RequiredArgsConstructor
 public class PostRepositoryImpl implements PostRepositoryCustom{

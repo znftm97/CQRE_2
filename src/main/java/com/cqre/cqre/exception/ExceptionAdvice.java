@@ -55,7 +55,7 @@ public class ExceptionAdvice {
     private String pwNotEquals(Model model, CPwNotEqualsException exception){
         errorLogging(exception);
         model.addAttribute("notEquals", "true");
-        return "redirect:/user/userInfo";
+        return "redirect:/users/user-info";
     }
 
     @ExceptionHandler(CPostNotFoundException.class)

@@ -36,7 +36,7 @@ public class CLoginFailHandler extends SimpleUrlAuthenticationFailureHandler {
             errorMsg = "Email Verification Required";
         }
 
-        setDefaultFailureUrl("/user/sign?error=true&errorMsg=" + errorMsg);
+        setDefaultFailureUrl("/users/sign?error=true&errorMsg=" + errorMsg);
         super.onAuthenticationFailure(request, response, exception);
     }
 

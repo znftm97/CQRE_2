@@ -29,11 +29,11 @@
             </ul>
         </div>
         <div class="sign">
-            <a th:href="@{/user/sign}" sec:authorize="isAnonymous()">SignIn/SignUp</a>
-            <form role="form" th:action="@{/user/logout}" method="post">
+            <a th:href="@{/uses/sign}" sec:authorize="isAnonymous()">SignIn/SignUp</a>
+            <form role="form" th:action="@{/users/logout}" method="post">
                 <button sec:authorize="isAuthenticated()">Logout</button>
             </form>
-            <a th:href="@{/user/userInfo}" sec:authorize="isAuthenticated()">MyInfo</a>
+            <a th:href="@{/users/userInfo}" sec:authorize="isAuthenticated()">MyInfo</a>
         </div>
     </header>
 </body>

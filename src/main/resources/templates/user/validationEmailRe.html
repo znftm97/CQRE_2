@@ -27,7 +27,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     <div class="container" id="container">
         <div class="form-container sign-up-container">
             <h1>이메일 인증</h1>
-            <form role="form" th:action="@{/user/validationEmailRe}" th:object="${ValidationEmailReDto}" method="post">
+            <form role="form" th:action="@{/users/validation-email-re}" th:object="${ValidationEmailReDto}" method="post">
                 <input type="text" name="LoginId" placeholder="Id" />
                 <input type="password" name="LoginPassword" placeholder="Password" />
                 <button class="btn btn-primary">인증 이메일 전송</button>

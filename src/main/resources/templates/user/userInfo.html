@@ -34,7 +34,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <div class="lnb">
                 <ul>
                     <li>
-                        <a th:href="@{/user/userInfo}">회원 정보</a>
+                        <a th:href="@{/users/user-infoo}">회원 정보</a>
                     </li>
                     <li>
                         <a th:href="@{/orderList}">나의 주문 내역</a>
@@ -94,7 +94,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
                     <!--modal-->
                     <div id="passwordCheck" class="modal">
-                        <form role="form" th:action="@{/user/editPwCheck}" th:object="${userPwCheckDto}" method="post">
+                        <form role="form" th:action="@{/users/pw-check}" th:object="${userPwCheckDto}" method="post">
                             <p class="modal-header">비밀번호 재확인</p>
                             <div class="modal-content">
                                 <input type="password" name="password" placeholder="비밀번호를 입력하세요">

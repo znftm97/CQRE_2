@@ -1,8 +1,8 @@
 package com.cqre.cqre.repository.comment;
 
-import com.cqre.cqre.domain.QUser;
 import com.cqre.cqre.domain.board.Comment;
 import com.cqre.cqre.domain.board.QPost;
+import com.cqre.cqre.domain.user.QUser;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
