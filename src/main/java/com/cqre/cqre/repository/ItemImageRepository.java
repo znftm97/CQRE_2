@@ -1,4 +1,4 @@
-package com.cqre.cqre.repository.itemImage;
+package com.cqre.cqre.repository;
 
 import com.cqre.cqre.domain.shop.ItemImage;
 import org.springframework.data.domain.Page;

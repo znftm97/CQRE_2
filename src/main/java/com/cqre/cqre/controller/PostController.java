@@ -1,8 +1,8 @@
 package com.cqre.cqre.controller;
 
 import com.cqre.cqre.dto.post.*;
-import com.cqre.cqre.domain.post.Board;
-import com.cqre.cqre.domain.post.Post;
+import com.cqre.cqre.domain.board.Board;
+import com.cqre.cqre.domain.board.Post;
 import com.cqre.cqre.repository.PostFileRepository;
 import com.cqre.cqre.repository.post.PostRepository;
 import com.cqre.cqre.service.CommentService;

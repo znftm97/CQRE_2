@@ -1,5 +1,6 @@
-package com.cqre.cqre.domain;
+package com.cqre.cqre.domain.user;
 
+import com.cqre.cqre.domain.BaseEntity;
 import com.cqre.cqre.dto.user.UserAddressDto;
 import lombok.*;
 
@@ -8,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "user_id")

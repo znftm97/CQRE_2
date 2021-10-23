@@ -1,6 +1,6 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.domain.User;
+import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.domain.shop.Coupon;
 import com.cqre.cqre.domain.shop.UserCoupon;
 import com.cqre.cqre.dto.coupon.CouponDto;

@@ -1,8 +1,8 @@
-package com.cqre.cqre.domain.post;
+package com.cqre.cqre.domain.board;
 
 import com.cqre.cqre.dto.post.CreateAndUpdatePostDto;
 import com.cqre.cqre.domain.BaseEntity;
-import com.cqre.cqre.domain.User;
+import com.cqre.cqre.domain.user.User;
 import lombok.*;
 
 import javax.persistence.*;

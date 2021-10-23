@@ -7,7 +7,7 @@ import com.cqre.cqre.domain.shop.item.Category;
 import com.cqre.cqre.domain.shop.item.CommonItem;
 import com.cqre.cqre.domain.shop.item.Item;
 import com.cqre.cqre.repository.Item.ItemRepository;
-import com.cqre.cqre.repository.category.CategoryRepository;
+import com.cqre.cqre.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

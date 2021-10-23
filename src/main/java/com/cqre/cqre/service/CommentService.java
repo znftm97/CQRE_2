@@ -1,9 +1,9 @@
 package com.cqre.cqre.service;
 
 import com.cqre.cqre.dto.comment.*;
-import com.cqre.cqre.domain.User;
-import com.cqre.cqre.domain.post.Comment;
-import com.cqre.cqre.domain.post.Post;
+import com.cqre.cqre.domain.user.User;
+import com.cqre.cqre.domain.board.Comment;
+import com.cqre.cqre.domain.board.Post;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
 import com.cqre.cqre.repository.comment.CommentRepository;
 import com.cqre.cqre.repository.post.PostRepository;

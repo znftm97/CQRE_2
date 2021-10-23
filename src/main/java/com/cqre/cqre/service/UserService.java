@@ -1,6 +1,6 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.domain.User;
+import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.dto.user.*;
 import com.cqre.cqre.exception.customexception.user.*;
 import com.cqre.cqre.repository.UserRepository;

@@ -1,5 +1,6 @@
 package com.cqre.cqre.domain;
 
+import com.cqre.cqre.domain.user.User;
 import lombok.*;
 
 import javax.persistence.*;

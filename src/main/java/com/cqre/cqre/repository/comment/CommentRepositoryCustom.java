@@ -1,6 +1,6 @@
 package com.cqre.cqre.repository.comment;
 
-import com.cqre.cqre.domain.post.Comment;
+import com.cqre.cqre.domain.board.Comment;
 
 import java.util.List;
 

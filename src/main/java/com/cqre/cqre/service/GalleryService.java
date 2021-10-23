@@ -10,7 +10,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.cqre.cqre.dto.gallery.FindGalleryFileDetailDto;
 import com.cqre.cqre.dto.gallery.FindGalleryFileDto;
 import com.cqre.cqre.domain.GalleryFile;
-import com.cqre.cqre.domain.User;
+import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.repository.gallery.GalleryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

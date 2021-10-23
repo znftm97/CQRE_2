@@ -1,8 +1,8 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.domain.User;
-import com.cqre.cqre.domain.post.Post;
-import com.cqre.cqre.domain.post.Recommendation;
+import com.cqre.cqre.domain.user.User;
+import com.cqre.cqre.domain.board.Post;
+import com.cqre.cqre.domain.board.Recommendation;
 import com.cqre.cqre.dto.post.RecommendationResponseDto;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
 import com.cqre.cqre.repository.RecommendationRepository;
