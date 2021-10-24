@@ -11,7 +11,6 @@ import com.cqre.cqre.dto.gallery.FindGalleryFileDetailDto;
 import com.cqre.cqre.dto.gallery.FindGalleryFileDto;
 import com.cqre.cqre.domain.GalleryFile;
 import com.cqre.cqre.domain.User;
-import com.cqre.cqre.exception.customexception.common.CFileIsNotImageException;
 import com.cqre.cqre.repository.gallery.GalleryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -65,18 +64,11 @@ public class GalleryService {
                 .build();
     }
 
-    public void upload1(List<MultipartFile> multipartFiles, String dirName, String title) throws IOException {
+    public void upload(List<MultipartFile> multipartFiles, String dirName, String title) throws IOException {
         User loginUser = userService.getLoginUser();
 
-        /*이미지 파일인지 검증*/
-        for (MultipartFile uploadFile : multipartFiles) {
-            if (uploadFile.getContentType().startsWith("image") == false) {
-                throw new CFileIsNotImageException();
-            }
-        }
-
         List<File> convertFiles = convert(multipartFiles);
-        List<String> uploadImageUrls = upload2(convertFiles, dirName);
+        List<String> uploadImageUrls = uploadToS3(convertFiles, dirName);
 
         for (int i = 0; i < multipartFiles.size(); i++) {
             String origFilename = multipartFiles.get(i).getOriginalFilename(); /*원본 파일 명*/
@@ -99,7 +91,7 @@ public class GalleryService {
         bundleId.incrementAndGet();
     }
 
-    private List<String> upload2(List<File> uploadFile, String dirName) {
+    private List<String> uploadToS3(List<File> uploadFile, String dirName) {
         String fileName = "";
         String uploadImageUrl = "";
         List<String> uploadImageUrls = new ArrayList<>();

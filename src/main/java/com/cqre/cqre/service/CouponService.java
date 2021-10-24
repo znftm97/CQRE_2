@@ -8,7 +8,6 @@ import com.cqre.cqre.dto.coupon.FindCouponDto;
 import com.cqre.cqre.dto.coupon.SendCouponDto;
 import com.cqre.cqre.exception.customexception.user.CUserNotFoundException;
 import com.cqre.cqre.exception.customexception.user.CUserNotFoundExceptionToCouponPage;
-import com.cqre.cqre.exception.customexception.user.CUserNotFoundExceptionToPwPage;
 import com.cqre.cqre.repository.CouponRepository;
 import com.cqre.cqre.repository.UserCouponRepository;
 import com.cqre.cqre.repository.UserRepository;
@@ -34,12 +33,6 @@ public class CouponService {
     @Transactional
     public void createCoupon(CouponDto dto) {
         User admin = userRepository.findByEmail("admin").orElseThrow(CUserNotFoundException::new);
-
-//        if (dto.getDiscountRate() >= 100) {
-//            throw new CDiscountRateExceededException();
-//        } else if (dto.getName().equals("")) {
-//            throw new CEmptyValueException();
-//        }
 
         Coupon coupon = Coupon.builder()
                 .name(dto.getName())

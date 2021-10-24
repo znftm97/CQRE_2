@@ -7,10 +7,8 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.cqre.cqre.domain.User;
 import com.cqre.cqre.domain.shop.ItemImage;
 import com.cqre.cqre.domain.shop.item.CommonItem;
-import com.cqre.cqre.exception.customexception.common.CFileIsNotImageException;
 import com.cqre.cqre.repository.itemImage.ItemImageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -61,18 +59,9 @@ public class ItemImageService {
                 .build();
     }
 
-    public void upload1(List<MultipartFile> multipartFiles, String dirName, CommonItem commonItem) throws IOException {
-        User loginUser = userService.getLoginUser();
-
-        /*이미지 파일인지 검증*/
-        for (MultipartFile uploadFile : multipartFiles) {
-            if (uploadFile.getContentType().startsWith("image") == false) {
-                throw new CFileIsNotImageException();
-            }
-        }
-
+    public void upload(List<MultipartFile> multipartFiles, String dirName, CommonItem commonItem) throws IOException {
         List<File> convertFiles = convert(multipartFiles);
-        List<String> uploadImageUrls = upload2(convertFiles, dirName);
+        List<String> uploadImageUrls = uploadToS3(convertFiles, dirName);
 
         for (int i = 0; i < multipartFiles.size(); i++) {
             String origFilename = multipartFiles.get(i).getOriginalFilename(); /*원본 파일 명*/
@@ -94,7 +83,7 @@ public class ItemImageService {
         bundleId.incrementAndGet();
     }
 
-    private List<String> upload2(List<File> uploadFile, String dirName) {
+    private List<String> uploadToS3(List<File> uploadFile, String dirName) {
         String fileName = "";
         String uploadImageUrl = "";
         List<String> uploadImageUrls = new ArrayList<>();

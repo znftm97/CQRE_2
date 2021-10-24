@@ -5,6 +5,7 @@ import com.cqre.cqre.dto.coupon.FindCouponDto;
 import com.cqre.cqre.dto.item.CreateItemDto;
 import com.cqre.cqre.dto.item.FindItemDetailDto;
 import com.cqre.cqre.dto.item.FindItemDto;
+import com.cqre.cqre.exception.customexception.common.CFileIsNotImageException;
 import com.cqre.cqre.service.CategoryService;
 import com.cqre.cqre.service.CouponService;
 import com.cqre.cqre.service.ItemImageService;
@@ -69,6 +70,11 @@ public class ItemController {
     @PostMapping("/createItem")
     public String pCreateItem(@ModelAttribute CreateItemDto dto,
                               @RequestParam("file") List<MultipartFile> files) throws IOException {
+        for (MultipartFile uploadFile : files) {
+            if (uploadFile.getContentType().startsWith("image") == false) {
+                throw new CFileIsNotImageException();
+            }
+        }
 
         itemService.createItem(dto, files, "shopImages");
         return "redirect:/shop";

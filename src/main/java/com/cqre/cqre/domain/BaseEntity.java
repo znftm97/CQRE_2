@@ -12,28 +12,12 @@ import java.time.format.DateTimeFormatter;
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 @Getter
-public class BaseEntity {
+public abstract class BaseEntity {
 
     @CreatedDate
     @Column(updatable = false)
-    @Convert(converter = DateFormatChange.class)
     private LocalDateTime createDate;
 
     @LastModifiedDate
-    @Convert(converter = DateFormatChange.class)
     private LocalDateTime lastModifiedDate;
-}
-
-@Converter
-class DateFormatChange implements AttributeConverter<LocalDateTime, String>{
-    @Override
-    public String convertToDatabaseColumn(LocalDateTime attribute) {
-        return attribute.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm"));
-    }
-
-    @Override
-    public LocalDateTime convertToEntityAttribute(String dbData) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        return LocalDateTime.parse(dbData, formatter);
-    }
 }

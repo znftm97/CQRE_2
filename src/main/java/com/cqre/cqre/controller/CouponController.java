@@ -11,10 +11,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,14 +27,19 @@ public class CouponController {
 
     /*쿠폰 생성 페이지*/
     @GetMapping("/createCoupon")
-    public String createCoupon(){
+    public String createCoupon(Model model){
+        model.addAttribute("couponDto", new CouponDto());
         return "/coupon/createCoupon";
     }
 
     /*쿠폰 생성*/
     @PostMapping("/createCoupon")
-    public String PCreateCoupon(@ModelAttribute CouponDto dto) {
-        couponService.createCoupon(dto);
+    public String PCreateCoupon(@ModelAttribute("couponDto") @Valid CouponDto couponDto, BindingResult result) {
+        if (result.hasErrors()){
+            return "/coupon/createCoupon";
+        }
+
+        couponService.createCoupon(couponDto);
 
         return "redirect:/couponList";
     }

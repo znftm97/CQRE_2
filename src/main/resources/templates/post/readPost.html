@@ -39,7 +39,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 <span>추천 수 : </span>
                 <span th:text="${readPostDto.recommendation}"></span>&nbsp&nbsp
                 <span>작성시간 : </span>
-                <span>[[${#temporals.format(readPostDto.createDate, 'yyyy-MM-dd일 hh:mm분')}]]</span>
+                <span>[[${#temporals.format(readPostDto.createDate, 'yyyy-MM-dd일 HH:mm분')}]]</span>
             </div>
         </div>
 
@@ -106,7 +106,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
                 return date.getFullYear() + '/' +
                     (date.getMonth() + 1) + '/' +
-                    date.getDate() + ' ' +
+                    date.getDate() + "일" + ' ' +
                     date.getHours() + ':' +
                     date.getMinutes();
             }

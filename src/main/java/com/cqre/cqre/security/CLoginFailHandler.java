@@ -1,4 +1,4 @@
-package com.cqre.cqre.exception;
+package com.cqre.cqre.security;
 
 import com.cqre.cqre.exception.customexception.user.CEmailTokenFalseException;
 import lombok.extern.slf4j.Slf4j;
@@ -24,16 +24,16 @@ public class CLoginFailHandler extends SimpleUrlAuthenticationFailureHandler {
 
         if(exception instanceof BadCredentialsException){
             errorLogging(exception);
-            errorMsg = "password is incorrect. Please enter again.";
+            errorMsg = "Wrong Password";
         } else if (exception instanceof UsernameNotFoundException) {
             errorLogging(exception);
-            errorMsg = "Id is incorrect. Please enter again.";
+            errorMsg = "Wrong ID";
         } else if (exception instanceof AuthenticationServiceException) {
             errorLogging(exception);
-            errorMsg = "This user does not exist.";
+            errorMsg = "Not Exist User";
         } else if (exception instanceof CEmailTokenFalseException) {
             errorLogging(exception);
-            errorMsg = "You have to get email verification.";
+            errorMsg = "Email Verification Required";
         }
 
         setDefaultFailureUrl("/user/sign?error=true&errorMsg=" + errorMsg);

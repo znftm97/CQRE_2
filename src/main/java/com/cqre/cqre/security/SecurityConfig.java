@@ -1,6 +1,5 @@
 package com.cqre.cqre.security;
 
-import com.cqre.cqre.exception.CLoginFailHandler;
 import com.cqre.cqre.security.OAuth2.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
