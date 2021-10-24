@@ -99,7 +99,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     function getCommentList(){
         let readPostDto = [[${readPostDto}]];
         let postId = readPostDto.id;
-        $.getJSON('/comment/'+postId, function (arr){
+        $.getJSON('/comments/'+postId, function (arr){
 
             function formatTime(str){
                 var date = new Date(str);
@@ -174,7 +174,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             alert("댓글 내용을 입력하세요.");
         }else{
             $.ajax({
-                url: "/comment/create",
+                url: "/comments",
                 type: "post",
                 data: JSON.stringify(form),
                 beforeSend: function (xhr) {
@@ -198,7 +198,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         }
 
         $.ajax({
-            url: "/comment/delete",
+            url: "/comments",
             type: "delete",
             data: JSON.stringify(form),
             beforeSend: function (xhr) {
@@ -235,8 +235,8 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         }
 
         $.ajax({
-            url: "/comment/update",
-            type: "post",
+            url: "/comments",
+            type: "patch",
             data: JSON.stringify(form),
             beforeSend: function (xhr) {
                 xhr.setRequestHeader(header, token);
@@ -276,7 +276,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         };
 
         $.ajax({
-            url: "/reComment/create",
+            url: "/re-comments",
             type: "post",
             data: JSON.stringify(form),
             beforeSend: function (xhr) {

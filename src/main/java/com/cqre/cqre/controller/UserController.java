@@ -79,14 +79,14 @@ public class UserController {
     }
 
     /*이메일 재인증 페이지*/
-    @GetMapping("/users/validation-email-re")
+    @GetMapping("/users/email-re-validation")
     public String GAuthenticationEmail(Model model){
         model.addAttribute("ValidationEmailReDto", new ValidationEmailReDto());
         return "/user/validationEmailRe";
     }
 
     /*이메일 재인증*/
-    @PostMapping("/users/validation-email-re")
+    @PostMapping("/users/email-re-validation")
     public String PAuthenticationEmail(@ModelAttribute("AuthenticationEmailDto") ValidationEmailReDto dto)
             throws UnsupportedEncodingException, MessagingException{
 

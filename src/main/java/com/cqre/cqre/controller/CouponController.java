@@ -20,20 +20,19 @@ import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 public class CouponController {
 
     private final CouponService couponService;
 
     /*쿠폰 생성 페이지*/
-    @GetMapping("/createCoupon")
+    @GetMapping("/coupons/page")
     public String createCoupon(Model model){
         model.addAttribute("couponDto", new CouponDto());
         return "/coupon/createCoupon";
     }
 
     /*쿠폰 생성*/
-    @PostMapping("/createCoupon")
+    @PostMapping("/coupons")
     public String PCreateCoupon(@ModelAttribute("couponDto") @Valid CouponDto couponDto, BindingResult result) {
         if (result.hasErrors()){
             return "/coupon/createCoupon";
@@ -41,11 +40,11 @@ public class CouponController {
 
         couponService.createCoupon(couponDto);
 
-        return "redirect:/couponList";
+        return "redirect:/coupons";
     }
 
     /*쿠폰목록 조회*/
-    @GetMapping("/couponList")
+    @GetMapping("/coupons")
     public String coupons(@PageableDefault(size = 7, sort = "id")Pageable pageable, Model model){
         Page<CouponDto> coupons = couponService.findCoupons(pageable);
         model.addAttribute("coupons", coupons);
@@ -53,14 +52,14 @@ public class CouponController {
     }
 
     /*쿠폰 전송*/
-    @PostMapping("/coupon/send")
+    @PostMapping("/coupons/send")
     public String sendCoupon(@ModelAttribute SendCouponDto dto) {
         couponService.sendCoupon(dto);
-        return "redirect:/couponList";
+        return "redirect:/coupons";
     }
 
     /*내 쿠폰 목록*/
-    @GetMapping("/myCouponList")
+    @GetMapping("/coupons/my-info")
     public String myCoupons(@PageableDefault(size = 5, sort = "id")Pageable pageable, Model model){
         Page<FindCouponDto> coupons = couponService.myCoupons(pageable);
         model.addAttribute("coupons", coupons);
