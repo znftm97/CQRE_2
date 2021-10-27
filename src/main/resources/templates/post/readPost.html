@@ -58,9 +58,10 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <!--글 수정 삭제-->
         <div>
             <a style="float: right" th:if="${readPostDto.authorCheck} == true"
-               th:href="@{/post/update/{postId} (postId=${readPostDto.id})}"><button class="btn-success">수정</button></a>
+               th:href="@{/posts/{postId}/update-page (postId=${readPostDto.id})}"><button class="btn-success">수정</button></a>
         </div>
-        <form role="form" method="post" th:action="@{/post/remove/{postId} (postId=${readPostDto.id})}">
+        <form role="form" method="post" th:action="@{/posts/{postId} (postId=${readPostDto.id})}">
+            <input type="hidden" name="_method" value="DELETE"/>
             <button type="submit" class="btn-danger" style="float: right; margin-right: 10px" th:if="${readPostDto.authorCheck} == true">삭제</button>
         </form> <!--글 수정 삭제-->
 
@@ -305,7 +306,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         }
 
         $.ajax({
-            url: "/recommendation",
+            url: "/recommendations",
             type: "post",
             data: JSON.stringify(form),
             beforeSend: function (xhr) {

@@ -35,8 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/post/createNoticePost", "/coupons/page", "/coupons").hasRole("ADMIN")
-                .antMatchers("/history", "/board/noticeBoard", "/board/freeBoard", "/gallerys", "/items").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/posts/notice-board/page", "/coupons/page", "/coupons").hasRole("ADMIN")
+                .antMatchers("/history", "/boards/notice-board", "/boards/free-board", "/gallerys", "/items").hasAnyRole("USER", "ADMIN")
                 .anyRequest().permitAll();
         http
                 .csrf();
