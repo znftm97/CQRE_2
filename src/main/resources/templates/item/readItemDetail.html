@@ -59,7 +59,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     <div><span th:text="'성별 : ' + ${itemDetail.gender}"></span></div>
                     <div><span>등록일 : </span><span>[[${#temporals.format(itemDetail.createDate, 'yyyy-MM-dd')}]]</span></div>
                     <div>
-                        <form th:method="post" th:action="@{/order}">
+                        <form th:method="post" th:action="@{/orders}">
                             <span>수량 </span><input type="text" name="count"/>
                             <button type="submit" class="btn btn-primary">주문</button>
                             <input type="hidden" name="itemId" th:value="${itemDetail.id}">
@@ -71,7 +71,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                                 />
                             </select>
                         </form>
-                        <form th:method="post" th:action="@{/basket}">
+                        <form th:method="post" th:action="@{/baskets}">
                             <span>수량 </span><input type="text" name="count"/>
                             <button type="submit" class="btn btn-success">장바구니 추가</button>
                             <input type="hidden" name="itemId" th:value="${itemDetail.id}">
