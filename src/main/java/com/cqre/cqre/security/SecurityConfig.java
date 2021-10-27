@@ -35,22 +35,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/post/createNoticePost", "/createCoupon", "/couponList").hasRole("ADMIN")
-                .antMatchers("/history", "/board/noticeBoard", "/board/freeBoard", "/gallery", "/shop").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/posts/notice-board/page", "/coupons/page", "/coupons").hasRole("ADMIN")
+                .antMatchers("/history", "/boards/notice-board", "/boards/free-board", "/gallerys", "/items").hasAnyRole("USER", "ADMIN")
                 .anyRequest().permitAll();
         http
                 .csrf();
         http
                 .formLogin()
-                .loginPage("/user/sign")
-                .loginProcessingUrl("/user/signIn")
+                .loginPage("/users/sign")
+                .loginProcessingUrl("/users/sign-in")
                 .defaultSuccessUrl("/home")
                 .failureHandler(cLoginFailHandler)
                 .permitAll();
         http
                 .logout()
-                .logoutUrl("/user/logout")
-                .logoutSuccessUrl("/user/sign")
+                .logoutUrl("/users/logout")
+                .logoutSuccessUrl("/users/sign")
                 .permitAll();
         http
                 .oauth2Login()

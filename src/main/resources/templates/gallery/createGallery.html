@@ -23,7 +23,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <h2>갤러리 업로드</h2>
     </div>
 
-    <form role="form" method="post" enctype="multipart/form-data" th:action="@{/gallery/create}" th:object="${createGalleryDto}">
+    <form role="form" method="post" enctype="multipart/form-data" th:action="@{/gallerys}" th:object="${createGalleryDto}">
         <div class="form-group">
             <label th:for="title"><strong>제목</strong></label>
             <input type="text" name="title" class="form-control" placeholder="제목을 입력하세요">
