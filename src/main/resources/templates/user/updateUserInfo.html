@@ -33,31 +33,33 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <div class="lnb">
             <ul>
                 <li>
-                    <a th:href="@{/user/userInfo}">회원 정보</a>
+                    <a th:href="@{/users/user-info}">회원 정보</a>
                 </li>
                 <li>
-                    <a th:href="@{/orderList}">나의 주문 내역</a>
+                    <a th:href="@{/orders}">나의 주문 내역</a>
                 </li>
                 <li>
-                    <a th:href="@{/basketList}">장바구니 확인</a>
+                    <a th:href="@{/baskets}">장바구니 확인</a>
                 </li>
                 <li>
-                    <a th:href="@{orderCancelList}">주문 취소 내역</a>
+                    <a th:href="@{/orders/cancel}">주문 취소 내역</a>
                 </li>
                 <li>
-                    <a th:href="@{myCouponList}">내 쿠폰함</a>
+                    <a th:href="@{/coupons/my-info}">내 쿠폰함</a>
                 </li>
                 <li>
-                    <a th:href="@{postList}">내 글</a>
+                    <a th:href="@{/posts/my-info}">내 글</a>
                 </li>
                 <li>
-                    <a th:href="@{commentList}">내 댓글</a>
+                    <a th:href="@{/comments/my-info}">내 댓글</a>
                 </li>
             </ul>
         </div><!--lnb-->
 
         <div id="tableBox">
-            <form role="form" th:action="@{/user/edit}" method="post">
+            <form role="form" th:action="@{/users}" method="POST">
+                <input type="hidden" name="_method" value="PATCH"/>
+
                 <label for="name">이름</label>
                 <input id="name" type="text" name="name">
 

@@ -31,25 +31,25 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <div class="lnb">
             <ul>
                 <li>
-                    <a th:href="@{/user/userInfo}">회원 정보</a>
+                    <a th:href="@{/users/user-info}">회원 정보</a>
                 </li>
                 <li>
-                    <a th:href="@{/orderList}">나의 주문 내역</a>
+                    <a th:href="@{/orders}">나의 주문 내역</a>
                 </li>
                 <li>
-                    <a th:href="@{/basketList}">장바구니 확인</a>
+                    <a th:href="@{/baskets}">장바구니 확인</a>
                 </li>
                 <li>
-                    <a th:href="@{orderCancelList}">주문 취소 내역</a>
+                    <a th:href="@{/orders/cancel}">주문 취소 내역</a>
                 </li>
                 <li>
-                    <a th:href="@{myCouponList}">내 쿠폰함</a>
+                    <a th:href="@{/coupons/my-info}">내 쿠폰함</a>
                 </li>
                 <li>
-                    <a th:href="@{postList}">내 글</a>
+                    <a th:href="@{/posts/my-info}">내 글</a>
                 </li>
                 <li>
-                    <a th:href="@{commentList}">내 댓글</a>
+                    <a th:href="@{/comments/my-info}">내 댓글</a>
                 </li>
             </ul>
         </div><!--lnb-->
@@ -83,33 +83,33 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
                     <!--  first  -->
                     <li class="page-item">
-                        <a class="page-link" th:href="@{/commentList(page=0)}" aria-label="First">
+                        <a class="page-link" th:href="@{/comments/my-info(page=0)}" aria-label="First">
                             <span aria-hidden="true">First</span>
                         </a>
                     </li>
 
                     <!--  <  -->
                     <li class="page-item">
-                        <a class="page-link" th:href="${commentList.first} ? '#' :@{/commentList(page=${commentList.number - 1})}" aria-label="Previous" >
+                        <a class="page-link" th:href="${commentList.first} ? '#' :@{/comments/my-info(page=${commentList.number - 1})}" aria-label="Previous" >
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
                     <!--  1,2,3  -->
                     <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == commentList.number + 1} ? 'page-item active'">
-                        <a class="page-link" th:text="${page}" th:href="@{/commentList(page=${page - 1})}"></a>
+                        <a class="page-link" th:text="${page}" th:href="@{/comments/my-info(page=${page - 1})}"></a>
                     </li>
 
                     <!--  > -->
                     <li class="page-item" th:class="${commentList.last} ? 'disabled'">
-                        <a class="page-link" th:href="${commentList.last} ? '#' : @{/commentList(page=${commentList.number + 1})}" aria-label="Next">
+                        <a class="page-link" th:href="${commentList.last} ? '#' : @{/comments/my-info(page=${commentList.number + 1})}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
 
                     <!--  Last  -->
                     <li class="page-item">
-                        <a class="page-link" th:href="@{/commentList(page=${commentList.totalPages - 1})}" aria-label="Last">
+                        <a class="page-link" th:href="@{/comments/my-info(page=${commentList.totalPages - 1})}" aria-label="Last">
                             <span aria-hidden="true">Last</span>
                         </a>
                     </li>

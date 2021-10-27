@@ -9,7 +9,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.cqre.cqre.domain.shop.ItemImage;
 import com.cqre.cqre.domain.shop.item.CommonItem;
-import com.cqre.cqre.repository.itemImage.ItemImageRepository;
+import com.cqre.cqre.repository.ItemImageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

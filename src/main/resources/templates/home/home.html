@@ -23,11 +23,11 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                 <img th:src="@{/images/mainLogo4.png}" type="images" alt="">
             </a>
             <div class="sign">
-                <a th:href="@{/user/sign}" sec:authorize="isAnonymous()">SignIn / SignUp</a>
-                <form role="form" th:action="@{/user/logout}" method="post">
+                <a th:href="@{/users/sign}" sec:authorize="isAnonymous()">SignIn / SignUp</a>
+                <form role="form" th:action="@{/users/logout}" method="post">
                     <button type="submit" sec:authorize="isAuthenticated()">Logout</button>
                 </form>
-                <a th:href="@{/user/userInfo}" sec:authorize="isAuthenticated()">myInfo</a>
+                <a th:href="@{/users/user-info}" sec:authorize="isAuthenticated()">myInfo</a>
             </div>
         </header>
 
@@ -47,7 +47,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     <p>공지사항</p>
                 </div>
                 <div>
-                    <a th:href="@{/board/noticeBoard}">자세히 보기</a>
+                    <a th:href="@{/boards/notice-board}">자세히 보기</a>
                 </div>
             </div>
             <div class="personal-box">
@@ -56,7 +56,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     <p>자유게시판</p>
                 </div>
                 <div>
-                    <a th:href="@{/board/freeBoard}">자세히 보기</a>
+                    <a th:href="@{/boards/free-board}">자세히 보기</a>
                 </div>
             </div>
             <div class="personal-box">
@@ -65,7 +65,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     <p>갤러리</p>
                 </div>
                 <div>
-                    <a th:href="@{/gallery}">자세히 보기</a>
+                    <a th:href="@{/gallerys}">자세히 보기</a>
                 </div>
             </div>
             <div class="personal-box">
@@ -74,7 +74,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     <p>쇼핑몰</p>
                 </div>
                 <div>
-                    <a th:href="@{/shop}">자세히 보기</a>
+                    <a th:href="@{/items}">자세히 보기</a>
                 </div>
             </div>
         </div>

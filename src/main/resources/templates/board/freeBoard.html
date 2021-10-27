@@ -31,10 +31,10 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <div class="lnb">
             <ul>
                 <li>
-                    <a th:href="@{/board/noticeBoard}">공지시항</a>
+                    <a th:href="@{/boards/notice-board}">공지시항</a>
                 </li>
                 <li>
-                    <a th:href="@{/board/freeBoard}">자유게시판</a>
+                    <a th:href="@{/boards/free-board}">자유게시판</a>
                 </li>
             </ul>
         </div><!--lnb-->
@@ -42,7 +42,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <div id="tableBox">
             <!--optionBox-->
             <div class="optionBox">
-                <form class="form-group mx-sm-1 mb-2" th:action="@{/board/freeBoard}" method="get">
+                <form class="form-group mx-sm-1 mb-2" th:action="@{/boards/free-board}" method="get">
                     <select name="sortSelect">
                         <option>정렬기준선택</option>
                         <option value="recommendation">추천순</option>
@@ -51,7 +51,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     <button class="btn btn-primary" type="submit">정렬</button>
                 </form>
 
-                <form class="form-inline" th:action="@{/board/freeBoard/search}" method="get">
+                <form class="form-inline" th:action="@{/boards/free-board/search}" method="get">
                     <div class="form-group mx-sm-1 mb-2">
                         <select name="searchSelect">
                             <option value="title">검색 조건 선택</option>
@@ -66,13 +66,13 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     <button type="submit" class="btn btn-primary mb-2">검색</button>
                 </form>
 
-                <a class="btn btn-primary mb-2" th:href="@{/post/createFreePost}">글쓰기</a>
+                <a class="btn btn-primary mb-2" th:href="@{/posts/free-board/page}">글쓰기</a>
             </div><!--optionBox-->
 
             <!--list-->
             <div class="list">
                 <li th:each="post : ${posts}">
-                    <a th:href="@{/post/{postId}/readPost (postId=${post.id})}">
+                    <a th:href="@{/posts/{postId} (postId=${post.id})}">
                         <div>
                             <h5 th:text="${post.title}"></h5>
                             <p th:text="${post.content}"></p>
@@ -98,33 +98,33 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
                     <!--  first  -->
                     <li class="page-item">
-                        <a class="page-link" th:href="@{/board/freeBoard(page=0)}" aria-label="First">
+                        <a class="page-link" th:href="@{/boards/free-board(page=0)}" aria-label="First">
                             <span aria-hidden="true">First</span>
                         </a>
                     </li>
 
                     <!--  <  -->
                     <li class="page-item">
-                        <a class="page-link" th:href="${posts.first} ? '#' :@{/board/freeBoard(page=${posts.number - 1})}" aria-label="Previous" >
+                        <a class="page-link" th:href="${posts.first} ? '#' :@{/boards/free-board(page=${posts.number - 1})}" aria-label="Previous" >
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
                     <!--  1,2,3  -->
                     <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == posts.number + 1} ? 'page-item active'">
-                        <a class="page-link" th:text="${page}" th:href="@{/board/freeBoard(page=${page - 1})}"></a>
+                        <a class="page-link" th:text="${page}" th:href="@{/boards/free-board(page=${page - 1})}"></a>
                     </li>
 
                     <!--  > -->
                     <li class="page-item" th:class="${posts.last} ? 'disabled'">
-                        <a class="page-link" th:href="${posts.last} ? '#' : @{/board/freeBoard(page=${posts.number + 1})}" aria-label="Next">
+                        <a class="page-link" th:href="${posts.last} ? '#' : @{/boards/free-board(page=${posts.number + 1})}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
 
                     <!--  Last  -->
                     <li class="page-item">
-                        <a class="page-link" th:href="@{/board/freeBoard(page=${posts.totalPages - 1})}" aria-label="Last">
+                        <a class="page-link" th:href="@{/boards/free-board(page=${posts.totalPages - 1})}" aria-label="Last">
                             <span aria-hidden="true">Last</span>
                         </a>
                     </li>

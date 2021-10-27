@@ -20,13 +20,12 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 public class GalleryController {
 
     private final GalleryService galleryService;
 
     /*갤러리 페이지*/
-    @GetMapping("/gallery")
+    @GetMapping("/gallerys")
     public String gallery(Model model, @PageableDefault(size = 6) Pageable pageable){
         Page<FindGalleryFileDto> galleryFiles = galleryService.findGalleryFilesDistinct(pageable);
         model.addAttribute("galleryFiles", galleryFiles);
@@ -35,14 +34,14 @@ public class GalleryController {
     }
 
     /*갤러리 생성 페이지*/
-    @GetMapping("/gallery/create")
+    @GetMapping("/gallerys/page")
     public String createGallery(Model model){
         model.addAttribute("createGalleryDto", new CreateGalleryDto());
         return "/gallery/createGallery";
     }
 
     /*갤러리 생성*/
-    @PostMapping("/gallery/create")
+    @PostMapping("/gallerys")
     public String PCreateGallery(@RequestParam("file") List<MultipartFile> files,
                                  @RequestParam("title") String title) throws IOException {
 
@@ -54,11 +53,11 @@ public class GalleryController {
 
         galleryService.upload(files, "galleryImages", title);
 
-        return "redirect:/gallery";
+        return "redirect:/gallerys";
     }
 
     /*갤러리 상세 조회 페이지*/
-    @GetMapping("/galleryView/{bundleId}")
+    @GetMapping("/gallerys/{bundleId}")
     public String galleryView(@PathVariable(value = "bundleId") Long bundleId,
                               @PageableDefault(size = 6, sort = "bundleOrder") Pageable pageable,
                               Model model){
@@ -77,9 +76,9 @@ public class GalleryController {
     }
 
     /*삭제*/
-    @PostMapping("/gallery/delete")
+    @DeleteMapping("/gallerys")
     public String galleryDelete(Long bundleId){
         galleryService.galleryFileDelete(bundleId);
-        return "redirect:/gallery";
+        return "redirect:/gallerys";
     }
 }

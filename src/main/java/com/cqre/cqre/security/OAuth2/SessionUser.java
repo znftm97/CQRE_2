@@ -1,6 +1,6 @@
 package com.cqre.cqre.security.OAuth2;
 
-import com.cqre.cqre.domain.User;
+import com.cqre.cqre.domain.user.User;
 import lombok.Getter;
 
 import java.io.Serializable;

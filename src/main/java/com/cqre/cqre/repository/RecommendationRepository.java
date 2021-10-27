@@ -1,6 +1,6 @@
 package com.cqre.cqre.repository;
 
-import com.cqre.cqre.domain.post.Recommendation;
+import com.cqre.cqre.domain.board.Recommendation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

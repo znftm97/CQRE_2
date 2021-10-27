@@ -31,17 +31,18 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <div class="lnb">
             <ul>
                 <li>
-                    <a th:href="@{/gallery}">갤러리</a>
+                    <a th:href="@{/gallerys}">갤러리</a>
                 </li>
                 <li>
-                    <a th:href="@{/shop}">쇼핑몰</a>
+                    <a th:href="@{/items}">쇼핑몰</a>
                 </li>
             </ul>
         </div><!--lnb-->
 
         <div class="galleryBox">
             <div class="btnBox">
-                <form method="post" th:action="@{/gallery/delete}">
+                <form method="post" th:action="@{/gallerys}">
+                    <input type="hidden" name="_method" value="DELETE"/>
                     <button class="btn btn-danger" th:if="${authorCheck} == 'true'" >삭제</button>
                     <input type="hidden" name="bundleId" th:value="${bundleId}">
                 </form>
@@ -64,33 +65,33 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
             <!--  first  -->
             <li class="page-item">
-                <a class="page-link" th:href="@{'/galleryView/' + ${bundleId}(page=0)}" aria-label="First">
+                <a class="page-link" th:href="@{'/gallerys/' + ${bundleId}(page=0)}" aria-label="First">
                     <span aria-hidden="true">First</span>
                 </a>
             </li>
 
             <!--  <  -->
             <li class="page-item">
-                <a class="page-link" th:href="${galleryFiles.first} ? '#' :@{'/galleryView/' + ${bundleId}(page=${galleryFiles.number - 1})}" aria-label="Previous" >
+                <a class="page-link" th:href="${galleryFiles.first} ? '#' :@{'/gallerys/' + ${bundleId}(page=${galleryFiles.number - 1})}" aria-label="Previous" >
                     <span aria-hidden="true">&lt;</span>
                 </a>
             </li>
 
             <!--  1,2,3  -->
             <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == galleryFiles.number + 1} ? 'page-item active'">
-                <a class="page-link" th:text="${page}" th:href="@{'/galleryView/' + ${bundleId}(page=${page - 1})}"></a>
+                <a class="page-link" th:text="${page}" th:href="@{'/gallerys/' + ${bundleId}(page=${page - 1})}"></a>
             </li>
 
             <!--  > -->
             <li class="page-item" th:class="${galleryFiles.last} ? 'disabled'">
-                <a class="page-link" th:href="${galleryFiles.last} ? '#' : @{'/galleryView/' + ${bundleId}(page=${galleryFiles.number + 1})}" aria-label="Next">
+                <a class="page-link" th:href="${galleryFiles.last} ? '#' : @{'/gallerys/' + ${bundleId}(page=${galleryFiles.number + 1})}" aria-label="Next">
                     <span aria-hidden="true">&gt;</span>
                 </a>
             </li>
 
             <!--  Last  -->
             <li class="page-item">
-                <a class="page-link" th:href="@{'/galleryView/' + ${bundleId}(page=${galleryFiles.totalPages - 1})}" aria-label="Last">
+                <a class="page-link" th:href="@{'/gallerys/' + ${bundleId}(page=${galleryFiles.totalPages - 1})}" aria-label="Last">
                     <span aria-hidden="true">Last</span>
                 </a>
             </li>

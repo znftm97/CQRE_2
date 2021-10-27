@@ -31,25 +31,25 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <div class="lnb">
             <ul>
                 <li>
-                    <a th:href="@{/user/userInfo}">회원 정보</a>
+                    <a th:href="@{/users/user-info}">회원 정보</a>
                 </li>
                 <li>
-                    <a th:href="@{/orderList}">나의 주문 내역</a>
+                    <a th:href="@{/orders}">나의 주문 내역</a>
                 </li>
                 <li>
-                    <a th:href="@{/basketList}">장바구니 확인</a>
+                    <a th:href="@{/baskets}">장바구니 확인</a>
                 </li>
                 <li>
-                    <a th:href="@{orderCancelList}">주문 취소 내역</a>
+                    <a th:href="@{/orders/cancel}">주문 취소 내역</a>
                 </li>
                 <li>
-                    <a th:href="@{myCouponList}">내 쿠폰함</a>
+                    <a th:href="@{/coupons/my-info}">내 쿠폰함</a>
                 </li>
                 <li>
-                    <a th:href="@{postList}">내 글</a>
+                    <a th:href="@{/posts/my-info}">내 글</a>
                 </li>
                 <li>
-                    <a th:href="@{commentList}">내 댓글</a>
+                    <a th:href="@{/comments/my-info}">내 댓글</a>
                 </li>
             </ul>
         </div><!--lnb-->
@@ -74,7 +74,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                         <td th:text="${orderItem.orderCount}"></td>
                         <td>[[${#temporals.format(orderItem.createDate, 'yyyy-MM-dd일 HH:mm분')}]]</td>
                         <td>
-                            <form method="post" th:action="@{/reOrder/{orderItemId} (orderItemId = ${orderItem.id})}">
+                            <form method="post" th:action="@{/re-orders/{orderItemId} (orderItemId = ${orderItem.id})}">
                                 <button type="submit" class="btn-primary">Order</button>
                             </form>
                         </td>
@@ -90,33 +90,33 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
                     <!--  first  -->
                     <li class="page-item">
-                        <a class="page-link" th:href="@{/orderCancelList(page=0)}" aria-label="First">
+                        <a class="page-link" th:href="@{/orders/cancel(page=0)}" aria-label="First">
                             <span aria-hidden="true">First</span>
                         </a>
                     </li>
 
                     <!--  <  -->
                     <li class="page-item">
-                        <a class="page-link" th:href="${orderItems.first} ? '#' :@{/orderCancelList(page=${orderItems.number - 1})}" aria-label="Previous" >
+                        <a class="page-link" th:href="${orderItems.first} ? '#' :@{/orders/cancel(page=${orderItems.number - 1})}" aria-label="Previous" >
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
                     <!--  1,2,3  -->
                     <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == orderItems.number + 1} ? 'page-item active'">
-                        <a class="page-link" th:text="${page}" th:href="@{/orderCancelList(page=${page - 1})}"></a>
+                        <a class="page-link" th:text="${page}" th:href="@{/orders/cancel(page=${page - 1})}"></a>
                     </li>
 
                     <!--  > -->
                     <li class="page-item" th:class="${orderItems.last} ? 'disabled'">
-                        <a class="page-link" th:href="${orderItems.last} ? '#' : @{/orderCancelList(page=${orderItems.number + 1})}" aria-label="Next">
+                        <a class="page-link" th:href="${orderItems.last} ? '#' : @{/orders/cancel(page=${orderItems.number + 1})}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
 
                     <!--  Last  -->
                     <li class="page-item">
-                        <a class="page-link" th:href="@{/orderCancelList(page=${orderItems.totalPages - 1})}" aria-label="Last">
+                        <a class="page-link" th:href="@{/orders/cancel(page=${orderItems.totalPages - 1})}" aria-label="Last">
                             <span aria-hidden="true">Last</span>
                         </a>
                     </li>

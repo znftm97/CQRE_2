@@ -3,8 +3,7 @@ package com.cqre.cqre.repository.post;
 import com.cqre.cqre.dto.post.ListPostDto;
 import com.cqre.cqre.dto.post.PostSearchCondition;
 import com.cqre.cqre.dto.post.QListPostDto;
-import com.cqre.cqre.domain.QUser;
-import com.cqre.cqre.domain.post.*;
+import com.cqre.cqre.domain.board.*;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -15,10 +14,8 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-import static com.cqre.cqre.domain.QUser.*;
-import static com.cqre.cqre.domain.post.QPost.*;
-import static com.cqre.cqre.domain.post.QPostFile.*;
-import static com.cqre.cqre.domain.post.QRecommendation.*;
+import static com.cqre.cqre.domain.board.QPost.*;
+import static com.cqre.cqre.domain.user.QUser.user;
 
 @RequiredArgsConstructor
 public class PostRepositoryImpl implements PostRepositoryCustom{

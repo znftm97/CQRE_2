@@ -1,11 +1,12 @@
 package com.cqre.cqre.controller;
 
-import com.cqre.cqre.dto.post.*;
-import com.cqre.cqre.domain.post.Board;
-import com.cqre.cqre.domain.post.Post;
-import com.cqre.cqre.repository.PostFileRepository;
+import com.cqre.cqre.domain.board.Board;
+import com.cqre.cqre.domain.board.Post;
+import com.cqre.cqre.dto.post.CreateAndUpdatePostDto;
+import com.cqre.cqre.dto.post.ListPostDto;
+import com.cqre.cqre.dto.post.PostFileDto;
+import com.cqre.cqre.dto.post.ReadPostDto;
 import com.cqre.cqre.repository.post.PostRepository;
-import com.cqre.cqre.service.CommentService;
 import com.cqre.cqre.service.PostFileService;
 import com.cqre.cqre.service.PostService;
 import com.cqre.cqre.service.RecommendationService;
@@ -29,71 +30,11 @@ public class PostController {
 
     private final PostService postService;
     private final PostFileService postFileService;
-    private final PostFileRepository postFileRepository;
-    private final CommentService commentService;
     private final RecommendationService recommendationService;
     private final PostRepository postRepository;
 
-    /*자유게시판 페이지*/
-    @GetMapping("/board/freeBoard")
-    public String freeBoard(@RequestParam(value = "sortSelect", required = false) String sortOption,
-                            @RequestParam(value = "page", required = false, defaultValue = "0") int page, Model model){
-
-        Page<ListPostDto> posts = postService.findFreePosts(sortOption, page);
-        model.addAttribute("posts", posts);
-
-        return "/board/freeBoard";
-    }
-
-    /*공지사항 게시판 페이지*/
-    @GetMapping("/board/noticeBoard")
-    public String noticeBoard(@RequestParam(value = "sortSelect", required = false) String sortOption,
-                              @RequestParam(value = "page", required = false, defaultValue = "0") int page, Model model){
-
-        Page<ListPostDto> posts = postService.findNoticePosts(sortOption, page);
-        model.addAttribute("posts", posts);
-
-        return "/board/noticeBoard";
-    }
-
-    /*자유게시판 검색*/
-    @GetMapping("/board/freeBoard/search")
-    public String searchFreeBoard(Model model, PostSearchCondition condition,
-                                  @PageableDefault(size = 6, sort = "id")Pageable pageable){
-
-        if(condition.getSearchSelect().equals("title")){
-            condition.setTitle(condition.getSearchWord());
-        } else if (condition.getSearchSelect().equals("name")) {
-            condition.setName(condition.getSearchWord());
-        }
-        condition.setBoard(Board.FREE);
-
-        Page<ListPostDto> posts = postRepository.searchPost(condition, pageable);
-        model.addAttribute("posts", posts);
-
-        return "/board/freeBoard";
-    }
-
-    /*공시사항 검색*/
-    @GetMapping("/board/noticeBoard/search")
-    public String searchNoticeBoard(Model model, PostSearchCondition condition,
-                                    @PageableDefault(size = 6, sort = "id")Pageable pageable){
-
-        if(condition.getSearchSelect().equals("title")){
-            condition.setTitle(condition.getSearchWord());
-        } else if (condition.getSearchSelect().equals("name")) {
-            condition.setName(condition.getSearchWord());
-        }
-        condition.setBoard(Board.NOTICE);
-
-        Page<ListPostDto> posts = postRepository.searchPost(condition, pageable);
-        model.addAttribute("posts", posts);
-
-        return "/board/noticeBoard";
-    }
-
     /*자유게시판 글 생성 페이지*/
-    @GetMapping("/post/createFreePost")
+    @GetMapping("/posts/free-board/page")
     public String createFreePost(Model model){
 
         model.addAttribute("createAndUpdatePostDto", new CreateAndUpdatePostDto());
@@ -102,7 +43,7 @@ public class PostController {
     }
 
     /*공지사항 글 생성 페이지*/
-    @GetMapping("/post/createNoticePost")
+    @GetMapping("/posts/notice-board/page")
     public String createNoticePost(Model model){
 
         model.addAttribute("createAndUpdatePostDto", new CreateAndUpdatePostDto());
@@ -111,7 +52,7 @@ public class PostController {
     }
 
     /*자유게시판 글 생성*/
-    @PostMapping("/post/createFreePost")
+    @PostMapping("/posts/free-board")
     public String PCreateFreePost(@ModelAttribute("createAndUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
                                   @RequestParam(value = "file", required = false) List<MultipartFile> files) throws IOException {
         if (result.hasErrors()) {
@@ -123,11 +64,11 @@ public class PostController {
             postFileService.upload(files, "postFiles", postId);
         }
 
-        return "redirect:/board/freeBoard";
+        return "redirect:/boards/free-board";
     }
 
     /*공지사항 글 생성*/
-    @PostMapping("/post/createNoticePost")
+    @PostMapping("/posts/notice-board")
     public String PCreateNoticePost(@ModelAttribute("createAndUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
                                     @RequestParam(value = "file", required = false) List<MultipartFile> files) throws IOException {
 
@@ -140,11 +81,11 @@ public class PostController {
             postFileService.upload(files, "postFiles", postId);
         }
 
-        return "redirect:/board/noticeBoard";
+        return "redirect:/boards/notice-board";
     }
 
     /*글 조회 페이지*/
-    @GetMapping("/post/{postId}/readPost")
+    @GetMapping("/posts/{postId}")
     public String readFreePost(@PathVariable("postId") Long postId, Model model){
         /*글 조회*/
         ReadPostDto readPostDto = postService.readPost(postId);
@@ -162,14 +103,14 @@ public class PostController {
     }
 
     /*글 삭제*/
-    @PostMapping("/post/remove/{postId}")
+    @DeleteMapping("/posts/{postId}")
     public String removePost(@PathVariable("postId") Long postId){
         postService.removePost(postId);
-        return "redirect:/board/freeBoard";
+        return "redirect:/boards/free-board";
     }
 
     /*글 수정 페이지*/
-    @GetMapping("/post/update/{postId}")
+    @GetMapping("/posts/{postId}/update-page")
     public String updatePost(@PathVariable("postId") Long postId, Model model) {
         CreateAndUpdatePostDto createAndUpdatePostDto = postService.updatePostPage(postId);
         model.addAttribute("createAndUpdatePostDto", createAndUpdatePostDto);
@@ -183,7 +124,7 @@ public class PostController {
     }
 
     /*글 수정*/
-    @PostMapping("/post/update")
+    @PatchMapping("/posts")
     public String PUpdatePost(@ModelAttribute("createAndUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
                               @RequestParam(value = "file", required = false) List<MultipartFile> files) throws IOException {
         if (result.hasErrors() && (createAndUpdatePostDto.getBoard()==Board.FREE) ) {
@@ -198,14 +139,14 @@ public class PostController {
         }
 
         if(updatePost.getBoard() == Board.FREE){
-            return "redirect:/board/freeBoard";
+            return "redirect:/boards/free-board";
         }else {
-            return "redirect:/board/noticeBoard";
+            return "redirect:/boards/notice-board";
         }
     }
 
     /*내가 쓴 글 조회*/
-    @GetMapping("/postList")
+    @GetMapping("/posts/my-info")
     public String postList(Model model, @PageableDefault(size=5, sort = "id") Pageable pageable){
         Page<ListPostDto> listPostDtos = postService.myPost(pageable);
         model.addAttribute("listPostDtos", listPostDtos);

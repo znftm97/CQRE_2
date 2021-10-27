@@ -1,6 +1,6 @@
 package com.cqre.cqre.dto.post;
 
-import com.cqre.cqre.domain.post.Post;
+import com.cqre.cqre.domain.board.Post;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 

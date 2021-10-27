@@ -1,4 +1,4 @@
-package com.cqre.cqre.repository.order;
+package com.cqre.cqre.repository;
 
 import com.cqre.cqre.domain.shop.Order;
 import org.springframework.data.jpa.repository.JpaRepository;

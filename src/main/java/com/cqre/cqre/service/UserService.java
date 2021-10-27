@@ -1,6 +1,6 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.domain.User;
+import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.dto.user.*;
 import com.cqre.cqre.exception.customexception.user.*;
 import com.cqre.cqre.repository.UserRepository;
@@ -18,7 +18,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -57,7 +56,7 @@ public class UserService {
         /*ec2 환경에서 사용하기위한 코드 수정 부분*/
         String html = "<h1>이메일 인증</h1><br>" +
                 "아래 버튼을 클릭하시면 이메일 인증이 완료됩니다.<br>" +
-                "<a href='http://ec2-54-180-142-70.ap-northeast-2.compute.amazonaws.com:8080/user/validationEmail?email=" +
+                "<a href='http://ec2-54-180-142-70.ap-northeast-2.compute.amazonaws.com:8080/users/validation-email?email=" +
                 user.getEmail() +
                 "&emailCheckToken=" +
                 user.getEmailCheckToken() +
@@ -80,7 +79,7 @@ public class UserService {
         /*ec2 환경에서 사용하기위한 코드 수정 부분*/
         String html = "<h1>이메일 인증</h1><br>" +
                 "아래 버튼을 클릭하시면 이메일 인증이 완료됩니다.<br>" +
-                "<a href='http://ec2-54-180-142-70.ap-northeast-2.compute.amazonaws.com:8080/user/validationEmail?email=" +
+                "<a href='http://ec2-54-180-142-70.ap-northeast-2.compute.amazonaws.com:8080/users/validation-email?email=" +
                 findUser.getEmail() +
                 "&emailCheckToken=" +
                 findUser.getEmailCheckToken() +
@@ -131,7 +130,7 @@ public class UserService {
 
         String html = "<h1>비밀번호 변경 본인확인</h1><br>" +
                 "아래 버튼을 클릭하시면 본인 인증이 완료됩니다.<br>" +
-                "<a href='http://ec2-54-180-142-70.ap-northeast-2.compute.amazonaws.com:8080/user/updatePassword?email=" +
+                "<a href='http://ec2-54-180-142-70.ap-northeast-2.compute.amazonaws.com:8080/users/update-password?email=" +
                 findUserByEmail.getEmail() +
                 "' target='_blank'><button>인증 하기</button></a>";
 
@@ -164,7 +163,7 @@ public class UserService {
             Map<String, Object> attributes = defaultOAuth2User.getAttributes();
 
             /*카카오는 이중 Map 구조라 다르게 구현*/
-            if (Objects.isNull(attributes.get("email"))) {
+            if (attributes.get("email") == null) {
                 Map<String, Object> kakao_account = (Map<String, Object>) attributes.get("kakao_account");
                 return userRepository.findByEmail(kakao_account.get("email").toString()).orElseThrow(CUserNotFoundException::new);
             } else {

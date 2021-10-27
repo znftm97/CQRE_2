@@ -20,21 +20,21 @@ public class OrderController {
     private final OrderService orderService;
 
     /*주문*/
-    @PostMapping("/order")
+    @PostMapping("/orders")
     public String createOrder(@RequestParam("itemId") Long itemId,
                               @RequestParam("count") int count,
                               @RequestParam("userCouponId") String userCouponId) {
-        if (userCouponId.equals("null")) {
+        if (userCouponId.isEmpty()) {
             orderService.createOrder(itemId, count);
         } else {
             orderService.createOrderWithCoupon(itemId, count, userCouponId);
         }
 
-        return "redirect:/orderList";
+        return "redirect:/orders";
     }
 
     /*주문목록*/
-    @GetMapping("/orderList")
+    @GetMapping("/orders")
     public String orderList(@PageableDefault(size = 5, sort = "id") Pageable pageable, Model model) {
         Page<FindOrderItemDto> orderItems = orderService.findOrders(pageable);
         model.addAttribute("orderItems", orderItems);
@@ -42,15 +42,15 @@ public class OrderController {
     }
 
     /*주문 취소*/
-    @PostMapping("/orderCancel/{orderItemId}")
+    @PostMapping("/orders/cancel/{orderItemId}")
     public String orderCancel(@PathVariable("orderItemId") Long orderItemId) {
         orderService.orderCancel(orderItemId);
 
-        return "redirect:/orderCancelList";
+        return "redirect:/orders/cancel";
     }
 
     /*주문 취소 목록*/
-    @GetMapping("/orderCancelList")
+    @GetMapping("/orders/cancel")
     public String orderCancelList(@PageableDefault(size = 5, sort = "id") Pageable pageable, Model model) {
         Page<FindOrderItemDto> orderItems = orderService.findCancelOrders(pageable);
         model.addAttribute("orderItems", orderItems);
@@ -58,24 +58,24 @@ public class OrderController {
     }
 
     /*재 주문*/
-    @PostMapping("/reOrder/{orderItemId}")
+    @PostMapping("/re-orders/{orderItemId}")
     public String reOrder(@PathVariable("orderItemId") Long orderItemId) {
         orderService.reOrder(orderItemId);
 
-        return "redirect:/orderList";
+        return "redirect:/orders";
     }
 
     /*장바구니 추가*/
-    @PostMapping("/basket")
+    @PostMapping("/baskets")
     public String createBasket(@RequestParam("itemId") Long itemId,
                                @RequestParam("count") int count) {
         orderService.createBasket(itemId, count);
 
-        return "redirect:/basketList";
+        return "redirect:/baskets";
     }
 
     /*장바구니 목록 조회*/
-    @GetMapping("/basketList")
+    @GetMapping("/baskets")
     public String findBaskets(@PageableDefault(size = 5, sort = "id")Pageable pageable, Model model) {
         Page<FindOrderItemDto> orderItems = orderService.findBaskets(pageable);
         model.addAttribute("orderItems", orderItems);
@@ -84,18 +84,18 @@ public class OrderController {
     }
 
     /*장바구니에서 바로 주문*/
-    @PostMapping("/basketOrder/{orderItemId}")
+    @PostMapping("/baskets/order/{orderItemId}")
     public String basketOrder(@PathVariable("orderItemId") Long orderItemId) {
         orderService.basketOrder(orderItemId);
 
-        return "redirect:/orderList";
+        return "redirect:/orders";
     }
 
     /*장바구니 삭제*/
-    @PostMapping("/basketCancel/{orderItemId}")
+    @PostMapping("/baskets/cancel/{orderItemId}")
     public String basketCancel(@PathVariable("orderItemId") Long orderItemId) {
         orderService.basketCancel(orderItemId);
 
-        return "redirect:/basketList";
+        return "redirect:/baskets";
     }
 }
