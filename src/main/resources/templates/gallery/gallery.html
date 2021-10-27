@@ -30,10 +30,10 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <div class="lnb">
             <ul>
                 <li>
-                    <a th:href="@{/gallery}">갤러리</a>
+                    <a th:href="@{/gallerys}">갤러리</a>
                 </li>
                 <li>
-                    <a th:href="@{/shop}">쇼핑몰</a>
+                    <a th:href="@{/items}">쇼핑몰</a>
                 </li>
             </ul>
         </div><!--lnb-->
@@ -41,14 +41,14 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <div id="tableBox">
             <!--searchBox-->
             <div class="searchBox">
-                <a class="btn btn-primary mb-2" th:href="@{/gallery/create}">업로드</a>
+                <a class="btn btn-primary mb-2" th:href="@{/gallerys/page}">업로드</a>
             </div><!--searchBox-->
 
             <!--list-->
             <div class="list">
                 <div class="topPic">
                     <li th:each = "galleryFile : ${galleryFiles}">
-                        <a th:href="@{/galleryView/{bundleId} (bundleId=${galleryFile.bundleId})}">
+                        <a th:href="@{/gallerys/{bundleId} (bundleId=${galleryFile.bundleId})}">
                             <img th:src="@{/images/InstagramFrame.png}" type="images" alt="">
                             <img th:src="@{${galleryFile.filePath}}"/>
                         </a>
@@ -69,33 +69,33 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
                     <!--  first  -->
                     <li class="page-item">
-                        <a class="page-link" th:href="@{/gallery(page=0)}" aria-label="First">
+                        <a class="page-link" th:href="@{/gallerys(page=0)}" aria-label="First">
                             <span aria-hidden="true">First</span>
                         </a>
                     </li>
 
                     <!--  <  -->
                     <li class="page-item">
-                        <a class="page-link" th:href="${galleryFiles.first} ? '#' :@{/gallery(page=${galleryFiles.number - 1})}" aria-label="Previous" >
+                        <a class="page-link" th:href="${galleryFiles.first} ? '#' :@{/gallerys(page=${galleryFiles.number - 1})}" aria-label="Previous" >
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
                     <!--  1,2,3  -->
                     <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == galleryFiles.number + 1} ? 'page-item active'">
-                        <a class="page-link" th:text="${page}" th:href="@{/gallery(page=${page - 1})}"></a>
+                        <a class="page-link" th:text="${page}" th:href="@{/gallerys(page=${page - 1})}"></a>
                     </li>
 
                     <!--  > -->
                     <li class="page-item" th:class="${galleryFiles.last} ? 'disabled'">
-                        <a class="page-link" th:href="${galleryFiles.last} ? '#' : @{/gallery(page=${galleryFiles.number + 1})}" aria-label="Next">
+                        <a class="page-link" th:href="${galleryFiles.last} ? '#' : @{/gallerys(page=${galleryFiles.number + 1})}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
 
                     <!--  Last  -->
                     <li class="page-item">
-                        <a class="page-link" th:href="@{/gallery(page=${galleryFiles.totalPages - 1})}" aria-label="Last">
+                        <a class="page-link" th:href="@{/gallerys(page=${galleryFiles.totalPages - 1})}" aria-label="Last">
                             <span aria-hidden="true">Last</span>
                         </a>
                     </li>

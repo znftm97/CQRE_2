@@ -44,7 +44,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     </div>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form role="form" th:action="@{/user/signIn}" method="post">
+            <form role="form" th:action="@{/users/sign-in}" method="post">
                 <h1>Sign In</h1>
                 <input type="text" name="username" placeholder="Id" />
                 <input type="password" name="password" placeholder="Password" />
@@ -56,9 +56,9 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                     <span>자동로그인</span>
                 </div>
                 <button>Sign In</button>
-                <a th:href="@{/user/findId}">ID 찾기</a>
-                <a th:href="@{/user/findPw}">PW 찾기</a>
-                <a th:href="@{/user/validationEmailRe}">이메일 인증하기</a>
+                <a th:href="@{/users/find-id}">ID 찾기</a>
+                <a th:href="@{/users/find-pw}">PW 찾기</a>
+                <a th:href="@{/users/email-re-validation}">이메일 인증하기</a>
             </form>
             <!--social login button-->
             <div class="socialLogin">
@@ -95,7 +95,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         </div>
 
         <div class="form-container sign-in-container">
-            <form role="form" th:action="@{/user/signUp}" th:object="${SignUpDto}" method="post">
+            <form role="form" th:action="@{/users}" th:object="${SignUpDto}" method="post">
                 <h1>Sign Up</h1>
                 <input type="text" placeholder="Name" th:field="*{name}" class="form-control"
                        th:class="${#fields.hasErrors('name')}? 'form-control fieldError' : 'form-control'"/>

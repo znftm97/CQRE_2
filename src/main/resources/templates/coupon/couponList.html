@@ -57,33 +57,33 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
             <!--  first  -->
             <li class="page-item">
-                <a class="page-link" th:href="@{/couponList(page=0)}" aria-label="First">
+                <a class="page-link" th:href="@{/coupons(page=0)}" aria-label="First">
                     <span aria-hidden="true">First</span>
                 </a>
             </li>
 
             <!--  <  -->
             <li class="page-item">
-                <a class="page-link" th:href="${coupons.first} ? '#' :@{/couponList(page=${coupons.number - 1})}" aria-label="Previous" >
+                <a class="page-link" th:href="${coupons.first} ? '#' :@{/coupons(page=${coupons.number - 1})}" aria-label="Previous" >
                     <span aria-hidden="true">&lt;</span>
                 </a>
             </li>
 
             <!--  1,2,3  -->
             <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == coupons.number + 1} ? 'page-item active'">
-                <a class="page-link" th:text="${page}" th:href="@{/couponList(page=${page - 1})}"></a>
+                <a class="page-link" th:text="${page}" th:href="@{/coupons(page=${page - 1})}"></a>
             </li>
 
             <!--  > -->
             <li class="page-item" th:class="${coupons.last} ? 'disabled'">
-                <a class="page-link" th:href="${coupons.last} ? '#' : @{/couponList(page=${coupons.number + 1})}" aria-label="Next">
+                <a class="page-link" th:href="${coupons.last} ? '#' : @{/coupons(page=${coupons.number + 1})}" aria-label="Next">
                     <span aria-hidden="true">&gt;</span>
                 </a>
             </li>
 
             <!--  Last  -->
             <li class="page-item">
-                <a class="page-link" th:href="@{/couponList(page=${coupons.totalPages - 1})}" aria-label="Last">
+                <a class="page-link" th:href="@{/coupons(page=${coupons.totalPages - 1})}" aria-label="Last">
                     <span aria-hidden="true">Last</span>
                 </a>
             </li>
@@ -93,7 +93,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     <div class="boardTitle" style="margin-top: 0px">
         <h2>쿠폰 전송</h2>
     </div>
-    <form role="form" method="post" th:action="@{/coupon/send}">
+    <form role="form" method="post" th:action="@{/coupons/send}">
         <div class="form-group">
             <label th:for="title"><strong>사용자 이메일</strong></label>
             <input name="email" type="text" class="form-control" placeholder="이메일을 입력하세요">

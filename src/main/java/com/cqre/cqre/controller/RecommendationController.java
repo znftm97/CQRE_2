@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -16,7 +15,7 @@ public class RecommendationController {
 
     private final RecommendationService recommendationService;
 
-    @PostMapping("/recommendation")
+    @PostMapping("/recommendations")
     @ResponseBody
     public RecommendationResponseDto recommendation(@RequestBody RecommendationRequestDto requestDto) {
         return recommendationService.recommendation(requestDto.getPostId());
