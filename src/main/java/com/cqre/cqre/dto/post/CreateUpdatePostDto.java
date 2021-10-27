@@ -1,6 +1,6 @@
 package com.cqre.cqre.dto.post;
 
-import com.cqre.cqre.domain.post.Board;
+import com.cqre.cqre.domain.board.Board;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;

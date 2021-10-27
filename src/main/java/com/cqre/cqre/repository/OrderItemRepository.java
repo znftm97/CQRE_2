@@ -1,4 +1,4 @@
-package com.cqre.cqre.repository.order;
+package com.cqre.cqre.repository;
 
 import com.cqre.cqre.domain.shop.OrderItem;
 import com.cqre.cqre.domain.shop.OrderStatus;

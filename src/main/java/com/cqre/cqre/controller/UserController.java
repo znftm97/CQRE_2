@@ -1,7 +1,7 @@
 package com.cqre.cqre.controller;
 
 import com.cqre.cqre.dto.user.*;
-import com.cqre.cqre.domain.User;
+import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.exception.customexception.user.CPwNotEqualsException;
 import com.cqre.cqre.service.UserService;
 import lombok.RequiredArgsConstructor;

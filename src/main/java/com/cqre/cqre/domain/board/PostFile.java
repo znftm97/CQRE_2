@@ -1,4 +1,4 @@
-package com.cqre.cqre.domain.post;
+package com.cqre.cqre.domain.board;
 
 import com.cqre.cqre.domain.BaseEntity;
 import lombok.*;

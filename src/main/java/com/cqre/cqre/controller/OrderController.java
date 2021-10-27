@@ -24,7 +24,7 @@ public class OrderController {
     public String createOrder(@RequestParam("itemId") Long itemId,
                               @RequestParam("count") int count,
                               @RequestParam("userCouponId") String userCouponId) {
-        if (userCouponId.equals("null")) {
+        if (userCouponId.isEmpty()) {
             orderService.createOrder(itemId, count);
         } else {
             orderService.createOrderWithCoupon(itemId, count, userCouponId);

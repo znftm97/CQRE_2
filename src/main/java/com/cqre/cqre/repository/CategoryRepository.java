@@ -1,4 +1,4 @@
-package com.cqre.cqre.repository.category;
+package com.cqre.cqre.repository;
 
 import com.cqre.cqre.domain.shop.item.Category;
 import org.springframework.data.jpa.repository.JpaRepository;

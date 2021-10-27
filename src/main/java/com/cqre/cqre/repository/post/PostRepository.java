@@ -1,7 +1,7 @@
 package com.cqre.cqre.repository.post;
 
-import com.cqre.cqre.domain.post.Board;
-import com.cqre.cqre.domain.post.Post;
+import com.cqre.cqre.domain.board.Board;
+import com.cqre.cqre.domain.board.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

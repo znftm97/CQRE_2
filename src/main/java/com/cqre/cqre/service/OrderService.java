@@ -1,7 +1,7 @@
 package com.cqre.cqre.service;
 
 import com.cqre.cqre.dto.order.FindOrderItemDto;
-import com.cqre.cqre.domain.User;
+import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.domain.shop.Order;
 import com.cqre.cqre.domain.shop.OrderItem;
 import com.cqre.cqre.domain.shop.OrderStatus;
@@ -10,8 +10,8 @@ import com.cqre.cqre.domain.shop.item.Item;
 import com.cqre.cqre.exception.customexception.item.CNotEnoughStockException;
 import com.cqre.cqre.repository.Item.ItemRepository;
 import com.cqre.cqre.repository.UserCouponRepository;
-import com.cqre.cqre.repository.order.OrderItemRepository;
-import com.cqre.cqre.repository.order.OrderRepository;
+import com.cqre.cqre.repository.OrderItemRepository;
+import com.cqre.cqre.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

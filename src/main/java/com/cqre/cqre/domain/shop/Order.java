@@ -1,7 +1,7 @@
 package com.cqre.cqre.domain.shop;
 
 import com.cqre.cqre.domain.BaseEntity;
-import com.cqre.cqre.domain.User;
+import com.cqre.cqre.domain.user.User;
 import lombok.*;
 
 import javax.persistence.*;
