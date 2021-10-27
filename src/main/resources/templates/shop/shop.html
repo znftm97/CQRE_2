@@ -34,10 +34,10 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         <div class="lnb">
             <ul>
                 <li>
-                    <a th:href="@{/gallery}">갤러리</a>
+                    <a th:href="@{/gallerys}">갤러리</a>
                 </li>
                 <li>
-                    <a th:href="@{/shop}">쇼핑몰</a>
+                    <a th:href="@{/items}">쇼핑몰</a>
                 </li>
             </ul>
         </div><!--lnb-->
@@ -57,7 +57,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <div class="categoryDetail">
                 <ul>
                     <li th:each="name : ${categoryNames}">
-                        <a th:href="@{/shop/{categoryName} (categoryName = ${name}) }"><span th:text="${name}"></span></a>
+                        <a th:href="@{/items/{categoryName} (categoryName = ${name}) }"><span th:text="${name}"></span></a>
                     </li>
                 </ul>
             </div>
@@ -65,7 +65,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
         <div id="tableBox">
             <div class="buttonBoxShop">
-                <a class="btn btn-primary mb-2" th:href="@{/createItem}" >상품 등록</a>
+                <a class="btn btn-primary mb-2" th:href="@{/items/page}" >상품 등록</a>
                 <a class="btn btn-primary mb-2" th:href="@{/coupons/page}">쿠폰 생성</a>
                 <a class="btn btn-primary mb-2" th:href="@{/coupons}">쿠폰 목록</a>
             </div>
@@ -74,7 +74,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             <div class="list">
                 <div class="topPic">
                     <li th:each = "item : ${items}">
-                        <a th:href="@{/itemDetail/{itemId}/{bundleId} (itemId=${item.id} ,bundleId=${item.bundleId}) }">
+                        <a th:href="@{/items/{itemId}/{bundleId} (itemId=${item.id} ,bundleId=${item.bundleId}) }">
                             <img th:src="@{${item.filePath}}"/>
                         </a>
                         <div>
@@ -94,33 +94,33 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 
                     <!--  first  -->
                     <li class="page-item">
-                        <a class="page-link" th:href="@{/shop(page=0)}" aria-label="First">
+                        <a class="page-link" th:href="@{/items(page=0)}" aria-label="First">
                             <span aria-hidden="true">First</span>
                         </a>
                     </li>
 
                     <!--  <  -->
                     <li class="page-item">
-                        <a class="page-link" th:href="${items.first} ? '#' :@{/shop(page=${items.number - 1})}" aria-label="Previous" >
+                        <a class="page-link" th:href="${items.first} ? '#' :@{/items(page=${items.number - 1})}" aria-label="Previous" >
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
                     <!--  1,2,3  -->
                     <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == items.number + 1} ? 'page-item active'">
-                        <a class="page-link" th:text="${page}" th:href="@{/shop(page=${page - 1})}"></a>
+                        <a class="page-link" th:text="${page}" th:href="@{/items(page=${page - 1})}"></a>
                     </li>
 
                     <!--  > -->
                     <li class="page-item" th:class="${items.last} ? 'disabled'">
-                        <a class="page-link" th:href="${items.last} ? '#' : @{/shop(page=${items.number + 1})}" aria-label="Next">
+                        <a class="page-link" th:href="${items.last} ? '#' : @{/items(page=${items.number + 1})}" aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
 
                     <!--  Last  -->
                     <li class="page-item">
-                        <a class="page-link" th:href="@{/shop(page=${items.totalPages - 1})}" aria-label="Last">
+                        <a class="page-link" th:href="@{/items(page=${items.totalPages - 1})}" aria-label="Last">
                             <span aria-hidden="true">Last</span>
                         </a>
                     </li>
