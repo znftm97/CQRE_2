@@ -138,41 +138,4 @@ public class ItemImageService {
                 .collect(Collectors.toList());
     }
 
-    /*상품 이미지 생성*/
-   /* @Transactional
-    public void createItemImage(MultipartFile[] files, CommonItem commonItem) {
-
-        *//*이미지 파일인지 검사*//*
-        for (MultipartFile uploadFile : files) {
-            if (uploadFile.getContentType().startsWith("image") == false) {
-                throw new CFileIsNotImage();
-            }
-        }
-
-        for(int i=0; i<files.length; i++){
-            try {
-                String origFilename = files[i].getOriginalFilename(); *//*원본 파일 명*//*
-                String filename = System.currentTimeMillis() + "_" + origFilename; *//*파일 이름 중복되지 않도록*//*
-                String filePath = savePath + "\\" + filename;
-
-                files[i].transferTo(new java.io.File(filePath));
-
-                ItemImage itemImage = ItemImage.builder()
-                        .originFilename(origFilename)
-                        .filename(filename)
-                        .filePath(filePath)
-                        .bundleOrder(System.currentTimeMillis())
-                        .bundleId(bundleId.get())
-                        .item(commonItemcommonItem)
-                        .build();
-
-                itemImageRepository.save(itemImage);
-
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        bundleId.incrementAndGet();
-    }*/
 }

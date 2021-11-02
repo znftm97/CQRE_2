@@ -179,11 +179,4 @@ public class UserService {
         loginUser.updateUserInfo(userAddressDto);
     }
 
-    /*회원 탈퇴*/
-    /*post, galleryFile, UserCoupon, Comment, PostFile, Recommendation 등등... 다 삭제해줘야함*/
-    /*@Transactional
-    public void removeUser(){
-        User loginUser = getLoginUser();
-        userRepository.delete(loginUser);
-    }*/
 }
