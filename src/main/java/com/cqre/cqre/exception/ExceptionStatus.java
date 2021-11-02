@@ -11,7 +11,7 @@ import static org.springframework.http.HttpStatus.*;
 public enum ExceptionStatus {
 
     // common - 1000
-    FILE_IS_NOT_IMAGE_EXCEPTION(1000, "이미지 파일 형태가 아닙니다.", BAD_REQUEST),
+    FILE_IS_NOT_IMAGE_EXCEPTION(1000, "이미지 파일 형태가 아니거나 존재하지 않습니다.", BAD_REQUEST),
 
     // user - 2000
     USER_NOT_FOUND_EXCEPTION(2000, "유저가 존재하지 않습니다.", NOT_FOUND),

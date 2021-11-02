@@ -3,10 +3,9 @@ package com.cqre.cqre.controller;
 import com.cqre.cqre.dto.gallery.CreateGalleryDto;
 import com.cqre.cqre.dto.gallery.FindGalleryFileDetailDto;
 import com.cqre.cqre.dto.gallery.FindGalleryFileDto;
-import com.cqre.cqre.exception.customexception.common.CFileIsNotImageException;
+import com.cqre.cqre.exception.customexception.gallery.CFileIsNotImageGalleryException;
 import com.cqre.cqre.service.GalleryService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -47,7 +46,7 @@ public class GalleryController {
 
         for (MultipartFile uploadFile : files) {
             if (uploadFile.getContentType().startsWith("image") == false) {
-                throw new CFileIsNotImageException();
+                throw new CFileIsNotImageGalleryException();
             }
         }
 
