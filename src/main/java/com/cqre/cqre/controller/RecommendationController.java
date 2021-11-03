@@ -17,7 +17,7 @@ public class RecommendationController {
 
     @PostMapping("/recommendations")
     @ResponseBody
-    public RecommendationResponseDto recommendation(@RequestBody RecommendationRequestDto requestDto) {
+    public RecommendationResponseDto createRecommendation(@RequestBody RecommendationRequestDto requestDto) {
         return recommendationService.recommendation(requestDto.getPostId());
     }
 

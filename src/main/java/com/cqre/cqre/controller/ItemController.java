@@ -32,7 +32,7 @@ public class ItemController {
 
     /*상품 페이지*/
     @GetMapping("/items")
-    public String shop(@PageableDefault(size = 6) Pageable pageable,
+    public String itemPage(@PageableDefault(size = 6) Pageable pageable,
                        @RequestParam(value = "notEnoughStock", required = false) String notEnoughStock,
                        Model model){
         Page<FindItemDto> items = itemService.findItems(pageable);
@@ -47,7 +47,7 @@ public class ItemController {
 
     /*카테고리별 상품조회*/
     @GetMapping("/items/{categoryName}")
-    public String shop(@PageableDefault(size = 6, sort = "id") Pageable pageable, Model model,
+    public String readItemOfCategory(@PageableDefault(size = 6, sort = "id") Pageable pageable, Model model,
                        @PathVariable(value = "categoryName") String categoryName){
         Page<FindItemDto> items = itemService.findItemsByCategory(pageable, categoryName);
         List<String> categoryNames = categoryService.findCategoryNames();
@@ -60,14 +60,14 @@ public class ItemController {
 
     /*상품 생성 페이지*/
     @GetMapping("/items/page")
-    public String createItem(){
+    public String createItemPage(){
 
         return "/item/createItem";
     }
 
     /*상품 생성*/
     @PostMapping("/items")
-    public String pCreateItem(@ModelAttribute CreateItemDto dto,
+    public String createItem(@ModelAttribute CreateItemDto dto,
                               @RequestParam("file") List<MultipartFile> files) throws IOException {
         for (MultipartFile uploadFile : files) {
             if (uploadFile.getContentType().startsWith("image") == false) {
@@ -81,7 +81,7 @@ public class ItemController {
 
     /*상품 상세 조회*/
     @GetMapping("/items/{itemId}/{bundleId}")
-    public String findItemDetail(@PathVariable("bundleId") Long bundleId,
+    public String readItemDetail(@PathVariable("bundleId") Long bundleId,
                                  @PathVariable("itemId") Long itemId,
                                  Model model){
 

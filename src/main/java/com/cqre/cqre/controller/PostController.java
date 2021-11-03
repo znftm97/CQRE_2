@@ -35,7 +35,7 @@ public class PostController {
 
     /*자유게시판 글 생성 페이지*/
     @GetMapping("/posts/free-board/page")
-    public String createFreePost(Model model){
+    public String createFreePostPage(Model model){
 
         model.addAttribute("createAndUpdatePostDto", new CreateAndUpdatePostDto());
 
@@ -44,7 +44,7 @@ public class PostController {
 
     /*공지사항 글 생성 페이지*/
     @GetMapping("/posts/notice-board/page")
-    public String createNoticePost(Model model){
+    public String createNoticePostPage(Model model){
 
         model.addAttribute("createAndUpdatePostDto", new CreateAndUpdatePostDto());
 
@@ -53,7 +53,7 @@ public class PostController {
 
     /*자유게시판 글 생성*/
     @PostMapping("/posts/free-board")
-    public String PCreateFreePost(@ModelAttribute("createAndUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
+    public String createFreePost(@ModelAttribute("createAndUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
                                   @RequestParam(value = "file", required = false) List<MultipartFile> files) throws IOException {
         if (result.hasErrors()) {
             return "/post/createFreePost";
@@ -69,7 +69,7 @@ public class PostController {
 
     /*공지사항 글 생성*/
     @PostMapping("/posts/notice-board")
-    public String PCreateNoticePost(@ModelAttribute("createAndUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
+    public String createNoticePost(@ModelAttribute("createAndUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
                                     @RequestParam(value = "file", required = false) List<MultipartFile> files) throws IOException {
 
         if (result.hasErrors()) {
@@ -104,14 +104,14 @@ public class PostController {
 
     /*글 삭제*/
     @DeleteMapping("/posts/{postId}")
-    public String removePost(@PathVariable("postId") Long postId){
+    public String deletePost(@PathVariable("postId") Long postId){
         postService.removePost(postId);
         return "redirect:/boards/free-board";
     }
 
     /*글 수정 페이지*/
     @GetMapping("/posts/{postId}/update-page")
-    public String updatePost(@PathVariable("postId") Long postId, Model model) {
+    public String updatePostPage(@PathVariable("postId") Long postId, Model model) {
         CreateAndUpdatePostDto createAndUpdatePostDto = postService.updatePostPage(postId);
         model.addAttribute("createAndUpdatePostDto", createAndUpdatePostDto);
 
@@ -125,7 +125,7 @@ public class PostController {
 
     /*글 수정*/
     @PatchMapping("/posts")
-    public String PUpdatePost(@ModelAttribute("createAndUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
+    public String updatePost(@ModelAttribute("createAndUpdatePostDto") @Valid CreateAndUpdatePostDto createAndUpdatePostDto, BindingResult result,
                               @RequestParam(value = "file", required = false) List<MultipartFile> files) throws IOException {
         if (result.hasErrors() && (createAndUpdatePostDto.getBoard()==Board.FREE) ) {
             return "/post/updatePostFree";
@@ -147,7 +147,7 @@ public class PostController {
 
     /*내가 쓴 글 조회*/
     @GetMapping("/posts/my-info")
-    public String postList(Model model, @PageableDefault(size=5, sort = "id") Pageable pageable){
+    public String readPostMy(Model model, @PageableDefault(size=5, sort = "id") Pageable pageable){
         Page<ListPostDto> listPostDtos = postService.myPost(pageable);
         model.addAttribute("listPostDtos", listPostDtos);
         return "/post/postList";
