@@ -36,7 +36,7 @@ public class UserController {
 
     /*sign 페이지*/
     @GetMapping("/users/sign")
-    public String signIn(@RequestParam(value = "error", required = false) String error,
+    public String signInPage(@RequestParam(value = "error", required = false) String error,
                          @RequestParam(value = "errorMsg", required = false) String errorMsg,
                          Model model){
         model.addAttribute("SignUpDto", new SignUpDto());
@@ -80,14 +80,14 @@ public class UserController {
 
     /*이메일 재인증 페이지*/
     @GetMapping("/users/email-re-validation")
-    public String GAuthenticationEmail(Model model){
+    public String authenticationEmailPage(Model model){
         model.addAttribute("ValidationEmailReDto", new ValidationEmailReDto());
         return "/user/validationEmailRe";
     }
 
     /*이메일 재인증*/
     @PostMapping("/users/email-re-validation")
-    public String PAuthenticationEmail(@ModelAttribute("AuthenticationEmailDto") ValidationEmailReDto dto)
+    public String authenticationEmail(@ModelAttribute("AuthenticationEmailDto") ValidationEmailReDto dto)
             throws UnsupportedEncodingException, MessagingException{
 
         userService.emailSendRe(dto);
@@ -96,7 +96,7 @@ public class UserController {
 
     /*ID 찾기 페이지*/
     @GetMapping("/users/find-id")
-    public String findId(Model model){
+    public String findIdPage(Model model){
         model.addAttribute("userDto", new UserDto());
 
         return "/user/findId";
@@ -104,7 +104,7 @@ public class UserController {
 
     /*ID 찾기*/
     @PostMapping("/users/find-id")
-    public String PFindId(@ModelAttribute("userDto") UserDto userDto, Model model){
+    public String findId(@ModelAttribute("userDto") UserDto userDto, Model model){
 
         String findLoginId = userService.findId(userDto);
         model.addAttribute("findLoginId", findLoginId);
@@ -114,7 +114,7 @@ public class UserController {
 
     /*비밀번호 찾기 페이지*/
     @GetMapping("/users/find-pw")
-    public String findPw(Model model){
+    public String findPwPage(Model model){
 
         model.addAttribute("userDto", new UserDto());
 
@@ -123,7 +123,7 @@ public class UserController {
 
     /*비밀번호 찾기*/
     @PostMapping("/users/find-pw")
-    public String PFindPw(@ModelAttribute("userDto") UserDto userDto, Model model) throws UnsupportedEncodingException, MessagingException {
+    public String findPw(@ModelAttribute("userDto") UserDto userDto, Model model) throws UnsupportedEncodingException, MessagingException {
 
         userService.emailSendPw(userDto);
 
@@ -132,7 +132,7 @@ public class UserController {
 
     /*이메일 인증 메일에서 버튼 클릭 url 매핑*/
     @GetMapping("/users/update-password")
-    public String updatePassword(@RequestParam String email, Model model){
+    public String updatePasswordPage(@RequestParam String email, Model model){
 
         model.addAttribute("updatePasswordDto", new UpdatePasswordDto());
         model.addAttribute("email", email);
@@ -141,7 +141,7 @@ public class UserController {
 
     /*비밀번호 변경*/
     @PatchMapping("/users/password")
-    public String PUpdatePassword(@ModelAttribute("updatePasswordDto") @Valid UpdatePasswordDto updatePasswordDto, BindingResult result, Model model){
+    public String updatePassword(@ModelAttribute("updatePasswordDto") @Valid UpdatePasswordDto updatePasswordDto, BindingResult result, Model model){
 
         if (result.hasErrors()){
             return "/user/updatePassword";
@@ -159,7 +159,7 @@ public class UserController {
 
     /*회원 정보 페이지*/
     @GetMapping("/users/user-info")
-    public String userInfo(Model model, @RequestParam(value = "notEquals", required = false) String notEquals){
+    public String userInfoPage(Model model, @RequestParam(value = "notEquals", required = false) String notEquals){
 
         User loginUser = userService.getLoginUser();
         UserDto loginUserDto = modelMapper.map(loginUser, UserDto.class);
@@ -172,7 +172,7 @@ public class UserController {
 
     /*비밀번호 재 검증 및 각 페이지 매핑(회원정보 수정, 비밀번호 변경, 회원탈퇴)*/
     @PostMapping("/users/pw-check")
-    public String userInfoEdit(@ModelAttribute("userPwCheckDto") UserPwCheckDto userPwCheckDto, Model model, HttpSession session){
+    public String updateUserInfoPage(@ModelAttribute("userPwCheckDto") UserPwCheckDto userPwCheckDto, Model model, HttpSession session){
         User loginUser = userService.getLoginUser();
 
         if (!passwordEncoder.matches(userPwCheckDto.getPassword(), loginUser.getPassword())) {
@@ -196,7 +196,7 @@ public class UserController {
 
     /*회원 정보 수정*/
     @PatchMapping("/users")
-    public String PUserInfoEdit(@ModelAttribute("userAddressDto") UserAddressDto userAddressDto, HttpSession session){
+    public String updateUserInfo(@ModelAttribute("userAddressDto") UserAddressDto userAddressDto, HttpSession session){
         userService.updateUserInfo(userAddressDto);
 
         session.invalidate();

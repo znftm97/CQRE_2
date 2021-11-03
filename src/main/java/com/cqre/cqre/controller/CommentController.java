@@ -50,13 +50,13 @@ public class CommentController {
     /*대댓글 생성*/
     @PostMapping("/re-comments")
     @ResponseBody
-    public void createReComment(@RequestBody CreateReCommentDto createReCommentDto){
+    public void createCommentRe(@RequestBody CreateReCommentDto createReCommentDto){
         commentService.createReComment(createReCommentDto);
     }
 
     /*나의 댓글 목록 조회*/
     @GetMapping("/comments/my-info")
-    public String commentList(Model model, @PageableDefault(size = 5, sort = "id") Pageable pageable){
+    public String readCommentMy(Model model, @PageableDefault(size = 5, sort = "id") Pageable pageable){
         Page<MyCommentDto> myCommentDtos = commentService.myComments(pageable);
         model.addAttribute("commentList", myCommentDtos);
         return "/comment/commentList";

@@ -3,10 +3,9 @@ package com.cqre.cqre.controller;
 import com.cqre.cqre.dto.gallery.CreateGalleryDto;
 import com.cqre.cqre.dto.gallery.FindGalleryFileDetailDto;
 import com.cqre.cqre.dto.gallery.FindGalleryFileDto;
-import com.cqre.cqre.exception.customexception.common.CFileIsNotImageException;
+import com.cqre.cqre.exception.customexception.gallery.CFileIsNotImageGalleryException;
 import com.cqre.cqre.service.GalleryService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -26,7 +25,7 @@ public class GalleryController {
 
     /*갤러리 페이지*/
     @GetMapping("/gallerys")
-    public String gallery(Model model, @PageableDefault(size = 6) Pageable pageable){
+    public String galleryPage(Model model, @PageableDefault(size = 6) Pageable pageable){
         Page<FindGalleryFileDto> galleryFiles = galleryService.findGalleryFilesDistinct(pageable);
         model.addAttribute("galleryFiles", galleryFiles);
 
@@ -35,19 +34,19 @@ public class GalleryController {
 
     /*갤러리 생성 페이지*/
     @GetMapping("/gallerys/page")
-    public String createGallery(Model model){
+    public String createGalleryPage(Model model){
         model.addAttribute("createGalleryDto", new CreateGalleryDto());
         return "/gallery/createGallery";
     }
 
     /*갤러리 생성*/
     @PostMapping("/gallerys")
-    public String PCreateGallery(@RequestParam("file") List<MultipartFile> files,
+    public String createGallery(@RequestParam("file") List<MultipartFile> files,
                                  @RequestParam("title") String title) throws IOException {
 
         for (MultipartFile uploadFile : files) {
             if (uploadFile.getContentType().startsWith("image") == false) {
-                throw new CFileIsNotImageException();
+                throw new CFileIsNotImageGalleryException();
             }
         }
 
@@ -58,7 +57,7 @@ public class GalleryController {
 
     /*갤러리 상세 조회 페이지*/
     @GetMapping("/gallerys/{bundleId}")
-    public String galleryView(@PathVariable(value = "bundleId") Long bundleId,
+    public String galleryDetailPage(@PathVariable(value = "bundleId") Long bundleId,
                               @PageableDefault(size = 6, sort = "bundleOrder") Pageable pageable,
                               Model model){
         Page<FindGalleryFileDetailDto> galleryFiles = galleryService.findGalleryFiles(pageable, bundleId);
@@ -77,7 +76,7 @@ public class GalleryController {
 
     /*삭제*/
     @DeleteMapping("/gallerys")
-    public String galleryDelete(Long bundleId){
+    public String deleteGallery(Long bundleId){
         galleryService.galleryFileDelete(bundleId);
         return "redirect:/gallerys";
     }
