@@ -1,5 +1,6 @@
 package com.cqre.cqre.dto.user;
 
+import com.cqre.cqre.domain.user.User;
 import lombok.Data;
 
 @Data

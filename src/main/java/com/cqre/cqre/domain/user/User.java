@@ -1,8 +1,10 @@
 package com.cqre.cqre.domain.user;
 
 import com.cqre.cqre.domain.BaseEntity;
-import com.cqre.cqre.dto.user.UserAddressDto;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -36,9 +38,7 @@ public class User extends BaseEntity {
     private String role = "ROLE_USER";
 
     @Builder
-    public User(String name, String studentId, String loginId, String password, String email, String emailVerified, String emailCheckToken, String role){
-        Address address = new Address("Not yet Entered", "Not yet Entered");
-
+    public User(String name, String studentId, String loginId, String password, String email, Address address, String emailVerified, String emailCheckToken, String role){
         this.name = name;
         this.studentId = studentId;
         this.loginId = loginId;
@@ -50,12 +50,9 @@ public class User extends BaseEntity {
         this.role = role;
     }
 
-    // == 비즈니스 로직 == //
-
     /*소셜 계정 정보 업데이트 시 DB값도 업데이트 하기 위함*/
-    public User update(String name) {
+    public User updateName(String name) {
         this.name = name;
-
         return this;
     }
 
@@ -70,12 +67,14 @@ public class User extends BaseEntity {
     }
 
     /*회원 정보 수정*/
-    public void updateUserInfo(UserAddressDto dto) {
-        this.address = new Address(dto.getStreet(), dto.getDetail());
-        this.name = dto.getName();
-        this.studentId = dto.getStudentId();
-        this.loginId = dto.getLoginId();
+    public void updateUserInfo(String street, String detail, String name, String studentId, String loginId){
+        Address address = new Address(street, detail);
+        this.address = address;
+        this.name = name;
+        this.studentId = studentId;
+        this.loginId = loginId;
     }
+
 }
 
 
