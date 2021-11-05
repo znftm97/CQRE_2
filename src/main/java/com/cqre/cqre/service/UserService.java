@@ -164,8 +164,8 @@ public class UserService {
 
             /*카카오는 이중 Map 구조라 다르게 구현*/
             if (attributes.get("email") == null) {
-                Map<String, Object> kakao_account = (Map<String, Object>) attributes.get("kakao_account");
-                return userRepository.findByEmail(kakao_account.get("email").toString()).orElseThrow(CUserNotFoundException::new);
+                Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
+                return userRepository.findByEmail(kakaoAccount.get("email").toString()).orElseThrow(CUserNotFoundException::new);
             } else {
                 return userRepository.findByEmail(attributes.get("email").toString()).orElseThrow(CUserNotFoundException::new);
             }
