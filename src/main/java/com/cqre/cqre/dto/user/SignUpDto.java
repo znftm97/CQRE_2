@@ -1,10 +1,18 @@
 package com.cqre.cqre.dto.user;
 
-import lombok.Data;
+import com.cqre.cqre.domain.user.Address;
+import com.cqre.cqre.domain.user.User;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 public class SignUpDto {
     @NotEmpty(message = "필수로 입력해야 합니다.")
     private String name;
@@ -24,4 +32,20 @@ public class SignUpDto {
     @NotEmpty(message = "필수로 입력해야 합니다.")
     @Email(message = "이메일 형식에 맞지 않습니다.")
     private String email;
+
+    public User toEntity(){
+        Address address = new Address("Not yet Entered", "Not yet Entered");
+
+        return User.builder()
+                .name(name)
+                .studentId(studentId)
+                .loginId(loginId)
+                .password(password)
+                .email(email)
+                .address(address)
+                .emailVerified("false")
+                .emailCheckToken(UUID.randomUUID().toString())
+                .role("ROLE_USER")
+                .build();
+    }
 }

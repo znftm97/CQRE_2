@@ -18,7 +18,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -32,24 +31,14 @@ public class UserService {
     /*회원가입*/
     @Transactional
     public void signUp(SignUpDto signUpDto) throws UnsupportedEncodingException, MessagingException {
-        User user = User.builder()
-                .name(signUpDto.getName())
-                .studentId(signUpDto.getStudentId())
-                .loginId(signUpDto.getLoginId())
-                .password(passwordEncoder.encode(signUpDto.getPassword()))
-                .email(signUpDto.getEmail())
-                .emailVerified("false")
-                .emailCheckToken(UUID.randomUUID().toString())
-                .role("ROLE_USER")
-                .build();
-
+        User user = signUpDto.toEntity();
         userRepository.save(user);
 
-        emailSend(user);
+        sendEmail(user);
     }
 
     /*메일 전송*/
-    public void emailSend(User user) throws MessagingException, UnsupportedEncodingException {
+    public void sendEmail(User user) throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
@@ -176,7 +165,7 @@ public class UserService {
     @Transactional
     public void updateUserInfo(UserAddressDto userAddressDto){
         User loginUser = getLoginUser();
-        loginUser.updateUserInfo(userAddressDto);
+        loginUser.updateUserInfo(userAddressDto.getStreet(), userAddressDto.getDetail(), userAddressDto.getName(), userAddressDto.getStudentId(), userAddressDto.getLoginId());
     }
 
 }
