@@ -1,26 +1,15 @@
 package com.cqre.cqre.service;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.cqre.cqre.domain.shop.ItemImage;
 import com.cqre.cqre.domain.shop.item.CommonItem;
 import com.cqre.cqre.repository.ItemImageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.PostConstruct;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
@@ -31,37 +20,13 @@ import java.util.stream.Collectors;
 public class ItemImageService {
 
     private final ItemImageRepository itemImageRepository;
-    private final UserService userService;
-
-    private AmazonS3 amazonS3Client;
-
-    @Value("${cloud.aws.s3.bucket}")
-    private String bucket;
-
-    @Value("${cloud.aws.credentials.access-key}")
-    private String accessKey;
-
-    @Value("${cloud.aws.credentials.secret-key}")
-    private String secretKey;
-
-    @Value("${cloud.aws.region.static}")
-    private String region;
+    private final FileUploadService fileUploadService;
 
     private final AtomicLong bundleId = new AtomicLong(1);
 
-    @PostConstruct
-    public void setAmazonS3Client() {
-        AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
-
-        amazonS3Client = AmazonS3ClientBuilder.standard()
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                .withRegion(region)
-                .build();
-    }
-
     public void upload(List<MultipartFile> multipartFiles, String dirName, CommonItem commonItem) throws IOException {
-        List<File> convertFiles = convert(multipartFiles);
-        List<String> uploadImageUrls = uploadToS3(convertFiles, dirName);
+        List<File> convertFiles = fileUploadService.convert(multipartFiles);
+        List<String> uploadImageUrls = fileUploadService.uploadToS3(convertFiles, dirName);
 
         for (int i = 0; i < multipartFiles.size(); i++) {
             String origFilename = multipartFiles.get(i).getOriginalFilename(); /*원본 파일 명*/
@@ -81,53 +46,6 @@ public class ItemImageService {
         }
 
         bundleId.incrementAndGet();
-    }
-
-    private List<String> uploadToS3(List<File> uploadFile, String dirName) {
-        String fileName = "";
-        String uploadImageUrl = "";
-        List<String> uploadImageUrls = new ArrayList<>();
-
-        for (int i = 0; i < uploadFile.size(); i++) {
-            fileName = dirName + "/" + System.currentTimeMillis() + "_" + uploadFile.get(i).getName(); // 파일명/랜덤숫자_파일이름
-            uploadImageUrl = putS3(uploadFile.get(i), fileName);
-
-            uploadImageUrls.add(uploadImageUrl);
-            removeNewFile(uploadFile);
-        }
-
-        return uploadImageUrls;
-    }
-
-    private String putS3(File uploadFile, String fileName) {
-        amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
-        return amazonS3Client.getUrl(bucket, fileName).toString();
-    }
-
-    private void removeNewFile(List<File> targetFile) {
-        for (int i = 0; i < targetFile.size(); i++) {
-            if (targetFile.get(i).delete()) {
-                return;
-            }
-            log.info("임시 파일이 삭제 되지 못했습니다. 파일 이름: {}", targetFile.get(i).getName());
-        }
-    }
-
-    private List<File> convert(List<MultipartFile> multipartFiles) throws IOException {
-        List<File> files = new ArrayList<>();
-        String home = System.getProperty("user.home");
-
-        for (int i = 0; i < multipartFiles.size(); i++) {
-            File convertFile = new File(home + File.separator + System.currentTimeMillis() + "_" + multipartFiles.get(i).getOriginalFilename());
-            if (convertFile.createNewFile()) {
-                try (FileOutputStream fos = new FileOutputStream(convertFile)) {
-                    fos.write(multipartFiles.get(i).getBytes());
-                }
-                files.add(convertFile);
-            }
-        }
-
-        return files;
     }
 
     /*상품 상세 이미지 조회*/
