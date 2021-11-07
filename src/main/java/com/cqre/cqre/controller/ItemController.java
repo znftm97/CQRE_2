@@ -81,7 +81,7 @@ public class ItemController {
 
     /*상품 상세 조회*/
     @GetMapping("/items/{itemId}/{bundleId}")
-    public String readItemDetail(@PathVariable("bundleId") Long bundleId,
+    public String readItemDetail(@PathVariable("bundleId") String bundleId,
                                  @PathVariable("itemId") Long itemId,
                                  Model model){
 

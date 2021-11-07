@@ -12,11 +12,11 @@ public class FindGalleryFileDto {
     private String filePath;
     private LocalDateTime createDate;
     private String username;
-    private Long bundleId;
+    private String bundleId;
     private Long bundleOrder;
 
     @QueryProjection
-    public FindGalleryFileDto(Long id, String title, String filePath, LocalDateTime createDate, String username, Long bundleId, Long bundleOrder) {
+    public FindGalleryFileDto(Long id, String title, String filePath, LocalDateTime createDate, String username, String bundleId, Long bundleOrder) {
         this.id = id;
         this.title = title;
         this.filePath = filePath;

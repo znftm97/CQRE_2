@@ -6,11 +6,11 @@ import lombok.Data;
 @Data
 public class FindItemImageDistinctDto {
 
-    private Long bundleId;
+    private String bundleId;
     private Long id;
 
     @QueryProjection
-    public FindItemImageDistinctDto(Long bundleId, Long id) {
+    public FindItemImageDistinctDto(String bundleId, Long id) {
         this.bundleId = bundleId;
         this.id = id;
     }
