@@ -30,11 +30,6 @@ public class RecommendationService {
         if(findRecommendation == null){
             findPost.addRecommendation();
 
-            /*Recommendation recommendation = Recommendation.builder()
-                                                            .post(findPost)
-                                                            .user(loginUser)
-                                                            .build();*/
-
             Recommendation recommendation = Recommendation.createRecommendation(loginUser, findPost);
 
             recommendationRepository.save(recommendation);

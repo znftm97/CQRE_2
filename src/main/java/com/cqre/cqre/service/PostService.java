@@ -66,14 +66,6 @@ public class PostService {
     @Transactional
     public Long createFreePost(CreateAndUpdatePostDto createAndUpdatePostDto){
         User loginUser = userService.getLoginUser();
-        /*Post post = Post.builder()
-                .title(createAndUpdatePostDto.getTitle())
-                .content(createAndUpdatePostDto.getContent())
-                .postViews(0)
-                .recommendation(0)
-                .user(loginUser)
-                .board(Board.FREE)
-                .build();*/
 
         Post post = Post.createPost(createAndUpdatePostDto.getTitle(), createAndUpdatePostDto.getContent(),
                                 0, 0, loginUser, Board.FREE);
@@ -117,12 +109,6 @@ public class PostService {
 
         return dto;
     }
-
-    /*글 읽기*/
-    /*@Transactional
-    public ReadPostWithDto readPost2(Long postId) {
-        postRepository.readPost(postId);
-    }*/
 
     /*글 삭제*/
     @Transactional

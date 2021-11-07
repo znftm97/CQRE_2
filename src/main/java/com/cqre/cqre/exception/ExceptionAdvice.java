@@ -1,6 +1,7 @@
 package com.cqre.cqre.exception;
 
-import com.cqre.cqre.exception.customexception.common.CFileIsNotImageException;
+import com.cqre.cqre.exception.customexception.gallery.CFileIsNotImageGalleryException;
+import com.cqre.cqre.exception.customexception.item.CFileIsNotImageItemException;
 import com.cqre.cqre.exception.customexception.item.CNotEnoughStockException;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
 import com.cqre.cqre.exception.customexception.user.*;
@@ -77,11 +78,18 @@ public class ExceptionAdvice {
         return "/home/home";
     }
 
-    @ExceptionHandler(CFileIsNotImageException.class)
-    private String notImageFile(Model model, CFileIsNotImageException exception){
+    @ExceptionHandler(CFileIsNotImageGalleryException.class)
+    private String notImageFileGallery(Model model, CFileIsNotImageGalleryException exception){
         errorLogging(exception);
         model.addAttribute("notImageFile", "true");
         return "/gallery/createGallery";
+    }
+
+    @ExceptionHandler(CFileIsNotImageItemException.class)
+    private String notImageFileItem(Model model, CFileIsNotImageItemException exception){
+        errorLogging(exception);
+        model.addAttribute("notImageFile", "true");
+        return "/item/createItem";
     }
 
     @ExceptionHandler(CNotEnoughStockException.class)

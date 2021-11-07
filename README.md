@@ -59,6 +59,17 @@ http://ec2-54-180-142-70.ap-northeast-2.compute.amazonaws.com:8080/
   - 상품 CRUD
   - 상품 주문, 주문취소, 재 주문, 장바구니
   - 쿠폰 적용한 주문
+  </details>
+
+## 🔨 리팩토링
+<details>
+  <br>
+  <a href="https://languid-visage-6fe.notion.site/d83088a2380e42f49da34ffb126685d6"> - 글 추천 로직 리팩토링 </a> <br>
+  <a href="https://languid-visage-6fe.notion.site/65eea333e7c3434eb65f3479e06690cc"> - 불필요한 객체 생성을 피하라 (Effective Java Item6) </a><br>
+  <a href="https://languid-visage-6fe.notion.site/d83088a2380e42f49da34ffb126685d6"> - 객체의 null 체크시 == 연산자를 직접 사용하는게 좋은가? </a><br>
+  <a href="https://languid-visage-6fe.notion.site/d908cbc54eb04b6c97459950f557f06e"> - 검증로직은 어디에? </a><br>
+  <a href="https://languid-visage-6fe.notion.site/REST-API-60860e5dfbc44355abf6c8bc02e1086b"> - REST API </a><br>
+  <a href="https://languid-visage-6fe.notion.site/Auditing-b7b68f3796784eed9da8b6a9318a4ee9"> - Auditing 클래스는 추상클래스로 </a><br>
 </details>
 
 ## 🔨 리팩토링

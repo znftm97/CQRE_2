@@ -8,7 +8,7 @@ public class FindGalleryFileDetailDto {
 
     private String title;
     private String filePath;
-    private Long bundleId;
+    private String bundleId;
     private String authorCheck;
 
     public FindGalleryFileDetailDto(GalleryFile galleryFile, String authorCheck) {

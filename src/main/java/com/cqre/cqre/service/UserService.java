@@ -18,7 +18,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -32,24 +31,14 @@ public class UserService {
     /*회원가입*/
     @Transactional
     public void signUp(SignUpDto signUpDto) throws UnsupportedEncodingException, MessagingException {
-        User user = User.builder()
-                .name(signUpDto.getName())
-                .studentId(signUpDto.getStudentId())
-                .loginId(signUpDto.getLoginId())
-                .password(passwordEncoder.encode(signUpDto.getPassword()))
-                .email(signUpDto.getEmail())
-                .emailVerified("false")
-                .emailCheckToken(UUID.randomUUID().toString())
-                .role("ROLE_USER")
-                .build();
-
+        User user = signUpDto.toEntity();
         userRepository.save(user);
 
-        emailSend(user);
+        sendEmail(user);
     }
 
     /*메일 전송*/
-    public void emailSend(User user) throws MessagingException, UnsupportedEncodingException {
+    public void sendEmail(User user) throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
@@ -164,8 +153,8 @@ public class UserService {
 
             /*카카오는 이중 Map 구조라 다르게 구현*/
             if (attributes.get("email") == null) {
-                Map<String, Object> kakao_account = (Map<String, Object>) attributes.get("kakao_account");
-                return userRepository.findByEmail(kakao_account.get("email").toString()).orElseThrow(CUserNotFoundException::new);
+                Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
+                return userRepository.findByEmail(kakaoAccount.get("email").toString()).orElseThrow(CUserNotFoundException::new);
             } else {
                 return userRepository.findByEmail(attributes.get("email").toString()).orElseThrow(CUserNotFoundException::new);
             }
@@ -176,14 +165,7 @@ public class UserService {
     @Transactional
     public void updateUserInfo(UserAddressDto userAddressDto){
         User loginUser = getLoginUser();
-        loginUser.updateUserInfo(userAddressDto);
+        loginUser.updateUserInfo(userAddressDto.getStreet(), userAddressDto.getDetail(), userAddressDto.getName(), userAddressDto.getStudentId(), userAddressDto.getLoginId());
     }
 
-    /*회원 탈퇴*/
-    /*post, galleryFile, UserCoupon, Comment, PostFile, Recommendation 등등... 다 삭제해줘야함*/
-    /*@Transactional
-    public void removeUser(){
-        User loginUser = getLoginUser();
-        userRepository.delete(loginUser);
-    }*/
 }

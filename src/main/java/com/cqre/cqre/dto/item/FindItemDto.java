@@ -11,10 +11,10 @@ public class FindItemDto {
     private String itemExplanation;
     private int price;
     private String filePath;
-    private Long bundleId;
+    private String bundleId;
 
     @QueryProjection
-    public FindItemDto(Long id, String name, String itemExplanation, int price, String filePath, Long bundleId) {
+    public FindItemDto(Long id, String name, String itemExplanation, int price, String filePath, String bundleId) {
         this.id = id;
         this.name = name;
         this.itemExplanation = itemExplanation;

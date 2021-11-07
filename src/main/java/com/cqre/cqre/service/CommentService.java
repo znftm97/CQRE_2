@@ -1,9 +1,9 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.dto.comment.*;
-import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.domain.board.Comment;
 import com.cqre.cqre.domain.board.Post;
+import com.cqre.cqre.domain.user.User;
+import com.cqre.cqre.dto.comment.*;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
 import com.cqre.cqre.repository.comment.CommentRepository;
 import com.cqre.cqre.repository.post.PostRepository;
@@ -20,11 +20,12 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class CommentService {
-    private final AtomicLong bundleId = new AtomicLong(1);
 
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
     private final UserService userService;
+
+    private final AtomicLong bundleId = new AtomicLong(1);
 
     /*댓글 생성*/
     @Transactional
