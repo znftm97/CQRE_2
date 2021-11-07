@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,19 +25,20 @@ public class CommentService {
     private final PostRepository postRepository;
     private final UserService userService;
 
+    private final AtomicLong bundleId = new AtomicLong(1);
+
     /*댓글 생성*/
     @Transactional
     public void createComment(CreateCommentDto dto) {
         Post findPost = postRepository.findById(dto.getPostId()).orElseThrow(CPostNotFoundException::new);
         User loginUser = userService.getLoginUser();
-        String bundleId = UUID.randomUUID().toString();
 
         Comment comment = Comment.builder()
                     .content(dto.getContent())
                     .user(loginUser)
                     .post(findPost)
                     .depth(1)
-                    .bundleId(bundleId)
+                    .bundleId(bundleId.getAndIncrement())
                     .bundleOrder(System.currentTimeMillis())
                     .existsCheck(true)
                     .build();
