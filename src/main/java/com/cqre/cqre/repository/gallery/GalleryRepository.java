@@ -13,10 +13,10 @@ import java.util.List;
 public interface GalleryRepository extends JpaRepository<GalleryFile, Long>, GalleryRepositoryCustom{
 
     @Query(value = "select g from GalleryFile g join fetch g.user where g.bundleId = :bundleId", countQuery = "select count(g.id) from GalleryFile g where g.bundleId = :bundleId")
-    Page<GalleryFile> findGalleryFileByBundleIdPaging(@Param("bundleId") Long bundleId, Pageable pageable);
+    Page<GalleryFile> findGalleryFileByBundleIdPaging(@Param("bundleId") String bundleId, Pageable pageable);
 
     @Query("select g from GalleryFile g where g.bundleId = :bundleId")
-    List<GalleryFile> findGalleryFileByBundleId(@Param("bundleId") Long bundleId);
+    List<GalleryFile> findGalleryFileByBundleId(@Param("bundleId") String bundleId);
 
     @Query("delete from GalleryFile g where g.id in :ids")
     @Modifying(clearAutomatically = true)

@@ -22,7 +22,7 @@ public class Comment extends BaseEntity {
 
     private int depth;
 
-    private Long bundleId;
+    private String bundleId;
 
     private Long bundleOrder;
 

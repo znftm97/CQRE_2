@@ -12,7 +12,7 @@ import java.util.List;
 public interface ItemImageRepository extends JpaRepository<ItemImage, Long> {
 
     @Query("select i from ItemImage i where i.bundleId = :bundleId")
-    List<ItemImage> findItemImageByBundleId(@Param("bundleId") Long bundleId);
+    List<ItemImage> findItemImageByBundleId(@Param("bundleId") String bundleId);
 
     @Query("select i from ItemImage i where i.item.category.name = :categoryName")
     Page<ItemImage> findItemsByCategory(@Param("categoryName") String categoryName, Pageable pageable);

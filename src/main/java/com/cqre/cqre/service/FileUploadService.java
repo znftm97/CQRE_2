@@ -17,7 +17,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class FileUploadService {
@@ -35,8 +34,6 @@ public class FileUploadService {
 
     @Value("${cloud.aws.region.static}")
     private String region;
-
-    private final AtomicLong bundleId = new AtomicLong(1);
 
     @PostConstruct
     public void setAmazonS3Client() {

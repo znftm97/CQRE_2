@@ -1,9 +1,9 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.dto.comment.*;
-import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.domain.board.Comment;
 import com.cqre.cqre.domain.board.Post;
+import com.cqre.cqre.domain.user.User;
+import com.cqre.cqre.dto.comment.*;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
 import com.cqre.cqre.repository.comment.CommentRepository;
 import com.cqre.cqre.repository.post.PostRepository;
@@ -14,13 +14,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class CommentService {
-    private final AtomicLong bundleId = new AtomicLong(1);
 
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
@@ -31,13 +30,14 @@ public class CommentService {
     public void createComment(CreateCommentDto dto) {
         Post findPost = postRepository.findById(dto.getPostId()).orElseThrow(CPostNotFoundException::new);
         User loginUser = userService.getLoginUser();
+        String bundleId = UUID.randomUUID().toString();
 
         Comment comment = Comment.builder()
                     .content(dto.getContent())
                     .user(loginUser)
                     .post(findPost)
                     .depth(1)
-                    .bundleId(bundleId.getAndIncrement())
+                    .bundleId(bundleId)
                     .bundleOrder(System.currentTimeMillis())
                     .existsCheck(true)
                     .build();

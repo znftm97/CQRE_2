@@ -57,7 +57,7 @@ public class GalleryController {
 
     /*갤러리 상세 조회 페이지*/
     @GetMapping("/gallerys/{bundleId}")
-    public String galleryDetailPage(@PathVariable(value = "bundleId") Long bundleId,
+    public String galleryDetailPage(@PathVariable(value = "bundleId") String bundleId,
                               @PageableDefault(size = 6, sort = "bundleOrder") Pageable pageable,
                               Model model){
         Page<FindGalleryFileDetailDto> galleryFiles = galleryService.findGalleryFiles(pageable, bundleId);
@@ -76,7 +76,7 @@ public class GalleryController {
 
     /*삭제*/
     @DeleteMapping("/gallerys")
-    public String deleteGallery(Long bundleId){
+    public String deleteGallery(String bundleId){
         galleryService.galleryFileDelete(bundleId);
         return "redirect:/gallerys";
     }

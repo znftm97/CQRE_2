@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,13 +28,12 @@ public class GalleryService {
     private final GalleryRepository galleryRepository;
     private final FileUploadService fileUploadService;
 
-    private final AtomicLong bundleId = new AtomicLong(1);
-
     public void upload(List<MultipartFile> multipartFiles, String dirName, String title) throws IOException {
         User loginUser = userService.getLoginUser();
 
         List<File> convertFiles = fileUploadService.convert(multipartFiles);
         List<String> uploadImageUrls = fileUploadService.uploadToS3(convertFiles, dirName);
+        String bundleId = UUID.randomUUID().toString();
 
         for (int i = 0; i < multipartFiles.size(); i++) {
             String origFilename = multipartFiles.get(i).getOriginalFilename(); /*원본 파일 명*/
@@ -47,14 +46,12 @@ public class GalleryService {
                     .filePath(filePath)
                     .originFilename(origFilename)
                     .user(loginUser)
-                    .bundleId(bundleId.get())
+                    .bundleId(bundleId)
                     .bundleOrder(System.currentTimeMillis())
                     .build();
 
             galleryRepository.save(galleryFile);
         }
-
-        bundleId.incrementAndGet();
     }
 
     /*갤러리 파일 중복 제거 조회*/
@@ -63,7 +60,7 @@ public class GalleryService {
     }
 
     /*갤러리 상세 조회 페이지*/
-    public Page<FindGalleryFileDetailDto> findGalleryFiles(Pageable pageable, Long bundleId){
+    public Page<FindGalleryFileDetailDto> findGalleryFiles(Pageable pageable, String bundleId){
         Page<GalleryFile> findGalleryFiles = galleryRepository.findGalleryFileByBundleIdPaging(bundleId, pageable);
 
         Long loginUserId = userService.getLoginUser().getId();
@@ -78,7 +75,7 @@ public class GalleryService {
 
     /*삭제*/
     @Transactional
-    public void galleryFileDelete(Long bundleId){
+    public void galleryFileDelete(String bundleId){
         List<GalleryFile> findGalleryFiles = galleryRepository.findGalleryFileByBundleId(bundleId);
 
         List<Long> GalleryFileIds = findGalleryFiles.stream()

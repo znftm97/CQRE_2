@@ -51,7 +51,7 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
                 .leftJoin(itemImage.item, item)
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-                .orderBy(itemImage.bundleId.desc())
+                .orderBy(itemImage.id.desc())
                 .fetchResults();
 
         List<FindItemDto> content = result.getResults();

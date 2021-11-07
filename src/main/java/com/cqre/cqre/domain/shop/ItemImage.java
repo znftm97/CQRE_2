@@ -27,7 +27,7 @@ public class ItemImage extends BaseEntity {
 
     private String filePath;
 
-    private Long bundleId;
+    private String bundleId;
 
     private Long bundleOrder;
 

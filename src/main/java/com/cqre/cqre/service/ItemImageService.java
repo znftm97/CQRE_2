@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,11 +22,10 @@ public class ItemImageService {
     private final ItemImageRepository itemImageRepository;
     private final FileUploadService fileUploadService;
 
-    private final AtomicLong bundleId = new AtomicLong(1);
-
     public void upload(List<MultipartFile> multipartFiles, String dirName, CommonItem commonItem) throws IOException {
         List<File> convertFiles = fileUploadService.convert(multipartFiles);
         List<String> uploadImageUrls = fileUploadService.uploadToS3(convertFiles, dirName);
+        String bundleId = UUID.randomUUID().toString();
 
         for (int i = 0; i < multipartFiles.size(); i++) {
             String origFilename = multipartFiles.get(i).getOriginalFilename(); /*원본 파일 명*/
@@ -37,19 +36,17 @@ public class ItemImageService {
                     .originFilename(origFilename)
                     .filename(filename)
                     .filePath(filePath)
-                    .bundleId(bundleId.get())
+                    .bundleId(bundleId)
                     .bundleOrder(System.currentTimeMillis())
                     .item(commonItem)
                     .build();
 
             itemImageRepository.save(itemImage);
         }
-
-        bundleId.incrementAndGet();
     }
 
     /*상품 상세 이미지 조회*/
-    public List<String> findItemImageDetail(Long bundleId) {
+    public List<String> findItemImageDetail(String bundleId) {
         List<ItemImage> findItemImages = itemImageRepository.findItemImageByBundleId(bundleId);
         return findItemImages.stream()
                 .map(i -> i.getFilePath())
