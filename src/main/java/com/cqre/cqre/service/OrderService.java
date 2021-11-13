@@ -1,17 +1,17 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.dto.order.FindOrderItemDto;
-import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.domain.shop.Order;
 import com.cqre.cqre.domain.shop.OrderItem;
 import com.cqre.cqre.domain.shop.OrderStatus;
 import com.cqre.cqre.domain.shop.UserCoupon;
 import com.cqre.cqre.domain.shop.item.Item;
+import com.cqre.cqre.domain.user.User;
+import com.cqre.cqre.dto.order.FindOrderItemDto;
 import com.cqre.cqre.exception.customexception.item.CNotEnoughStockException;
 import com.cqre.cqre.repository.Item.ItemRepository;
-import com.cqre.cqre.repository.UserCouponRepository;
 import com.cqre.cqre.repository.OrderItemRepository;
 import com.cqre.cqre.repository.OrderRepository;
+import com.cqre.cqre.repository.UserCouponRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,15 +34,11 @@ public class OrderService {
         Item findItem = itemRepository.findItemById(itemId);
         User findUser = userService.getLoginUser();
 
-        OrderItem orderItem = OrderItem.builder()
-                .item(findItem)
-                .orderPrice(findItem.getPrice()*count)
-                .count(count)
-                .build();
-
+        OrderItem orderItem = OrderItem.of(findItem, count);
         findItem.removeStock(orderItem.getCount());
 
         Order order = Order.createOrder(findUser, orderItem);
+        orderItem.setOrder(order);
 
         orderRepository.save(order);
     }
