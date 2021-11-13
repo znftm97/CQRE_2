@@ -29,21 +29,11 @@ public class CommentService {
 
     /*댓글 생성*/
     @Transactional
-    public void createComment(CreateCommentDto dto) {
-        Post findPost = postRepository.findById(dto.getPostId()).orElseThrow(CPostNotFoundException::new);
+    public void createComment(CreateCommentDto createCommentDto) {
+        Post findPost = postRepository.findById(createCommentDto.getPostId()).orElseThrow(CPostNotFoundException::new);
         User loginUser = userService.getLoginUser();
 
-        Comment comment = Comment.builder()
-                    .content(dto.getContent())
-                    .user(loginUser)
-                    .post(findPost)
-                    .depth(1)
-                    .bundleId(bundleId.getAndIncrement())
-                    .bundleOrder(System.currentTimeMillis())
-                    .existsCheck(true)
-                    .build();
-
-        commentRepository.save(comment);
+        commentRepository.save(createCommentDto.toEntity(findPost, loginUser, bundleId));
     }
 
     /*댓글 조회*/
