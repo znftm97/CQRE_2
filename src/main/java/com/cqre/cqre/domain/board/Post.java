@@ -11,8 +11,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@Builder
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post extends BaseEntity {
 
@@ -41,39 +39,44 @@ public class Post extends BaseEntity {
     @OneToMany(mappedBy = "post")
     private List<Recommendation> recommendations = new ArrayList<>();
 
-    /*조회수 증가*/
+    @Builder
+    public Post(String title, String content, int postViews, int recommendation, User user, Board board, List<PostFile> postFiles, List<Recommendation> recommendations) {
+        this.title = title;
+        this.content = content;
+        this.postViews = postViews;
+        this.recommendation = recommendation;
+        this.user = user;
+        this.board = board;
+    }
+
     public void addPostViews(){
         this.postViews++;
     }
 
-    /*추천수 증가*/
     public void addRecommendation(){
         this.recommendation++;
     }
 
-    /*추천수 감소*/
     public void subtractRecommendation(){
         this.recommendation--;
     }
 
-    /*글 수정*/
     public void updatePost(CreateAndUpdatePostDto dto){
         this.title = dto.getTitle();
         this.content = dto.getContent();
     }
 
-    //==생성 메서드==//
-    public static Post createPost(String title, String content, int postViews, int recommendation, User user, Board board){
-        Post post = new Post();
-        post.title = title;
-        post.content = content;
-        post.postViews = postViews;
-        post.recommendation = recommendation;
-        post.user = user;
-        post.board = board;
-
-        return post;
+    public static Post of(String title, String content, User user, Board board){
+        return Post.builder()
+                .title(title)
+                .content(content)
+                .postViews(0)
+                .recommendation(0)
+                .user(user)
+                .board(board)
+                .build();
     }
+
 }
 
 
