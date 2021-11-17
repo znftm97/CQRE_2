@@ -14,17 +14,6 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment extends BaseEntity {
 
-    @Builder
-    public Comment(String content, int depth, Long bundleId, Long bundleOrder, boolean existsCheck, User user, Post post) {
-        this.content = content;
-        this.depth = depth;
-        this.bundleId = bundleId;
-        this.bundleOrder = bundleOrder;
-        this.existsCheck = existsCheck;
-        this.user = user;
-        this.post = post;
-    }
-
     @Id
     @GeneratedValue
     @Column(name = "comment_id")
@@ -47,6 +36,17 @@ public class Comment extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
+
+    @Builder
+    public Comment(String content, int depth, Long bundleId, Long bundleOrder, boolean existsCheck, User user, Post post) {
+        this.content = content;
+        this.depth = depth;
+        this.bundleId = bundleId;
+        this.bundleOrder = bundleOrder;
+        this.existsCheck = existsCheck;
+        this.user = user;
+        this.post = post;
+    }
 
     public void updateComment(String content){
         this.content = content;

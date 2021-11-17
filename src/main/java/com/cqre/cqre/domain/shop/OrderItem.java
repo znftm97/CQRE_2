@@ -14,13 +14,6 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem extends BaseEntity {
 
-    @Builder
-    public OrderItem(int orderPrice, int count, Item item) {
-        this.orderPrice = orderPrice;
-        this.count = count;
-        this.item = item;
-    }
-
     @Id
     @GeneratedValue
     @Column(name = "orderitem_id")
@@ -37,6 +30,13 @@ public class OrderItem extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
+
+    @Builder
+    public OrderItem(int orderPrice, int count, Item item) {
+        this.orderPrice = orderPrice;
+        this.count = count;
+        this.item = item;
+    }
 
     public static OrderItem of(Item item, int count) {
         return OrderItem.builder()

@@ -13,19 +13,6 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseEntity {
 
-    @Builder
-    public User(String name, String studentId, String loginId, String password, String email, Address address, String emailVerified, String emailCheckToken, String role){
-        this.name = name;
-        this.studentId = studentId;
-        this.loginId = loginId;
-        this.password = password;
-        this.email = email;
-        this.address = address;
-        this.emailVerified = emailVerified;
-        this.emailCheckToken = emailCheckToken;
-        this.role = role;
-    }
-
     @Id @GeneratedValue
     @Column(name = "user_id")
     private Long id;
@@ -49,6 +36,19 @@ public class User extends BaseEntity {
     private String emailCheckToken;
 
     private String role = "ROLE_USER";
+
+    @Builder
+    public User(String name, String studentId, String loginId, String password, String email, Address address, String emailVerified, String emailCheckToken, String role){
+        this.name = name;
+        this.studentId = studentId;
+        this.loginId = loginId;
+        this.password = password;
+        this.email = email;
+        this.address = address;
+        this.emailVerified = emailVerified;
+        this.emailCheckToken = emailCheckToken;
+        this.role = role;
+    }
 
     public User updateName(String name) {
         this.name = name;
