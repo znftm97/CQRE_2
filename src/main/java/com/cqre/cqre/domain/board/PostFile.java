@@ -1,14 +1,15 @@
 package com.cqre.cqre.domain.board;
 
 import com.cqre.cqre.domain.BaseEntity;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-@Builder
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostFile extends BaseEntity {
 
@@ -27,17 +28,27 @@ public class PostFile extends BaseEntity {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    //== 연관관계 편의 메서드 ==//
+    @Builder
+    public PostFile(String originFilename, String filename, String filePath){
+        this.originFilename = originFilename;
+        this.filename = filename;
+        this.filePath = filePath;
+    }
+
+    public static PostFile of(String originFilename, String filename, String filePath, Post post){
+        PostFile postFile = PostFile.builder()
+                .originFilename(originFilename)
+                .filename(filename)
+                .filePath(filePath)
+                .build();
+
+        postFile.setPost(post);
+        return postFile;
+    }
+
     public void setPost(Post post) {
         this.post = post;
         post.getPostFiles().add(this);
     }
 
-    @Builder
-    public PostFile(String originFilename, String filename, String filePath, Post post){
-        this.originFilename = originFilename;
-        this.filename = filename;
-        this.filePath = filePath;
-        setPost(post);
-    }
 }
