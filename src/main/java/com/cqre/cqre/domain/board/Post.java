@@ -49,6 +49,17 @@ public class Post extends BaseEntity {
         this.board = board;
     }
 
+    public static Post of(String title, String content, User user, Board board){
+        return Post.builder()
+                .title(title)
+                .content(content)
+                .postViews(0)
+                .recommendation(0)
+                .user(user)
+                .board(board)
+                .build();
+    }
+
     public void addPostViews(){
         this.postViews++;
     }
@@ -64,17 +75,6 @@ public class Post extends BaseEntity {
     public void updatePost(CreateAndUpdatePostDto dto){
         this.title = dto.getTitle();
         this.content = dto.getContent();
-    }
-
-    public static Post of(String title, String content, User user, Board board){
-        return Post.builder()
-                .title(title)
-                .content(content)
-                .postViews(0)
-                .recommendation(0)
-                .user(user)
-                .board(board)
-                .build();
     }
 
 }
