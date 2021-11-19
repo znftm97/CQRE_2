@@ -50,4 +50,9 @@ public class OrderItem extends BaseEntity {
         this.order = order;
     }
 
+    public void calculateDiscountPrice(Item item, Long discountRate){
+        int discountPrice = (item.getPrice() * count) * discountRate.intValue() / 100;
+        this.orderPrice = (item.getPrice() * count) - discountPrice;
+    }
+
 }

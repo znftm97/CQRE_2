@@ -50,15 +50,8 @@ public class OrderService {
         Item findItem = itemRepository.findItemById(itemId);
         User findUser = userService.getLoginUser();
 
-        int discountPrice = (findItem.getPrice() * count) / (findUserCoupon.getCoupon().getDiscountRate()).intValue();
-        int orderPrice = (findItem.getPrice() * count) - discountPrice;
-
-        OrderItem orderItem = OrderItem.builder()
-                .item(findItem)
-                .count(count)
-                .orderPrice(orderPrice)
-                .build();
-
+        OrderItem orderItem = OrderItem.of(findItem, count);
+        orderItem.calculateDiscountPrice(findItem, findUserCoupon.getCoupon().getDiscountRate());
         findItem.removeStock(orderItem.getCount());
 
         Order order = Order.createOrderWithCoupon(findUser, orderItem, findUserCoupon);
