@@ -64,11 +64,9 @@ public class PostService {
 
     /*자유게시판 글 생성*/
     @Transactional
-    public Long createFreePost(CreateAndUpdatePostDto createAndUpdatePostDto){
+    public Long createFreePost(CreateAndUpdatePostDto dto){
         User loginUser = userService.getLoginUser();
-
-        Post post = Post.createPost(createAndUpdatePostDto.getTitle(), createAndUpdatePostDto.getContent(),
-                                0, 0, loginUser, Board.FREE);
+        Post post = Post.of(dto.getTitle(), dto.getContent(), loginUser, Board.FREE);
 
         postRepository.save(post);
 
@@ -77,16 +75,9 @@ public class PostService {
 
     /*공지사항 글 생성*/
     @Transactional
-    public Long createNoticePost(CreateAndUpdatePostDto createAndUpdatePostDto){
+    public Long createNoticePost(CreateAndUpdatePostDto dto){
         User loginUser = userService.getLoginUser();
-        Post post = Post.builder()
-                .title(createAndUpdatePostDto.getTitle())
-                .content(createAndUpdatePostDto.getContent())
-                .postViews(0)
-                .recommendation(0)
-                .user(loginUser)
-                .board(Board.NOTICE)
-                .build();
+        Post post = Post.of(dto.getTitle(), dto.getContent(), loginUser, Board.NOTICE);
 
         postRepository.save(post);
 
