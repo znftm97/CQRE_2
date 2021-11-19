@@ -34,13 +34,14 @@ public class OrderService {
         Item findItem = itemRepository.findItemById(itemId);
         User findUser = userService.getLoginUser();
 
+        if (findItem.getStockCount() < count) {
+            throw new CNotEnoughStockException();
+        }
+
         OrderItem orderItem = OrderItem.of(findItem, count);
         findItem.removeStock(orderItem.getCount());
 
-        Order order = Order.createOrder(findUser, orderItem);
-        orderItem.setOrder(order);
-
-        orderRepository.save(order);
+        orderRepository.save(Order.of(findUser, orderItem));
     }
 
     /*쿠폰같이 주문 생성*/
@@ -49,6 +50,10 @@ public class OrderService {
         UserCoupon findUserCoupon = userCouponRepository.findUserCouponByUserCouponIdWithCoupon(Long.parseLong(userCouponId));
         Item findItem = itemRepository.findItemById(itemId);
         User findUser = userService.getLoginUser();
+
+        if (findItem.getStockCount() < count) {
+            throw new CNotEnoughStockException();
+        }
 
         OrderItem orderItem = OrderItem.of(findItem, count);
         orderItem.calculateDiscountPrice(findItem, findUserCoupon.getCoupon().getDiscountRate());
@@ -94,18 +99,13 @@ public class OrderService {
         User loginUser = userService.getLoginUser();
         Item findItem = itemRepository.findItemById(itemId);
 
-        OrderItem orderItem = OrderItem.builder()
-                .item(findItem)
-                .orderPrice(findItem.getPrice()*count)
-                .count(count)
-                .build();
+        OrderItem orderItem = OrderItem.of(findItem, count);
 
         if (findItem.getStockCount() < count) {
             throw new CNotEnoughStockException();
         }
 
-        Order order = Order.createBasket(loginUser, orderItem);
-        orderRepository.save(order);
+        orderRepository.save(Order.createBasket(loginUser, orderItem));
     }
 
     /*장바구니 목록 조회*/

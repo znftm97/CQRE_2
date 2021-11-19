@@ -2,7 +2,10 @@ package com.cqre.cqre.domain.shop;
 
 import com.cqre.cqre.domain.BaseEntity;
 import com.cqre.cqre.domain.user.User;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,8 +13,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@Builder
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "orders")
 public class Order extends BaseEntity {
@@ -35,36 +36,53 @@ public class Order extends BaseEntity {
     @JoinColumn(name = "usercoupon_id")
     private UserCoupon coupon;
 
+    @Builder
+    public Order(OrderStatus status, User user, List<OrderItem> orderItems, UserCoupon coupon) {
+        this.status = status;
+        this.user = user;
+        this.orderItems = orderItems;
+        this.coupon = coupon;
+    }
+
     /*주문 생성*/
-    public static Order createOrder(User user, OrderItem orderItem) {
-        Order order = new Order();
-        order.user = user;
+    public static Order of(User user, OrderItem orderItem) {
+        Order order = Order.builder()
+                            .user(user)
+                            .status(OrderStatus.ORDER)
+                            .orderItems(new ArrayList<>())
+                            .build();
+
         order.orderItems.add(orderItem);
         orderItem.setOrder(order);
-        order.status = OrderStatus.ORDER;
 
         return order;
     }
 
     /*쿠폰같이 주문 생성*/
     public static Order createOrderWithCoupon(User user, OrderItem orderItem, UserCoupon coupon) {
-        Order order = new Order();
-        order.user = user;
+        Order order = Order.builder()
+                        .user(user)
+                        .status(OrderStatus.ORDER)
+                        .orderItems(new ArrayList<>())
+                        .coupon(coupon)
+                        .build();
+
         order.orderItems.add(orderItem);
         orderItem.setOrder(order);
-        order.status = OrderStatus.ORDER;
-        order.coupon = coupon;
 
         return order;
     }
 
     /*장바구니 생성*/
     public static Order createBasket(User user, OrderItem orderItem) {
-        Order order = new Order();
-        order.user = user;
+        Order order = Order.builder()
+                .user(user)
+                .status(OrderStatus.BASKET)
+                .orderItems(new ArrayList<>())
+                .build();
+
         order.orderItems.add(orderItem);
         orderItem.setOrder(order);
-        order.status = OrderStatus.BASKET;
 
         return order;
     }
