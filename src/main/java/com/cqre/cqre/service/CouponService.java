@@ -1,8 +1,8 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.domain.shop.Coupon;
 import com.cqre.cqre.domain.shop.UserCoupon;
+import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.dto.coupon.CouponDto;
 import com.cqre.cqre.dto.coupon.FindCouponDto;
 import com.cqre.cqre.dto.coupon.SendCouponDto;
@@ -31,18 +31,9 @@ public class CouponService {
 
     /*쿠폰생성*/
     @Transactional
-    public void createCoupon(CouponDto dto) {
+    public void createCoupon(CouponDto CouponDto) {
         User admin = userRepository.findByEmail("admin").orElseThrow(CUserNotFoundException::new);
-
-        Coupon coupon = Coupon.builder()
-                .name(dto.getName())
-                .discountRate(dto.getDiscountRate())
-                .totalCount(dto.getTotalCount())
-                .remainCount(dto.getTotalCount())
-                .user(admin)
-                .build();
-
-        couponRepository.save(coupon);
+        couponRepository.save(CouponDto.toEntity(admin));
     }
 
     /*쿠폰목록 조회*/

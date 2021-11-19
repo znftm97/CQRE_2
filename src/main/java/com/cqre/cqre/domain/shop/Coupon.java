@@ -2,14 +2,15 @@ package com.cqre.cqre.domain.shop;
 
 import com.cqre.cqre.domain.BaseEntity;
 import com.cqre.cqre.domain.user.User;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-@Builder
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Coupon extends BaseEntity {
 
@@ -29,6 +30,15 @@ public class Coupon extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Builder
+    public Coupon(String name, Long discountRate, Integer totalCount, int remainCount, User user) {
+        this.name = name;
+        this.discountRate = discountRate;
+        this.totalCount = totalCount;
+        this.remainCount = remainCount;
+        this.user = user;
+    }
 
     public void removeCount(int sendCount) {
         this.remainCount = totalCount - sendCount;

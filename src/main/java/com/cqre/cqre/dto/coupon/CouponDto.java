@@ -1,7 +1,10 @@
 package com.cqre.cqre.dto.coupon;
 
 import com.cqre.cqre.domain.shop.Coupon;
+import com.cqre.cqre.domain.user.User;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Max;
@@ -12,6 +15,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class CouponDto {
 
     private Long id;
@@ -42,6 +46,14 @@ public class CouponDto {
         this.remainCount = coupon.getRemainCount();
     }
 
-    public CouponDto() {
+    public Coupon toEntity(User user){
+        return Coupon.builder()
+                    .name(name)
+                    .discountRate(discountRate)
+                    .totalCount(totalCount)
+                    .remainCount(remainCount)
+                    .user(user)
+                    .build();
     }
+
 }
