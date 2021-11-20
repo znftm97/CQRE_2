@@ -18,6 +18,7 @@ public class ReadPostDto {
     private boolean AuthorCheck;
 
     public ReadPostDto(Post post){
+        this.id = post.getId();
         this.title = post.getTitle();
         this.content = post.getContent();
         this.postViews = post.getPostViews();
