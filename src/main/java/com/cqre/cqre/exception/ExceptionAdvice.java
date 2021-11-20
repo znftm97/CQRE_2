@@ -71,10 +71,17 @@ public class ExceptionAdvice {
         return "/user/exception/userNotFoundException";
     }
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    private String emailOverlapCheck(Model model, DataIntegrityViolationException exception){
+    @ExceptionHandler(CUserEmailOverlapException.class)
+    private String emailOverlapCheck(Model model, CUserEmailOverlapException exception){
         errorLogging(exception);
-        model.addAttribute("emailOverlap", "true");
+        model.addAttribute("overlapEmail", "true");
+        return "/home/home";
+    }
+
+    @ExceptionHandler(CUserLoginIdOverlapException.class)
+    private String emailOverlapCheck(Model model, CUserLoginIdOverlapException exception){
+        errorLogging(exception);
+        model.addAttribute("overlapLoginId", "true");
         return "/home/home";
     }
 

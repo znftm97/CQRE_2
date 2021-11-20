@@ -80,9 +80,13 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         </div>
     </div>
 <script th:inline="javascript">
-        let emailOverlap = [[${emailOverlap}]];
-        if (emailOverlap == "true") {
+        let overlapEmail = [[${overlapEmail}]];
+        let overlapLoginId = [[${overlapLoginId}]];
+
+        if (overlapEmail == "true") {
             alert("해당 이메일로 가입된 회원이 존재합니다.");
+        } else if(overlapLoginId == "true"){
+            alert("해당 아이디로 가입된 회원이 존재합니다.");
         }
 </script>
 </body>
