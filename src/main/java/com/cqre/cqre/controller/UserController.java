@@ -1,14 +1,10 @@
 package com.cqre.cqre.controller;
 
-import com.cqre.cqre.dto.user.*;
 import com.cqre.cqre.domain.user.User;
+import com.cqre.cqre.dto.user.*;
 import com.cqre.cqre.exception.customexception.user.CPwNotEqualsException;
 import com.cqre.cqre.service.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,11 +23,9 @@ import java.io.UnsupportedEncodingException;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 public class UserController {
 
     private final UserService userService;
-    private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
     /*sign 페이지*/
@@ -161,8 +155,7 @@ public class UserController {
     @GetMapping("/users/user-info")
     public String userInfoPage(Model model, @RequestParam(value = "notEquals", required = false) String notEquals){
 
-        User loginUser = userService.getLoginUser();
-        UserDto loginUserDto = modelMapper.map(loginUser, UserDto.class);
+        UserDto loginUserDto = new UserDto(userService.getLoginUser());
         model.addAttribute("loginUserDto", loginUserDto);
         model.addAttribute("userPwCheckDto", new UserPwCheckDto());
         model.addAttribute("notEquals", notEquals);
