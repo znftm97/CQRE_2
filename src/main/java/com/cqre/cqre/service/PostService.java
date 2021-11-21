@@ -1,15 +1,17 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.dto.post.*;
-import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.domain.board.*;
+import com.cqre.cqre.domain.user.User;
+import com.cqre.cqre.dto.post.CreateAndUpdatePostDto;
+import com.cqre.cqre.dto.post.ListPostDto;
+import com.cqre.cqre.dto.post.PostFileDto;
+import com.cqre.cqre.dto.post.ReadPostDto;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
 import com.cqre.cqre.repository.PostFileRepository;
-import com.cqre.cqre.repository.comment.CommentRepository;
 import com.cqre.cqre.repository.RecommendationRepository;
+import com.cqre.cqre.repository.comment.CommentRepository;
 import com.cqre.cqre.repository.post.PostRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +30,6 @@ public class PostService {
     private final CommentRepository commentRepository;
     private final PostFileRepository postFileRepository;
     private final RecommendationRepository recommendationRepository;
-    private final ModelMapper modelMapper;
 
     /*자유게시판 글 목록 출력*/
     public Page<ListPostDto> findFreePosts(String sortOption, int page){
@@ -91,8 +92,7 @@ public class PostService {
         Post findPost = postRepository.CFindByPostId(postId).orElseThrow(CPostNotFoundException::new);
         findPost.addPostViews();
 
-        ReadPostDto dto = modelMapper.map(findPost, ReadPostDto.class);
-        dto.setUserName(findPost.getUser().getName());
+        ReadPostDto dto = new ReadPostDto(findPost);
 
         if (findPost.getUser().getId().equals(userService.getLoginUser().getId())) {
             dto.setAuthorCheck(true);

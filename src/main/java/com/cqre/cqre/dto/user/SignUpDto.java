@@ -4,6 +4,7 @@ import com.cqre.cqre.domain.user.Address;
 import com.cqre.cqre.domain.user.User;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public class SignUpDto {
+
     @NotEmpty(message = "필수로 입력해야 합니다.")
     private String name;
 
@@ -33,14 +35,14 @@ public class SignUpDto {
     @Email(message = "이메일 형식에 맞지 않습니다.")
     private String email;
 
-    public User toEntity(){
+    public User toEntity(PasswordEncoder passwordEncoder){
         Address address = new Address("Not yet Entered", "Not yet Entered");
 
         return User.builder()
                 .name(name)
                 .studentId(studentId)
                 .loginId(loginId)
-                .password(password)
+                .password(passwordEncoder.encode(password))
                 .email(email)
                 .address(address)
                 .emailVerified("false")

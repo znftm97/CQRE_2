@@ -1,14 +1,10 @@
 package com.cqre.cqre.controller;
 
-import com.cqre.cqre.dto.user.*;
 import com.cqre.cqre.domain.user.User;
+import com.cqre.cqre.dto.user.*;
 import com.cqre.cqre.exception.customexception.user.CPwNotEqualsException;
 import com.cqre.cqre.service.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,11 +23,11 @@ import java.io.UnsupportedEncodingException;
 
 @Controller
 @RequiredArgsConstructor
-@Slf4j
 public class UserController {
 
+    private static final int updateUserInfo = 1;
+    private static final int deleteUser = 2;
     private final UserService userService;
-    private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
     /*sign 페이지*/
@@ -161,8 +157,7 @@ public class UserController {
     @GetMapping("/users/user-info")
     public String userInfoPage(Model model, @RequestParam(value = "notEquals", required = false) String notEquals){
 
-        User loginUser = userService.getLoginUser();
-        UserDto loginUserDto = modelMapper.map(loginUser, UserDto.class);
+        UserDto loginUserDto = new UserDto(userService.getLoginUser());
         model.addAttribute("loginUserDto", loginUserDto);
         model.addAttribute("userPwCheckDto", new UserPwCheckDto());
         model.addAttribute("notEquals", notEquals);
@@ -179,14 +174,13 @@ public class UserController {
             throw new CPwNotEqualsException();
         }
 
-        if (userPwCheckDto.getIdentifier() == 1) {
+        if (userPwCheckDto.getSelectFunction() == updateUserInfo) {
             model.addAttribute("userAddressDto", new UserAddressDto());
             return "/user/updateUserInfo";
 
-        } else if(userPwCheckDto.getIdentifier() == 2){
+        } else if(userPwCheckDto.getSelectFunction() == deleteUser){// Todo 글, 댓글, 등 다 삭제하는 로직 추가해야함 (회원탈퇴 기능)
             /*userService.removeUser();*/
             session.invalidate();
-            //Todo 글, 댓글, 등 다 삭제하는 로직 추가해야함
 
             return "redirect:/home";
         }

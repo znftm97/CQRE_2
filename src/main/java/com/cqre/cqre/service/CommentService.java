@@ -21,10 +21,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CommentService {
 
+    private static final int reCommentDepth = 2;
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
     private final UserService userService;
-
     private final AtomicLong bundleId = new AtomicLong(1);
 
     /*댓글 생성*/
@@ -72,7 +72,7 @@ public class CommentService {
                 .content(createReCommentDto.getContent())
                 .user(loginUser)
                 .post(findPost)
-                .depth(2)
+                .depth(reCommentDepth)
                 .bundleId(findComment.getBundleId())
                 .bundleOrder(System.currentTimeMillis())
                 .existsCheck(true)

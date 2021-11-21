@@ -21,6 +21,7 @@ public class User extends BaseEntity {
 
     private String studentId;
 
+    @Column(unique = true, nullable = false)
     private String loginId;
 
     private String password;
