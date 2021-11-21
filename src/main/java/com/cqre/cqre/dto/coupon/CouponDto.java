@@ -51,7 +51,7 @@ public class CouponDto {
                     .name(name)
                     .discountRate(discountRate)
                     .totalCount(totalCount)
-                    .remainCount(remainCount)
+                    .remainCount(totalCount)
                     .user(user)
                     .build();
     }
