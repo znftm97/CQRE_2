@@ -1,8 +1,8 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.domain.shop.Coupon;
 import com.cqre.cqre.domain.shop.UserCoupon;
+import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.dto.coupon.CouponDto;
 import com.cqre.cqre.dto.coupon.FindCouponDto;
 import com.cqre.cqre.dto.coupon.SendCouponDto;
@@ -31,18 +31,9 @@ public class CouponService {
 
     /*쿠폰생성*/
     @Transactional
-    public void createCoupon(CouponDto dto) {
+    public void createCoupon(CouponDto CouponDto) {
         User admin = userRepository.findByEmail("admin").orElseThrow(CUserNotFoundException::new);
-
-        Coupon coupon = Coupon.builder()
-                .name(dto.getName())
-                .discountRate(dto.getDiscountRate())
-                .totalCount(dto.getTotalCount())
-                .remainCount(dto.getTotalCount())
-                .user(admin)
-                .build();
-
-        couponRepository.save(coupon);
+        couponRepository.save(CouponDto.toEntity(admin));
     }
 
     /*쿠폰목록 조회*/
@@ -56,16 +47,10 @@ public class CouponService {
     public void sendCoupon(SendCouponDto dto) {
         User findUser = userRepository.findByEmail(dto.getEmail()).orElseThrow(CUserNotFoundExceptionToCouponPage::new);
         Coupon findCoupon = couponRepository.findByName(dto.getName());
+        int couponCount = dto.getCount();
 
-        UserCoupon userCoupon = UserCoupon.builder()
-                .count(dto.getCount())
-                .user(findUser)
-                .coupon(findCoupon)
-                .build();
-
-        findCoupon.removeCount(dto.getCount());
-
-        userCouponRepository.save(userCoupon);
+        findCoupon.removeCount(couponCount);
+        userCouponRepository.save(UserCoupon.of(findCoupon, findUser, couponCount));
     }
 
     /*내 쿠폰 목록 조회*/

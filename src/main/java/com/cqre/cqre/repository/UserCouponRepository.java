@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface UserCouponRepository extends JpaRepository<UserCoupon, Long> {
 
-    @Query("select uc from UserCoupon uc join fetch uc.coupon where uc.user.id = :userId")
+    @Query("select uc from UserCoupon uc join fetch uc.coupon where uc.user.id = :userId order by uc.createDate desc")
     List<UserCoupon> findUserCouponsByUserIdWithCoupon(@Param("userId") Long userId);
 
     @Query("select uc from UserCoupon uc join fetch uc.coupon where uc.id= :userCouponId")

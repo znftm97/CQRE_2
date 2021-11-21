@@ -6,5 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserPwCheckDto extends UserDto{
-    private int identifier;
+    private int selectFunction;
 }

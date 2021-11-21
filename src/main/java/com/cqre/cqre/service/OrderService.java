@@ -1,17 +1,17 @@
 package com.cqre.cqre.service;
 
-import com.cqre.cqre.dto.order.FindOrderItemDto;
-import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.domain.shop.Order;
 import com.cqre.cqre.domain.shop.OrderItem;
 import com.cqre.cqre.domain.shop.OrderStatus;
 import com.cqre.cqre.domain.shop.UserCoupon;
 import com.cqre.cqre.domain.shop.item.Item;
+import com.cqre.cqre.domain.user.User;
+import com.cqre.cqre.dto.order.FindOrderItemDto;
 import com.cqre.cqre.exception.customexception.item.CNotEnoughStockException;
 import com.cqre.cqre.repository.Item.ItemRepository;
-import com.cqre.cqre.repository.UserCouponRepository;
 import com.cqre.cqre.repository.OrderItemRepository;
 import com.cqre.cqre.repository.OrderRepository;
+import com.cqre.cqre.repository.UserCouponRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,17 +34,14 @@ public class OrderService {
         Item findItem = itemRepository.findItemById(itemId);
         User findUser = userService.getLoginUser();
 
-        OrderItem orderItem = OrderItem.builder()
-                .item(findItem)
-                .orderPrice(findItem.getPrice()*count)
-                .count(count)
-                .build();
+        if (findItem.getStockCount() < count) {
+            throw new CNotEnoughStockException();
+        }
 
+        OrderItem orderItem = OrderItem.of(findItem, count);
         findItem.removeStock(orderItem.getCount());
 
-        Order order = Order.createOrder(findUser, orderItem);
-
-        orderRepository.save(order);
+        orderRepository.save(Order.of(findUser, orderItem));
     }
 
     /*쿠폰같이 주문 생성*/
@@ -54,15 +51,12 @@ public class OrderService {
         Item findItem = itemRepository.findItemById(itemId);
         User findUser = userService.getLoginUser();
 
-        int discountPrice = (findItem.getPrice() * count) / (findUserCoupon.getCoupon().getDiscountRate()).intValue();
-        int orderPrice = (findItem.getPrice() * count) - discountPrice;
+        if (findItem.getStockCount() < count) {
+            throw new CNotEnoughStockException();
+        }
 
-        OrderItem orderItem = OrderItem.builder()
-                .item(findItem)
-                .count(count)
-                .orderPrice(orderPrice)
-                .build();
-
+        OrderItem orderItem = OrderItem.of(findItem, count);
+        orderItem.calculateDiscountPrice(findItem, findUserCoupon.getCoupon().getDiscountRate());
         findItem.removeStock(orderItem.getCount());
 
         Order order = Order.createOrderWithCoupon(findUser, orderItem, findUserCoupon);
@@ -105,18 +99,13 @@ public class OrderService {
         User loginUser = userService.getLoginUser();
         Item findItem = itemRepository.findItemById(itemId);
 
-        OrderItem orderItem = OrderItem.builder()
-                .item(findItem)
-                .orderPrice(findItem.getPrice()*count)
-                .count(count)
-                .build();
+        OrderItem orderItem = OrderItem.of(findItem, count);
 
         if (findItem.getStockCount() < count) {
             throw new CNotEnoughStockException();
         }
 
-        Order order = Order.createBasket(loginUser, orderItem);
-        orderRepository.save(order);
+        orderRepository.save(Order.createBasket(loginUser, orderItem));
     }
 
     /*장바구니 목록 조회*/

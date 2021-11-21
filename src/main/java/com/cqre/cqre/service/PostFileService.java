@@ -7,7 +7,6 @@ import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
 import com.cqre.cqre.repository.PostFileRepository;
 import com.cqre.cqre.repository.post.PostRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,7 +17,6 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class PostFileService {
 
     private final PostFileRepository postFileRepository;
@@ -32,18 +30,11 @@ public class PostFileService {
         List<String> uploadImageUrls = fileUploadService.uploadToS3(convertFiles, dirName);
 
         for (int i = 0; i < multipartFiles.size(); i++) {
-            String origFilename = multipartFiles.get(i).getOriginalFilename(); /*원본 파일 명*/
-            String filename = System.currentTimeMillis() + "_" + origFilename; /*파일 이름 중복되지 않도록*/
+            String origFilename = multipartFiles.get(i).getOriginalFilename();
+            String filename = System.currentTimeMillis() + "_" + origFilename;
             String filePath = uploadImageUrls.get(i);
 
-            PostFile postFile = PostFile.builder()
-                    .post(findPost)
-                    .originFilename(origFilename)
-                    .filename(filename)
-                    .filePath(filePath)
-                    .build();
-
-            postFileRepository.save(postFile);
+            postFileRepository.save(PostFile.of(origFilename, filename, filePath, findPost));
         }
     }
 

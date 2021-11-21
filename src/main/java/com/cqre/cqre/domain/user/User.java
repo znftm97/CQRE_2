@@ -21,6 +21,7 @@ public class User extends BaseEntity {
 
     private String studentId;
 
+    @Column(unique = true, nullable = false)
     private String loginId;
 
     private String password;
@@ -50,23 +51,19 @@ public class User extends BaseEntity {
         this.role = role;
     }
 
-    /*소셜 계정 정보 업데이트 시 DB값도 업데이트 하기 위함*/
     public User updateName(String name) {
         this.name = name;
         return this;
     }
 
-    /*비밀번호 변경*/
     public void updatePassword(String password) {
         this.password = password;
     }
 
-    /*이메일 인증 성공*/
     public void updateEmailVerified() {
         this.emailVerified = "true";
     }
 
-    /*회원 정보 수정*/
     public void updateUserInfo(String street, String detail, String name, String studentId, String loginId){
         Address address = new Address(street, detail);
         this.address = address;
