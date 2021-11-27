@@ -21,7 +21,7 @@ public class OrderItem extends BaseEntity {
 
     private int orderPrice;
 
-    private int count;
+    private int orderQuantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
@@ -32,17 +32,17 @@ public class OrderItem extends BaseEntity {
     private Order order;
 
     @Builder
-    public OrderItem(int orderPrice, int count, Item item) {
+    public OrderItem(int orderPrice, int orderQuantity, Item item) {
         this.orderPrice = orderPrice;
-        this.count = count;
+        this.orderQuantity = orderQuantity;
         this.item = item;
     }
 
-    public static OrderItem of(Item item, int count) {
+    public static OrderItem of(Item item, int orderQuantity) {
         return OrderItem.builder()
                     .item(item)
-                    .orderPrice(item.getPrice()*count)
-                    .count(count)
+                    .orderPrice(item.getPrice()*orderQuantity)
+                    .orderQuantity(orderQuantity)
                     .build();
     }
 
@@ -51,8 +51,8 @@ public class OrderItem extends BaseEntity {
     }
 
     public void calculateDiscountPrice(Item item, Long discountRate){
-        int discountPrice = (item.getPrice() * count) * discountRate.intValue() / 100;
-        this.orderPrice = (item.getPrice() * count) - discountPrice;
+        int discountPrice = (item.getPrice() * orderQuantity) * discountRate.intValue() / 100;
+        this.orderPrice = (item.getPrice() * orderQuantity) - discountPrice;
     }
 
 }
