@@ -93,7 +93,7 @@ public class UserService {
     public void validationEmailToken(String email, String emailCheckToken){
         User findUser = userRepository.findByEmail(email).orElseThrow(CUserNotFoundExceptionToPwPage::new);
 
-        if (!emailCheckToken.equals(findUser.getEmailCheckToken())) {
+        if (!findUser.matchToken(emailCheckToken)) {
             throw new CValidationEmailException();
         }
 
@@ -105,7 +105,7 @@ public class UserService {
         User findUserByEmail = userRepository.findByEmail(userDto.getEmail()).orElseThrow(CUserNotFoundExceptionToIdPage::new);
         User findUserByName = userRepository.findByName(userDto.getName()).orElseThrow(CUserNotFoundExceptionToIdPage::new);
 
-        if (!findUserByEmail.getEmail().equals(findUserByName.getEmail())) {
+        if (!findUserByEmail.matchEmail(findUserByName.getEmail())) {
             log.error("엔티티 조회 에러");
             throw new CUserNotFoundExceptionToPwPage();
         }
@@ -117,7 +117,7 @@ public class UserService {
     public void emailSendPw(UserDto userDto) throws MessagingException, UnsupportedEncodingException {
         User findUserByEmail = userRepository.findByEmail(userDto.getEmail()).orElseThrow(CUserNotFoundExceptionToPwPage::new);
         User findUserByLoginId = userRepository.findByLoginId(userDto.getLoginId()).orElseThrow(CUserNotFoundExceptionToPwPage::new);
-        if (!findUserByEmail.getEmail().equals(findUserByLoginId.getEmail())) {
+        if (!findUserByEmail.matchEmail(findUserByLoginId.getEmail())) {
             throw new CUserNotFoundExceptionToPwPage();
         }
 
