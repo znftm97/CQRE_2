@@ -22,6 +22,14 @@ public class CAuthenticationProvider implements AuthenticationProvider {
         this.passwordEncoder = passwordEncoder;
     }
 
+    private boolean validPassword(String password, UserContext userContext) {
+        return !passwordEncoder.matches(password, userContext.getUser().getPassword());
+    }
+
+    private boolean validToken(UserContext userContext) {
+        return userContext.getUser().getEmailVerified().equals("false");
+    }
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String loginId = authentication.getName();
@@ -29,14 +37,14 @@ public class CAuthenticationProvider implements AuthenticationProvider {
 
         UserContext userContext = (UserContext) cUserDetailsService.loadUserByUsername(loginId);
 
-        if (!passwordEncoder.matches(password, userContext.getUser().getPassword())) {
+        if (validPassword(password, userContext)) {
             throw new BadCredentialsException("");
-        }else if (userContext.getUser().getEmailVerified().equals("false")) {
+        }else if (validToken(userContext)) {
             throw new CEmailTokenFalseException("이메일 토큰값이 유효하지 않습니다.");
         }
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userContext.getUser(), null, userContext.getAuthorities());
-        log.info("User Login");
+        log.info("=============User Login=============");
         return authenticationToken;
     }
 

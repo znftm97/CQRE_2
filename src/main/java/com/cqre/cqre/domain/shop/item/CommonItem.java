@@ -16,7 +16,7 @@ public class CommonItem extends Item {
         commonItem.setItemExplanation(dto.getItemExplanation());
         commonItem.setName(dto.getItemName());
         commonItem.setPrice(dto.getPrice());
-        commonItem.setStockCount(dto.getStockCount());
+        commonItem.setStock(dto.getStock());
 
         if (dto.getGender().equals("MEN")) {
             commonItem.setGender(ItemGender.MEN);

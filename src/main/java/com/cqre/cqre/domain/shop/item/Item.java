@@ -28,21 +28,21 @@ public abstract class Item extends BaseEntity {
 
     private String itemExplanation;
 
-    private int stockCount;
+    private int stock;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public void removeStock(int stockCount) {
-        int restStock = this.stockCount - stockCount;
+    public void removeStock(int stock) {
+        int restStock = this.stock - stock;
         if( restStock < 0){
             throw new CNotEnoughStockException();
         }
-        this.stockCount = restStock;
+        this.stock = restStock;
     }
 
-    public void addStock(int stockCount) {
-        this.stockCount += stockCount;
+    public void addStock(int stock) {
+        this.stock += stock;
     }
 }

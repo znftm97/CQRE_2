@@ -71,7 +71,7 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
                         <td>[[${state.count}]]</td>
                         <td th:text="${orderItem.itemName}"></td>
                         <td th:text="${orderItem.orderPrice}"></td>
-                        <td th:text="${orderItem.orderCount}"></td>
+                        <td th:text="${orderItem.orderQuantity}"></td>
                         <td>[[${#temporals.format(orderItem.createDate, 'yyyy-MM-dd일 HH:mm분')}]]</td>
                         <td>
                             <form method="post" th:action="@{/re-orders/{orderItemId} (orderItemId = ${orderItem.id})}">

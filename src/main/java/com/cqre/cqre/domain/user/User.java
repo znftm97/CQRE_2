@@ -72,6 +72,14 @@ public class User extends BaseEntity {
         this.loginId = loginId;
     }
 
+    public boolean matchToken(String emailCheckToken){
+        return this.emailCheckToken.equals(emailCheckToken);
+    }
+
+    public boolean matchEmail(String email){
+        return this.email.equals(email);
+    }
+
 }
 
 
