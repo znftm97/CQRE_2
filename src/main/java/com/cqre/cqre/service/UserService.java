@@ -52,7 +52,7 @@ public class UserService {
         /*ec2 환경에서 사용하기위한 코드 수정 부분*/
         String html = "<h1>이메일 인증</h1><br>" +
                 "아래 버튼을 클릭하시면 이메일 인증이 완료됩니다.<br>" +
-                "<a href='http://ec2-54-180-142-70.ap-northeast-2.compute.amazonaws.com:8080/users/validation-email?email=" +
+                "<a href='http://3.35.191.224:8080/users/validation-email?email=" +
                 user.getEmail() +
                 "&emailCheckToken=" +
                 user.getEmailCheckToken() +
@@ -75,7 +75,7 @@ public class UserService {
         /*ec2 환경에서 사용하기위한 코드 수정 부분*/
         String html = "<h1>이메일 인증</h1><br>" +
                 "아래 버튼을 클릭하시면 이메일 인증이 완료됩니다.<br>" +
-                "<a href='http://ec2-54-180-142-70.ap-northeast-2.compute.amazonaws.com:8080/users/validation-email?email=" +
+                "<a href='http://3.35.191.224:8080/users/validation-email?email=" +
                 findUser.getEmail() +
                 "&emailCheckToken=" +
                 findUser.getEmailCheckToken() +
@@ -93,7 +93,7 @@ public class UserService {
     public void validationEmailToken(String email, String emailCheckToken){
         User findUser = userRepository.findByEmail(email).orElseThrow(CUserNotFoundExceptionToPwPage::new);
 
-        if (!emailCheckToken.equals(findUser.getEmailCheckToken())) {
+        if (!findUser.matchToken(emailCheckToken)) {
             throw new CValidationEmailException();
         }
 
@@ -105,7 +105,7 @@ public class UserService {
         User findUserByEmail = userRepository.findByEmail(userDto.getEmail()).orElseThrow(CUserNotFoundExceptionToIdPage::new);
         User findUserByName = userRepository.findByName(userDto.getName()).orElseThrow(CUserNotFoundExceptionToIdPage::new);
 
-        if (!findUserByEmail.getEmail().equals(findUserByName.getEmail())) {
+        if (!findUserByEmail.matchEmail(findUserByName.getEmail())) {
             log.error("엔티티 조회 에러");
             throw new CUserNotFoundExceptionToPwPage();
         }
@@ -117,7 +117,7 @@ public class UserService {
     public void emailSendPw(UserDto userDto) throws MessagingException, UnsupportedEncodingException {
         User findUserByEmail = userRepository.findByEmail(userDto.getEmail()).orElseThrow(CUserNotFoundExceptionToPwPage::new);
         User findUserByLoginId = userRepository.findByLoginId(userDto.getLoginId()).orElseThrow(CUserNotFoundExceptionToPwPage::new);
-        if (!findUserByEmail.getEmail().equals(findUserByLoginId.getEmail())) {
+        if (!findUserByEmail.matchEmail(findUserByLoginId.getEmail())) {
             throw new CUserNotFoundExceptionToPwPage();
         }
 
@@ -126,7 +126,7 @@ public class UserService {
 
         String html = "<h1>비밀번호 변경 본인확인</h1><br>" +
                 "아래 버튼을 클릭하시면 본인 인증이 완료됩니다.<br>" +
-                "<a href='http://ec2-54-180-142-70.ap-northeast-2.compute.amazonaws.com:8080/users/update-password?email=" +
+                "<a href='http://3.35.191.224:8080/users/update-password?email=" +
                 findUserByEmail.getEmail() +
                 "' target='_blank'><button>인증 하기</button></a>";
 

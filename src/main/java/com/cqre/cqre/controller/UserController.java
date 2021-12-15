@@ -25,8 +25,8 @@ import java.io.UnsupportedEncodingException;
 @RequiredArgsConstructor
 public class UserController {
 
-    private static final int updateUserInfo = 1;
-    private static final int deleteUser = 2;
+    private static final int UPDATE = 1;
+    private static final int DELETE = 2;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
@@ -174,11 +174,11 @@ public class UserController {
             throw new CPwNotEqualsException();
         }
 
-        if (userPwCheckDto.getSelectFunction() == updateUserInfo) {
+        if (userPwCheckDto.getSelectFunction() == UPDATE) {
             model.addAttribute("userAddressDto", new UserAddressDto());
             return "/user/updateUserInfo";
 
-        } else if(userPwCheckDto.getSelectFunction() == deleteUser){// Todo 글, 댓글, 등 다 삭제하는 로직 추가해야함 (회원탈퇴 기능)
+        } else if(userPwCheckDto.getSelectFunction() == DELETE){// Todo 글, 댓글, 등 다 삭제하는 로직 추가해야함 (회원탈퇴 기능)
             /*userService.removeUser();*/
             session.invalidate();
 

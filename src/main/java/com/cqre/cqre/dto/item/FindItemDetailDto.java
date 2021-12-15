@@ -15,7 +15,7 @@ public class FindItemDetailDto {
     private String filename;
     private LocalDateTime createDate;
     private String gender;
-    private int stockCount;
+    private int stock;
     private String category;
 
     public FindItemDetailDto(Item item) {
@@ -25,7 +25,7 @@ public class FindItemDetailDto {
         this.price = item.getPrice();
         this.createDate = item.getCreateDate();
         this.gender = String.valueOf(item.getGender());
-        this.stockCount = item.getStockCount();
+        this.stock = item.getStock();
         this.category = item.getCategory().getName();
     }
 }

@@ -28,36 +28,40 @@ public class OrderService {
     private final UserService userService;
     private final UserCouponRepository userCouponRepository;
 
+    private boolean validStock(int orderStock, Item findItem) {
+        return findItem.getStock() < orderStock;
+    }
+
     /*주문 생성*/
     @Transactional
-    public void createOrder(Long itemId, int count) {
+    public void createOrder(Long itemId, int orderStock) {
         Item findItem = itemRepository.findItemById(itemId);
         User findUser = userService.getLoginUser();
 
-        if (findItem.getStockCount() < count) {
+        if (validStock(orderStock, findItem)) {
             throw new CNotEnoughStockException();
         }
 
-        OrderItem orderItem = OrderItem.of(findItem, count);
-        findItem.removeStock(orderItem.getCount());
+        OrderItem orderItem = OrderItem.of(findItem, orderStock);
+        findItem.removeStock(orderItem.getOrderQuantity());
 
         orderRepository.save(Order.of(findUser, orderItem));
     }
 
     /*쿠폰같이 주문 생성*/
     @Transactional
-    public void createOrderWithCoupon(Long itemId, int count, String userCouponId) {
+    public void createOrderWithCoupon(Long itemId, int orderStock, String userCouponId) {
         UserCoupon findUserCoupon = userCouponRepository.findUserCouponByUserCouponIdWithCoupon(Long.parseLong(userCouponId));
         Item findItem = itemRepository.findItemById(itemId);
         User findUser = userService.getLoginUser();
 
-        if (findItem.getStockCount() < count) {
+        if (validStock(orderStock, findItem)) {
             throw new CNotEnoughStockException();
         }
 
-        OrderItem orderItem = OrderItem.of(findItem, count);
+        OrderItem orderItem = OrderItem.of(findItem, orderStock);
         orderItem.calculateDiscountPrice(findItem, findUserCoupon.getCoupon().getDiscountRate());
-        findItem.removeStock(orderItem.getCount());
+        findItem.removeStock(orderItem.getOrderQuantity());
 
         Order order = Order.createOrderWithCoupon(findUser, orderItem, findUserCoupon);
         orderRepository.save(order);
@@ -74,7 +78,7 @@ public class OrderService {
     @Transactional
     public void orderCancel(Long orderItemId) {
         OrderItem findOrderItem = orderItemRepository.findOrderItemWithOrder(orderItemId);
-        findOrderItem.getItem().addStock(findOrderItem.getCount());
+        findOrderItem.getItem().addStock(findOrderItem.getOrderQuantity());
         findOrderItem.getOrder().cancelOrder();
     }
 
@@ -89,19 +93,19 @@ public class OrderService {
     @Transactional
     public void reOrder(Long orderItemId) {
         OrderItem findOrderItem = orderItemRepository.findOrderItemWithOrder(orderItemId);
-        findOrderItem.getItem().removeStock(findOrderItem.getCount());
+        findOrderItem.getItem().removeStock(findOrderItem.getOrderQuantity());
         findOrderItem.getOrder().reOrder();
     }
 
     /*장바구니 추가*/
     @Transactional
-    public void createBasket(Long itemId, int count) {
+    public void createBasket(Long itemId, int orderStock) {
         User loginUser = userService.getLoginUser();
         Item findItem = itemRepository.findItemById(itemId);
 
-        OrderItem orderItem = OrderItem.of(findItem, count);
+        OrderItem orderItem = OrderItem.of(findItem, orderStock);
 
-        if (findItem.getStockCount() < count) {
+        if (validStock(orderStock, findItem)) {
             throw new CNotEnoughStockException();
         }
 
@@ -119,7 +123,7 @@ public class OrderService {
     @Transactional
     public void basketOrder(Long orderItemId) {
         OrderItem findOrderItem = orderItemRepository.findOrderItemWithOrder(orderItemId);
-        findOrderItem.getItem().removeStock(findOrderItem.getCount());
+        findOrderItem.getItem().removeStock(findOrderItem.getOrderQuantity());
         findOrderItem.getOrder().reOrder();
     }
 
