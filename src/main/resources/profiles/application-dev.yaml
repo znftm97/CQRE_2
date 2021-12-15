@@ -55,7 +55,7 @@ spring:
         registration:
           google:
             client-id: ENC(FkqTYHx0nfQe+TAGM6bHxiTBs5ffIyFDDrouPKBKbj1BWlsRkos0sU5CA9RtPjcBOEu/Q9Y5XH2CZUTe458M8cnxefsVx9e6/m+p3ghPIpyT4i/11uqLxg==)
-            client-secret: ENC(sMtgjllxwfojYJbyyks5GyNnN4AOOQFfKZjGu3hBfhAs+5nb4zQmvA==)
+            client-secret: ENC(sydfEeh3VD4XKADc0NTiIcbaEh1sCGFMjE17LjExrgLbT8U2fwfPxXrur9oOd+yG)
             scope: profile,email
           facebook:
             client-id: ENC(kt0ynjPj/xwCEUqOui1ugEHZwdwLZNVo)
