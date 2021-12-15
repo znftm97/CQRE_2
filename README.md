@@ -8,7 +8,7 @@
 [CQRE 프로젝트 Wiki - 2](https://languid-visage-6fe.notion.site/CQRE-Wiki-2-2996c9ddea484275b89d0d0b14022774)
 
 ## 🏠 배포 URL
-http://ec2-54-180-142-70.ap-northeast-2.compute.amazonaws.com:8080/
+3.35.191.224:8080
 
 ## 🔧 배포 환경
 - AWS EC2 (Ubuntu 20.04)
@@ -31,7 +31,7 @@ http://ec2-54-180-142-70.ap-northeast-2.compute.amazonaws.com:8080/
 <img src="https://user-images.githubusercontent.com/57134526/119619566-19343100-be3f-11eb-89a6-1d10aab5933b.png"></img>
 
 ## 🔁 CI/CD 파이프라인 (배포 자동화)
-![cqre_CICD](https://user-images.githubusercontent.com/57134526/136551080-3baef7b4-96ba-47a4-a266-45156d18c168.png)<br>
+![cqre_CI/CD](https://user-images.githubusercontent.com/57134526/136551080-3baef7b4-96ba-47a4-a266-45156d18c168.png)<br>
 - [구축 과정 정리](https://languid-visage-6fe.notion.site/CQRE-Wiki-2-2996c9ddea484275b89d0d0b14022774)
 
 
