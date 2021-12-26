@@ -46,16 +46,15 @@ public class FileUploadService {
     }
 
     public List<String> uploadToS3(List<File> uploadFile, String dirName) {
-        String fileName = "";
-        String uploadImageUrl = "";
         List<String> uploadImageUrls = new ArrayList<>();
 
         for (int i = 0; i < uploadFile.size(); i++) {
-            fileName = dirName + "/" + System.currentTimeMillis() + "_" + uploadFile.get(i).getName(); // 파일명/랜덤숫자_파일이름
-            uploadImageUrl = putS3(uploadFile.get(i), fileName);
+            File file = uploadFile.get(i);
+            String fileName = dirName + "/" + System.currentTimeMillis() + "_" + uploadFile.get(i).getName();
+            String uploadImageUrl = putS3(file, fileName);
 
             uploadImageUrls.add(uploadImageUrl);
-            removeNewFile(uploadFile);
+            file.delete();
         }
 
         return uploadImageUrls;
@@ -65,15 +64,6 @@ public class FileUploadService {
     public String putS3(File uploadFile, String fileName) {
         amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
         return amazonS3Client.getUrl(bucket, fileName).toString();
-    }
-
-    /*MultipartFile을 File로 변환하면서 생긴 로컬에 생성된 File 삭제*/
-    public void removeNewFile(List<File> targetFile) {
-        for (int i = 0; i < targetFile.size(); i++) {
-            if (targetFile.get(i).delete()) {
-                return;
-            }
-        }
     }
 
     /*MultipartFile을 File로 변환 (s3에는 MultipartFile 타입 전송 불가능 하기 때문)*/
