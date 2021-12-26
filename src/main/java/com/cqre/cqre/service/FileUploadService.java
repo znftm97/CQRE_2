@@ -17,6 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FileUploadService {
@@ -46,18 +47,9 @@ public class FileUploadService {
     }
 
     public List<String> uploadToS3(List<File> uploadFile, String dirName) {
-        List<String> uploadImageUrls = new ArrayList<>();
-
-        for (int i = 0; i < uploadFile.size(); i++) {
-            File file = uploadFile.get(i);
-            String fileName = dirName + "/" + System.currentTimeMillis() + "_" + uploadFile.get(i).getName();
-            String uploadImageUrl = putS3(file, fileName);
-
-            uploadImageUrls.add(uploadImageUrl);
-            file.delete();
-        }
-
-        return uploadImageUrls;
+        return uploadFile.stream()
+                .map(file -> putS3(file, dirName + "/" + System.currentTimeMillis() + "_" + file.getName()))
+                .collect(Collectors.toList());
     }
 
     /*s3에 이미지 업로드*/
