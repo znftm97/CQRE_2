@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,10 +25,10 @@ public class OrderController {
     public String createOrder(@RequestParam("itemId") Long itemId,
                               @RequestParam("count") int count,
                               @RequestParam("userCouponId") String userCouponId) {
-        if (userCouponId.isEmpty()) {
-            orderService.createOrder(itemId, count);
-        } else {
+        if (StringUtils.hasText(userCouponId)) {
             orderService.createOrderWithCoupon(itemId, count, userCouponId);
+        } else {
+            orderService.createOrder(itemId, count);
         }
 
         return "redirect:/orders";
