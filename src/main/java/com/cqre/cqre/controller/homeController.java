@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class homeController {
     @GetMapping({"/", "/home"})
     public String home(){
-        log.info("=============connect user=============");
         return "/home/home";
     }
 
