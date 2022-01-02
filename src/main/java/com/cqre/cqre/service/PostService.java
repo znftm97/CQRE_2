@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,15 +34,12 @@ public class PostService {
 
     /*자유게시판 글 목록 출력*/
     public Page<ListPostDto> findFreePosts(String sortOption, int page){
-        PageRequest pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "id"));
+        PageRequest pageRequest;
 
-        if(sortOption == null){
-        }
-        else if(sortOption.equals("recommendation")){
+        if (StringUtils.hasText(sortOption)) {
             pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, sortOption));
-        }
-        else if (sortOption.equals("postViews")) {
-            pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, sortOption));
+        } else {
+            pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "id"));
         }
 
         return postRepository.findPostByBoard(Board.FREE, pageRequest).map(post -> new ListPostDto(post));
@@ -49,15 +47,12 @@ public class PostService {
 
     /*공지사항 글 목록 출력*/
     public Page<ListPostDto> findNoticePosts(String sortOption, int page){
-        PageRequest pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "id"));
+        PageRequest pageRequest;
 
-        if(sortOption == null){
-        }
-        else if(sortOption.equals("recommendation")){
+        if (StringUtils.hasText(sortOption)) {
             pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, sortOption));
-        }
-        else if (sortOption.equals("postViews")) {
-            pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, sortOption));
+        } else {
+            pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "id"));
         }
 
         return postRepository.findPostByBoard(Board.NOTICE, pageRequest).map(post -> new ListPostDto(post));

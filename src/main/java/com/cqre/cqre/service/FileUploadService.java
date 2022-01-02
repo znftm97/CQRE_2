@@ -17,6 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FileUploadService {
@@ -46,34 +47,15 @@ public class FileUploadService {
     }
 
     public List<String> uploadToS3(List<File> uploadFile, String dirName) {
-        String fileName = "";
-        String uploadImageUrl = "";
-        List<String> uploadImageUrls = new ArrayList<>();
-
-        for (int i = 0; i < uploadFile.size(); i++) {
-            fileName = dirName + "/" + System.currentTimeMillis() + "_" + uploadFile.get(i).getName(); // 파일명/랜덤숫자_파일이름
-            uploadImageUrl = putS3(uploadFile.get(i), fileName);
-
-            uploadImageUrls.add(uploadImageUrl);
-            removeNewFile(uploadFile);
-        }
-
-        return uploadImageUrls;
+        return uploadFile.stream()
+                .map(file -> putS3(file, dirName + "/" + System.currentTimeMillis() + "_" + file.getName()))
+                .collect(Collectors.toList());
     }
 
     /*s3에 이미지 업로드*/
     public String putS3(File uploadFile, String fileName) {
         amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
         return amazonS3Client.getUrl(bucket, fileName).toString();
-    }
-
-    /*MultipartFile을 File로 변환하면서 생긴 로컬에 생성된 File 삭제*/
-    public void removeNewFile(List<File> targetFile) {
-        for (int i = 0; i < targetFile.size(); i++) {
-            if (targetFile.get(i).delete()) {
-                return;
-            }
-        }
     }
 
     /*MultipartFile을 File로 변환 (s3에는 MultipartFile 타입 전송 불가능 하기 때문)*/

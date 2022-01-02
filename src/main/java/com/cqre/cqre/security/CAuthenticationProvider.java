@@ -44,7 +44,6 @@ public class CAuthenticationProvider implements AuthenticationProvider {
         }
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userContext.getUser(), null, userContext.getAuthorities());
-        log.info("=============User Login=============");
         return authenticationToken;
     }
 
