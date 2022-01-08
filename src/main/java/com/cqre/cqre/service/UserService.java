@@ -31,12 +31,11 @@ public class UserService {
     /*회원가입*/
     @Transactional
     public void signUp(SignUpDto signUpDto) throws UnsupportedEncodingException, MessagingException {
-        userRepository.findByEmail(signUpDto.getEmail()).ifPresent(user -> {
+        if(userRepository.findByEmail(signUpDto.getEmail()).isPresent()){
             throw new CUserEmailOverlapException();
-        });
-        userRepository.findByLoginId(signUpDto.getLoginId()).ifPresent(user -> {
+        } else if(userRepository.findByLoginId(signUpDto.getLoginId()).isPresent()){
             throw new CUserLoginIdOverlapException();
-        });
+        }
 
         User user = signUpDto.toEntity(passwordEncoder);
         userRepository.save(user);
