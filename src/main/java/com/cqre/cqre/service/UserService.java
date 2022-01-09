@@ -105,7 +105,6 @@ public class UserService {
         User findUserByName = userRepository.findByName(userDto.getName()).orElseThrow(CUserNotFoundExceptionToIdPage::new);
 
         if (!findUserByEmail.matchEmail(findUserByName.getEmail())) {
-            log.error("엔티티 조회 에러");
             throw new CUserNotFoundExceptionToPwPage();
         }
 
