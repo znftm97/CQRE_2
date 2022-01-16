@@ -4,9 +4,11 @@ import com.cqre.cqre.domain.board.Board;
 import com.cqre.cqre.domain.board.Post;
 import com.cqre.cqre.domain.user.Address;
 import com.cqre.cqre.domain.user.User;
+import com.cqre.cqre.dto.post.CreateAndUpdatePostDto;
 import com.cqre.cqre.dto.post.ListPostDto;
 import com.cqre.cqre.repository.post.PostRepository;
 import com.cqre.cqre.service.PostService;
+import com.cqre.cqre.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,6 +33,9 @@ import static org.mockito.Mockito.when;
 public class PostServiceTest {
 
     @Mock
+    UserService userService;
+
+    @Mock
     PostRepository postRepository;
 
     @InjectMocks
@@ -38,6 +43,7 @@ public class PostServiceTest {
 
     private User user;
     private User admin;
+    private List<Post> posts;
 
     @BeforeEach
     void beforeEach(){
@@ -64,21 +70,20 @@ public class PostServiceTest {
                     .emailCheckToken(UUID.randomUUID().toString())
                     .role("ADMIN")
                     .build();
+
+        posts = new ArrayList<>();
+        posts.add(Post.of("title1", "content1", user, Board.FREE));
+        posts.add(Post.of("title2", "content2", user, Board.FREE));
+        posts.add(Post.of("title3", "content3", user, Board.FREE));
+        posts.add(Post.of("title4", "content4", user, Board.FREE));
+        posts.add(Post.of("title5", "content5", user, Board.FREE));
+        posts.add(Post.of("title6", "content6", user, Board.FREE));
     }
 
     @Test
     @DisplayName("[글 목록 조회] - 자유게시판 글 목록을 조회할 수 있다.")
     public void findFreePosts(){
-
-        // given
-        List<Post> posts = new ArrayList<>();
-        posts.add(Post.of("title1", "content1", user, Board.FREE));
-        posts.add(Post.of("title2", "content2", user, Board.FREE));
-        posts.add(Post.of("title3", "content3", user, Board.FREE));
-        posts.add(Post.of("title4", "content3", user, Board.FREE));
-        posts.add(Post.of("title5", "content3", user, Board.FREE));
-        posts.add(Post.of("title6", "content3", user, Board.FREE));
-
+        //given
         PageRequest pageRequest = PageRequest.of(0, 6, Sort.by(Sort.Direction.DESC, "id"));
         when(postRepository.findPostByBoard(Board.FREE, pageRequest)).thenReturn(new PageImpl<>(posts, pageRequest, posts.size()));
 
@@ -101,25 +106,40 @@ public class PostServiceTest {
     @Test
     @DisplayName("[글 목록 조회] - sortOption이 null이여도 목록을 조회할 수 있다.")
     public void findFreePostsSortOptionIsNull(){
+        // given
+        PageRequest pageRequest = PageRequest.of(0, 6, Sort.by(Sort.Direction.DESC, "id"));
+        when(postRepository.findPostByBoard(Board.FREE, pageRequest)).thenReturn(new PageImpl<>(posts, pageRequest, posts.size()));
 
-    }
+        List<ListPostDto> postDtos = posts.stream()
+                .map(ListPostDto::new)
+                .collect(Collectors.toList());
+        Page<ListPostDto> expected = new PageImpl<>(postDtos, pageRequest, postDtos.size());
 
-    @Test
-    @DisplayName("[글 목록 조회] - admin 권한 유저는 공지사항 글 목록을 조회할 수 있다.")
-    public void findNoticePosts(){
+        // when
+        Page<ListPostDto> findPosts = postService.findFreePosts(null, 0);
 
-    }
-
-    @Test
-    @DisplayName("[글 목록 조회] - 일반 권한 유저는 공지사항 글 목록을 조회할 수 없다.")
-    public void failureFindNoticePosts(){
-
+        // then
+        assertThat(findPosts.getContent()).isEqualTo(expected.getContent());
+        assertThat(findPosts.getTotalElements()).isEqualTo(expected.getTotalElements());
+        assertThat(findPosts.getTotalPages()).isEqualTo(expected.getTotalPages());
+        assertThat(findPosts.getSize()).isEqualTo(expected.getSize());
+        assertThat(findPosts.getSort()).isEqualTo(expected.getSort());
     }
 
     @Test
     @DisplayName("[글 생성] - 로그인한 유저는 글을 생성할 수 있다.")
     public void createFreePost(){
+        //given
+        CreateAndUpdatePostDto dto = new CreateAndUpdatePostDto("title", "content");
+        Post post = Post.of(dto.getTitle(), dto.getContent(), user, Board.FREE);
 
+        when(userService.getLoginUser()).thenReturn(user);
+
+        //when
+        Long findPostId = postService.createFreePost(dto);
+
+        //then
+        assertThat(findPostId).isEqualTo(post.getId());
     }
 
     @Test
@@ -129,7 +149,7 @@ public class PostServiceTest {
     }
 
     @Test
-    @DisplayName("[글 생성] - 일반 권한 유저는 공지사항 글을 생성할 수 없다.")
+    @DisplayName("[글 생성]  일반 권한 유저는 공지사항 글을 생성할 수 없다.")
     public void failureCreateNoticePostByUser(){
 
     }
