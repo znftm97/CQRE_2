@@ -6,6 +6,7 @@ import com.cqre.cqre.domain.user.Address;
 import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.dto.post.CreateAndUpdatePostDto;
 import com.cqre.cqre.dto.post.ListPostDto;
+import com.cqre.cqre.exception.customexception.user.CAnonymousUserException;
 import com.cqre.cqre.repository.post.PostRepository;
 import com.cqre.cqre.service.PostService;
 import com.cqre.cqre.service.UserService;
@@ -27,6 +28,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -145,7 +147,13 @@ public class PostServiceTest {
     @Test
     @DisplayName("[글 생성] - 로그인하지 않은 유저는 글을 생성할 수 없다.")
     public void failureCreateFreePost(){
+        //given
+        CreateAndUpdatePostDto dto = new CreateAndUpdatePostDto("title", "content");
+        when(userService.getLoginUser()).thenThrow(CAnonymousUserException.class);
 
+        //when && then
+        assertThatExceptionOfType(CAnonymousUserException.class)
+                .isThrownBy(() -> postService.createFreePost(dto));
     }
 
     @Test

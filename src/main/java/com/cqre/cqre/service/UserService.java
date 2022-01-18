@@ -146,6 +146,11 @@ public class UserService {
     public User getLoginUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+        /*혹시 Security 에서 권한 필터처리가 뚤렸을 경우*/
+        if (principal == "anonymousUser") {
+            throw new CAnonymousUserException();
+        }
+
         /*일반 로그인 사용자*/
         if (principal instanceof User) {
             User loginUser = (User) principal;
