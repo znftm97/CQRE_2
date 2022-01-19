@@ -6,11 +6,13 @@ import com.cqre.cqre.domain.user.Address;
 import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.dto.post.CreateAndUpdatePostDto;
 import com.cqre.cqre.dto.post.ListPostDto;
+import com.cqre.cqre.dto.post.ReadPostDto;
 import com.cqre.cqre.exception.customexception.user.CAnonymousUserException;
 import com.cqre.cqre.repository.post.PostRepository;
 import com.cqre.cqre.service.PostService;
 import com.cqre.cqre.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,6 +26,7 @@ import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -50,6 +53,7 @@ public class PostServiceTest {
     @BeforeEach
     void beforeEach(){
         user = User.builder()
+                    .id(1L)
                     .name("user")
                     .studentId("11111111")
                     .loginId("loginId")
@@ -62,6 +66,7 @@ public class PostServiceTest {
                     .build();
 
         admin = User.builder()
+                    .id(2L)
                     .name("admin")
                     .studentId("99999999")
                     .loginId("loginId")
@@ -79,7 +84,7 @@ public class PostServiceTest {
         posts.add(Post.of("title3", "content3", user, Board.FREE));
         posts.add(Post.of("title4", "content4", user, Board.FREE));
         posts.add(Post.of("title5", "content5", user, Board.FREE));
-        posts.add(Post.of("title6", "content6", user, Board.FREE));
+        posts.add(Post.of("title6", "content6", admin, Board.FREE));
     }
 
     @Test
@@ -157,21 +162,65 @@ public class PostServiceTest {
     }
 
     @Test
-    @DisplayName("[글 생성]  일반 권한 유저는 공지사항 글을 생성할 수 없다.")
+    @DisplayName("[글 생성] - 일반 권한 유저는 공지사항 글을 생성할 수 없다.")
+    @Disabled("스프링 시큐리티 필터에서 url에 따라 필터링 되는거라 테스트하기 힘들다.. 일단 보류")
     public void failureCreateNoticePostByUser(){
 
     }
 
     @Test
-    @DisplayName("[글 조회] - 로그인한 유저는 글을 조회할 수 있다.")
-    public void readPost(){
+    @DisplayName("[글 조회] - 로그인한 유저는 글을 조회할 수 있다. && 자신이 쓴 글이면 수정 삭제 버튼이 노출된다.(isAuthorCheck == true)")
+    public void readMyPost(){
+        //given
+        Long postId = 1L;
+        Post post = posts.get(0);
 
+        when(userService.getLoginUser()).thenReturn(user);
+        when(postRepository.CFindByPostId(postId)).thenReturn(Optional.of(post));
+
+        //when
+        ReadPostDto dto = postService.readPost(postId);
+
+        //then
+        assertThat(dto.getTitle()).isEqualTo(post.getTitle());
+        assertThat(dto.getContent()).isEqualTo(post.getContent());
+        assertThat(dto.getUserName()).isEqualTo(user.getName());
+        assertThat(dto.isAuthorCheck()).isEqualTo(true);
+    }
+
+    @Test
+    @DisplayName("[글 조회] - 로그인한 유저는 글을 조회할 수 있다. && 자신이 쓴 글이 아니면 수정 삭제 버튼이 노출되지 않는다.(isAuthorCheck == false)")
+    public void readNonMyPost(){
+        //given
+        Long postId = 1L;
+        Post post = posts.get(0);
+
+        when(userService.getLoginUser()).thenReturn(admin);
+        when(postRepository.CFindByPostId(postId)).thenReturn(Optional.of(post));
+
+        //when
+        ReadPostDto dto = postService.readPost(postId);
+
+        //then
+        assertThat(dto.getTitle()).isEqualTo(post.getTitle());
+        assertThat(dto.getContent()).isEqualTo(post.getContent());
+        assertThat(dto.getUserName()).isNotEqualTo(admin.getName());
+        assertThat(dto.isAuthorCheck()).isEqualTo(false);
     }
 
     @Test
     @DisplayName("[글 조회] - 로그인하지 않은 유저는 글을 조회할 수 없다.")
     public void failureReadPost(){
+        //given
+        Long postId = 1L;
+        Post post = posts.get(0);
 
+        when(userService.getLoginUser()).thenThrow(CAnonymousUserException.class);
+        when(postRepository.CFindByPostId(postId)).thenReturn(Optional.of(post));
+
+        //when
+        assertThatExceptionOfType(CAnonymousUserException.class)
+                .isThrownBy(() -> postService.readPost(postId));
     }
 
     @Test
@@ -188,7 +237,7 @@ public class PostServiceTest {
 
     @Test
     @DisplayName("[나의 글 조회] - 현재 로그인한 유저가 쓴 글을 조회할 수 있다.")
-    public void readMyPost(){
+    public void readMyPostList(){
 
     }
 
