@@ -51,7 +51,7 @@ public class UserController {
 
         userService.signUp(signUpDto);
 
-        return "/user/validationEmail";
+        return "redirect:/users/sign";
     }
 
     /*이메일 인증*/

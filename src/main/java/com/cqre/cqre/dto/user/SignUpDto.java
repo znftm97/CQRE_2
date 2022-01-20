@@ -57,7 +57,7 @@ public class SignUpDto {
                 .password(passwordEncoder.encode(password))
                 .email(email)
                 .address(address)
-                .emailVerified("false")
+                .emailVerified("true") // 구글 계정 2단계 보안 설정으로 gsmtp 사용 못함, 일단 회원가입하면 인증된 유저로 판단
                 .emailCheckToken(UUID.randomUUID().toString())
                 .role("ROLE_USER")
                 .build();

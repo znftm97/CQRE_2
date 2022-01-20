@@ -40,7 +40,7 @@ public class UserService {
         User user = signUpDto.toEntity(passwordEncoder);
         userRepository.save(user);
 
-        sendEmail(user);
+        //sendEmail(user); 구글 계정 2단계 보안 설정으로 gsmtp 사용 못함, 필요하면 계정 보안수준 낮춰야함
     }
 
     /*메일 전송*/
