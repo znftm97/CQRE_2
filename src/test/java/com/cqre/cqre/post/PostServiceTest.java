@@ -2,10 +2,12 @@ package com.cqre.cqre.post;
 
 import com.cqre.cqre.domain.board.Board;
 import com.cqre.cqre.domain.board.Post;
+import com.cqre.cqre.domain.board.PostFile;
 import com.cqre.cqre.domain.user.Address;
 import com.cqre.cqre.domain.user.User;
 import com.cqre.cqre.dto.post.CreateAndUpdatePostDto;
 import com.cqre.cqre.dto.post.ListPostDto;
+import com.cqre.cqre.dto.post.PostFileDto;
 import com.cqre.cqre.dto.post.ReadPostDto;
 import com.cqre.cqre.exception.customexception.user.CAnonymousUserException;
 import com.cqre.cqre.repository.post.PostRepository;
@@ -224,23 +226,49 @@ public class PostServiceTest {
     }
 
     @Test
-    @DisplayName("[글 삭제] - 글을 삭제할 수 있다.")
-    public void removePost(){
-
-    }
-
-    @Test
     @DisplayName("[글 수정] - 글을 수정할 수 있다.")
     public void updatePost(){
+        // given
+        Post post = posts.get(0);
+        Long postId = 1L;
+        PostFile postFile = PostFile.of("originFilename", "filename", "filePath", post);
+        PostFileDto postFileDto = new PostFileDto(postFile);
+        CreateAndUpdatePostDto updatePostDto = new CreateAndUpdatePostDto("updateTitle", "updateContent",
+                                                                            postId, Board.FREE, List.of(postFileDto));
 
+        when(postRepository.findById(postId)).thenReturn(Optional.of(post));
+
+        // when
+        Post findPost = postService.updatePost(updatePostDto);
+
+        // then
+        assertThat(findPost.getTitle()).isEqualTo(updatePostDto.getTitle());
+        assertThat(findPost.getContent()).isEqualTo(updatePostDto.getContent());
     }
 
     @Test
     @DisplayName("[나의 글 조회] - 현재 로그인한 유저가 쓴 글을 조회할 수 있다.")
     public void readMyPostList(){
+        // given
+        PageRequest pageRequest = PageRequest.of(0, 6, Sort.by(Sort.Direction.DESC, "id"));
 
+        List<ListPostDto> postDtos = posts.stream()
+                .map(ListPostDto::new)
+                .collect(Collectors.toList());
+        Page<ListPostDto> expected = new PageImpl<>(postDtos, pageRequest, postDtos.size());
+
+        when(postRepository.findPostByUserId(user.getId(), pageRequest)).thenReturn(new PageImpl<>(posts, pageRequest, posts.size()));
+        when(userService.getLoginUser()).thenReturn(user);
+
+        // when
+        Page<ListPostDto> findPosts = postService.myPost(pageRequest);
+
+        // then
+        assertThat(findPosts.getContent()).isEqualTo(expected.getContent());
+        assertThat(findPosts.getTotalElements()).isEqualTo(expected.getTotalElements());
+        assertThat(findPosts.getTotalPages()).isEqualTo(expected.getTotalPages());
+        assertThat(findPosts.getSize()).isEqualTo(expected.getSize());
+        assertThat(findPosts.getSort()).isEqualTo(expected.getSort());
     }
-
-
 
 }
