@@ -2,7 +2,9 @@ package com.cqre.cqre.dto.user;
 
 import com.cqre.cqre.domain.user.Address;
 import com.cqre.cqre.domain.user.User;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -14,6 +16,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class SignUpDto {
 
     @NotEmpty(message = "필수로 입력해야 합니다.")
@@ -35,6 +38,15 @@ public class SignUpDto {
     @Email(message = "이메일 형식에 맞지 않습니다.")
     private String email;
 
+    @Builder
+    public SignUpDto(String name, String studentId, String loginId, String password, String email) {
+        this.name = name;
+        this.studentId = studentId;
+        this.loginId = loginId;
+        this.password = password;
+        this.email = email;
+    }
+
     public User toEntity(PasswordEncoder passwordEncoder){
         Address address = new Address("Not yet Entered", "Not yet Entered");
 
@@ -50,4 +62,5 @@ public class SignUpDto {
                 .role("ROLE_USER")
                 .build();
     }
+
 }

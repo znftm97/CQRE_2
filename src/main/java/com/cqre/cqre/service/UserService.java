@@ -105,7 +105,6 @@ public class UserService {
         User findUserByName = userRepository.findByName(userDto.getName()).orElseThrow(CUserNotFoundExceptionToIdPage::new);
 
         if (!findUserByEmail.matchEmail(findUserByName.getEmail())) {
-            log.error("엔티티 조회 에러");
             throw new CUserNotFoundExceptionToPwPage();
         }
 
@@ -146,6 +145,11 @@ public class UserService {
     /*로그인 사용자 조회*/
     public User getLoginUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        /*혹시 Security 에서 권한 필터처리가 뚤렸을 경우*/
+        if (principal == "anonymousUser") {
+            throw new CAnonymousUserException();
+        }
 
         /*일반 로그인 사용자*/
         if (principal instanceof User) {
