@@ -6,7 +6,6 @@ import com.cqre.cqre.exception.customexception.item.CNotEnoughStockException;
 import com.cqre.cqre.exception.customexception.post.CPostNotFoundException;
 import com.cqre.cqre.exception.customexception.user.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,7 +17,13 @@ public class ExceptionAdvice {
     @ExceptionHandler(CUserNotFoundException.class)
     private String userNotFoundException(Model model, CUserNotFoundException exception) {
         errorLogging(exception);
-        return "/userNotFoundException";
+        return "/user/exception/userNotFoundException";
+    }
+
+    @ExceptionHandler(CAnonymousUserException.class)
+    private String userNotFoundException2(Model model, CAnonymousUserException exception) {
+        errorLogging(exception);
+        return "/user/exception/userNotFoundException";
     }
 
     @ExceptionHandler(CUserNotFoundExceptionToIdPage.class)

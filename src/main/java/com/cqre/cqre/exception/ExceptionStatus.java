@@ -23,6 +23,7 @@ public enum ExceptionStatus {
     VALIDATION_EMAIL_EXCEPTION(2006, "이메일 토큰 값이 일치하지 않습니다..", UNAUTHORIZED),
     OVERLAP_EMAIL(2007, "이미 존재하는 이메일입니다.", CONFLICT),
     OVERLAP_LOGIN_ID(2008, "이미 존재하는 아이디입니다.", CONFLICT),
+    ANONYMOUS_USER_BLOCK_EXCEPTION(2009, "익명 사용자는 인증이 필요합니다.", UNAUTHORIZED),
 
     // post - 3000
     POST_NOT_FOUND_EXCEPTION(3000, "글을 찾을 수 없습니다.", NOT_FOUND),
