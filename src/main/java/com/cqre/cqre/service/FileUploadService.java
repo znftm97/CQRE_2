@@ -63,14 +63,18 @@ public class FileUploadService {
         List<File> files = new ArrayList<>();
         String home = System.getProperty("user.home");
 
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < multipartFiles.size(); i++) {
-            File convertFile = new File(home + File.separator + System.currentTimeMillis() + "_" + multipartFiles.get(i).getOriginalFilename());
+            String pathname = sb.append(home).append(File.separator).append(System.currentTimeMillis()).append("_")
+                                .append(multipartFiles.get(i).getOriginalFilename()).toString();
+            File convertFile = new File(pathname);
             if (convertFile.createNewFile()) {
                 try (FileOutputStream fos = new FileOutputStream(convertFile)) {
                     fos.write(multipartFiles.get(i).getBytes());
                 }
                 files.add(convertFile);
             }
+            sb.setLength(0);
         }
 
         return files;
