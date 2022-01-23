@@ -1,8 +1,10 @@
 package com.cqre.cqre;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.PutObjectResult;
 import com.cqre.cqre.service.FileUploadService;
 import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,11 +17,14 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class FileUploadServiceTest {
@@ -60,22 +65,25 @@ public class FileUploadServiceTest {
         assertThat(findFiles.get(0).getFreeSpace()).isEqualTo(files.get(0).getFreeSpace());
     }
 
-//    @Test
-//    @DisplayName("S3에 파일을 업로드 한다.")
-//    public void fileUploadToS3() throws MalformedURLException {
-//        List<File> files = new ArrayList<>();
-//        File file = mock(File.class);
-//        files.add(file);
-//
-//        PutObjectResult result = mock(PutObjectResult.class);
-//        when(amazonS3.putObject(anyString(), anyString(), (File) any())).thenReturn(result);
-//        URL url = mock(URL.class);
-//        when(amazonS3.getUrl("bucketName", "fileName")).thenReturn(url);
-//
-//        //when
-//        List<String> findUrls = fileUploadService.uploadToS3(files, "dirName");
-//
-//        // then
-//        assertThat(findUrls.get(0)).isEqualTo(url.toString());
-//    }
+    @Test
+    @DisplayName("S3에 파일을 업로드 한다.")
+    @Disabled("System.currentTimeMillis() 때문에 stubbing arcument가 mismatch 난다.. 테스트 하려면 원본 코드를 수정해야 할 듯하다.")
+    public void fileUploadToS3() throws MalformedURLException {
+        List<File> files = new ArrayList<>();
+        File file = new File("pathName");
+        files.add(file);
+
+        PutObjectResult result = mock(PutObjectResult.class);
+        when(amazonS3.putObject("cqrebucket", "key", file)).thenReturn(result);
+
+        URL url = new URL("http:test");
+        when(amazonS3.getUrl("cqrebucket", file.getName())).thenReturn(url);
+
+        //when
+        List<String> findUrls = fileUploadService.uploadToS3(files, "dirName");
+
+        // then
+        assertThat(findUrls.get(0)).isEqualTo(url.toString());
+    }
+
 }
