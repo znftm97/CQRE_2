@@ -67,7 +67,7 @@ public class FileUploadServiceTest {
 
     @Test
     @DisplayName("S3에 파일을 업로드 한다.")
-    @Disabled("System.currentTimeMillis() 때문에 stubbing arcument가 mismatch 난다.. 테스트 하려면 원본 코드를 수정해야 할 듯하다.")
+    @Disabled("System.currentTimeMillis() 때문에 stubbing argument mismatch 난다.. 테스트 하려면 원본 코드를 수정해야 할 듯하다.")
     public void fileUploadToS3() throws MalformedURLException {
         List<File> files = new ArrayList<>();
         File file = new File("pathName");
