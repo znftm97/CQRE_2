@@ -1,9 +1,11 @@
 package com.cqre.cqre.domain.board;
 
-import com.cqre.cqre.dto.post.CreateAndUpdatePostDto;
 import com.cqre.cqre.domain.BaseEntity;
 import com.cqre.cqre.domain.user.User;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -72,9 +74,9 @@ public class Post extends BaseEntity {
         this.recommendation--;
     }
 
-    public void updatePost(CreateAndUpdatePostDto dto){
-        this.title = dto.getTitle();
-        this.content = dto.getContent();
+    public void updatePost(String title, String content){
+        this.title = getTitle();
+        this.content = getContent();
     }
 
 }

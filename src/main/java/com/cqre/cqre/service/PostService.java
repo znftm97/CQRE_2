@@ -138,9 +138,9 @@ public class PostService {
 
     /*글 수정*/
     @Transactional
-    public Post updatePost(CreateAndUpdatePostDto createAndUpdatePostDto) {
-        Post findPost = postRepository.findById(createAndUpdatePostDto.getId()).orElseThrow(CPostNotFoundException::new);
-        findPost.updatePost(createAndUpdatePostDto);
+    public Post updatePost(CreateAndUpdatePostDto dto) {
+        Post findPost = postRepository.findById(dto.getId()).orElseThrow(CPostNotFoundException::new);
+        findPost.updatePost(dto.getTitle(), dto.getContent());
 
         return findPost;
     }
