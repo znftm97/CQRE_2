@@ -12,7 +12,6 @@ import org.springframework.security.test.context.support.WithSecurityContextFact
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class WithMockCustomUserSecurityContextFactory implements WithSecurityContextFactory<WithMockCustomUser> {
 
@@ -21,14 +20,14 @@ public class WithMockCustomUserSecurityContextFactory implements WithSecurityCon
         SecurityContext context = SecurityContextHolder.createEmptyContext();
 
         User user = User.builder()
-                .name("user")
-                .studentId("11111111")
+                .name("test1")
+                .studentId("321312312")
                 .loginId("loginId")
                 .password("password")
-                .email("email@email.com")
-                .address(new Address("street", "detail"))
+                .email("test1@gmail.com")
+                .address(new Address("aaa", "aaa"))
                 .emailVerified("true")
-                .emailCheckToken(UUID.randomUUID().toString())
+                .emailCheckToken("b345ecde-b142-4371-af6b-7009af59d050")
                 .role("ROLE_USER")
                 .build();
 

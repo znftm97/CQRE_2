@@ -3,13 +3,17 @@ package com.cqre.cqre.dto.comment;
 import com.cqre.cqre.domain.board.Comment;
 import com.cqre.cqre.domain.board.Post;
 import com.cqre.cqre.domain.user.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.concurrent.atomic.AtomicLong;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CreateCommentDto {
     private String content;
     private Long postId;
