@@ -29,12 +29,14 @@ public class PostFileService {
         List<File> convertFiles = fileUploadService.convert(multipartFiles);
         List<String> uploadImageUrls = fileUploadService.uploadToS3(convertFiles, dirName);
 
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < multipartFiles.size(); i++) {
             String origFilename = multipartFiles.get(i).getOriginalFilename();
-            String filename = System.currentTimeMillis() + "_" + origFilename;
+            String filename = sb.append(System.currentTimeMillis()).append("_").append(origFilename).toString();
             String filePath = uploadImageUrls.get(i);
 
             postFileRepository.save(PostFile.of(origFilename, filename, filePath, findPost));
+            sb.setLength(0);
         }
     }
 

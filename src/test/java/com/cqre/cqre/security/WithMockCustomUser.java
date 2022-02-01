@@ -9,5 +9,4 @@ import java.lang.annotation.RetentionPolicy;
 @WithSecurityContext(factory = WithMockCustomUserSecurityContextFactory.class)
 public @interface WithMockCustomUser {
 
-    String loginId() default "test1";
 }

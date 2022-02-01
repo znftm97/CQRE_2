@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CommentService {
 
-    private static final int reCommentDepth = 2;
+    private static final int RE_COMMENT_DEPTH = 2;
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
     private final UserService userService;
@@ -72,7 +72,7 @@ public class CommentService {
                 .content(createReCommentDto.getContent())
                 .user(loginUser)
                 .post(findPost)
-                .depth(reCommentDepth)
+                .depth(RE_COMMENT_DEPTH)
                 .bundleId(findComment.getBundleId())
                 .bundleOrder(System.currentTimeMillis())
                 .existsCheck(true)
@@ -84,6 +84,6 @@ public class CommentService {
     /*내 댓글 조회*/
     public Page<MyCommentDto> myComments(Pageable pageable){
         Page<Comment> findComments = commentRepository.findCommentByUserId(userService.getLoginUser().getId(), true, pageable);
-        return findComments.map(c -> new MyCommentDto(c));
+        return findComments.map(MyCommentDto::new);
     }
 }
