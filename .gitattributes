@@ -1,3 +1,1 @@
-src/main/resources/**/** linguist-vendored
-
-**/*.js linguist-vendored
+src/main/resources/static/js/bootstrap linguist-vendored
