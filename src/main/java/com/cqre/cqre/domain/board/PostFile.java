@@ -35,20 +35,18 @@ public class PostFile extends BaseEntity {
         this.filePath = filePath;
     }
 
-    public static PostFile of(String originFilename, String filename, String filePath, Post post){
+    public static PostFile of(String originFilename, String filename, String filePath){
         PostFile postFile = PostFile.builder()
                 .originFilename(originFilename)
                 .filename(filename)
                 .filePath(filePath)
                 .build();
 
-        postFile.setPost(post);
         return postFile;
     }
 
     public void setPost(Post post) {
         this.post = post;
-        post.getPostFiles().add(this);
     }
 
 }
