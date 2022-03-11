@@ -99,25 +99,13 @@ public class PostService {
     /*글 삭제*/
     @Transactional
     public void removePost(Long postId){
-        List<Comment> comments = commentRepository.findCommentByPostId(postId);
-        List<Long> commentIds = comments
-                .stream()
-                .map(c -> c.getId())
-                .collect(Collectors.toList());
+        List<Long> commentIds = commentRepository.findCommentIdsByPostId(postId);
         commentRepository.deleteAllByIdInQuery(commentIds);
 
-        List<PostFile> postFiles = postFileRepository.findPostFileByPostId(postId);
-        List<Long> postFileIds = postFiles
-                .stream()
-                .map(p -> p.getId())
-                .collect(Collectors.toList());
+        List<Long> postFileIds = postFileRepository.findPostFileIdsByPostId(postId);
         postFileRepository.deleteAllByIdInQuery(postFileIds);
 
-        List<Recommendation> recommendations = recommendationRepository.findRecommendationByPostId(postId);
-        List<Long> recommendationIds = recommendations
-                .stream()
-                .map(r -> r.getId())
-                .collect(Collectors.toList());
+        List<Long> recommendationIds = recommendationRepository.findRecommendationIdsByPostId(postId);
         recommendationRepository.deleteAllByIdInQuery(recommendationIds);
 
         Post findPost = postRepository.CFindByPostId(postId).orElseThrow(CPostNotFoundException::new);
