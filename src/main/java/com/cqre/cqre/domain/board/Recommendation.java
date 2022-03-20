@@ -28,16 +28,12 @@ public class Recommendation extends BaseEntity {
         this.user = user;
     }
 
-    public static Recommendation of(User user, Post post){
-        Recommendation recommendation = Recommendation.builder().user(user).build();
-        recommendation.setPost(post);
-
-        return recommendation;
+    public static Recommendation of(User user){
+        return Recommendation.builder().user(user).build();
     }
 
     public void setPost(Post post) {
         this.post = post;
-        post.getRecommendations().add(this);
     }
 
 }

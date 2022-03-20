@@ -232,7 +232,9 @@ public class PostServiceTest {
         // given
         Post post = posts.get(0);
         Long postId = 1L;
-        PostFile postFile = PostFile.of("originFilename", "filename", "filePath", post);
+        PostFile postFile = PostFile.of("originFilename", "filename", "filePath");
+        postFile.setPost(post);
+
         PostFileDto postFileDto = new PostFileDto(postFile);
         CreateAndUpdatePostDto updatePostDto = new CreateAndUpdatePostDto("updateTitle", "updateContent",
                                                                             postId, Board.FREE, List.of(postFileDto));
