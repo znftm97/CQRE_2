@@ -26,7 +26,8 @@ public class RecommendationService {
 
         if(findRecommendation == null){
             findPost.addRecommendation();
-            Recommendation recommendation = Recommendation.of(loginUser, findPost);
+            Recommendation recommendation = Recommendation.of(loginUser);
+            recommendation.setPost(findPost);
             recommendationRepository.save(recommendation);
         }else {
             findPost.subtractRecommendation();

@@ -16,6 +16,9 @@ public interface RecommendationRepository extends JpaRepository<Recommendation, 
     @Query("select r from Recommendation r where r.post.id = :postId")
     List<Recommendation> findRecommendationByPostId(@Param("postId") Long postId);
 
+    @Query("select r.id from Recommendation r where r.post.id = :postId")
+    List<Long> findRecommendationIdsByPostId(@Param("postId") Long postId);
+
     @Query("delete from Recommendation r where r.id in :ids")
     @Modifying(clearAutomatically = true)
     void deleteAllByIdInQuery(@Param("ids") List<Long> ids);

@@ -8,8 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -35,14 +33,8 @@ public class Post extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Board board;
 
-    @OneToMany(mappedBy = "post")
-    private List<PostFile> postFiles = new ArrayList<>();
-
-    @OneToMany(mappedBy = "post")
-    private List<Recommendation> recommendations = new ArrayList<>();
-
     @Builder
-    public Post(String title, String content, int postViews, int recommendation, User user, Board board, List<PostFile> postFiles, List<Recommendation> recommendations) {
+    public Post(String title, String content, int postViews, int recommendation, User user, Board board) {
         this.title = title;
         this.content = content;
         this.postViews = postViews;

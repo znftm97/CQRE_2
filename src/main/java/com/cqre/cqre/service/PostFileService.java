@@ -35,7 +35,10 @@ public class PostFileService {
             String filename = sb.append(System.currentTimeMillis()).append("_").append(origFilename).toString();
             String filePath = uploadImageUrls.get(i);
 
-            postFileRepository.save(PostFile.of(origFilename, filename, filePath, findPost));
+            PostFile postFile = PostFile.of(origFilename, filename, filePath);
+            postFile.setPost(findPost);
+            postFileRepository.save(postFile);
+
             sb.setLength(0);
         }
     }
