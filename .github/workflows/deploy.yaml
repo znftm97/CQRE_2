@@ -9,10 +9,19 @@ on: # 지정한 이벤트가 해당 브랜치에서 발생할 때 Github Action 
       - master
   workflow_dispatch:
     inputs:
-      name:
-        description: "Person to greet"
+      logLevel:
+        description: 'Log level'
         required: true
-        default: "znftm97"
+        default: 'info'
+        type: choice
+        options:
+          - info
+          - warning
+          - debug
+        environment:
+          description: 'Environment to run tests against'
+          type: environment
+          required: true
 
 jobs: # 여러 Step으로 구성되고, 각 step 들은 가상 환경의 인스턴스에서 실행됨.
   build:
