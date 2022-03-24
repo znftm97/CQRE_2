@@ -42,7 +42,7 @@ public class PostService {
             pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "id"));
         }
 
-        return postRepository.findPostByBoard(Board.FREE, pageRequest).map(post -> new ListPostDto(post));
+        return postRepository.findPostByBoard(Board.FREE, pageRequest).map(ListPostDto::new);
     }
 
     /*공지사항 글 목록 출력*/
@@ -55,7 +55,7 @@ public class PostService {
             pageRequest = PageRequest.of(page, 6, Sort.by(Sort.Direction.DESC, "id"));
         }
 
-        return postRepository.findPostByBoard(Board.NOTICE, pageRequest).map(post -> new ListPostDto(post));
+        return postRepository.findPostByBoard(Board.NOTICE, pageRequest).map(ListPostDto::new);
     }
 
     /*자유게시판 글 생성*/
