@@ -23,8 +23,12 @@ public class BoardController {
 
     /*자유게시판 페이지*/
     @GetMapping("/boards/free-board")
-    public String freeBoardPage(@RequestParam(value = "sortSelect", required = false) String sortOption,
+    public String freeBoardPage(@RequestParam(value = "sortSelect", required = false, defaultValue = "id") String sortOption,
                             @RequestParam(value = "page", required = false, defaultValue = "0") int page, Model model){
+
+        if (sortOption.equals("정렬기준선택")) {
+            sortOption = "id";
+        }
 
         Page<ListPostDto> posts = postService.findFreePosts(sortOption, page);
         model.addAttribute("posts", posts);
@@ -34,8 +38,12 @@ public class BoardController {
 
     /*공지사항 게시판 페이지*/
     @GetMapping("/boards/notice-board")
-    public String noticeBoardPage(@RequestParam(value = "sortSelect", required = false) String sortOption,
+    public String noticeBoardPage(@RequestParam(value = "sortSelect", required = false, defaultValue = "id") String sortOption,
                               @RequestParam(value = "page", required = false, defaultValue = "0") int page, Model model){
+
+        if (sortOption.equals("정렬기준선택")) {
+            sortOption = "id";
+        }
 
         Page<ListPostDto> posts = postService.findNoticePosts(sortOption, page);
         model.addAttribute("posts", posts);
