@@ -9,7 +9,7 @@
 [CQRE 프로젝트 Wiki - 2](https://languid-visage-6fe.notion.site/CQRE-Wiki-2-2996c9ddea484275b89d0d0b14022774)
 
 ## 🏠 배포 URL
-3.35.191.224:8080
+[3.35.191.224:8080](http://3.35.191.224:8080/)
 
 ## 🔧 배포 환경
 - AWS EC2 (Ubuntu 20.04)
