@@ -9,7 +9,8 @@
 [CQRE 프로젝트 Wiki - 2](https://languid-visage-6fe.notion.site/CQRE-Wiki-2-2996c9ddea484275b89d0d0b14022774)
 
 ## 🏠 배포 URL
-[3.35.191.224:8080](http://3.35.191.224:8080/)
+~~3.35.191.224:8080~~
+- AWS 프리티어 만료
 
 ## 🔧 배포 환경
 - AWS EC2 (Ubuntu 20.04)
@@ -35,6 +36,13 @@
 ![cqre_CI/CD](https://user-images.githubusercontent.com/57134526/136551080-3baef7b4-96ba-47a4-a266-45156d18c168.png)<br>
 - [구축 과정 정리](https://languid-visage-6fe.notion.site/CQRE-Wiki-2-2996c9ddea484275b89d0d0b14022774)
 
+## 🔨 리팩토링
+<a href="https://languid-visage-6fe.notion.site/f6b523b482934eed806aee0652b3f44b"> 커버링 인덱스 적용 및 인덱스 활용해보기 </a><br>
+<a href="https://languid-visage-6fe.notion.site/92d95823cfa04b0794ad80f7bc864ecc"> 다양한 엔티티 생성 패턴 </a><br>
+<a href="https://languid-visage-6fe.notion.site/d83088a2380e42f49da34ffb126685d6"> Artillery를 이용한 성능테스트 후 리팩토링  </a> <br>
+<a href="https://languid-visage-6fe.notion.site/d7160101483d48c29106db7106957a4d"> 동시성 이슈 해결 </a><br>
+<a href="https://languid-visage-6fe.notion.site/92d95823cfa04b0794ad80f7bc864ecc"> 엔티티 생성 패턴 </a><br>
+<a href="https://languid-visage-6fe.notion.site/f6b523b482934eed806aee0652b3f44b"> 매직넘버 제거 </a><br>
 
 ## 🔎 구현 기능
 <details>
@@ -61,18 +69,4 @@
   - 상품 주문, 주문취소, 재 주문, 장바구니
   - 쿠폰 적용한 주문
   </details>
-
-## 🔨 리팩토링
-<details>
-  <br>
-  <a href="https://languid-visage-6fe.notion.site/d83088a2380e42f49da34ffb126685d6"> - 글 추천 로직 리팩토링 </a> <br>
-  <a href="https://languid-visage-6fe.notion.site/65eea333e7c3434eb65f3479e06690cc"> - 불필요한 객체 생성을 피하라 (Effective Java Item6) </a><br>
-  <a href="https://languid-visage-6fe.notion.site/d83088a2380e42f49da34ffb126685d6"> - 객체의 null 체크시 == 연산자를 직접 사용하는게 좋은가? </a><br>
-  <a href="https://languid-visage-6fe.notion.site/d908cbc54eb04b6c97459950f557f06e"> - 검증로직은 어디에? </a><br>
-  <a href="https://languid-visage-6fe.notion.site/REST-API-60860e5dfbc44355abf6c8bc02e1086b"> - REST API </a><br>
-  <a href="https://languid-visage-6fe.notion.site/Auditing-b7b68f3796784eed9da8b6a9318a4ee9"> - Auditing 클래스는 추상클래스로 </a><br>
-  <a href="https://languid-visage-6fe.notion.site/d7160101483d48c29106db7106957a4d"> - 동시성 이슈 해결 </a><br>
-  <a href="https://languid-visage-6fe.notion.site/92d95823cfa04b0794ad80f7bc864ecc"> - 엔티티 생성 패턴 </a><br>
-  <a href="https://languid-visage-6fe.notion.site/f6b523b482934eed806aee0652b3f44b"> - 매직넘버 제거 </a><br>
-</details>
   
